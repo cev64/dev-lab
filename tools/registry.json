@@ -1,0 +1,9 @@
+[
+  {
+    "name": "Odds Toolkit",
+    "slug": "odds-toolkit",
+    "description": "Convert odds, remove the vig, and size bets with EV and Kelly.",
+    "area": "Betting",
+    "added": "2026-10-08"
+  }
+]
