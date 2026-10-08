@@ -131,3 +131,23 @@ test('formatAmerican uses true minus', () => {
   assert.equal(O.formatAmerican(150), '+150');
   assert.equal(O.formatAmerican(null), null);
 });
+
+test('parseOdds auto-detects format', () => {
+  close(O.parseOdds('-110'), 1.909090909);
+  close(O.parseOdds('\u2212110'), 1.909090909);
+  close(O.parseOdds('+150'), 2.5);
+  close(O.parseOdds('150'), 2.5);
+  close(O.parseOdds('1.91'), 1.91);
+  close(O.parseOdds('2'), 2);
+  close(O.parseOdds('5/2'), 3.5);
+  assert.equal(O.parseOdds('evens'), 2);
+  assert.equal(O.parseOdds('+50'), null);
+  assert.equal(O.parseOdds('1'), null);
+  assert.equal(O.parseOdds(''), null);
+  assert.equal(O.parseOdds('abc'), null);
+});
+
+test('hold (margin as share of total)', () => {
+  const r = O.removeVig([O.americanToDecimal(-110), O.americanToDecimal(-110)]);
+  close(r.hold, 0.0454545, 1e-6);
+});

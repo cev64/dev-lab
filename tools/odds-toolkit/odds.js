@@ -74,6 +74,17 @@
     return null;
   }
 
+  /** Auto-detect format: "5/2" fractional, "+150"/"-110"/"150" american, "2.5"/"2" decimal. Returns decimal odds or null. */
+  function parseOdds(text) {
+    if (text == null) return null;
+    var s = String(text).trim().replace(/\u2212/g, '-');
+    if (!s) return null;
+    if (/^(evens?|ev)$/i.test(s) || s.indexOf('/') >= 0) return parseToDecimal(s, 'fractional');
+    if (/^[+-]/.test(s)) return parseToDecimal(s, 'american');
+    if (s.indexOf('.') >= 0) return parseToDecimal(s, 'decimal');
+    return Math.abs(parseFloat(s)) >= 100 ? parseToDecimal(s, 'american') : parseToDecimal(s, 'decimal');
+  }
+
   /** All formats from decimal odds. */
   function describe(dec) {
     if (!isNum(dec) || dec <= 1) return null;
@@ -124,7 +135,8 @@
       fair: fair,
       fairDecimal: fairDecimal,
       fairAmerican: fairDecimal.map(decimalToAmerican),
-      overround: total - 1
+      overround: total - 1,
+      hold: 1 - 1 / total
     };
   }
 
@@ -173,6 +185,7 @@
     decimalToFractional: decimalToFractional,
     fmtFractional: fmtFractional,
     parseToDecimal: parseToDecimal,
+    parseOdds: parseOdds,
     describe: describe,
     formatAmerican: formatAmerican,
     removeVig: removeVig,
