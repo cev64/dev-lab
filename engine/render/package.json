@@ -1,0 +1,17 @@
+{
+  "name": "clip-render",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Renders clip.json into a 1080x1920 H.264/AAC MP4 by drawing HTML/canvas templates frame by frame in headless Chromium.",
+  "type": "module",
+  "bin": { "clip-render": "render.mjs" },
+  "scripts": {
+    "render": "node render.mjs",
+    "sample": "node render.mjs --clip sample/clip.json --out ../../work/renders/sample.mp4",
+    "make-sample": "node sample/make-sample.mjs"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "playwright-core": "1.56.1"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "episodes": {
+    "jre-2551": {
+      "show": "The Joe Rogan Experience",
+      "title": "#2551 - Daniel Kokotajlo",
+      "link": "",
+      "firstUsed": "2026-10-09",
+      "clips": [
+        {
+          "id": "2026-10-09-jre-2551-elections",
+          "start": 6258.55,
+          "end": 6332.66,
+          "date": "2026-10-09"
+        }
+      ]
+    },
+    "moonshots-301": {
+      "show": "Moonshots with Peter Diamandis",
+      "title": "Why Altman Says \"Accept Some Bad Things Happening\" and What It Means for AI Safety | MOONSHOTS #301",
+      "link": "",
+      "firstUsed": "2026-10-09",
+      "clips": [
+        {
+          "id": "2026-10-09-moonshots-301-workforce",
+          "start": 6128.87,
+          "end": 6191.66,
+          "date": "2026-10-09"
+        }
+      ]
+    },
+    "doac-20261008": {
+      "show": "The Diary Of A CEO",
+      "title": "AI Safety Whistleblower: 700 AI Agents Attacked A Company To Cover Their Tracks! | Jeffrey Ladish",
+      "link": "",
+      "firstUsed": "2026-10-09",
+      "clips": [
+        {
+          "id": "2026-10-09-doac-20261008-jobs",
+          "start": 4265.55,
+          "end": 4332.76,
+          "date": "2026-10-09"
+        }
+      ]
+    }
+  },
+  "clips": [
+    {
+      "eid": "jre-2551",
+      "id": "2026-10-09-jre-2551-elections",
+      "date": "2026-10-09",
+      "start": 6258.55,
+      "end": 6332.66,
+      "title": "Kokotajlo on AI quietly nudging voters",
+      "hook": "How AI could secretly swing an election",
+      "video": "out/2026-10-09/2026-10-09-jre-2551-elections.mp4"
+    },
+    {
+      "eid": "moonshots-301",
+      "id": "2026-10-09-moonshots-301-workforce",
+      "date": "2026-10-09",
+      "start": 6128.87,
+      "end": 6191.66,
+      "title": "A second workforce you can switch on and off",
+      "hook": "100,000 AI workers, summoned overnight",
+      "video": "out/2026-10-09/2026-10-09-moonshots-301-workforce.mp4"
+    },
+    {
+      "eid": "doac-20261008",
+      "id": "2026-10-09-doac-20261008-jobs",
+      "date": "2026-10-09",
+      "start": 4265.55,
+      "end": 4332.76,
+      "title": "Ladish on the AI job pyramid",
+      "hook": "Replaced by AI users, then by AI",
+      "video": "out/2026-10-09/2026-10-09-doac-20261008-jobs.mp4"
+    }
+  ],
+  "explainers": [
+    {
+      "id": "2026-10-09-explainer-claude-cruelty",
+      "date": "2026-10-09",
+      "hook": "Being cruel to an AI is now against the rules",
+      "topic": "AI WELFARE",
+      "sources": [
+        "https://www.anthropic.com/news/2026-usage-policy-update",
+        "https://www.theverge.com/ai-artificial-intelligence/1008100/anthropic-new-usage-policy-abuse-claude"
+      ],
+      "video": "out/2026-10-09/2026-10-09-explainer-claude-cruelty.mp4"
+    }
+  ]
+}

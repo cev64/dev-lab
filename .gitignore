@@ -1,6 +1,9 @@
+.venv/
 node_modules/
-dist/
-.env.local
+work/
+out/
+__pycache__/
+*.pyc
 .env
+.env.local
 *.log
-.convex/

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ai-shorts template</title>
+<link rel="stylesheet" href="template.css">
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<!-- engine first, then every style; each style calls registerStyle(). Order here = order for style "auto". -->
+<script src="core.js"></script>
+<script src="styles/neural.js"></script>
+<script src="styles/flow.js"></script>
+<script src="styles/horizon.js"></script>
+<script src="styles/orb.js"></script>
+<script>CLIPKIT.boot();</script>
+</body>
+</html>

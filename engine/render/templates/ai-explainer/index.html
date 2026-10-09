@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ai-explainer template</title>
+<link rel="stylesheet" href="../ai-shorts/template.css">
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<!-- Reuses the ai-shorts engine (captions, hook card/dock, credit, progress, fonts) and its background
+     styles; beats.js adds the beat-visual band and the AI-narrator credit glyph. -->
+<script src="../ai-shorts/core.js"></script>
+<script src="../ai-shorts/styles/neural.js"></script>
+<script src="../ai-shorts/styles/flow.js"></script>
+<script src="../ai-shorts/styles/horizon.js"></script>
+<script src="../ai-shorts/styles/orb.js"></script>
+<script src="kit.js"></script>
+<script src="beats.js"></script>
+<script>CLIPKIT.boot({ setup: EXPLAINER.setup, sample: '../../sample/explainer-clip.json' });</script>
+</body>
+</html>

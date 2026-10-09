@@ -1,9 +1,14 @@
 # Needs Charlie
 
-The only list Charlie has to read. Newest first. The routine removes items once done (verify, don't assume).
+Short list of things only Charlie can do. Newest first; the nightly run keeps it current.
 
-- [ ] Launch kit is ready in marketing/launch/ (share it once the site is live; replace {{SITE_URL}}).
-- [ ] Do the one-time setup in ops/SETUP.md (about 60-90 min total; steps 1-3 put the site live, step 4 turns on money).
-- [ ] Check your employer's outside-business-activity policy before launch (you work at an investment firm; the
-      product is sports analytics, but disclosure rules can apply to any paid side business).
-- [ ] Optional: close obsolete PR #1 (odds toolkit) in cev64/dev-lab; it belongs to the old repo mission.
+- [ ] Merge the engine branch `claude/sweet-mendel-glnm0v` into main (GitHub -> Pull requests -> New -> compare
+      `claude/sweet-mendel-glnm0v`). Until then the nightly run works from that branch, which is fine.
+- [ ] Each morning: 3 explainers arrive as files in the night's session (tap the push notification) and on GitHub
+      branch `videos/<date>`. Post them morning / midday / evening in the order the delivery note gives, pasting the
+      post text from `deliveries/<date>.md`, with the platform's "AI-generated content" label switched ON.
+- [ ] Create the TikTok and Instagram accounts (bio idea: "AI news, animated. 3 stories a day.").
+- [ ] Once a week, add a row per posted video to `ops/PERFORMANCE.md` (views, avg watch %, shares). The Sunday run
+      uses it to learn which stories and scenes hold viewers.
+- [ ] TikTok Creator Rewards (the money): needs 10k followers and 100k views in 30 days, videos over 1 minute
+      (ours are 62-75 s). Apply in the TikTok app once eligible.

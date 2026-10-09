@@ -1,0 +1,8 @@
+# Clip engine (engine/clipper). Installed into .venv by scripts/setup.sh.
+# Audio is decoded with the system ffmpeg, so faster-whisper's PyAV path is never used.
+faster-whisper==1.2.1
+numpy>=1.26,<3
+# Explainer narrator TTS (engine/clipper/tts_backends.py; licences in docs/specs/voice-notes.md).
+# Model/voice files are downloaded once by scripts/setup.sh into ~/.cache/clipper-tts.
+kokoro-onnx==0.6.1
+piper-tts==1.8.0

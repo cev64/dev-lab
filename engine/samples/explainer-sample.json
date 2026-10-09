@@ -1,0 +1,88 @@
+{
+  "id": "sample-explainer-chatbot-memory",
+  "note": "SAMPLE script for testing `python -m clipper voice`. A general explanation, not news; do not publish.",
+  "hook": "SAMPLE: how a chatbot remembers you",
+  "topic": "SAMPLE",
+  "beats": [
+    {
+      "say": "Your chatbot doesn't actually remember you. Here's the trick.",
+      "visual": {
+        "type": "title",
+        "text": "SAMPLE: chatbot memory"
+      }
+    },
+    {
+      "say": "Every time you send a message, the app quietly bundles the whole conversation so far and sends all of it back to the model as one long block of text.",
+      "visual": {
+        "type": "keyword",
+        "text": "RE-READ"
+      }
+    },
+    {
+      "say": "The model reads that block from the top, every single time, and then predicts the next words of its reply.",
+      "visual": {
+        "type": "list",
+        "items": [
+          "Read it all",
+          "Predict",
+          "Forget"
+        ]
+      }
+    },
+    {
+      "say": "That block has a size limit, called the context window, measured in tokens, which are small chunks of words. Early chat models held a few thousand tokens. Some newer ones accept 1,000,000 or more.",
+      "visual": {
+        "type": "compare",
+        "unit": "tokens",
+        "items": [
+          {
+            "label": "early",
+            "value": 4000
+          },
+          {
+            "label": "newer",
+            "value": 1000000
+          }
+        ]
+      }
+    },
+    {
+      "say": "So what happens when a chat grows past the limit? Something has to give. Some apps drop the oldest messages. Others keep a short summary instead.",
+      "visual": {
+        "type": "list",
+        "items": [
+          "Drop old messages",
+          "Summarise",
+          "Save key facts"
+        ]
+      }
+    },
+    {
+      "say": "A few save key facts, like your dog's name, to a separate memory file and paste them back in later. Say 40% of a chat is small talk: that goes first.",
+      "visual": {
+        "type": "stat",
+        "value": "40%",
+        "label": "hypothetical share of small talk",
+        "source": "SAMPLE, illustrative"
+      }
+    },
+    {
+      "say": "So the next time an AI assistant recalls something you told it last week, it isn't remembering. It's rereading. Would you want it to forget on purpose?",
+      "visual": {
+        "type": "keyword",
+        "text": "REREADING"
+      }
+    }
+  ],
+  "emphasis": [
+    "rereading",
+    "40%"
+  ],
+  "voice": "default",
+  "sources": [],
+  "post": {
+    "title": "SAMPLE",
+    "caption": "SAMPLE explainer for pipeline testing. Not for posting.",
+    "hashtags": []
+  }
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:podcast="https://podcastindex.org/namespace/1.0">
+  <channel>
+    <title>Test Show &amp; Friends</title>
+    <item>
+      <title>#452 – Dario Amodei: Anthropic CEO on Claude, AGI &amp; the Future of AI</title>
+      <link>https://example.com/452</link>
+      <guid isPermaLink="false">ep-452</guid>
+      <pubDate>Mon, 05 Oct 2026 12:00:00 +0000</pubDate>
+      <itunes:duration>02:41:10</itunes:duration>
+      <itunes:episode>452</itunes:episode>
+      <description><![CDATA[<p>Dario talks about scaling and safety.</p>]]></description>
+      <enclosure url="https://cdn.example.com/452.mp3" length="1" type="audio/mpeg"/>
+      <podcast:transcript url="https://example.com/452.txt" type="text/plain"/>
+      <podcast:transcript url="https://example.com/452.vtt" type="text/vtt"/>
+    </item>
+    <item>
+      <title>Gardening With Grandma</title>
+      <link>https://example.com/garden</link>
+      <guid>ep-garden</guid>
+      <pubDate>Sun, 04 Oct 2026 12:00:00 +0000</pubDate>
+      <itunes:duration>3600</itunes:duration>
+      <content:encoded><![CDATA[<p>Tomatoes, compost and patience.</p>
+<p><b>SPONSORS:</b><br/>
+<b>Fin:</b> AI agent for customer service.<br/>
+Go to <a href="https://fin.ai/x">https://fin.ai/x</a><br/>
+<b>Wispr Flow:</b> AI-powered voice dictation app.</p>
+<p><b>OUTLINE:</b><br/>
+(00:00) Introduction</p>]]></content:encoded>
+      <enclosure url="https://cdn.example.com/garden.mp3" length="1" type="audio/mpeg"/>
+    </item>
+    <item>
+      <title>Trailer: Season 2 is about AI</title>
+      <guid>ep-trailer</guid>
+      <pubDate>Sat, 03 Oct 2026 12:00:00 +0000</pubDate>
+      <itunes:duration>95</itunes:duration>
+      <itunes:episodeType>trailer</itunes:episodeType>
+      <enclosure url="https://cdn.example.com/trailer.mp3" length="1" type="audio/mpeg"/>
+    </item>
+    <item>
+      <title>No audio here</title>
+      <guid>ep-noaudio</guid>
+    </item>
+  </channel>
+</rss>

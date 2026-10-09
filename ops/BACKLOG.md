@@ -1,34 +1,24 @@
 # Backlog
 
-Ranked by expected revenue impact. The nightly run takes the top unchecked item it can finish (P0 first),
-unless something is broken. Add ideas at the bottom of the right section; re-rank on Sundays.
+The nightly run first delivers the 3 explainers. With leftover time it ships ONE improvement from the top of this list
+(on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
-## P0 (this week)
-- [x] Foundation on main (merged by Charlie 2026-10-09).
-- [x] Launch kit for Charlie in `marketing/launch/`: a group-chat message for his fantasy leagues, 3 posts for his
-      personal X, 1 LinkedIn post, and per-subreddit notes (read r/fantasyfootball and r/DynastyFF self-promo rules
-      first; write posts that add value without a hard sell). Tell him in NEEDS-CHARLIE once the site is live.
-- [ ] Social autopilot: `scripts/post-social.mjs` (X API v2 text posts via OAuth 1.0a user context; Bluesky via
-      app password) + `.github/workflows/social.yml` (cron ~12:15 and ~18:15 ET) posting today's file from
-      `marketing/queue/YYYY-MM-DD.json`; dry-run log when secrets are missing. Text-only on X (link posts cost $0.20;
-      put the link in the bio, use a link at most 2x/week). Guarded path: needs-charlie.
-- [x] Daily post generator (queue files must be generated from live snapshot once deployed): `scripts/make-posts.ts` turns the latest snapshot into 2 posts/day (risers, xFP leaders,
-      FPOE outliers, PROE teams, playoff schedule). Facts only, no hype, nflverse credit where space allows.
-- [ ] Player + team pages for SEO: static `nfl/player/<slug>/` for the top ~150 players by xFP and `nfl/team/<abbr>/`,
-      generated at build from the snapshot with unique numbers and a short data-driven summary; add to sitemap.
-- [ ] Shareable player card image (OG image per player) so links unfurl with the score.
-
-## P1 (next 2-3 weeks)
-- [ ] Start/sit compare: pick 2-3 players, side-by-side cards, shareable URL.
-- [ ] Waiver radar: combine our opportunity metrics with Sleeper's public trending-adds endpoint (verify terms first).
-- [ ] Weekly projection model with a backtest on 2024-2025 (report MAE vs a naive baseline); publish methodology.
-- [ ] Tuesday risers email (needs Resend + domain).
-- [ ] Trade value view using rest-of-season score.
-- [ ] Fantasy Premier League: data model from the public FPL API (bootstrap-static, fixtures, element-summary),
-      xG-based metrics, fixture difficulty, `/fpl/` dashboard, FPL Season Pass product (needs-charlie for the product).
-- [ ] Items from "Metrics roadmap" in docs/specs/nfl-snapshot.md, best value first.
-
-## P2 (later)
-- [ ] Dynasty mode and 2027 draft kit (Jul-Aug).
-- [ ] Price/packaging test (Skeptic review first).
-- [ ] Pre-trim the play-by-play download to needed columns if refresh time or memory grows.
+## Next
+- [ ] Scene library growth: aim for 25+ reusable story scenes (launch event on stage with a generic presenter,
+      lawsuit/courtroom, layoffs at an office, chip factory, phone app update, kids using AI at school, doctor's office,
+      robot in a warehouse, data center power grid, stock-ticker-free 'money' scenes). Each with params + stills.
+- [ ] More kit settings: newsroom, classroom, hospital, warehouse, stage/keynote, street by day.
+- [ ] Explainer polish: background music bed generated in code (subtle synth pad, ducked under the voice), sound
+      effects for stamps/pops/whooshes generated in code; more kit settings (newsroom, hospital, classroom, street at day).
+- [ ] (Parked, owner decision 2026-10-09) X pulse: popular AI posts via the official X API ($0.005/post, ~$4.50/mo
+      for ~30 posts/night). Revisit once the channel earns money; free sources only until then (Techmeme added).
+- [ ] Speaker turns: detect speaker changes (pause + pitch/energy shift, or a light diarization model that runs on CPU
+      with no token) and show a small name tag when the speaker changes; never guess a wrong name.
+- [ ] "Fact card" overlays: when a clip states a number or names a company/model, show a clean info card (e.g.
+      "GPT-5 · OpenAI · 2025") for 2-3 s. Adds real transformation (rights + Reels originality). Facts must be checked.
+- [ ] Silence and filler trimming inside a clip (cut "um"s and gaps > 0.6 s) without making speech sound spliced.
+- [ ] Two more visual styles; rotate so no two clips in a night share a style.
+- [ ] A/B variants: render each clip with 2 hooks; deliver both covers so Charlie can pick.
+- [x] Original-content track: fully animated narrated explainers (shipped 2026-10-09).
+- [ ] Use publisher transcripts when feeds provide them (faster, more accurate), else whisper.
+- [ ] Weekly performance review automation from ops/PERFORMANCE.md.
