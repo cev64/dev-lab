@@ -88,6 +88,9 @@ stylised cartoon characters only — never a real or recognisable person, never 
   product, topic) + one emoji; then 1-2 sentences of what happened; last line one easy question + 👇.
 - `instagram`: same facts, a little fuller (2-3 sentences); then `💬` + the question and `📤` + a share/tag prompt
   ("Send this to the coworker who...", "Tag the friend who...") — shares and saves drive Reels reach.
+- `youtubeTitle`: YouTube Shorts title, <= 70 characters, the hook as a searchable statement (names first; no
+  clickbait the video doesn't pay off). The Shorts description reuses the `tiktok` body (or `youtube` if set) with a
+  subscribe line.
 - `pinnedComment`: an either/or emoji poll that takes one tap to answer ("🔓 = keep it open, 🔒 = lock it down").
 - `sources`: publisher names; `hashtags`: 3-4 topical (broad #ai + 2 niche + #technews). The command adds the follow
   line, "Sources: ... AI narrator." and #thedailytoken (5 tags max). No #fyp/#viral spam, no bait ("part 2?") we
@@ -111,7 +114,7 @@ last time against the final script.
 
 ## 6. Deliver
 SendUserFile with the 3 MP4s + `deliveries/<date>.md` (the explainer command writes each block: cover text, TikTok
-description, Instagram caption, pinned comment, sources). To fix post copy after rendering, edit `post` and re-run
+description, Instagram caption, YouTube Shorts title + description, pinned comment, sources). To fix post copy after rendering, edit `post` and re-run
 `explainer --no-render --date <date>` (rewrites that block only). Order them for posting: the strongest hook goes to the evening slot (~6-9pm ET), the next to
 midday (~12pm), the third to the morning (~8am); write that order at the top of the delivery note. Then
 `scripts/publish-videos.sh <date>` (backup branch) and commit the ledger + delivery note. Drive archive: for each

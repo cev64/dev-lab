@@ -5,7 +5,7 @@ where available. Mascot: the kit's robot (white head, dark visor, lime #c4ff3a e
 
 This repo is a faceless short-form video studio run by Claude Code. Every night at ~3am ET a routine makes
 **3 original, fully animated explainers (62-75 s each)** about real AI news, and delivers them to the owner, Charlie,
-who posts them through the day (morning / midday / evening) on TikTok and Instagram Reels.
+who posts them through the day (morning / midday / evening) on TikTok, Instagram Reels and YouTube Shorts.
 
 Each explainer: a story picked from the day's AI news, fact-checked against >= 2 sources, a script in our own words,
 a clearly synthetic narrator (Kokoro), and code-drawn animation in which cartoon characters and objects act out what

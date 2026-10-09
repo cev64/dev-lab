@@ -12,7 +12,8 @@ day (morning, midday, evening).
 
 GOAL TONIGHT: deliver 3 ORIGINAL, fully animated explainers (62-75 s each), each a short animated story about one
 real development from the latest AI news (last ~3 days), fact-checked against >= 2 sources, narrated by the synthetic
-narrator, with a ready-to-paste post kit (cover text, TikTok description, Instagram caption, pinned comment, hashtags)
+narrator, with a ready-to-paste post kit (cover text, TikTok description, Instagram caption, YouTube Shorts title +
+description, pinned comment, hashtags)
 — 3 different stories.
 
 1. START

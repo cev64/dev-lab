@@ -47,6 +47,7 @@ out/YYYY-MM-DD/<id>.drive.json       {title, text}: the Google Doc filed in Char
     "cover": "Google's AI works with your laptop shut",
     "tiktok": "Searchable hook line 💻\nWhat happened, 1-2 sentences.\nOne question? 👇",
     "instagram": "Hook line\nWhat happened, 2-3 sentences.\n💬 Question?\n📤 Share prompt.",
+    "youtubeTitle": "Google's new AI agent keeps working after you close your laptop",
     "pinnedComment": "Either/or poll: 🤖 = yes, 😬 = no",
     "sources": "The Verge, Google",
     "hashtags": ["#ai", "#google", "#aiagents", "#technews"]
@@ -56,7 +57,8 @@ out/YYYY-MM-DD/<id>.drive.json       {title, text}: the Google Doc filed in Char
 - 5-8 beats, ~150-175 words total (Kokoro af_heart at speed 0.85 reads ~2.25-2.3 words/s, measured 2026-10-09: 158-173 words
   gave 68.9-72.9 s; so this gives ~65-75 s). The 62-75 s duration rule is unchanged. Beat 1 is the hook, spoken in <= 3 s.
 - `post` is the paste-ready post kit (`explainer` writes it into deliveries/<date>.md): `cover` (<= 7 words, the
-  cover/title text), `tiktok` (description body), `instagram` (Reels caption body), `pinnedComment` (posted from the
+  cover/title text), `tiktok` (description body), `instagram` (Reels caption body), `youtubeTitle` (Shorts title, <= 70 chars; the
+  Shorts description reuses the `tiktok` body, or `youtube` if set), `pinnedComment` (posted from the
   channel account and pinned), `sources` (publisher names), `hashtags` (3-4 topical). The command appends the follow
   line, "Sources: ... AI narrator." and the hashtags (#thedailytoken first, 5 max) to both bodies. An old-style
   `caption` still works as a fallback.
