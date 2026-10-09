@@ -4,6 +4,8 @@ The nightly run first delivers the 3 clips. With leftover time it ships ONE engi
 list (on a branch + PR), verified with a test render. Re-rank on Sundays.
 
 ## Next
+- [ ] (Parked, owner decision 2026-10-09) X pulse: popular AI posts via the official X API ($0.005/post, ~$4.50/mo
+      for ~30 posts/night). Revisit once the channel earns money; free sources only until then (Techmeme added).
 - [ ] Speaker turns: detect speaker changes (pause + pitch/energy shift, or a light diarization model that runs on CPU
       with no token) and show a small name tag when the speaker changes; never guess a wrong name.
 - [ ] "Fact card" overlays: when a clip states a number or names a company/model, show a clean info card (e.g.
