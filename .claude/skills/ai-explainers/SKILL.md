@@ -1,13 +1,13 @@
 ---
 name: ai-explainers
-description: Make one original 60-75 s vertical AI-news explainer — pick a real story with the selection rubric, fact-check it against >= 2 sources, write a beat-by-beat script, voice it with the synthetic narrator, add beat cards and B-roll (stock footage or fictional AI illustrations), render, QA and deliver. Use for the nightly explainer or any request to make or improve explainers.
+description: Make one original 60-75 s vertical AI-news explainer — pick a real story with the selection rubric, fact-check it against >= 2 sources, write a beat-by-beat script, voice it with the synthetic narrator, add beat animated cards and story-specific animated scenes, render, QA and deliver. Use for the nightly explainer or any request to make or improve explainers.
 ---
 
 # AI explainers: the nightly method
 
 The clip track borrows other people's words. This track is ours: our story choice, our facts in our own words, our
 visuals, a clearly synthetic narrator. It is the channel's monetizable content, so quality and accuracy matter more
-than speed. Evidence: `docs/explainer-playbook.md`. Formats: `docs/specs/explainer-contract.md`, `docs/specs/broll.md`.
+than speed. Evidence: `docs/explainer-playbook.md`. Formats: `docs/specs/explainer-contract.md`, scenes + illustration kit: `engine/render/README.md`.
 
 ## 1. Pick the story (10 min)
 ```
@@ -53,32 +53,30 @@ scene — `{"type":"scene","module":"scenes/<name>.js","params":{...}}` — foll
 engine/render/README.md. Animate the story's key moment, not decoration: the chat that gets ended, the price that
 collapses, the agent that books the flight, the packets flowing into a data center. Reuse/adapt modules in
 engine/render/templates/ai-explainer/scenes/ when they fit and save good new ones there for future nights. Always
-preview stills at several t before rendering the full video. Panning B-roll alone never counts as the animation.
+preview stills at several t before rendering the full video. Every beat must move.
 
-B-roll per beat (`broll` field, see docs/specs/broll.md): stock footage when a Pexels/Pixabay key exists
-(`{"kind":"stock","query":"server room blue light"}`), else AI illustration (`{"kind":"ai","prompt":"..."}`).
-AI prompts describe generic fictional subjects only: "a young woman reading her phone on a train, photorealistic",
-"rows of servers in a data center" — never a real person, brand, logo or a real event; the engine refuses those.
-Never pair a person shot with a claim so it looks like that person is the subject of the news. Prefer people-free
-shots for anything about a specific company.
+**Fully animated, no B-roll (owner decision 2026-10-09):** no stock footage, no AI-generated images. Every beat
+is either a `scene` (preferred for the story's moments: 3+ scenes per explainer) or an animated card (stat, compare,
+list, quote, timeline, title, keyword), over the generative animated background. People in scenes are the kit's
+stylised cartoon characters only — never a real or recognisable person, never a logo.
 
-`post.caption`: line 1 restates the hook as a fact; line 2 `Sources: <Publisher>, <Publisher>`; if stock footage
-was used add `Video: Pexels` (or Pixabay); line 3 a question. Hashtags 3-5 (#ai + topical + #technews + audience).
+`post.caption`: line 1 restates the hook as a fact; line 2 `Sources: <Publisher>, <Publisher>. AI narrator.`;
+line 3 a question. Hashtags 3-5 (#ai + topical + #technews + audience).
 
-## 4. Voice, B-roll, render (from engine/; ~10 min)
+## 4. Voice and render (from engine/; ~10 min)
 ```
 python -m clipper voice --script ../work/explainers/<id>/script.json      # fails with a word budget if not 62-80 s
-python -m broll fetch --script ../work/explainers/<id>/script.json --out ../work/explainers/<id>/broll \
-    --timings ../work/explainers/<id>/voice.json
 python -m clipper explainer --script ../work/explainers/<id>/script.json
 ```
+Scene modules referenced by relative path resolve against the clip.json folder (work/explainers/<id>/); put story
+scenes in work/explainers/<id>/scenes/ or reference the shared library under engine/render/templates/ai-explainer/scenes/.
 If `voice` says the narration is too short or long, edit the words (not the TTS speed) and re-run.
 
 ## 5. QA (do not skip)
 Dump stills mid-beat for every beat (`node engine/render/render.mjs --clip <clip.json> --out /tmp/qa.mp4
 --frames-only ...`) and look at them: every card legible and inside x 60-915, y 150-1540; captions match the script;
-"AI narrator" credit visible; "AI-generated illustration" chip on AI beats; no B-roll shot that could be mistaken for
-a real person in the story. ffprobe: 1080x1920, 30 fps, 62-80 s. Loudness about -14 LUFS. Re-read the claim table one
+"AI narrator" credit visible; every beat animated (no static card held for > 4 s without motion); cartoon
+characters clearly stylised and never resembling a real person. ffprobe: 1080x1920, 30 fps, 62-80 s. Loudness about -14 LUFS. Re-read the claim table one
 last time against the final script.
 
 ## 6. Deliver

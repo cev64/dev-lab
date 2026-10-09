@@ -39,8 +39,9 @@ news story, fact-checked against >= 2 sources — plus ready-to-paste post capti
      selection rubric, open the primary source and >= 1 independent outlet (WebFetch), build the claim table, and
      write work/explainers/<id>/script.json. If no story clears the rubric and the gates, skip the explainer and say
      why — never publish an unverified claim.
-   - voice -> broll (stock if PEXELS_API_KEY/PIXABAY_API_KEY are set, else fictional AI illustrations; skip B-roll if
-     it fails, the generative backgrounds are fine) -> `python -m clipper explainer --script ...` -> QA per the skill.
+   - Write the story's animated scenes (3+, using the illustration kit; see engine/render/README.md "Authoring a scene"),
+     preview stills, then voice -> `python -m clipper explainer --script ...` -> QA per the skill. Fully animated,
+     no B-roll.
 
 3. DELIVER (skill section 6)
    - SendUserFile (status proactive) with the MP4s (3 clips + the explainer) and the night's deliveries/<date>.md;

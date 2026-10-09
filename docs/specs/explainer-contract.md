@@ -1,7 +1,8 @@
 # Original explainer track: contract (v1)
 
 Fully original 60-75 s vertical videos about real AI news: a fact-checked script written by the nightly agent, read by
-a clearly synthetic open-source TTS narrator, with code-generated visuals per beat and word-by-word captions. No real
+a clearly synthetic open-source TTS narrator, fully animated with code (story-specific scenes with cartoon
+characters and objects, plus animated data cards) and word-by-word captions. No B-roll. No real
 person's voice, face or likeness. Eligible for platform originality programs (unlike podcast clips).
 
 ```
@@ -45,7 +46,8 @@ out/YYYY-MM-DD/<id>.mp4              final video (+ .cover.png)
 - 5-8 beats, 150-185 words total (about 60-75 s at the narrator's pace). Beat 1 is the hook, spoken in <= 3 s.
 - Every factual claim must be supported by `sources` (>= 2 independent sources for the main claim). Quotes verbatim.
   Numbers exactly as published. Speculation is labelled as such in the narration ("could", "analysts expect").
-- Visual types: title, stat, compare, list, quote, timeline, keyword. Text fields short (fit the safe box).
+- Visual types: scene (story-specific animation module; see engine/render/README.md), title, stat, compare, list,
+  quote, timeline, keyword. Text fields short (fit the safe box). 3+ scenes per explainer.
 
 ## clip.json additions for explainers (renderer input)
 Same as the clip contract (`audio`, `duration`, `words`, `envelope`, `hook`, `topic`, `emphasis`, `theme`) plus:
