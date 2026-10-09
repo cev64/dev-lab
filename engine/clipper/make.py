@@ -163,8 +163,13 @@ def refine(paths: Paths, eid: str, start: float, end: float, exact: bool = True)
     t_origin = max(0.0, lo)
     hop = 0.02
     samples = audio.decode(paths.episode_dir(eid) / "audio.mp3", start=t_origin, duration=hi - t_origin)
-    quiet = boundaries.quiet_from_rms(audio.rms_frames(samples, audio.SR, hop), t_origin, hop)
-    return boundaries.snap(words, start, end, quiet, exact=exact)
+    rms = audio.rms_frames(samples, audio.SR, hop)
+    quiet = boundaries.quiet_from_rms(rms, t_origin, hop)
+    s, e, info = boundaries.snap(words, start, end, quiet, exact=exact)
+    s2, e2 = boundaries.settle_in_silence(rms, t_origin, hop, s, e)
+    if (s2, e2) != (s, e):
+        info["settled"] = [round(s2 - s, 2), round(e2 - e, 2)]
+    return s2, e2, info
 
 
 def make_one(paths: Paths, sel: dict, date: str, *, render: bool = True, do_package: bool = True,

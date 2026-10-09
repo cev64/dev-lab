@@ -28,6 +28,20 @@
           "date": "2026-10-09"
         }
       ]
+    },
+    "doac-20261008": {
+      "show": "The Diary Of A CEO",
+      "title": "AI Safety Whistleblower: 700 AI Agents Attacked A Company To Cover Their Tracks! | Jeffrey Ladish",
+      "link": "",
+      "firstUsed": "2026-10-09",
+      "clips": [
+        {
+          "id": "2026-10-09-doac-20261008-jobs",
+          "start": 4265.55,
+          "end": 4332.76,
+          "date": "2026-10-09"
+        }
+      ]
     }
   },
   "clips": [
@@ -50,6 +64,16 @@
       "title": "A second workforce you can switch on and off",
       "hook": "100,000 AI workers, summoned overnight",
       "video": "out/2026-10-09/2026-10-09-moonshots-301-workforce.mp4"
+    },
+    {
+      "eid": "doac-20261008",
+      "id": "2026-10-09-doac-20261008-jobs",
+      "date": "2026-10-09",
+      "start": 4265.55,
+      "end": 4332.76,
+      "title": "Ladish on the AI job pyramid",
+      "hook": "Replaced by AI users, then by AI",
+      "video": "out/2026-10-09/2026-10-09-doac-20261008-jobs.mp4"
     }
   ]
 }

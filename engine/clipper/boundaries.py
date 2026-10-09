@@ -148,6 +148,38 @@ def snap(words: list[dict], start: float, end: float,
     return round(s_cut, 2), round(e_cut, 2), info
 
 
+def settle_in_silence(rms, t_origin: float, hop: float, start: float, end: float,
+                      max_shift: float = 0.6, win: float = 0.08) -> tuple[float, float]:
+    """Whisper word edges can be ~0.2-0.4 s early/late, which clips the last syllable (on 2026-10-09 "useful" was
+    cut to "use-"). Move the end forward / the start backward to the first stretch of near-silence (win seconds
+    below 15% of the local median level) within max_shift. Unchanged if no silence is found."""
+    import numpy as np
+
+    if len(rms) == 0:
+        return start, end
+    med = float(np.median(rms)) or 1e-9
+    k = max(1, int(round(win / hop)))
+
+    def idx(t: float) -> int:
+        return int(round((t - t_origin) / hop))
+
+    def quiet_at(i: int) -> bool:
+        seg = rms[max(0, i):max(0, i) + k]
+        return len(seg) == k and float(seg.max()) < 0.15 * med
+
+    new_end = end
+    for i in range(idx(end), idx(end + max_shift) + 1):
+        if quiet_at(i):
+            new_end = t_origin + i * hop + win / 2
+            break
+    new_start = start
+    for i in range(idx(start) - k, idx(start - max_shift) - k - 1, -1):
+        if quiet_at(i):
+            new_start = t_origin + (i + k) * hop - win / 2
+            break
+    return round(min(new_start, start), 2), round(max(new_end, end), 2)
+
+
 def quiet_from_rms(rms, t_origin: float, hop: float) -> Callable[[float, float], float]:
     """Build a quiet(t0, t1) function from an RMS array that starts at source time `t_origin`.
 

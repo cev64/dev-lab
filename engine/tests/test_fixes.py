@@ -50,3 +50,24 @@ class AgreementTest(unittest.TestCase):
         exp = [{"w": w} for w in "A lot of people say this phrase".split()]
         self.assertGreater(word_agreement(exp, [{"w": w} for w in "a lot of people say this phrase,".split()]), 0.9)
         self.assertLess(word_agreement(exp, [{"w": w} for w in "AI system they're not just trained".split()]), 0.3)
+
+
+class SettleTest(unittest.TestCase):
+    def test_end_moves_into_following_silence(self):
+        import numpy as np
+        from clipper.boundaries import settle_in_silence
+        hop = 0.02
+        rms = np.full(500, 0.2)       # 10 s of speech from t=0
+        rms[300:330] = 0.001          # silence 6.00-6.60 s
+        rms[100:120] = 0.001          # silence 2.00-2.40 s
+        s, e = settle_in_silence(rms, 0.0, hop, start=2.6, end=5.7)
+        self.assertGreaterEqual(e, 6.0)
+        self.assertLessEqual(e, 6.3)
+        self.assertLessEqual(s, 2.45)
+        self.assertGreaterEqual(s, 2.0)
+
+    def test_no_silence_no_change(self):
+        import numpy as np
+        from clipper.boundaries import settle_in_silence
+        rms = np.full(500, 0.2)
+        self.assertEqual(settle_in_silence(rms, 0.0, 0.02, 2.0, 5.0), (2.0, 5.0))
