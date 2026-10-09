@@ -640,12 +640,13 @@
   }
   // band scenes behave like a beat card
   TYPES.scene = {
-    layout(ctx, v, S, b) { const L = makeScene(S, v, b.ts, b.t1); L.h0 = L.h; return Object.assign(L, { h: IH, sceneL: true }); },
+    layout(ctx, v, S, b) { return { h: IH, scene: makeScene(S, v, b.ts, b.t1) }; }, // h = card content height
     draw(ctx, S, L, x0, top, age, dur, t, b) {
-      runScene(S, L, age, t);
+      const sc = L.scene;
+      runScene(S, sc, age, t);
       ctx.save();
       roundRect(ctx, b.box.x, b.box.y, b.box.w, b.box.h, 38); ctx.clip();
-      ctx.drawImage(L.cv, b.box.x, b.box.y + (b.box.h - L.h0) / 2);
+      ctx.drawImage(sc.cv, b.box.x, b.box.y + (b.box.h - sc.h) / 2);
       ctx.restore();
     },
   };
@@ -735,7 +736,7 @@
       b.chip = { L, w: L.w + 2 * 18 + 22, h: 40 };
     }
     for (const f of fulls) checkScene(S, f.L);
-    for (const b of beats) if (b.type === TYPES.scene) checkScene(S, b.L);
+    for (const b of beats) if (b.type === TYPES.scene) checkScene(S, b.L.scene);
     return { fulls, beats };
   }
 

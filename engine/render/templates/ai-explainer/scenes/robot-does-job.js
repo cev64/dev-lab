@@ -16,8 +16,8 @@ export default function draw(ctx, t, info) {
   const reactAt = cue != null ? cue : lerp(w0, w1, 0.55);
 
   // camera: start a bit wide, ease in on the desk while working, small settle at the end
-  const z = lerp(1, 1.08, K.phase(t, w0, w1)) * (1 + 0.04 * K.phase(t, w1, w1 + 0.8, K.easeOutBack) - 0.04 * K.phase(t, w1 + 0.8, D));
-  ctx.save(); ctx.translate(487, 725); ctx.scale(z, z); ctx.translate(-500, -735);
+  const z = lerp(1.06, 1.14, K.phase(t, w0, w1)) * (1 + 0.04 * K.phase(t, w1, w1 + 0.8, K.easeOutBack) - 0.04 * K.phase(t, w1 + 0.8, D));
+  ctx.save(); ctx.translate(487, 725); ctx.scale(z, z); ctx.translate(-510, -760);
 
   K.world.office(ctx, { t, time: P.time || 'day' });
   const feet = 1035;
@@ -25,11 +25,11 @@ export default function draw(ctx, t, info) {
   const working = t >= w0 && t < w1;
   const state = t < w0 ? 'thinking' : working ? 'working' : 'happy';
   const deskX = 600;
-  K.drawRobot(ctx, deskX, feet - 20, 1.45, { t, state, seed: 5 });
-  K.drawDesk(ctx, deskX, feet, 1.3);
-  const deskTop = feet - 110 * 1.3;
-  // laptop facing us
-  K.drawLaptop(ctx, deskX + 10, deskTop + 2, 0.78, { t: t - w0, screen: 'code', typing: working, shadow: false });
+  K.drawRobot(ctx, deskX + 70, feet - 40, 1.5, { t, state, seed: 5 });
+  K.drawDesk(ctx, deskX, feet, 1.35);
+  const deskTop = feet - 110 * 1.35;
+  // laptop facing us, left of the robot (the robot's hands reach it while working)
+  K.drawLaptop(ctx, deskX - 95, deskTop + 2, 0.62, { t: t - w0, screen: 'code', typing: working, shadow: false });
   // documents popping out of the laptop and stacking on the desk (right)
   const nDocs = 6, every = (w1 - w0) / (nDocs + 0.5);
   let stacked = 0;
@@ -37,7 +37,7 @@ export default function draw(ctx, t, info) {
     const born = w0 + (i + 0.6) * every, age = t - born;
     if (age < 0) continue;
     const fly = clamp(age / 0.7);
-    const sx = deskX + 10, sy = deskTop - 80, ex = deskX + 165, ey = deskTop - 2 - stacked * 7;
+    const sx = deskX - 95, sy = deskTop - 70, ex = deskX + 190, ey = deskTop - 2 - stacked * 7;
     const e = easeOutCubic(fly);
     const x = lerp(sx, ex, e), y = lerp(sy, ey, e) - Math.sin(fly * Math.PI) * 130;
     ctx.save(); ctx.translate(x, y); ctx.rotate((1 - e) * -0.6 + (i % 2 ? 0.04 : -0.03));
@@ -49,8 +49,8 @@ export default function draw(ctx, t, info) {
   const lab = P.task || 'Writing the weekly report';
   const lp = K.popIn(t, 0.2, 0.45);
   if (lp > 0) {
-    K.drawLabel(ctx, deskX - 10, 470, lp, { text: lab, size: 28, dot: true });
-    const prog = K.phase(t, w0, w1, smooth), bw = 300, bx = deskX - 10 - bw / 2, by = 486;
+    K.drawLabel(ctx, deskX - 10, 520, lp, { text: lab, size: 30, dot: true });
+    const prog = K.phase(t, w0, w1, smooth), bw = 320, bx = deskX - 10 - bw / 2, by = 538;
     ctx.save(); ctx.globalAlpha = lp;
     H.roundRect(ctx, bx, by, bw, 14, 7); ctx.fillStyle = 'rgba(10,12,22,0.75)'; ctx.fill();
     if (prog > 0) { H.roundRect(ctx, bx, by, Math.max(14, bw * prog), 14, 7); ctx.fillStyle = ACC; ctx.fill(); }
@@ -75,6 +75,6 @@ export default function draw(ctx, t, info) {
     ctx.restore();
   }
   // done stamp over the stack
-  if (t >= w1) K.drawStamp(ctx, deskX + 165, deskTop - 40, 0.72, { kind: 'check', text: P.done || 'DONE', land: clamp((t - w1) / 0.55) });
+  if (t >= w1) K.drawStamp(ctx, deskX + 190, deskTop - 50, 0.72, { kind: 'check', text: P.done || 'DONE', land: clamp((t - w1) / 0.55) });
   ctx.restore();
 }

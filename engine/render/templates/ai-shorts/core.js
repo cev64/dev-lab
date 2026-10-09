@@ -17,7 +17,7 @@
   const CX = (SAFE.x0 + SAFE.x1) / 2; // horizontal centre of the safe box (text is centred here, not on W/2)
   const BOXW = SAFE.x1 - SAFE.x0;
   const LAYOUT = {
-    progressY: 1516, progressH: 7,
+    showProgress: false, progressY: 1516, progressH: 7,
     dockY: 206,
     cardCenterY: 560,
     captionY: 1200,     // visual centre of the caption block (band 1050-1350)
@@ -905,8 +905,7 @@
         if (cover) {
           if (S.hook) blit(ctx, S.cardSprite, 1, 1.04, 40); else blit(ctx, S.dockSprite, 1, 1, 0);
         } else {
-          drawProgress(ctx, S, t);
-          mark('progress');
+          if (LAYOUT.showProgress) { drawProgress(ctx, S, t); mark('progress'); } // owner: no progress bar (2026-10-09)
           drawHook(ctx, S, t);
           mark('hook');
           drawCaptions(ctx, S, t);

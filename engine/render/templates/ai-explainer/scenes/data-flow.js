@@ -11,27 +11,27 @@ export default function draw(ctx, t, info) {
   const labels = (P.sources || ['You', 'Apps', 'Sensors']).slice(0, 3);
 
   // camera: slow push towards the data center
-  const z = lerp(1, 1.1, H.phase(t, 0.5, D)), cx = lerp(487, 560, H.phase(t, 0.5, D)), cy = 725;
+  const z = lerp(1, 1.06, H.phase(t, 0.5, D)), cx = lerp(487, 505, H.phase(t, 0.5, D)), cy = 725;
   ctx.save(); ctx.translate(487, 725); ctx.scale(z, z); ctx.translate(-cx, -cy);
 
   const city = K.world.city(ctx, { t, time: P.time || 'night', groundY: 960 });
   const feet = 1030;
   // senders: two people with phones + one laptop on a bench-like stand
   const senders = [
-    { x: 120, kind: 'person', opts: { pose: 'phone', skin: 1, shirt: 1, hair: 4, hairStyle: 'bun', seed: 1 } },
-    { x: 270, kind: 'person', opts: { pose: 'phone', skin: 3, shirt: 2, hair: 0, hairStyle: 'short', seed: 4 } },
-    { x: 410, kind: 'laptop' },
+    { x: 130, kind: 'person', opts: { pose: 'phone', skin: 1, shirt: 1, hair: 4, hairStyle: 'bun', seed: 1 } },
+    { x: 300, kind: 'person', opts: { pose: 'phone', skin: 3, shirt: 2, hair: 0, hairStyle: 'short', seed: 4 } },
+    { x: 455, kind: 'laptop' },
   ].slice(0, Math.max(2, labels.length));
-  const DC = { x: 735, y: feet - 6, s: 1.12 };
+  const DC = { x: 735, y: feet - 6, s: 1.3 };
   const ramp = (s) => 0.25 + 0.75 * smooth(s / Math.max(1, D * 0.55));
   const act = ramp(t);
   K.drawDataCenter(ctx, DC.x, DC.y, DC.s, { t, activity: act, label: P.label || 'Data center' });
 
   // source points + curved paths into the roof of the data center
-  const srcPt = (sd) => (sd.kind === 'laptop' ? [sd.x, feet - 150] : [sd.x + 12, feet - 152]);
+  const srcPt = (sd) => (sd.kind === 'laptop' ? [sd.x, feet - 200] : [sd.x + 16, feet - 196]);
   const paths = senders.map((sd, i) => {
-    const [x0, y0] = srcPt(sd), x1 = DC.x - 120 + i * 90, y1 = DC.y - 180 * DC.s;
-    return K.bezier(x0, y0 - 10, x0 + 40, 480 - i * 30, x1 - 80, 470 + i * 20, x1, y1, 48);
+    const [x0, y0] = srcPt(sd), x1 = DC.x - 110 + i * 100, y1 = DC.y - 186 * DC.s;
+    return K.bezier(x0, y0 - 10, x0 + 30, 450 - i * 30, x1 - 60, 430 + i * 20, x1, y1, 48);
   });
   // paths draw in, then packets stream along them
   paths.forEach((pts, i) => {
@@ -69,16 +69,16 @@ export default function draw(ctx, t, info) {
     ctx.save(); ctx.translate(sd.x, feet); ctx.scale(1, pop); ctx.translate(-sd.x, -feet);
     if (sd.kind === 'person') {
       // look up at the packets now and then, otherwise tap the phone
-      K.drawPerson(ctx, sd.x, feet, 0.92, Object.assign({ t, typing: 1, mood: 'happy' }, sd.opts));
+      K.drawPerson(ctx, sd.x, feet, 1.22, Object.assign({ t, typing: 1, mood: 'happy' }, sd.opts));
     } else {
-      ctx.fillStyle = K.NEUTRAL.darkL; H.roundRect(ctx, sd.x - 70, feet - 96, 140, 14, 6); ctx.fill();
-      ctx.fillRect(sd.x - 6, feet - 84, 12, 84);
-      K.drawLaptop(ctx, sd.x, feet - 96, 0.5, { t, screen: 'chart', typing: false, shadow: false });
+      ctx.fillStyle = K.NEUTRAL.darkL; H.roundRect(ctx, sd.x - 80, feet - 120, 160, 16, 7); ctx.fill();
+      ctx.fillRect(sd.x - 7, feet - 106, 14, 106);
+      K.drawLaptop(ctx, sd.x, feet - 120, 0.6, { t, screen: 'chart', typing: false, shadow: false });
     }
     ctx.restore();
     if (labels[i]) {
       const lp = K.popIn(t, 0.5 + 0.15 * i, 0.4);
-      if (lp > 0) K.drawLabel(ctx, sd.x, (sd.kind === 'laptop' ? feet - 190 : feet - 250) - 10, lp, { text: labels[i], size: 24 });
+      if (lp > 0) K.drawLabel(ctx, sd.x, (sd.kind === 'laptop' ? feet - 230 : feet - 312) - 10, lp, { text: labels[i], size: 26 });
     }
   });
   ctx.restore();

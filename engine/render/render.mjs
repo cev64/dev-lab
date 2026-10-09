@@ -264,7 +264,7 @@ async function main() {
   const templateUrl = `http://127.0.0.1:${server.address().port}/templates/${encodeURIComponent(template)}/index.html`;
   const workers = await Promise.all(Array.from({ length: nWorkers }, (_, i) => startWorker(clip, templateUrl, i)));
   log(`template=${template} style=${workers[0].info.style} palette=${workers[0].info.palette} seed=${workers[0].info.seed} ` +
-    `groups=${workers[0].info.groups}${workers[0].info.beats != null ? ` beats=${workers[0].info.beats}` : ''}` +
+    `groups=${workers[0].info.groups}${workers[0].info.beats != null ? ` beats=${workers[0].info.beats}` : ''}${workers[0].info.scenes ? ` scenes=${workers[0].info.scenes}` : ''}` +
     `${workers[0].info.background ? ` background=${workers[0].info.background}` : ''} frames=${frames ? frames.length : total} workers=${nWorkers}`);
 
   try {

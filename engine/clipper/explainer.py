@@ -8,6 +8,7 @@ template -> render -> delivery note (with sources) + ledger "explainers" entry.
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -50,6 +51,23 @@ def ensure_voice(script_path: Path, vdir: Path) -> dict:
     return voice
 
 
+SHARED_SCENES = Path(__file__).resolve().parents[1] / "render" / "templates" / "ai-explainer"
+
+
+def resolve_visual(visual: dict, vdir: Path) -> dict:
+    """Scene modules may be given as 'scenes/x.js': look in the story folder first (work/explainers/<id>/), then the
+    shared library (engine/render/templates/ai-explainer/), and pass the renderer an absolute path."""
+    if visual.get("type") != "scene" or not visual.get("module"):
+        return visual
+    mod = Path(visual["module"])
+    if mod.is_absolute():
+        return visual
+    for base in (vdir, SHARED_SCENES):
+        if (base / mod).exists():
+            return {**visual, "module": str((base / mod).resolve())}
+    raise FileNotFoundError(f"scene module {mod} not found in {vdir} or {SHARED_SCENES}")
+
+
 def build_clip(script: dict, voice: dict, vdir: Path, date: str, broll_dir: Path | None) -> dict:
     wav = vdir / "voice.wav"
     duration = float(voice.get("duration") or audio.probe_duration(wav))
@@ -68,7 +86,7 @@ def build_clip(script: dict, voice: dict, vdir: Path, date: str, broll_dir: Path
     for i, b in enumerate(script["beats"]):
         t = vbeats[i] if i < len(vbeats) else {"t0": duration * i / len(script["beats"]),
                                                "t1": duration * (i + 1) / len(script["beats"])}
-        beat = {"t0": float(t["t0"]), "t1": float(t["t1"]), "visual": b["visual"]}
+        beat = {"t0": float(t["t0"]), "t1": float(t["t1"]), "visual": resolve_visual(b["visual"], vdir)}
         if i in labels:
             beat["label"] = labels[i]
         beats.append(beat)
@@ -84,7 +102,7 @@ def build_clip(script: dict, voice: dict, vdir: Path, date: str, broll_dir: Path
         "hook": script["hook"],
         "topic": script.get("topic", ""),
         "emphasis": script.get("emphasis", []),
-        "credit": {"show": "Original explainer", "episode": "Sources in caption", "speakers": "AI narrator"},
+        "credit": {},  # owner: nothing at the bottom of explainers; AI-narrator disclosure is in the caption + platform label
         "theme": {"seed": theme_seed(script["id"]), "style": style},
         "beats": beats,
         "source": {"kind": "explainer", "date": date, "sources": script["sources"]},
@@ -144,8 +162,13 @@ def explainer(paths: Paths, script_path: Path, date: str | None = None, render: 
     dpath = paths.root / "deliveries" / f"{date}.md"
     dpath.parent.mkdir(parents=True, exist_ok=True)
     existing = dpath.read_text(encoding="utf-8") if dpath.exists() else f"# Deliveries {date}\n\n"
-    if f"`{eid}`" not in existing:
-        dpath.write_text(existing + delivery_block(script, clip, video_rel, stock), encoding="utf-8")
+    block = delivery_block(script, clip, video_rel, stock)
+    if f"`{eid}`" in existing:  # re-run: replace this explainer's block, keep everything else
+        parts = re.split(r"(?=^## )", existing, flags=re.M)
+        existing = "".join(block if f"`{eid}`" in part else part for part in parts)
+        dpath.write_text(existing, encoding="utf-8")
+    else:
+        dpath.write_text(existing + block, encoding="utf-8")
     if video:
         data = ledger.load(paths.ledger)
         exp = data.setdefault("explainers", [])

@@ -107,15 +107,16 @@
         for (let i = 0; i <= n; i++) { const u = i / n, a = 1 - u; pts.push([a * a * a * x0 + 3 * a * a * u * x1 + 3 * a * u * u * x2 + u * u * u * x3, a * a * a * y0 + 3 * a * a * u * y1 + 3 * a * u * u * y2 + u * u * u * y3]); }
         return pts;
       },
-      // camera: keys [{t, zoom, x, y}] (x, y = scene point to centre), eased between keys. Call first in draw().
-      camera(ctx, t, keys, w = 855, h = 480) {
-        if (!keys || !keys.length) return { zoom: 1, x: w / 2, y: h / 2 };
+      // camera: keys [{t, zoom, x, y}] (x, y = scene point brought to the anchor (ax, ay), default the centre),
+      // eased between keys. Call first in draw(), inside ctx.save()/restore().
+      camera(ctx, t, keys, w = 855, h = 480, ax = w / 2, ay = h / 2) {
+        if (!keys || !keys.length) return { zoom: 1, x: ax, y: ay };
         let a = keys[0], b = keys[keys.length - 1];
         for (let i = 0; i < keys.length - 1; i++) if (t >= keys[i].t && t <= keys[i + 1].t) { a = keys[i]; b = keys[i + 1]; break; }
         const k = t <= keys[0].t ? 0 : t >= keys[keys.length - 1].t ? 1 : easeInOutCubic((t - a.t) / Math.max(1e-6, b.t - a.t));
         const A0 = t <= keys[0].t ? keys[0] : a, B0 = t >= keys[keys.length - 1].t ? keys[keys.length - 1] : b;
-        const z = lerp(A0.zoom ?? 1, B0.zoom ?? 1, k), x = lerp(A0.x ?? w / 2, B0.x ?? w / 2, k), y = lerp(A0.y ?? h / 2, B0.y ?? h / 2, k);
-        ctx.translate(w / 2, h / 2); ctx.scale(z, z); ctx.translate(-x, -y);
+        const z = lerp(A0.zoom ?? 1, B0.zoom ?? 1, k), x = lerp(A0.x ?? ax, B0.x ?? ax, k), y = lerp(A0.y ?? ay, B0.y ?? ay, k);
+        ctx.translate(ax, ay); ctx.scale(z, z); ctx.translate(-x, -y);
         return { zoom: z, x, y };
       },
     };
@@ -1065,11 +1066,12 @@
     const props = { plant, mug, floorLamp: (ctx, x, y, on, t) => floorLamp(ctx, x, y, on, t), window: windowFrame };
 
     return {
-      ACCENT: A, NEUTRAL: N, SKIN, HAIR, SHIRT, SIZE, font, motion, world, props,
-      camera: (ctx, t, keys) => motion.camera(ctx, t, keys, CW, CH),
-      cameraShake: (ctx, t, start, dur = 0.4, amp = 12) => { ctx.translate(motion.shake(t, start, dur, amp), motion.shake(t, start + 0.03, dur, amp * 0.6, 31)); },
-      // motion helpers are also available at the top level
+      // motion helpers at the top level first, so the frame-size-aware camera below wins over motion.camera
       ...motion,
+      ACCENT: A, NEUTRAL: N, SKIN, HAIR, SHIRT, SIZE, font, motion, world, props,
+      // full frame: the anchor is the stage centre (487, 725), so { zoom: 1 } with no x/y is the identity
+      camera: (ctx, t, keys) => (CW === 1080 && CH === 1920 ? motion.camera(ctx, t, keys, CW, CH, 487, 725) : motion.camera(ctx, t, keys, CW, CH)),
+      cameraShake: (ctx, t, start, dur = 0.4, amp = 12) => { ctx.translate(motion.shake(t, start, dur, amp), motion.shake(t, start + 0.03, dur, amp * 0.6, 31)); },
       shadow, glow: addGlow,
       drawPerson, drawRobot, drawPhone, drawLaptop, drawServerRack, drawDataCenter, drawDocument, drawCoin, drawBills,
       drawPriceTag, drawChart, drawLock, drawShield, drawGlobe, drawGavel, drawRulebook, drawBriefcase, drawClock,

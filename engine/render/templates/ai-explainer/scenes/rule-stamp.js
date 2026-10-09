@@ -16,16 +16,16 @@ export default function draw(ctx, t, info) {
 
   // camera: wide, push into the book before the stamp, shake on impact
   const push = K.phase(t, openAt, stampAt - 0.15);
-  const z = lerp(1, 1.32, push), cx = lerp(487, 487, push), cy = lerp(735, 790, push);
+  const z = lerp(1, 1.3, push), cx = 487, cy = lerp(725, 655, push);
   ctx.save();
   K.cameraShake(ctx, t, stampAt, 0.45, 16);
   ctx.translate(487, 725); ctx.scale(z, z); ctx.translate(-cx, -cy);
 
   const room = K.world.courtroom(ctx, { t });
   // official at the bench (only the upper body shows above it)
-  const gesture = t > stampAt + 0.3 ? 'point' : t > openAt ? 'stand' : 'stand';
+  const gesture = t > stampAt + 0.3 ? 'cheer' : t > openAt ? 'point' : 'stand';
   ctx.save(); ctx.beginPath(); ctx.rect(0, 0, info.width, room.bench.y + 4); ctx.clip();
-  K.drawPerson(ctx, 330, room.bench.y + 180, 1.25, { t, pose: gesture, flip: false, skin: 1, hair: 3, shirt: '#3b4580', hairStyle: 'short', mood: t > stampAt ? 'happy' : 'neutral', talk: t > openAt && t < gavelAt ? 0.5 * info.env + 0.2 : 0, seed: 3 });
+  K.drawPerson(ctx, 790, room.bench.y + 170, 1.3, { t, pose: gesture, flip: true, skin: 1, hair: 3, shirt: '#3b4580', hairStyle: 'short', mood: t > stampAt ? 'happy' : 'neutral', talk: t > openAt && t < gavelAt ? 0.5 * info.env + 0.2 : 0, seed: 3 });
   ctx.restore();
   // lectern + book in the foreground
   const LX = 487, LY = 1060;
@@ -41,12 +41,12 @@ export default function draw(ctx, t, info) {
   if (t < gavelAt - 0.5) hit = 1; // resting
   else if (t < gavelAt) hit = 1 - K.phase(t, gavelAt - 0.5, gavelAt, smooth); // raise
   else hit = K.phase(t, gavelAt, gavelAt + 0.14, (k) => k * k); // strike fast
-  K.drawGavel(ctx, LX + 210, top + 6, 0.8, { hit });
+  K.drawGavel(ctx, 640, room.bench.y + 4, 0.95, { hit, shadow: false });
   // stamp lands on the right page
   if (t >= stampAt - 0.05) {
     const land = clamp((t - stampAt + 0.05) / 0.5);
-    K.drawStamp(ctx, LX + 88, top - 40, 0.78, { kind: P.kind === 'cross' ? 'cross' : 'check', text: P.text || 'NEW RULES', land });
+    K.drawStamp(ctx, LX + 60, top - 20, 0.95, { kind: P.kind === 'cross' ? 'cross' : 'check', text: P.text || 'NEW RULES', land });
   }
-  if (P.note && t > stampAt + 0.6) K.drawLabel(ctx, LX, LY - 10, K.popIn(t, stampAt + 0.6, 0.4), { text: P.note, size: 26, dot: true });
+  if (P.note && t > stampAt + 0.6) K.drawLabel(ctx, LX, top + 150, K.popIn(t, stampAt + 0.6, 0.4), { text: P.note, size: 28, dot: true });
   ctx.restore();
 }

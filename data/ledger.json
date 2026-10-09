@@ -75,5 +75,18 @@
       "hook": "Replaced by AI users, then by AI",
       "video": "out/2026-10-09/2026-10-09-doac-20261008-jobs.mp4"
     }
+  ],
+  "explainers": [
+    {
+      "id": "2026-10-09-explainer-claude-cruelty",
+      "date": "2026-10-09",
+      "hook": "Being cruel to an AI is now against the rules",
+      "topic": "AI WELFARE",
+      "sources": [
+        "https://www.anthropic.com/news/2026-usage-policy-update",
+        "https://www.theverge.com/ai-artificial-intelligence/1008100/anthropic-new-usage-policy-abuse-claude"
+      ],
+      "video": "out/2026-10-09/2026-10-09-explainer-claude-cruelty.mp4"
+    }
   ]
 }

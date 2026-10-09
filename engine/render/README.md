@@ -91,18 +91,122 @@ with a voice-bars glyph instead of the mic). Additions, all in `templates/ai-exp
 | quote | `text` (<= ~20 words), `by` ("Name, where") | big accent quote mark, words fade in, "— Name, where"; text only |
 | timeline | `items` 2-5 {t, label, at?} | points on a line, the accent point advances across ~72% of the beat (or at `at`), past/now/future states |
 | keyword | `text` | huge Anton word/phrase, letter-by-letter masked rise, accent underline sweep |
+| scene | `module`, `params`, `layout` ("full" default / "band"), `span`? | a per-story animated scene (ES module), see "Authoring a scene" |
+
+Explainers should be mostly **scenes** (characters and objects acting out the story); cards are support for 1-2
+beats. `sample/explainer-story-clip.json` is a ~90%-scene sample using the five example scenes.
 
 All text is shrink-to-fit inside the card (with a uniform-scale emergency fallback), so nothing can reach the
 dock (ends <= ~420) or the captions (>= ~1100). One accent colour per palette (yellow or green), no emoji/logos/photos.
 Review: `node render.mjs --clip sample/explainer-clip.json --out /tmp/x/e.png --frames-only 0.1s,6.4s,14.7s,22.9s,30.8s,40.1s,48.8s,59.5s`.
-Speed: ~25 fps generative (66 s sample: 85 s total), ~31 fps with a background video (+ extraction).
+Speed: ~25 fps for cards over the generative background (66 s sample: 85 s total), ~31 fps with a background
+video (+ extraction), ~36 fps for full-frame scenes (66 s story sample: 61 s total).
 
 ## Engine hooks for other templates
-`CLIPKIT.boot(opts)`: `opts.setup(S, ctx)` runs after the core layouts are built and may set
+`CLIPKIT.boot(opts)`: `opts.setup(S, ctx)` (may be async) runs after the core layouts are built and may set
 `S.layers.mid(ctx, S, t, cover)` (drawn after the background overlay, before progress/hook/captions),
+`S.layers.skipBackground(t, cover)` (true = mid paints the whole frame, skip the generative style),
 `S.layers.creditGlyph(ctx, S, x, y, size, color, t)` and `S.info` (merged into `__INFO`); `opts.sample` is the
 preview fixture. Text/panel helpers (`font`, `fitText`, `wrapBalanced`, `capHeight`, `glassPanel`, ...) are exported
 on `CLIPKIT`. With no opts, `ai-shorts` renders byte-identically to before.
+
+## Authoring a scene
+A scene is a small ES module written per story that animates what the narration says. Reference it from a beat:
+```json
+{ "t0": 14.0, "t1": 26.0, "visual": { "type": "scene", "module": "scenes/2026-10-10-agents.js", "span": 2,
+  "params": { "task": "Booking the flight" } } }
+```
+or top level: `"scenes": [{ "module": "...", "t0": 14.0, "t1": 26.0, "params": {} }]` (wins over overlapping beats).
+- `module`: absolute, or relative to clip.json. render.mjs serves it; the page imports it before frame 0.
+- `layout`: `"full"` (default) draws the **whole 1080x1920 frame** and replaces the background; `"band"` draws an
+  855x480 canvas inside the beat card (like the other card types).
+- `span: n` on a beat makes one continuous scene over that beat and the next n-1 (their visuals are ignored).
+- Full scenes crossfade (350 ms) with the previous scene or card mode, and a scrim is added over the dock and
+  caption band. The hook card covers y ~330-790 for the first ~3 s, so start the first scene with an establishing shot.
+- **Stage** (full layout): paint the whole frame (use a `world`), but keep the action and any text inside
+  x 60-915, y 400-1050 (`info.stage`): the docked header sits at y 206-~420, captions at 1050-1350, credit/progress
+  to 1540. Characters' feet around y 1000-1040.
+- Failures stop the render with the module path: missing file, no default export, a throw at any t (each scene is
+  dry-run at its start, 25 %, end), `Math.random`/`Date.now`/`performance.now` (blocked while drawing), or
+  non-determinism (the middle frame is drawn twice and compared).
+
+```js
+// scenes/example.js: draw(ctx, t, info) paints one frame; t = seconds since the scene started. Pure function of t.
+export default function draw(ctx, t, info) {
+  const K = info.helpers.kit, P = info.params, D = info.duration;
+  const doneAt = info.timeOf(P.cue || 'done') ?? D * 0.7;      // sync to a narrated word (scene-relative s)
+  ctx.save();
+  K.camera(ctx, t, [{ t: 0, zoom: 1 }, { t: D, zoom: 1.08, x: 520, y: 760 }]); // gentle push-in
+  const room = K.world.office(ctx, { t });                        // a setting, not objects on black
+  K.drawDesk(ctx, 600, 1035, 1.3);
+  K.drawRobot(ctx, 640, 1000, 1.5, { t, state: t < doneAt ? 'working' : 'happy' });
+  K.drawPerson(ctx, 220, 1035, 1.55, { t, pose: t < doneAt ? 'stand' : 'cheer', mood: 'happy', talk: info.env * 0.6 });
+  const pop = K.popIn(t, 0.3);                                    // 0 -> 1 with overshoot
+  if (pop > 0) K.drawLabel(ctx, 600, 520, pop, { text: P.task || 'Doing the task', dot: true });
+  if (t > doneAt) K.drawStamp(ctx, 780, 880, 0.7, { kind: 'check', text: 'DONE', land: (t - doneAt) / 0.5 });
+  ctx.restore();
+}
+```
+`info`: `duration`, `width`/`height` (1080x1920 full, 855x480 band), `stage`, `safe`, `env`/`onset` (narration
+loudness 0..1 now), `params` (frozen), `beat` (index within a span), `beatT`/`beatDur`, `beats` [{t0, t1}] (scene-
+relative), `words` [{w, s, e}] (scene-relative), `wordAt(t)` (word being spoken at scene time t or null),
+`timeOf(word, nth = 0)` (scene time it is spoken or null), `accent`, `ink`, `muted`, `fonts`, `helpers`.
+`helpers`: `kit`, `world` (= kit.world), `camera`, `rng` (seeded; re-seeded every frame: call in the same order each
+frame), `hash(a, b)` (stable noise), `clamp lerp smooth easeOutCubic easeInOutCubic easeOutBack spring phase`,
+`roundRect rgba mixHex font(kind, size) fitText(ctx, text, kind, max, min, maxW) wrap(ctx, text, kind, size, maxW)
+glow(ctx, x, y, r, color, a)`; font kinds `display` (Montserrat 900), `bold` (800), `condensed` (Anton), `ui`
+(Inter 700), `body` (Inter 500).
+
+**Style rules.** Flat, friendly vector (the kit's look): simple rounded shapes, 2-3 tones per object, soft ground
+shadows, dark-ish settings. One accent colour (`info.accent`, yellow or green) for what matters; no emoji, no logos
+or real brands, no real people or likenesses (kit characters are generic cartoons; never caricature a real person),
+no photos. Readable on a phone: text >= 24 px (labels 26-30), key objects >= ~150 px. Motion eases in and out
+(popIn, phase, spring), with anticipation and follow-through on big actions (wind-up, overshoot, settle) and small
+secondary life (blinks, steam, blinking LEDs). Every scene ends in a settled state (no half-finished motion at t1).
+Sync key actions to the narration with `timeOf`.
+
+**Preview** stills at several t (seconds are absolute clip time):
+`node render.mjs --clip <clip.json> --out /tmp/x/s.png --frames-only 3s,6s,9s,12s` and look at them.
+
+### Kit reference (`info.helpers.kit`, templates/ai-explainer/kit.js)
+All `draw*(ctx, x, y, scale, opts)` are anchored at the **bottom-centre** (where the thing stands); sizes at scale 1
+are in `kit.SIZE`. Characters are generic cartoons.
+- `drawPerson` ~120x240: `pose` stand|point|shrug|cheer|phone|sit|sit-phone|sit-laptop, `t`, `talk` 0..1, `walk` (s of walking), `typing` 0-2, `mood` happy|neutral|worried|angry|shocked, `skin`/`hair`/`shirt` (0-4 or hex), `hairStyle` short|long|bun|curly|none, `look` -1..1, `flip`, `seat` (false on sofas), `seed`.
+- `drawRobot` ~130x225: `state` idle|thinking|working|happy, `t`, `talk`, `flip`, `seed`.
+- `drawPhone` 130x240: `t`, `bubbles` (count), `every`, `typing`, `screen` chat|blank.
+- `drawLaptop` 260x150: `t`, `screen` code|chart|chat|blank, `typing`.
+- `drawServerRack` 120x230: `t`, `activity` 0..1. `drawDataCenter` 330x190: `t`, `activity`, `label`.
+- `drawBuilding` 240x420 office/bank tower: `t`, `color`, `floors`, `lit` 0..1, `label`.
+- `drawDocument` 140x180: `lines`, `title`, `sign` 0..1 (signature draws), `seal`.
+- `drawCoin` 64x64: `spin` (radians), `symbol`. `drawBills` 130x80: `count` 1-8. `drawPriceTag` 130x150: `text`, `t` (swing).
+- `drawChart` 270x175: `trend` up|down, `progress` 0..1, `points` [[u, v]].
+- `drawLock` 90x125: `open` 0..1. `drawShield` 120x140: `check` 0..1. `drawGlobe` 170x170: `t`, `arcs`, `progress`.
+- `drawGavel` 190x120: `hit` 0 (raised) .. 1 (struck). `drawRulebook` 170x210: `open` 0..1, `title`. `drawLectern` 220x232.
+- `drawBriefcase` 170x135. `drawClock` 130x130: `t`, `speed` (h/s), `hour`. `drawLightbulb` 100x160: `on` 0..1, `t`.
+- `drawWarning` 140x125: `pulse`. `drawSpeechBubble` (anchor = tail tip): `text`, `size`, `maxW`, `tail` left|right|center, `dark`, `pop`.
+- `drawStamp` 190x190: `kind` check|cross, `text`, `land` 0..1 (slams in, burst). `drawLabel` pill: `text`, `size`, `dot`, `accent`. `drawDesk` 300x110.
+- Props: `kit.props.plant(ctx, x, y, s)`, `mug(ctx, x, y, s, t)` (steam), `floorLamp(ctx, x, y, on, t)`, `window(ctx, x, y, w, h, time, t)`.
+- `shadow(ctx, x, y, w)`, `glow(ctx, x, y, r, color, a)`; colours `ACCENT {base, shade, light, deep}`, `NEUTRAL`, `SKIN`, `HAIR`, `SHIRT`; `font.display(size)` etc.
+
+World (`kit.world.*(ctx, opts)`, paints the whole 1080x1920 frame, returns anchors):
+- `room` {t, time day|dusk|night, wall, floor, floorY, window, lamp, picture, plant} -> {floorY, feetY}
+- `livingRoom` / `livingRoomNight` {t, time, sofa colour, lampOn} -> {sofa: {x, seatY, feetY}, table, floorY} (sit characters with `seat: false` at sofa.x/feetY, scale ~1.9)
+- `office` {t, time} -> {floorY, desk}; `city` {t, time, groundY} -> {groundY, feetY}; `serverHall` {t, activity} -> {floorY, feetY}
+- `courtroom` {t} -> {bench: {x, y}, podium, floorY} (generic balance emblem, no real seals)
+
+Motion (also on `kit.motion`): `popIn(t, delay, dur)` 0->1 overshoot, `fadeIn/fadeOut`, `slideIn(t, delay, dur, dist)`
+offset, `bob(t, amp, speed, phase)`, `shake(t, start, dur, amp)`, `typewriter(text, t, cps, delay)`,
+`countUp(value, t, delay, dur, decimals)`, `stagger(items, t, step, delay)` -> local times, `phase(t, a, b, ease)`,
+`pathDraw(ctx, pts, progress)`, `pathPoint(pts, u)`, `bezier(x0, y0, x1, y1, x2, y2, x3, y3, n)` -> points,
+`camera(ctx, t, [{t, zoom, x, y}])` (x, y = scene point brought to the stage centre 487,725; zoom >= 1), `cameraShake(ctx, t, start, dur, amp)`.
+
+Example scenes in `templates/ai-explainer/scenes/` (all full-frame, generic placeholder text by default):
+- `chat-ends.js` (sofa at night, angry typing, zoom into the phone, chat ended, stare) params: messages, replies, title, ended, burst, endWord
+- `data-flow.js` (people/devices stream packets into a data center) params: sources, label, time
+- `robot-does-job.js` (robot works at a desk, documents stack, coworker reacts, DONE stamp) params: task, reaction impressed|worried, done, cue
+- `money-flow.js` (coins arc between two labelled buildings, amount counts up) params: from, to, amount, caption, time
+- `rule-stamp.js` (rule book opens, gavel strikes, stamp lands) params: text, kind, title, note, cue
+Scenes with 3+ beats (`span`) use the beat boundaries as their phases; otherwise fractions of the duration.
 
 ## Adding a style
 1. Create `templates/ai-shorts/styles/<name>.js`:
@@ -136,5 +240,5 @@ select it with `--template`, clip.json `"template"` or `theme.template` (see `te
 
 ## Files
 - `render.mjs` CLI; `templates/ai-shorts/` (core.js engine: audio features, captions, hook, credit, overlay,
-  background video; `styles/*.js` backgrounds); `templates/ai-explainer/` (index.html + beats.js); `fonts/` (Montserrat 800/900, Anton, Inter 500/700 latin woff2, OFL licences);
-  `sample/` (fixtures `clip.json`, `explainer-clip.json` + generator).
+  background video; `styles/*.js` backgrounds); `templates/ai-explainer/` (index.html, beats.js, kit.js, scenes/); `fonts/` (Montserrat 800/900, Anton, Inter 500/700 latin woff2, OFL licences);
+  `sample/` (fixtures `clip.json`, `explainer-clip.json` (cards), `explainer-story-clip.json` (scenes) + generator).
