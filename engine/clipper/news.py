@@ -125,7 +125,8 @@ def merge_stories(items: list[dict], threshold: float = 0.6) -> list[dict]:
 
 def news(paths: Paths, days: float = 3, limit: int = 40) -> dict:
     cfg = read_json(paths.root / "config" / "news_sources.json") or {}
-    feeds = cfg.get("feeds", [])
+    # JSON entries (e.g. the Hacker News Algolia API) are a trending signal, fetched by hn_front_titles(), not a feed.
+    feeds = [f for f in cfg.get("feeds", []) if not f.get("format", "").startswith("json")]
     if not feeds:
         raise SystemExit("config/news_sources.json has no feeds")
     now = time.time()
