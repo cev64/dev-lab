@@ -2,7 +2,7 @@ import { v } from "convex/values";
 import { internalQuery } from "./_generated/server";
 import { dayOf } from "./lib";
 
-// KPIs for the nightly agent (served at GET /metrics behind METRICS_TOKEN). Aggregates only, no emails.
+// KPIs for the nightly agent (served at GET /ops/metrics behind METRICS_TOKEN). Aggregates only, no emails.
 export const summary = internalQuery({
   args: { days: v.optional(v.number()) },
   handler: async (ctx, { days }) => {

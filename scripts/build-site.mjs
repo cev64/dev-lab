@@ -36,7 +36,7 @@ const configJs = join(out, "assets/config.js");
 if (existsSync(configJs)) {
   let s = readFileSync(configJs, "utf8");
   s = s.replace(/apiBase:\s*"[^"]*"/, `apiBase: ${JSON.stringify(apiBase)}`)
-    .replace(/checkoutUrl:\s*"[^"]*"/, `checkoutUrl: ${JSON.stringify(cfg.checkoutUrl || "")}`)
+    .replace(/checkoutUrl:\s*"[^"]*"/, `checkoutUrl: ${JSON.stringify(process.env.PUBLIC_CHECKOUT_URL || cfg.checkoutUrl || "")}`)
     .replace(/supportEmail:\s*"[^"]*"/, `supportEmail: ${JSON.stringify(cfg.supportEmail || "")}`);
   writeFileSync(configJs, s);
 }

@@ -194,7 +194,7 @@ http.route({
 
 // ---------- operator endpoints (nightly agent) ----------
 http.route({
-  path: "/metrics",
+  path: "/ops/metrics",
   method: "GET",
   handler: httpAction(async (ctx, req) => {
     if (!bearerOk(req, process.env.METRICS_TOKEN)) return json(req, { error: "unauthorized" }, 401);

@@ -23,6 +23,7 @@ const FIXTURE_ROUTES = {
 const mock = createServer((req, res) => {
   const url = new URL(req.url, "http://x");
   if (process.env.SMOKE_DEBUG) console.log("mock", req.method, url.pathname);
+  if (process.env.SMOKE_DEBUG) console.log("mock", req.method, url.pathname);
   if (url.pathname === "/v1/licenses/validate") {
     let body = "";
     req.on("data", (c) => (body += c));
@@ -71,7 +72,8 @@ const METRICS_TOKEN = "metrics_test_token_0123456789abcdef";
 const ADMIN_TOKEN = "admin_test_token_0123456789abcdef0";
 for (const [k, v] of Object.entries({
   LEMONSQUEEZY_API_BASE: mockBase, LEMONSQUEEZY_STORE_ID: "111", LEMONSQUEEZY_PRODUCT_IDS: "222,333",
-  LEMONSQUEEZY_WEBHOOK_SECRET: WEBHOOK_SECRET, METRICS_TOKEN, ADMIN_TOKEN, NFLVERSE_BASE: `${mockBase}/nflverse`,
+  LEMONSQUEEZY_WEBHOOK_SECRET: WEBHOOK_SECRET, METRICS_TOKEN, ADMIN_TOKEN, // Node actions in the local backend cannot reach the in-process mock, so the refresh reads real nflverse.
+  NFLVERSE_BASE: "https://github.com/nflverse/nflverse-data/releases/download",
   NFL_SEASON: "2026", SITE_URL: "https://example.com",
 })) cx("env", "set", k, v);
 
@@ -129,7 +131,7 @@ try {
   ok("csv without key -> 403", (await get("/nfl.csv?table=players")).status === 403);
 
   // webhook (unique order ids per run)
-  const m0 = await (await get("/metrics?days=7", { Authorization: `Bearer ${METRICS_TOKEN}` })).json();
+  const m0 = await (await get("/ops/metrics?days=7", { Authorization: `Bearer ${METRICS_TOKEN}` })).json();
   const oid = String(Date.now());
   const order = (event, id, extra = {}) => JSON.stringify({
     meta: { event_name: event },
@@ -145,14 +147,14 @@ try {
   await post("/webhooks/lemonsqueezy", b2, { "X-Signature": sign(b2) });
 
   // metrics
-  ok("metrics needs token", (await get("/metrics")).status === 401);
-  let m = await (await get("/metrics?days=7", { Authorization: `Bearer ${METRICS_TOKEN}` })).json();
+  ok("metrics needs token", (await get("/ops/metrics")).status === 401);
+  let m = await (await get("/ops/metrics?days=7", { Authorization: `Bearer ${METRICS_TOKEN}` })).json();
   ok("metrics counts one real order (dedup, test excluded)", m.sales.lifetimeOrders === m0.sales.lifetimeOrders + 1 && m.sales.lifetimeRevenueCents === m0.sales.lifetimeRevenueCents + 900 && m.sales.testOrders >= 1, JSON.stringify(m.sales));
   ok("metrics list counts", m.list.pending >= 1, JSON.stringify(m.list));
   ok("metrics data block", m.data?.throughWeek >= 1);
   const b3 = order("order_refunded", oid);
   await post("/webhooks/lemonsqueezy", b3, { "X-Signature": sign(b3) });
-  m = await (await get("/metrics", { Authorization: `Bearer ${METRICS_TOKEN}` })).json();
+  m = await (await get("/ops/metrics", { Authorization: `Bearer ${METRICS_TOKEN}` })).json();
   ok("refund removes revenue", m.sales.lifetimeOrders === m0.sales.lifetimeOrders, JSON.stringify(m.sales));
 } catch (e) {
   ok("unexpected error", false, e.stack);
