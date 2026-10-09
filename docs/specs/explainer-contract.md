@@ -54,9 +54,12 @@ Same as the clip contract (`audio`, `duration`, `words`, `envelope`, `hook`, `to
 ```json
 { "template": "ai-explainer",
   "beats": [ { "t0": 0.0, "t1": 3.1, "visual": { "type": "title", "text": "..." } } ],
-  "credit": { "show": "Original explainer", "episode": "Sources in caption", "speakers": "AI narrator" } }
+  "credit": {} }
 ```
-- The narrator is labelled "AI narrator" on screen (honest disclosure; also tell Charlie to switch on the platform's
-  AI-generated label when posting).
+- `credit` is empty: owner decision, nothing at the bottom of explainers (no credit line, no progress bar). The
+  "AI narrator" disclosure lives in the post caption and the platform's AI-generated label.
+```
+```
+- Disclosure: "AI narrator" in the post caption + Charlie switches on the platform's AI-generated label when posting.
 - Layout: hook card -> docked header (same as clips), the beat visual in the middle band (y ~ 560-1020), captions
   y 1050-1350, credit/sources line y 1400-1500, progress bar ~1520. Safe box x 60-915, y 150-1540.
