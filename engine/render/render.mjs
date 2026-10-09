@@ -2,19 +2,21 @@
 // clip.json -> 1080x1920 H.264/AAC MP4, rendered frame by frame in headless Chromium.
 //
 //   node render.mjs --clip <clip.json> --out <file.mp4> [--workers 3] [--style auto|neural|flow|horizon|orb]
-//                   [--frames-only 0,45,600 | 0.5s,20s] [--template ai-shorts] [--crf 20] [--quiet]
+//                   [--frames-only 0,45,600 | 0.5s,20s] [--template ai-shorts] [--crf 23] [--quiet]
 //
-// Frame i is drawn at t = i / fps by the page's window.renderFrame(t); nothing depends on wall time, so
-// any frame range can be rendered by any worker. Frames are split into contiguous chunks across N
-// browsers, each piped (JPEG over CDP) into its own libx264 encoder; chunks are concatenated without
-// re-encoding and muxed with the clip audio (AAC 192k, 48 kHz, +faststart). A cover PNG
+// Frame i is drawn at t = i / fps by the page's window.grabFrame(t) (same drawing as renderFrame); nothing
+// depends on wall time, so any frame range can be rendered by any worker. Frames are split into contiguous
+// chunks across N browsers; each page encodes its frame to JPEG in-page and POSTs it to a local server,
+// which pipes it into that chunk's libx264 encoder. Chunks are concatenated without re-encoding and muxed
+// with the clip audio (limited to < -1 dBTP, AAC 192k, 48 kHz, +faststart). A cover PNG
 // (<out minus .mp4>.cover.png) is written alongside.
 import { chromium } from 'playwright-core';
 import { spawn, spawnSync } from 'node:child_process';
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync, mkdirSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import http from 'node:http';
+import { dirname, join, resolve, normalize, sep, extname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const W = 1080, H = 1920;
@@ -25,7 +27,7 @@ const CHROME_CANDIDATES = [
 
 // ------------------------------------------------------------------ args
 function parseArgs(argv) {
-  const a = { workers: 3, template: null, style: null, crf: 20, quiet: false };
+  const a = { workers: 3, template: null, style: null, crf: 23, maxrate: '1.7M', quiet: false };
   for (let i = 0; i < argv.length; i++) {
     const k = argv[i], v = argv[i + 1];
     switch (k) {
@@ -36,6 +38,7 @@ function parseArgs(argv) {
       case '--style': a.style = v; i++; break;
       case '--template': a.template = v; i++; break;
       case '--crf': a.crf = parseInt(v, 10); i++; break;
+      case '--maxrate': a.maxrate = v; i++; break;
       case '--quiet': a.quiet = true; break;
       case '-h': case '--help': a.help = true; break;
       default: throw new Error(`unknown argument: ${k}`);
@@ -44,7 +47,7 @@ function parseArgs(argv) {
   return a;
 }
 const USAGE = `usage: node render.mjs --clip <clip.json> --out <file.mp4> [--workers 3] [--style auto|neural|flow|horizon|orb]
-                        [--frames-only 0,45,600|0.5s,20s] [--template ai-shorts] [--crf 20] [--quiet]`;
+                        [--frames-only 0,45,600|0.5s,20s] [--template ai-shorts] [--crf 23] [--maxrate 1.7M] [--quiet]`;
 
 // ------------------------------------------------------------------ helpers
 const log = (...m) => { if (!ARGS.quiet) console.error('[render]', ...m); };
@@ -97,8 +100,39 @@ function parseFrameList(spec, fps, total) {
   }))].sort((a, b) => a - b);
 }
 
+// ------------------------------------------------------------------ local server
+// Serves the template files to the browsers and receives encoded frames as binary POSTs
+// (much cheaper than base64 over CDP). Bound to 127.0.0.1 on a random port.
+const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json',
+  '.woff2': 'font/woff2', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml' };
+const pending = new Map();
+async function startServer() {
+  const srv = http.createServer((req, res) => {
+    const url = new URL(req.url, 'http://127.0.0.1');
+    if (req.method === 'POST' && url.pathname.startsWith('/frame/')) {
+      const key = url.pathname.slice(7), bufs = [];
+      req.on('data', (d) => bufs.push(d));
+      req.on('end', () => {
+        const done = pending.get(key);
+        pending.delete(key);
+        if (done) done(Buffer.concat(bufs));
+        res.statusCode = done ? 200 : 404; res.end();
+      });
+      return;
+    }
+    const file = normalize(join(HERE, decodeURIComponent(url.pathname)));
+    if (req.method !== 'GET' || !file.startsWith(HERE + sep) || file.includes(`${sep}node_modules${sep}`) || !existsSync(file) || !statSync(file).isFile()) {
+      res.statusCode = 404; res.end(); return;
+    }
+    res.setHeader('content-type', MIME[extname(file)] || 'application/octet-stream');
+    res.end(readFileSync(file));
+  });
+  await new Promise((r) => srv.listen(0, '127.0.0.1', r));
+  return srv;
+}
+
 // ------------------------------------------------------------------ browser workers
-async function startWorker(clip, templateHtml, id) {
+async function startWorker(clip, templateUrl, id) {
   const executablePath = CHROME_CANDIDATES.find((p) => existsSync(p));
   const browser = await chromium.launch({
     executablePath,
@@ -111,20 +145,23 @@ async function startWorker(clip, templateHtml, id) {
   page.on('pageerror', (e) => errors.push(String(e)));
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
   await page.addInitScript((c) => { window.__CLIP__ = c; }, clip);
-  await page.goto(pathToFileURL(templateHtml).href);
+  await page.goto(templateUrl);
   await page.waitForFunction(() => window.__READY === true || !!window.__ERROR, null, { timeout: 60000 });
   const err = await page.evaluate(() => window.__ERROR || null);
   if (err) throw new Error(`template failed to initialise: ${err}`);
   const info = await page.evaluate(() => window.__INFO);
   const cdp = await page.context().newCDPSession(page);
-  // Paint + encode inside the page (OffscreenCanvas.convertToBlob), return the image bytes.
-  // ~2-3x faster than Page.captureScreenshot because nothing is composited to the screen.
+  // Paint + encode inside the page (OffscreenCanvas.convertToBlob); the page POSTs the bytes back to
+  // our local server. Nothing is composited to the screen, so this is far cheaper than screenshots.
+  let seq = 0;
   const grab = async (t, format) => {
+    const key = `${id}-${seq++}`;
+    const got = new Promise((res) => pending.set(key, res));
     const r = await cdp.send('Runtime.evaluate', {
-      expression: `window.grabFrame(${t}, ${JSON.stringify(format)}, 0.92)`, awaitPromise: true, returnByValue: true,
+      expression: `window.grabFrame(${t}, ${JSON.stringify(format)}, 0.92, '/frame/${key}')`, awaitPromise: true, returnByValue: true,
     });
-    if (r.exceptionDetails) throw new Error(`page error at t=${t}: ${r.exceptionDetails.exception?.description || r.exceptionDetails.text}`);
-    return Buffer.from(r.result.value, 'base64');
+    if (r.exceptionDetails) { pending.delete(key); throw new Error(`page error at t=${t}: ${r.exceptionDetails.exception?.description || r.exceptionDetails.text}`); }
+    return got;
   };
   return {
     id, info, errors,
@@ -134,11 +171,12 @@ async function startWorker(clip, templateHtml, id) {
   };
 }
 
-function startEncoder(file, fps, crf) {
+// VBV cap: 1.7 Mbit/s video + 192k audio keeps every clip under ~15 MB per minute.
+function startEncoder(file, fps, crf, maxrate = ARGS.maxrate, bufsize = `${parseFloat(ARGS.maxrate) * 2}M`) {
   const ff = spawn('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y',
     '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
     '-vf', 'scale=out_color_matrix=bt709:out_range=tv,format=yuv420p',
-    '-c:v', 'libx264', '-preset', 'veryfast', '-crf', String(crf), '-tune', 'animation',
+    '-c:v', 'libx264', '-preset', 'veryfast', '-crf', String(crf), '-maxrate', maxrate, '-bufsize', bufsize, '-profile:v', 'high',
     '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv',
     '-r', String(fps), '-g', String(fps * 2), '-an', file], { stdio: ['pipe', 'ignore', 'pipe'] });
   let stderr = '';
@@ -169,7 +207,9 @@ async function main() {
 
   const frames = ARGS.framesOnly ? parseFrameList(ARGS.framesOnly, fps, total) : null;
   const nWorkers = Math.max(1, Math.min(ARGS.workers, frames ? frames.length : Math.ceil(total / 30)));
-  const workers = await Promise.all(Array.from({ length: nWorkers }, (_, i) => startWorker(clip, templateHtml, i)));
+  const server = await startServer();
+  const templateUrl = `http://127.0.0.1:${server.address().port}/templates/${encodeURIComponent(template)}/index.html`;
+  const workers = await Promise.all(Array.from({ length: nWorkers }, (_, i) => startWorker(clip, templateUrl, i)));
   log(`template=${template} style=${workers[0].info.style} palette=${workers[0].info.palette} seed=${workers[0].info.seed} ` +
     `groups=${workers[0].info.groups} frames=${frames ? frames.length : total} workers=${nWorkers}`);
 
@@ -219,7 +259,9 @@ async function main() {
         run('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y',
           '-f', 'concat', '-safe', '0', '-i', list, '-i', clip.audio,
           '-map', '0:v:0', '-map', '1:a:0', '-c:v', 'copy',
-          '-af', 'apad', '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-ac', '2',
+          // resample, then a brick-wall limiter at -1.4 dBFS so the AAC stays under -1 dBTP; pad to video length
+          '-af', 'aresample=48000,alimiter=limit=0.85:attack=2:release=40:level=disabled,apad',
+          '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-ac', '2',
           '-t', outDur, '-movflags', '+faststart', out]);
       } finally {
         rmSync(tmp, { recursive: true, force: true });
@@ -233,6 +275,7 @@ async function main() {
     if (errs.length) { console.error('[render] page console errors:\n' + [...new Set(errs)].join('\n')); process.exitCode = 3; }
   } finally {
     await Promise.all(workers.map((w) => w.close().catch(() => {})));
+    server.close();
   }
 }
 main().catch((e) => { console.error('[render] ERROR', e.message || e); process.exit(1); });

@@ -37,7 +37,7 @@
       }
       // background dust
       const dust = [];
-      for (let i = 0; i < 160; i++) dust.push({ x: r() * S.W, y: r() * S.H, s: 0.6 + r() * 1.6, tw: r() * 6.28, sp: 0.2 + r() * 0.6 });
+      for (let i = 0; i < 70; i++) dust.push({ x: r() * S.W, y: r() * S.H, s: 1.4 + r() * 1.6, tw: r() * 6.28, sp: 0.2 + r() * 0.6 });
       S.nn = { nodes, edges, dust, proj: new Float32Array(N * 3) };
     },
     draw(ctx, S, t) {
@@ -49,7 +49,7 @@
       g.addColorStop(0, pal.bg0); g.addColorStop(0.55, pal.bg1); g.addColorStop(1, pal.bg0);
       ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
       ctx.globalCompositeOperation = 'lighter';
-      const cx = 500, cy = 760;
+      const cx = 488, cy = 800;
       drawGlow(ctx, glow(pal.neb1, 0.2), cx - 160 + 60 * Math.sin(t * 0.21), cy - 120, 760 + 80 * env, 0.32 + 0.22 * env);
       drawGlow(ctx, glow(pal.neb2, 0.2), cx + 220 + 70 * Math.cos(t * 0.17), cy + 260, 640, 0.22 + 0.14 * env);
       // dust
@@ -115,6 +115,8 @@
         ctx.fillStyle = '#ffffff';
         ctx.beginPath(); ctx.arc(P[i * 3], P[i * 3 + 1], (1.6 + 2.6 * d) * n.size * (1 + flash), 0, 6.283); ctx.fill();
       }
+      // focal: the voice as a signal line through the middle of the network
+      K.drawSignalLine(ctx, S, t, { cx, y: 830, half: 430, amp: 130, color: pal.node, core: '#ffffff' });
       ctx.globalAlpha = 1;
       ctx.globalCompositeOperation = 'source-over';
     },

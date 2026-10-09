@@ -206,10 +206,32 @@
     return flags;
   }
   const STOP = new Set(['a', 'an', 'the', 'of', 'to', 'and', 'or', 'in', 'on', 'at', 'for', 'with', 'by', 'from', 'that', 'my', 'your', 'our', 'their', 'his', 'her', 'its', 'is', 'are', 'was', 'be', 'i', 'you', 'we', 'they', 'it', 'but', 'so', 'if', 'as', 'than']);
-  function buildGroups(words, emph, T) {
+  // Best line split (1 line, or 2 balanced lines) for word widths; returns { lines, m } (m = widest line).
+  function splitLines(widths, space, maxW, chars, lineChars) {
+    const n = widths.length;
+    const total = widths.reduce((a, b) => a + b, 0) + space * (n - 1);
+    if (n === 1 || (total <= maxW && chars <= lineChars)) return { lines: [widths.map((_, i) => i)], m: total };
+    let best = null;
+    for (let k = 1; k < n; k++) {
+      const a = widths.slice(0, k).reduce((x, y) => x + y, 0) + space * (k - 1);
+      const b = widths.slice(k).reduce((x, y) => x + y, 0) + space * (n - k - 1);
+      const m = Math.max(a, b);
+      if (!best || m < best.m) best = { k, m };
+    }
+    return { lines: [[...Array(best.k).keys()], [...Array(n - best.k).keys()].map((i) => i + best.k)], m: best.m };
+  }
+  function buildGroups(ctx, words, emph, T) {
     const groups = [];
     let cur = [];
-    const textLen = (g) => g.reduce((n, w) => n + w.text.length, 0) + Math.max(0, g.length - 1);
+    ctx.font = font(T, T.size);
+    const space = ctx.measureText(' ').width + T.size * 0.12;
+    const wcache = new Map();
+    const mw = (t) => { if (!wcache.has(t)) wcache.set(t, ctx.measureText(t).width); return wcache.get(t); };
+    // a group is acceptable if it fits in <= 2 lines at the full caption size
+    const fitsLayout = (ws) => {
+      const chars = ws.reduce((n, w) => n + w.text.length, 0) + ws.length - 1;
+      return splitLines(ws.map((w) => mw(w.text)), space, T.maxW, chars, T.lineChars).m <= T.maxW;
+    };
     for (let i = 0; i < words.length; i++) {
       const w = { text: captionText(words[i].w, T.upper), raw: words[i].w, s: +words[i].s, e: +words[i].e, emph: emph[i] };
       if (!w.text) continue;
@@ -218,7 +240,7 @@
         const gap = w.s - prev.e;
         const punct = /[.!?,;:—–-]["'”)]*$/.test(prev.raw);
         if (punct || gap > 0.35) { groups.push(cur); cur = []; }
-        else if (cur.length >= 4 || textLen(cur) + 1 + w.text.length > T.groupChars) {
+        else if (cur.length >= 4 || !fitsLayout([...cur, w])) {
           // don't strand a function word at the end of a group ("AND THE COST OF")
           const carry = cur.length > 1 && STOP.has(cleanTok(prev.raw)) ? [cur.pop()] : [];
           groups.push(cur); cur = carry;
@@ -227,36 +249,41 @@
       cur.push(w);
     }
     if (cur.length) groups.push(cur);
+    // No orphan single-word groups (they flash by and read badly), unless the word is emphasised:
+    // merge into the neighbour it is closest to, as long as the result is still 2-4 words.
+    const endsSentence = (g) => /[.!?]["')\u201d]*$/.test(g[g.length - 1].raw);
+    const fits = (a, b) => a.length + b.length <= 4 && fitsLayout([...a, ...b]);
+    for (let i = 0; i < groups.length; i++) {
+      const g = groups[i];
+      if (g.length !== 1 || g[0].emph) continue;
+      const prev = groups[i - 1], next = groups[i + 1];
+      const gapPrev = prev ? g[0].s - prev[prev.length - 1].e : 99;
+      const gapNext = next ? next[0].s - g[0].e : 99;
+      const canPrev = prev && gapPrev < 1.2 && fits(prev, g) && !endsSentence(prev);
+      const canNext = next && gapNext < 1.2 && fits(g, next) && !endsSentence(g);
+      if (canPrev && (!canNext || gapPrev <= gapNext)) { prev.push(g[0]); groups.splice(i, 1); i -= 2; if (i < -1) i = -1; }
+      else if (canNext) { next.unshift(g[0]); groups.splice(i, 1); i--; }
+    }
     return groups.map((ws, gi) => ({ words: ws, start: ws[0].s, lastEnd: ws[ws.length - 1].e, idx: gi }));
   }
   function layoutGroups(ctx, groups, T) {
     for (let gi = 0; gi < groups.length; gi++) {
       const g = groups[gi];
       const next = groups[gi + 1];
-      g.end = next ? (next.start - g.lastEnd < 0.7 ? next.start : g.lastEnd + 0.55) : g.lastEnd + 0.8;
-      let size = T.size, lines = null, widths, space;
-      for (; size >= T.minSize; size -= 2) {
+      g.end = next ? (next.start - g.lastEnd < 0.7 ? next.start : g.lastEnd + 0.55) : Infinity; // last group stays lit to the final frame
+      // shrink only when a single word is too long for the box (rare); below minSize is an emergency
+      let size = T.size, lines = null, widths, space, squash = 1;
+      const chars = g.words.reduce((n, w) => n + w.text.length, 0) + g.words.length - 1;
+      for (; size >= 48; size -= 2) {
         ctx.font = font(T, size);
         widths = g.words.map((w) => ctx.measureText(w.text).width);
         space = ctx.measureText(' ').width + size * 0.12;
-        const total = widths.reduce((a, b) => a + b, 0) + space * (widths.length - 1);
-        const chars = g.words.reduce((n, w) => n + w.text.length, 0) + g.words.length - 1;
-        if (total <= T.maxW && (chars <= T.lineChars || g.words.length === 1)) { lines = [g.words.map((_, i) => i)]; break; }
-        if (g.words.length > 1) {
-          let best = null;
-          for (let k = 1; k < g.words.length; k++) {
-            const a = widths.slice(0, k).reduce((x, y) => x + y, 0) + space * (k - 1);
-            const b = widths.slice(k).reduce((x, y) => x + y, 0) + space * (widths.length - k - 1);
-            const m = Math.max(a, b);
-            if (!best || m < best.m) best = { k, m };
-          }
-          if (best.m <= T.maxW) { lines = [[...Array(best.k).keys()], [...Array(g.words.length - best.k).keys()].map((i) => i + best.k)]; break; }
-        }
-        if (g.words.length === 1 && widths[0] <= T.maxW) { lines = [[0]]; break; }
+        const r = splitLines(widths, space, T.maxW, chars, T.lineChars);
+        lines = r.lines;
+        if (r.m <= T.maxW) break;
+        if (size <= 48) squash = T.maxW / r.m;
       }
-      if (!lines) { size = T.minSize; ctx.font = font(T, size); widths = g.words.map((w) => ctx.measureText(w.text).width); space = ctx.measureText(' ').width; lines = [g.words.map((_, i) => i)];
-        // last resort: squash each word into maxW via per-word scaleX
-      }
+      size = Math.max(size, 48);
       const cap = capHeight(ctx, T, size);
       const lineH = size * T.lineH;
       const blockH = cap + lineH * (lines.length - 1);
@@ -269,7 +296,7 @@
         for (const i of li) {
           const w = g.words[i];
           w.cx = x + widths[i] / 2; w.base = base; w.w = widths[i];
-          w.squash = widths[i] > T.maxW ? T.maxW / widths[i] : 1;
+          w.squash = squash;
           x += widths[i] + space;
         }
       });
@@ -308,9 +335,9 @@
     if (!g) return;
     const age = t - (g.start - 0.04);
     const sp = spring(age, 15, 18);
-    const settled = age > 0.6;
+    const settled = age > 0.6 || g.idx === 0; // frame 1 is often the thumbnail: first group fully drawn
     const gs = settled ? 1 : 0.84 + 0.16 * sp;
-    const alpha = clamp(age / 0.07);
+    const alpha = 1; // never dim: the entrance is a scale spring only
     const cy = LAYOUT.captionY;
     ctx.save();
     if (!settled) {
@@ -373,6 +400,24 @@
     const d = clean.findIndex((x) => /\d/.test(x));
     return d >= 0 ? new Set([d]) : new Set();
   }
+  // Greedy wrap at a fixed size into maxLines; drops trailing words (adding an ellipsis) when the text
+  // does not fit, and squashes any single word wider than maxW.
+  function truncWrap(ctx, T, size, toks, maxW, maxLines) {
+    ctx.font = font(T, size);
+    const space = ctx.measureText(' ').width;
+    for (let n = toks.length; n >= 1; n--) {
+      const words = toks.slice(0, n);
+      if (n < toks.length) words[n - 1] = words[n - 1].replace(/[.,;:!?\u2026]*$/, '') + '\u2026';
+      const widths = words.map((t) => Math.min(maxW, ctx.measureText(t).width));
+      const lines = []; let cur = [], w = 0;
+      widths.forEach((ww, i) => { const add = cur.length ? space + ww : ww; if (cur.length && w + add > maxW) { lines.push(cur); cur = [i]; w = ww; } else { cur.push(i); w += add; } });
+      if (cur.length) lines.push(cur);
+      if (lines.length <= maxLines || n === 1) {
+        const sq = words.map((t) => Math.min(1, maxW / ctx.measureText(t).width));
+        return { size, widths, space, lines: lines.slice(0, maxLines), lineH: size * T.lineH, cap: capHeight(ctx, T, size), disp: words, sq };
+      }
+    }
+  }
   function layoutHook(ctx, S) {
     const clip = S.clip;
     if (!clip.hook) return null;
@@ -380,46 +425,46 @@
     const toks = String(clip.hook).trim().split(/\s+/);
     const hl = pickHighlight(toks, clip);
     const disp = toks.map((t) => (HT.upper ? t.toUpperCase() : t));
-    // big card
+    // big card: up to 3 lines at a big size; very long hooks may use 4-5 lines at smaller sizes;
+    // beyond that the hook is truncated with an ellipsis (and any single huge word squashed).
     const cardInner = BOXW - 2 * 44;
     let card = null;
     for (let size = HT.size; size >= 44; size -= 2) {
       ctx.font = font(HT, size);
       const widths = disp.map((t) => ctx.measureText(t).width);
       const space = ctx.measureText(' ').width;
-      const lines = wrapBalanced(widths, space, cardInner, 3);
+      const lines = wrapBalanced(widths, space, cardInner, size >= 64 ? 3 : size >= 52 ? 4 : 5);
       if (!lines) continue;
       const lineH = size * HT.lineH;
-      if (lines.length * lineH > 400) continue;
-      card = { size, widths, space, lines, lineH, cap: capHeight(ctx, HT, size) };
+      if (lines.length * lineH > 440) continue;
+      card = { size, widths, space, lines, lineH, cap: capHeight(ctx, HT, size), disp };
       break;
     }
-    if (!card) { // pathological: one giant token; squash
-      const size = 44; ctx.font = font(HT, size);
-      const widths = disp.map((t) => Math.min(cardInner, ctx.measureText(t).width));
-      card = { size, widths, space: ctx.measureText(' ').width, lines: wrapBalanced(widths, ctx.measureText(' ').width, cardInner, 99) || [disp.map((_, i) => i)], lineH: size * HT.lineH, cap: capHeight(ctx, HT, size) };
-    }
-    // docked: mixed case, smaller, beside the topic chip
+    if (!card) card = truncWrap(ctx, HT, 44, disp, cardInner, 5);
+    // docked: mixed case, smaller. Chip beside the text when that still fits in 2 lines at a good size,
+    // otherwise chip stacked above the text (long topics like "AI CONSCIOUSNESS").
     const DT = S.type.dock;
-    const chipW = S.chip ? S.chip.w + 22 : 0;
-    const dockInner = BOXW - 2 * 24 - chipW;
     const dispD = toks.map((t) => (DT.upper ? t.toUpperCase() : t));
-    let dock = null;
-    for (let size = DT.size; size >= DT.minSize; size -= 1) {
-      ctx.font = font(DT, size);
-      const widths = dispD.map((t) => ctx.measureText(t).width);
-      const space = ctx.measureText(' ').width;
-      const lines = wrapBalanced(widths, space, dockInner, 2);
-      if (!lines) continue;
-      dock = { size, widths, space, lines, lineH: size * DT.lineH, cap: capHeight(ctx, DT, size) };
-      break;
+    const fitDock = (inner, minSize) => {
+      // (returns null when it does not fit in 2 lines)
+      for (let size = DT.size; size >= minSize; size -= 1) {
+        ctx.font = font(DT, size);
+        const widths = dispD.map((t) => ctx.measureText(t).width);
+        const space = ctx.measureText(' ').width;
+        const lines = wrapBalanced(widths, space, inner, 2);
+        if (lines) return { size, widths, space, lines, lineH: size * DT.lineH, cap: capHeight(ctx, DT, size), disp: dispD };
+      }
+      return null;
+    };
+    let stacked = false;
+    let dock = S.chip ? fitDock(BOXW - 2 * 24 - S.chip.w - 22, 40) : fitDock(BOXW - 2 * 24, DT.minSize);
+    if (!dock && S.chip) { stacked = true; dock = fitDock(BOXW - 2 * 24, DT.minSize); }
+    if (!dock) { // too long even for 2 full-width lines: truncate with an ellipsis
+      stacked = !!S.chip;
+      dock = truncWrap(ctx, DT, DT.minSize, dispD, BOXW - 2 * 24, 2);
     }
-    if (!dock) { // too long for 2 lines: allow 3 at min size
-      const size = DT.minSize; ctx.font = font(DT, size);
-      const widths = dispD.map((t) => Math.min(dockInner, ctx.measureText(t).width));
-      const space = ctx.measureText(' ').width;
-      dock = { size, widths, space, lines: wrapBalanced(widths, space, dockInner, 3) || [dispD.map((_, i) => i)], lineH: size * DT.lineH, cap: capHeight(ctx, DT, size) };
-    }
+    dock.stacked = stacked;
+    const chipW = S.chip && !stacked ? S.chip.w + 22 : 0;
     const chipH = S.chip ? S.chip.h : 0;
     // card geometry
     const textH = card.cap + card.lineH * (card.lines.length - 1);
@@ -430,10 +475,20 @@
     card.textTop = cardY + padT + chipH + chipGap;
     // dock geometry
     const dTextH = dock.cap + dock.lineH * (dock.lines.length - 1);
-    const dH = Math.max(chipH, dTextH) + 2 * 22;
-    dock.box = { x: SAFE.x0, y: LAYOUT.dockY, w: BOXW, h: dH };
-    dock.textX = SAFE.x0 + 24 + chipW;
-    dock.textTop = LAYOUT.dockY + (dH - dTextH) / 2;
+    const pad = 22;
+    if (dock.stacked) {
+      const dH = pad + chipH + 18 + dTextH + pad + 4;
+      dock.box = { x: SAFE.x0, y: LAYOUT.dockY, w: BOXW, h: dH };
+      dock.chipX = SAFE.x0 + 24; dock.chipY = LAYOUT.dockY + pad;
+      dock.textX = SAFE.x0 + 24;
+      dock.textTop = dock.chipY + chipH + 18;
+    } else {
+      const dH = Math.max(chipH, dTextH) + 2 * pad;
+      dock.box = { x: SAFE.x0, y: LAYOUT.dockY, w: BOXW, h: dH };
+      dock.chipX = SAFE.x0 + 24; dock.chipY = LAYOUT.dockY + (dH - chipH) / 2;
+      dock.textX = SAFE.x0 + 24 + chipW;
+      dock.textTop = LAYOUT.dockY + (dH - dTextH) / 2;
+    }
     return { toks, disp, dispD, hl, card, dock };
   }
   function glassPanel(ctx, b, r, pal, strength) {
@@ -467,27 +522,27 @@
     ctx.fillText(c.text, x + c.padX, y + c.h / 2 + c.cap / 2);
     ctx.restore();
   }
-  function drawHookLines(ctx, S, L, disp, x0, top, centered, alpha) {
+  function drawHookLines(ctx, S, L, x0, top, centered, alpha) {
     const HT = L === S.hook.card ? S.type.hook : S.type.dock;
     ctx.font = font(HT, L.size);
     ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
-    if (HT.track) ctx.letterSpacing = HT.track + 'px';
     L.lines.forEach((li, k) => {
       const lw = li.reduce((a, i) => a + L.widths[i], 0) + L.space * (li.length - 1);
       let x = centered ? CX - lw / 2 : x0;
       const base = top + L.cap + k * L.lineH;
       for (const i of li) {
         const on = S.hook.hl.has(i);
+        const sq = L.sq ? L.sq[i] : 1;
         ctx.save();
         ctx.globalAlpha = alpha;
         ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = L.size * 0.25; ctx.shadowOffsetY = L.size * 0.05;
         ctx.fillStyle = on ? S.pal.accent : '#ffffff';
-        ctx.fillText(disp[i], x, base);
+        ctx.translate(x, base); ctx.scale(sq, 1);
+        ctx.fillText(L.disp[i], 0, 0);
         ctx.restore();
         x += L.widths[i] + L.space;
       }
     });
-    ctx.letterSpacing = '0px';
   }
   function drawCard(ctx, S, alpha, scale, dx, dy) {
     const L = S.hook.card, b = L.box;
@@ -497,7 +552,7 @@
     ctx.globalAlpha = alpha;
     glassPanel(ctx, b, 40, S.pal, 1);
     if (S.chip) drawChip(ctx, S, CX - S.chip.w / 2, b.y + 46, alpha);
-    drawHookLines(ctx, S, L, S.hook.disp, 0, L.textTop, true, alpha);
+    drawHookLines(ctx, S, L, 0, L.textTop, true, alpha);
     ctx.restore();
   }
   function drawDock(ctx, S, alpha, dy) {
@@ -507,8 +562,8 @@
     if (L) {
       ctx.globalAlpha = alpha;
       glassPanel(ctx, L.box, 26, S.pal, 1);
-      if (S.chip) drawChip(ctx, S, 60 + 24, L.box.y + (L.box.h - S.chip.h) / 2, alpha);
-      drawHookLines(ctx, S, L, S.hook.dispD, L.textX, L.textTop, false, alpha);
+      if (S.chip) drawChip(ctx, S, L.chipX, L.chipY, alpha);
+      drawHookLines(ctx, S, L, L.textX, L.textTop, false, alpha);
     } else if (S.chip) {
       drawChip(ctx, S, 60, LAYOUT.dockY, alpha);
     }
@@ -643,22 +698,57 @@
     const g = c.getContext('2d');
     const lin = (y0, y1, stops) => { const gr = g.createLinearGradient(0, y0, 0, y1); stops.forEach(([o, a]) => gr.addColorStop(o, `rgba(0,0,0,${a})`)); g.fillStyle = gr; g.fillRect(0, y0, W, y1 - y0); };
     lin(0, 460, [[0, 0.62], [0.55, 0.22], [1, 0]]);
-    lin(1000, 1600, [[0, 0], [0.3, 0.36], [0.62, 0.42], [1, 0.48]]);
+    lin(900, 1600, [[0, 0], [0.25, 0.36], [0.6, 0.44], [1, 0.5]]);
     lin(1600, H, [[0, 0.48], [1, 0.62]]);
     const v = g.createRadialGradient(W / 2, 860, 420, W / 2, 860, 1300);
     v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.6)');
     g.fillStyle = v; g.fillRect(0, 0, W, H);
-    // static dither so dark gradients don't band after H.264
-    const img = g.getImageData(0, 0, W, H), d = img.data;
-    const r = mulberry32(S.seed ^ 0x5bd1e995);
-    for (let i = 0; i < d.length; i += 4) {
-      const n = r();
-      d[i + 3] = Math.min(255, Math.max(0, d[i + 3] + (n - 0.5) * 7));
-      const lum = n > 0.985 ? 255 : 0; // sparse light grain
-      if (lum) { d[i] = d[i + 1] = d[i + 2] = 255; d[i + 3] = Math.max(d[i + 3] * 0.2, 9); }
-    }
-    g.putImageData(img, 0, 0);
     return c;
+  }
+
+  // ------------------------------------------------------------------ shared focal elements
+  // Audio-reactive hero shapes styles can put in the empty middle band (y ~650-1000).
+  // Oscilloscope-like signal line: displacement travels outward from the centre with a delay, so the
+  // line reads as the voice "propagating". Draws additively (call inside a 'lighter' section).
+  function drawSignalLine(ctx, S, t, o) {
+    const A = S.A, cx = o.cx, y0 = o.y, half = o.half || 470, amp = o.amp || 120;
+    const pts = [];
+    for (let x = cx - half; x <= cx + half; x += 8) {
+      const d = Math.abs(x - cx) / half;
+      const bell = Math.pow(1 - d, 1.6);
+      const v = A.raw(Math.max(0, t - d * 0.45));
+      const y = y0 + amp * bell * (0.15 + v) * (Math.sin(x * 0.045 - t * 9) * 0.6 + Math.sin(x * 0.017 + t * 4.3) * 0.4);
+      pts.push(x, y);
+    }
+    const stroke = (w, col) => { ctx.beginPath(); for (let i = 0; i < pts.length; i += 2) (i ? ctx.lineTo : ctx.moveTo).call(ctx, pts[i], pts[i + 1]); ctx.lineWidth = w; ctx.strokeStyle = col; ctx.stroke(); };
+    const e = A.env(t);
+    drawGlow(ctx, glow(o.color, 0.25), cx, y0, 260 + 140 * e, 0.35 + 0.45 * e);
+    stroke(26, rgba(o.color, 0.10 + 0.12 * e));
+    stroke(10, rgba(o.color, 0.22 + 0.25 * e));
+    stroke(3.5, rgba(o.core || '#ffffff', 0.75 + 0.25 * e));
+  }
+  // Circular waveform ring with a breathing core.
+  function drawWaveRing(ctx, S, t, o) {
+    const A = S.A, cx = o.cx, cy = o.cy, R = o.R;
+    const e = A.env(t);
+    drawGlow(ctx, glow(o.color, 0.22), cx, cy, R * (2.2 + 0.6 * e), 0.35 + 0.4 * e);
+    drawGlow(ctx, glow(o.color2 || o.color, 0.4), cx, cy, R * (0.55 + 0.35 * e), 0.5 + 0.5 * e);
+    for (let layer = 0; layer < 3; layer++) {
+      ctx.beginPath();
+      const n = 150;
+      for (let i = 0; i <= n; i++) {
+        const a = (i / n) * Math.PI * 2;
+        const m = Math.abs(((i + layer * 25) % n) - n / 2) / (n / 2);
+        const v = A.raw(Math.max(0, t - m * 0.5));
+        const wob = Math.sin(a * 5 + t * 2.6 + layer * 2.1) * 0.65 + Math.sin(a * 8 - t * 3.1 + layer) * 0.35;
+        const rr = R * (1 + layer * 0.09) + (6 + 34 * v) * wob;
+        const x = cx + Math.cos(a) * rr, y = cy + Math.sin(a) * rr;
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.lineWidth = layer === 0 ? 4 : 2.2;
+      ctx.strokeStyle = rgba(layer === 1 ? (o.color2 || o.color) : layer === 0 ? '#ffffff' : o.color, layer === 0 ? 0.55 + 0.4 * e : 0.35 + 0.35 * e);
+      ctx.stroke();
+    }
   }
 
   // ------------------------------------------------------------------ type presets
@@ -669,7 +759,7 @@
   };
   const HOOKTYPE = {
     montserrat: { family: 'Montserrat', weight: 900, size: 108, upper: true, lineH: 1.04 },
-    anton: { family: 'Anton', weight: 400, size: 136, upper: true, lineH: 1.02, track: 1 },
+    anton: { family: 'Anton', weight: 400, size: 136, upper: true, lineH: 1.02 },
   };
   const DOCK = { family: 'Montserrat', weight: 800, size: 44, minSize: 34, upper: false, lineH: 1.16 };
   const CHIP = { family: 'Inter', weight: 700 };
@@ -723,13 +813,14 @@
         },
       };
       if (clip.topic) {
-        const text = String(clip.topic).toUpperCase().slice(0, 18);
+        let text = String(clip.topic).toUpperCase().trim();
+        if (text.length > 20) { const cut = text.slice(0, 20); text = (cut.lastIndexOf(' ') > 6 ? cut.slice(0, cut.lastIndexOf(' ')) : cut.slice(0, 19)) + '\u2026'; }
         ctx.font = font(CHIP, 30); ctx.letterSpacing = '2px';
         const w = ctx.measureText(text).width; ctx.letterSpacing = '0px';
         S.chip = { text, size: 30, w: w + 2 * 22, h: 52, padX: 22, cap: capHeight(ctx, CHIP, 30) };
       }
       const emph = markEmphasis(clip.words, clip.emphasis);
-      S.groups = buildGroups(clip.words, emph, S.type.caption);
+      S.groups = buildGroups(ctx, clip.words, emph, S.type.caption);
       layoutGroups(ctx, S.groups, S.type.caption);
       S.hook = layoutHook(ctx, S);
       S.credit = layoutCredit(ctx, S);
@@ -816,6 +907,6 @@
   window.CLIPKIT = {
     W, H, SAFE, LAYOUT, registerStyle, boot,
     mulberry32, hashStr, hash2, clamp, lerp, smooth, fract, easeOutCubic, easeInOutCubic, spring,
-    rgba, mixHex, hexRgb, glow, drawGlow, roundRect,
+    rgba, mixHex, hexRgb, glow, drawGlow, roundRect, drawSignalLine, drawWaveRing,
   };
 })();

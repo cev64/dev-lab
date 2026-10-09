@@ -21,7 +21,7 @@
         const y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), th = ga * i;
         pts.push([Math.cos(th) * r, y, Math.sin(th) * r]);
       }
-      S.orb = { pts, cx: 500, cy: 720, R: 230 };
+      S.orb = { pts, cx: 488, cy: 790, R: 215 };
     },
     draw(ctx, S, t) {
       const { W, H, pal, A } = S;

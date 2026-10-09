@@ -20,10 +20,10 @@
         const lines = [];
         const n = band === 0 ? 30 : 18;
         for (let i = 0; i < n; i++) lines.push({ k: i / (n - 1), ph: r() * 6.28, f: 0.0042 + r() * 0.0016, f2: 0.009 + r() * 0.004, ph2: r() * 6.28 });
-        ribbons.push({ lines, y: band === 0 ? 720 : 960, amp: band === 0 ? 170 : 80, spread: band === 0 ? 180 : 60, speed: band === 0 ? 0.6 : -0.45 });
+        ribbons.push({ lines, y: band === 0 ? 800 : 1000, amp: band === 0 ? 170 : 80, spread: band === 0 ? 180 : 60, speed: band === 0 ? 0.6 : -0.45 });
       }
       const parts = [];
-      for (let i = 0; i < 260; i++) parts.push({ x: r() * 1180 - 50, y: r() * 2000, sp: 0.4 + r() * 1.2, w: 0.3 + r() * 1.2, ph: r() * 6.28, s: 0.8 + r() * 2.2, hue: r() });
+      for (let i = 0; i < 150; i++) parts.push({ x: r() * 1180 - 50, y: r() * 2000, sp: 0.4 + r() * 1.2, w: 0.3 + r() * 1.2, ph: r() * 6.28, s: 1.6 + r() * 2.2, hue: r() });
       S.flow = { ribbons, parts };
     },
     draw(ctx, S, t) {
@@ -76,6 +76,8 @@
           ctx.fillRect(x, y, p.s, p.s * (1 + 3 * env));
         }
       }
+      // focal: a voice ring where the ribbons converge
+      K.drawWaveRing(ctx, S, t, { cx: 500, cy: 800, R: 150, color: pal.c1, color2: pal.c3 });
       ctx.globalAlpha = 1;
       ctx.globalCompositeOperation = 'source-over';
     },

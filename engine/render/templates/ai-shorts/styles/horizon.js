@@ -17,7 +17,7 @@
       const r = S.rng;
       const stars = [];
       for (let i = 0; i < 180; i++) stars.push({ x: r() * S.W, y: r() * 900, s: 0.6 + r() * 1.8, ph: r() * 6.28 });
-      S.hz = { stars, HZ: 980, VX: 500 };
+      S.hz = { stars, HZ: 1000, VX: 488 };
     },
     draw(ctx, S, t) {
       const { W, H, pal, A } = S;
