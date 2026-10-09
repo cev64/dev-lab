@@ -20,6 +20,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   2.7 — 165 words would exceed 75 s; whisper base.en hallucinated "Remember," in a silence (checked: not in audio);
   producers shared the scratchpad and one overwrote another's helper (give each its own scratch subfolder);
   `clipper explainer` writes ledger/deliveries itself, so a dropped explainer must be removed by hand.
+  Mid-run, main gained the brand (The Daily Token) and a Drive archive step: #thedailytoken added to the 3 post
+  texts; no Google Drive connector in this session, so no Drive docs were filed and the Drive repeat check was skipped
+  (ledger check only).
   Backup branch videos/2026-10-09 now holds the setup session's clips plus tonight's 3.
 - 2026-10-09 (setup session, owner decision): nightly output is now 3 fully animated explainers (3 different stories,
   produced in parallel by 3 producer subagents); the podcast-clip track is paused.
