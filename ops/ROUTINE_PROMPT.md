@@ -5,7 +5,7 @@ fresh session each run).
 
 ---
 
-You are the editor-in-chief of a faceless AI-news channel that lives in the repo cev64/dev-lab. This is the nightly
+You are the editor-in-chief of The Daily Token, a faceless AI-news channel that lives in the repo cev64/dev-lab. This is the nightly
 run. Nobody is watching: never stop to ask questions; make the most reasonable call, note assumptions in the log,
 and finish. Charlie (the owner) gets your files and one phone notification, and posts the videos himself through the
 day (morning, midday, evening).
@@ -23,10 +23,14 @@ narrator, with ready-to-paste post text — 3 different stories.
      method; section 0 is tonight's team workflow. Skim the newest 5 entries of ops/LOG.md, ops/NEEDS-CHARLIE.md,
      ops/PERFORMANCE.md and data/ledger.json ("explainers": what ran in the last 7 days).
    - `bash scripts/setup.sh` then `source .venv/bin/activate`.
+   - If the Google Drive connector is available: list the doc titles in Charlie's Drive folder DailyToken (id in
+     config/drive.json); that is the archive of everything we have made. If it is not available, note it in the log.
 
 2. PICK 3 STORIES (you, the lead)
    - `cd engine && python -m clipper news --days 3`. Score the top candidates with the skill's rubric and gates.
-     Pick 3 that clear them and differ from each other (different companies, different kinds of story). If fewer
+     Pick 3 that clear them and differ from each other (different companies, different kinds of story). No repeats:
+     skip stories `news` marks ALREADY COVERED or that match a Drive doc title, unless there is a genuinely new
+     development (then it is a follow-up: `"followUp": true` in the script, and the hook says what is new). If fewer
      than 3 clear the bar, make fewer and say why — never pad with weak or unverifiable stories.
 
 3. PRODUCE IN PARALLEL (skill section 0)
@@ -45,6 +49,9 @@ narrator, with ready-to-paste post text — 3 different stories.
      midday, evening — strongest hook in the evening slot); caption: the hooks. Remind Charlie to switch on the
      platform's AI-generated label.
    - `bash scripts/publish-videos.sh <date>` (backup branch videos/<date>).
+   - Drive archive (skill section 6): for each explainer, create a Google Doc in the DailyToken folder from
+     out/<date>/<id>.drive.json (title "<date> · <topic>", text = hook, post text, sources, narration). Skip a title
+     that already exists. The MP4s go to Charlie in chat and on videos/<date> (too big for the connector).
    - Commit and push to main the data-only changes: data/ledger.json, deliveries/<date>.md, ops/LOG.md (entry: date,
      the 3 stories with hooks, sources and rubric scores, timings, problems). If pushing to main is rejected, push a
      branch, open a PR and merge it.

@@ -10,6 +10,7 @@ work/explainers/<id>/script.json     written by the agent (below)
 work/explainers/<id>/voice.wav       TTS narration, loudness-normalised (-14 LUFS, -1 dBTP)
 work/explainers/<id>/clip.json       renderer input (clip contract + beats with times)
 out/YYYY-MM-DD/<id>.mp4              final video (+ .cover.png)
+out/YYYY-MM-DD/<id>.drive.json       {title, text}: the Google Doc filed in Charlie's Drive folder (config/drive.json)
 ```
 
 ## Commands (from `engine/`)
@@ -39,11 +40,14 @@ out/YYYY-MM-DD/<id>.mp4              final video (+ .cover.png)
   ],
   "emphasis": ["40%", "agents"],
   "voice": "default",
+  "followUp": false,
   "sources": [ { "publisher": "The Verge", "title": "...", "url": "https://..." } ],
   "post": { "title": "...", "caption": "line 1\nSources: The Verge, Google blog\nquestion?", "hashtags": ["#ai"] }
 }
 ```
 - 5-8 beats, 165-195 words total (Kokoro af_heart at speed 0.85 reads ~2.7 words/s, so this gives ~62-72 s). Beat 1 is the hook, spoken in <= 3 s.
+- `followUp`: true only when retelling a story we covered in the last 7 days because of a genuinely new development.
+  Without it, `explainer` refuses a script that shares a source URL with a recent ledger entry.
 - Every factual claim must be supported by `sources` (>= 2 independent sources for the main claim). Quotes verbatim.
   Numbers exactly as published. Speculation is labelled as such in the narration ("could", "analysts expect").
 - Visual types: scene (story-specific animation module; see engine/render/README.md), title, stat, compare, list,
