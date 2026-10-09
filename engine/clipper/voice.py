@@ -31,7 +31,7 @@ import numpy as np
 from . import audio
 from .common import Paths, log, r2, read_json, write_json
 
-VERSION = 1  # bump when synthesis/assembly changes so cached voice.json is rebuilt
+VERSION = 2  # bump when synthesis/assembly changes so cached voice.json is rebuilt
 MIN_S, MAX_S = 58.0, 80.0
 TARGET_LO, TARGET_HI = 62.0, 75.0  # what the cut/add advice aims for (playbook: >= 62 s for creator programs)
 LEAD, BEAT_GAP, TAIL = 0.15, 0.25, 0.6  # seconds of silence: before beat 1, between beats, after the last beat
@@ -188,40 +188,41 @@ def _char_pairs(a: str, b: str) -> list[tuple[int, int, bool]]:
     return pairs[::-1]
 
 
-def align_tokens(tokens: list[str], wwords: list[dict],
-                 span: tuple[float, float]) -> tuple[list[tuple[float, float]], list[int]]:
-    """Time each script token from whisper words (dicts with w, s, e) inside span (s0, s1).
-
-    Returns ([(s, e)] per token, indices of tokens whisper did not match, whose times were interpolated)."""
-    s0, s1 = span
+def match_tokens(tokens: list[str], wwords: list[dict]) -> list[tuple[float, float] | None]:
+    """Raw (s, e) for each script token from whisper words (dicts with w, s, e), None where whisper has nothing
+    that matches it. Matching is on the characters of the spoken form, so token boundaries may differ freely
+    ("40%" vs "forty percent", "OpenAI" vs "Open AI")."""
     keys = [spoken_key(t) for t in tokens]
-    a_chars, owner = [], []
-    for k_i, k in enumerate(keys):
-        a_chars.append(k)
-        owner += [k_i] * len(k)
+    owner = [k_i for k_i, k in enumerate(keys) for _ in k]
     b_chars, times = [], []
     for w in wwords:
         k = spoken_key(w["w"])
         if not k:
             continue
-        ws, we = max(s0, min(w["s"], s1)), max(s0, min(w["e"], s1))
-        step = (we - ws) / len(k)
+        step = (w["e"] - w["s"]) / len(k)
         b_chars.append(k)
-        times += [(ws + c * step, ws + (c + 1) * step) for c in range(len(k))]
+        times += [(w["s"] + c * step, w["s"] + (c + 1) * step) for c in range(len(k))]
 
     hits: list[list[tuple[int, bool]]] = [[] for _ in tokens]
-    for i, j, exact in _char_pairs("".join(a_chars), "".join(b_chars)):
+    for i, j, exact in _char_pairs("".join(keys), "".join(b_chars)):
         hits[owner[i]].append((j, exact))
-
     timed: list[tuple[float, float] | None] = []
     for k, h in zip(keys, hits):
         exact = sum(1 for _j, ex in h if ex)
-        if k and exact >= max(1, math.ceil(0.5 * len(k))):
-            timed.append((times[h[0][0]][0], times[h[-1][0]][1]))
-        else:
-            timed.append(None)
+        ok = k and exact >= max(1, math.ceil(0.5 * len(k)))
+        timed.append((times[h[0][0]][0], times[h[-1][0]][1]) if ok else None)
+    return timed
+
+
+def align_tokens(tokens: list[str], wwords: list[dict], span: tuple[float, float],
+                 raw: list[tuple[float, float] | None] | None = None) -> tuple[list[tuple[float, float]], list[int]]:
+    """Time each script token inside span (s0, s1) (one beat's spoken audio).
+
+    Returns ([(s, e)] per token, indices of tokens whisper did not match, whose times were interpolated).
+    `raw` = precomputed match_tokens() result (the narration is matched as a whole, then cut per beat)."""
+    timed = match_tokens(tokens, wwords) if raw is None else raw
     missing = [k for k, t in enumerate(timed) if t is None]
-    return _fill_and_order(timed, keys, s0, s1), missing
+    return _fill_and_order(timed, [spoken_key(t) for t in tokens], *span), missing
 
 
 def _fill_and_order(timed: list[tuple[float, float] | None], keys: list[str], s0: float, s1: float,
@@ -497,15 +498,12 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
     if wer > 0.08:
         warnings.append(f"whisper WER {wer:.1%}: narration may be garbled; check pronunciation/lexicon")
 
-    # whisper words -> beats by midpoint, cut halfway through each inter-beat pause
-    cuts = [(pe + ns) / 2 for (_ps, pe), (ns, _ne) in zip(speech, speech[1:])] + [math.inf]
-    per_beat: list[list[dict]] = [[] for _ in speech]
-    for w in wwords:
-        mid = (w["s"] + w["e"]) / 2
-        per_beat[next(k for k, c in enumerate(cuts) if mid < c)].append(w)
+    # match the whole narration at once (whisper may put a beat's first word inside the previous pause),
+    # then clamp/interpolate inside each beat's exact spoken span
+    raw = match_tokens([t for toks in beat_tokens for t in toks], wwords)
     words, unaligned = [], []
     for k, (toks, span) in enumerate(zip(beat_tokens, speech)):
-        timed, missing = align_tokens(toks, per_beat[k], span)
+        timed, missing = align_tokens(toks, [], span, raw=raw[len(words): len(words) + len(toks)])
         unaligned += [len(words) + m for m in missing]
         words += [{"w": tok, "s": s, "e": e} for tok, (s, e) in zip(toks, timed)]
         if len(missing) > max(2, 0.2 * len(toks)):

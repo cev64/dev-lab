@@ -5,7 +5,9 @@
  *   - the beat band (glass card, x 60-915, y 520-1000) showing clip.beats[i].visual between t0 and t1
  *     (spring in ~300 ms at t0, out ~200 ms before t1), types: title, stat, compare, list, quote, timeline, keyword,
  *   - an optional per-beat disclosure chip (beats[i].label, e.g. "AI-generated illustration") at y 1008-1046,
- *   - an "AI narrator" glyph (voice bars) in place of the podcast mic in the credit.
+ *   - an "AI narrator" glyph (voice bars) in place of the podcast mic in the credit,
+ *   - "scene" visuals: per-story ES modules (README "Authoring a scene"), full-frame (default; replaces the
+ *     background, may span several beats, crossfades 350 ms) or in the band; kit.js is their illustration kit.
  * Everything is a pure function of t (no state between frames). All text is shrink-to-fit inside the card.
  */
 (function () {
@@ -559,10 +561,14 @@
     },
   };
 
-  // ------------------------------------------------------------------ scene: per-story ES module
-  // visual { type: "scene", module, params, card? } -> module's default draw(ctx, t, info) on an isolated
-  // 855x480 transparent canvas (= the band, 1:1), composited onto the card. See README "Authoring a scene".
-  const SCENE_W = BW, SCENE_H = BAND.y1 - BAND.y0;
+  // ------------------------------------------------------------------ scenes: per-story ES modules
+  // visual { type: "scene", module, params, layout: "full" (default) | "band", span? (beats), card? (band only) }
+  // or top-level clip.scenes [{ module, t0, t1, params }]. The module's default draw(ctx, t, info) paints an
+  // isolated transparent canvas: full = 1080x1920 (the whole frame, replacing the background), band = 855x480
+  // (the beat card band). See README "Authoring a scene".
+  const STAGE = { x0: 60, x1: 915, y0: 400, y1: 1050 };   // full-frame action area: below the dock, above captions
+  const SAFE_BOX = { x0: 60, x1: 915, y0: 150, y1: 1540 };
+  const TX = 0.35;                                         // crossfade between scenes / to and from cards
   const SCENE_FONTS = {
     display: { family: 'Montserrat', weight: 900 }, bold: { family: 'Montserrat', weight: 800 },
     condensed: { family: 'Anton', weight: 400 }, ui: { family: 'Inter', weight: 700 }, body: { family: 'Inter', weight: 500 },
@@ -571,7 +577,6 @@
   const SCENE_HELPERS = Object.freeze({
     clamp, lerp, smooth, easeOutCubic, easeInOutCubic: K.easeInOutCubic, spring,
     easeOutBack: (k) => { k = clamp(k); const c = 1.70158; return 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); },
-    // window [a, b] of t mapped to 0..1 with an ease (default easeInOutCubic)
     phase: (t, a, b, ease) => (ease || K.easeInOutCubic)((t - a) / Math.max(1e-6, b - a)),
     roundRect, rgba, mixHex: K.mixHex, hash: K.hash2,
     font: sceneFont,
@@ -593,43 +598,63 @@
     Math.random = no('Math.random'); Date.now = no('Date.now'); performance.now = no('performance.now');
     try { return fn(); } finally { Math.random = R; Date.now = D; delete performance.now; }
   }
-  function runScene(S, L, age, dur, t) {
+  // Scene instance (one per scene segment / band beat).
+  function makeScene(S, v, t0, t1, beatTimes) {
+    const mod = S.sceneMods && S.sceneMods.get(v.__url);
+    if (!mod) throw new Error('scene module not loaded: ' + (v.__src || v.module) + ' (render with render.mjs)');
+    const full = (v.layout || 'full') !== 'band';
+    const w = full ? S.W : BW, h = full ? S.H : BAND.y1 - BAND.y0;
+    const cv = new OffscreenCanvas(w, h);
+    const words = (S.clip.words || []).filter((x) => x.s >= t0 - 0.05 && x.s < t1).map((x) => Object.freeze({ w: String(x.w), s: x.s - t0, e: x.e - t0 }));
+    const toks = words.map((x) => cleanTok(x.w));
+    const beats = (beatTimes && beatTimes.length ? beatTimes : [[t0, t1]]).map(([a, b]) => Object.freeze({ t0: a - t0, t1: b - t0 }));
+    const kit = window.EXPLAINER_KIT ? window.EXPLAINER_KIT.create({ accent: S.pal.accent, width: w, height: h }) : null;
+    return {
+      full, w, h, cv, ctx: cv.getContext('2d'), draw: mod.default, src: v.__src || v.module, t0, t1, dur: t1 - t0,
+      params: Object.freeze(Object.assign({}, v.params || {})), seed: K.hashStr(String(v.__src || v.module) + JSON.stringify(v.params || {}) + t0),
+      words: Object.freeze(words), beats: Object.freeze(beats), kit,
+      wordAt: (tt) => { for (const x of words) if (tt >= x.s && tt < x.e + 0.08) return x; return null; },
+      timeOf: (word, nth = 0) => { const k = cleanTok(String(word)); let c = 0; for (let i = 0; i < toks.length; i++) if (toks[i] === k && c++ === nth) return words[i].s; return null; },
+    };
+  }
+  function runScene(S, L, age, t) {
     const c = L.ctx;
     c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = 1; c.globalCompositeOperation = 'source-over';
-    c.clearRect(0, 0, SCENE_W, SCENE_H);
+    c.clearRect(0, 0, L.w, L.h);
     c.save();
+    let bi = 0;
+    for (let i = 0; i < L.beats.length; i++) if (age >= L.beats[i].t0) bi = i;
+    const B = L.beats[bi];
     const info = {
-      duration: dur, width: SCENE_W, height: SCENE_H, env: S.A.env(t), onset: S.A.onset(t), params: L.params,
+      duration: L.dur, width: L.w, height: L.h, layout: L.full ? 'full' : 'band',
+      stage: L.full ? STAGE : { x0: 0, x1: L.w, y0: 0, y1: L.h }, safe: L.full ? SAFE_BOX : { x0: 0, x1: L.w, y0: 0, y1: L.h },
+      env: S.A.env(t), onset: S.A.onset(t), params: L.params,
+      beat: bi, beatT: age - B.t0, beatDur: B.t1 - B.t0, beats: L.beats, words: L.words, wordAt: L.wordAt, timeOf: L.timeOf,
       accent: S.pal.accent, ink: '#ffffff', muted: 'rgba(255,255,255,0.6)', panel: '#0e101c',
       fonts: { display: 'Montserrat 900', bold: 'Montserrat 800', condensed: 'Anton', ui: 'Inter 700', body: 'Inter 500' },
-      helpers: Object.assign({ rng: K.mulberry32(L.seed) }, SCENE_HELPERS), // rng re-seeded every frame
+      helpers: Object.assign({ rng: K.mulberry32(L.seed), kit: L.kit, world: L.kit && L.kit.world, camera: L.kit && L.kit.camera }, SCENE_HELPERS),
     };
     try { guarded(() => L.draw(c, Math.max(0, age), info)); }
     catch (e) { throw new Error(`scene ${L.src} threw at t=${age.toFixed(2)}: ${(e && e.message) || e}`); }
     finally { c.restore(); }
   }
+  // band scenes behave like a beat card
   TYPES.scene = {
-    layout(ctx, v, S) {
-      const mod = S.sceneMods && S.sceneMods.get(v.__url);
-      if (!mod) throw new Error('scene module not loaded: ' + (v.__src || v.module) + ' (render with render.mjs)');
-      const cv = new OffscreenCanvas(SCENE_W, SCENE_H);
-      return { h: IH, full: true, draw: mod.default, src: v.__src || v.module, params: Object.freeze(Object.assign({}, v.params || {})),
-        cv, ctx: cv.getContext('2d'), seed: K.hashStr(String(v.__src || v.module) + JSON.stringify(v.params || {})) };
-    },
+    layout(ctx, v, S, b) { const L = makeScene(S, v, b.ts, b.t1); L.h0 = L.h; return Object.assign(L, { h: IH, sceneL: true }); },
     draw(ctx, S, L, x0, top, age, dur, t, b) {
-      runScene(S, L, age, dur, t);
+      runScene(S, L, age, t);
       ctx.save();
       roundRect(ctx, b.box.x, b.box.y, b.box.w, b.box.h, 38); ctx.clip();
-      ctx.drawImage(L.cv, b.box.x, b.box.y + (b.box.h - SCENE_H) / 2);
+      ctx.drawImage(L.cv, b.box.x, b.box.y + (b.box.h - L.h0) / 2);
       ctx.restore();
     },
   };
   async function loadScenes(S) {
     const urls = new Map();
-    for (const b of Array.isArray(S.clip.beats) ? S.clip.beats : []) {
-      const v = b && b.visual;
-      if (v && v.type === 'scene') {
-        if (!v.__url) throw new Error('scene beat at t0=' + b.t0 + ': module not resolved (render with render.mjs; "module" missing?)');
+    const refs = [...(Array.isArray(S.clip.beats) ? S.clip.beats.map((b) => b && b.visual) : []), ...(Array.isArray(S.clip.scenes) ? S.clip.scenes : [])];
+    for (const v of refs) {
+      if (v && (v.type === 'scene' || (!v.type && v.module))) {
+        if (!v.__url) throw new Error('scene ' + (v.module || '(no "module")') + ': module not resolved (render with render.mjs; "module" missing?)');
         urls.set(v.__url, v.__src || v.module);
       }
     }
@@ -641,49 +666,77 @@
       S.sceneMods.set(url, mod);
     }
   }
-  // Dry run before frame 0: start, middle, end must not throw, and the middle must render identically twice.
-  function checkScenes(S, beats) {
-    for (const b of beats) {
-      if (b.type !== TYPES.scene) continue;
-      const dur = b.t1 - b.ts, sum = () => { const d = b.L.ctx.getImageData(0, 0, SCENE_W, SCENE_H).data; let h = 0; for (let i = 0; i < d.length; i += 7) h = (h * 31 + d[i]) >>> 0; return h; };
-      for (const a of [0, dur * 0.25, dur - 0.01]) runScene(S, b.L, a, dur, b.ts + a);
-      runScene(S, b.L, dur * 0.5, dur, b.ts + dur * 0.5); const h1 = sum();
-      runScene(S, b.L, dur * 0.5, dur, b.ts + dur * 0.5); const h2 = sum();
-      if (h1 !== h2) throw new Error(`scene ${b.L.src} is not deterministic (two renders of t=${(dur * 0.5).toFixed(2)} differ)`);
-    }
+  // Dry run before frame 0: start, quarter, end must not throw; the middle must render identically twice.
+  function checkScene(S, L) {
+    const sum = () => { const d = L.ctx.getImageData(0, 0, L.w, L.h).data; let h = 0; for (let i = 0; i < d.length; i += 11) h = (h * 31 + d[i]) >>> 0; return h; };
+    for (const a of [0, L.dur * 0.25, Math.max(0, L.dur - 0.01)]) runScene(S, L, a, L.t0 + a);
+    const m = L.dur * 0.5;
+    runScene(S, L, m, L.t0 + m); const h1 = sum();
+    runScene(S, L, m, L.t0 + m); const h2 = sum();
+    if (h1 !== h2) throw new Error(`scene ${L.src} is not deterministic (two renders of t=${m.toFixed(2)} differ)`);
+  }
+  // readability scrim over full-frame scenes: behind the dock and the caption/credit band
+  function buildSceneScrim(S) {
+    const c = document.createElement('canvas'); c.width = S.W; c.height = S.H;
+    const g = c.getContext('2d');
+    const lin = (y0, y1, stops) => { const gr = g.createLinearGradient(0, y0, 0, y1); stops.forEach(([o, a]) => gr.addColorStop(o, `rgba(3,4,10,${a})`)); g.fillStyle = gr; g.fillRect(0, y0, S.W, y1 - y0); };
+    lin(0, 520, [[0, 0.62], [0.45, 0.3], [1, 0]]);
+    lin(980, S.H, [[0, 0], [0.18, 0.42], [0.5, 0.55], [1, 0.72]]);
+    return c;
   }
 
-  // ------------------------------------------------------------------ beats: normalise + lay out
-  function setupBeats(S, ctx) {
-    const clip = S.clip, LAY = S.LAYOUT;
+  // ------------------------------------------------------------------ timeline: full scenes + card beats
+  function setupTimeline(S, ctx) {
+    const clip = S.clip, LAY = S.LAYOUT, D = clip.duration;
     const hookEnd = S.hook ? LAY.hookSec + LAY.hookMorph * 0.7 : 0;
+    const isFull = (v) => v && v.type === 'scene' && (v.layout || 'full') !== 'band';
     const src = (Array.isArray(clip.beats) ? clip.beats : [])
       .filter((b) => b && b.visual && isFinite(+b.t0) && isFinite(+b.t1) && +b.t1 > +b.t0)
       .map((b) => ({ t0: +b.t0, t1: +b.t1, visual: b.visual, label: b.label ? String(b.label) : '' }))
       .sort((a, b) => a.t0 - b.t0);
-    const beats = [];
-    src.forEach((b, i) => {
-      const next = src[i + 1];
-      const t1 = Math.min(b.t1, next ? next.t0 : Infinity, clip.duration);
+    src.forEach((b, i) => { b.t1 = Math.min(b.t1, src[i + 1] ? src[i + 1].t0 : Infinity, D); });
+    const top = (Array.isArray(clip.scenes) ? clip.scenes : []).filter((sc) => sc && sc.__url && isFinite(+sc.t0) && isFinite(+sc.t1) && +sc.t1 > +sc.t0)
+      .map((sc) => ({ t0: +sc.t0, t1: Math.min(+sc.t1, D), visual: Object.assign({ type: 'scene' }, sc) }));
+    const fulls = [], beats = [];
+    // top-level scenes win over overlapping beats
+    const covered = (a, b) => top.some((sc) => a < sc.t1 - 0.05 && b > sc.t0 + 0.05);
+    for (const sc of top) {
+      const inside = src.filter((b) => b.t0 >= sc.t0 - 0.05 && b.t0 < sc.t1 - 0.05).map((b) => [Math.max(b.t0, sc.t0), Math.min(b.t1, sc.t1)]);
+      fulls.push({ t0: sc.t0, t1: sc.t1, L: makeScene(S, sc.visual, sc.t0, sc.t1, inside) });
+    }
+    for (let i = 0; i < src.length; i++) {
+      const b = src[i];
+      if (covered(b.t0, b.t1)) continue;
+      if (isFull(b.visual)) {
+        const n = Math.max(1, (b.visual.span | 0) || 1), last = src[Math.min(src.length - 1, i + n - 1)];
+        const parts = src.slice(i, i + n).map((x) => [x.t0, x.t1]);
+        fulls.push({ t0: b.t0, t1: last.t1, L: makeScene(S, b.visual, b.t0, last.t1, parts), label: b.label });
+        i += n - 1;
+        continue;
+      }
       const ts = Math.max(b.t0, hookEnd); // the hook card owns the first ~3 s
       const type = TYPES[b.visual.type];
-      if (!type) { console.warn('ai-explainer: unknown beat visual type ' + b.visual.type); return; }
-      if (t1 - ts < 0.5) return;
-      const L = type.layout(ctx, b.visual, S);
-      const h = Math.min(IH, L.h) + 2 * PADY;
-      beats.push({ ...b, t1, ts, type, L, last: t1 >= clip.duration - 0.05, box: { x: BAND.x0, y: Math.round(BCY - h / 2), w: BW, h } });
-    });
-    if (beats.length) {
-      // disclosure chips
-      for (const b of beats) {
-        if (!b.label) continue;
-        ctx.save(); ctx.letterSpacing = '1.5px';
-        const L = fitLine(ctx, b.label.toUpperCase(), F.ui, 24, 18, BW - 60);
-        ctx.restore();
-        b.chip = { L, w: L.w + 2 * 18 + 22, h: 40 };
-      }
+      if (!type) { console.warn('ai-explainer: unknown beat visual type ' + b.visual.type); continue; }
+      if (b.t1 - ts < 0.5) continue;
+      const bb = { ...b, ts, type, last: b.t1 >= D - 0.05 };
+      bb.L = type.layout(ctx, b.visual, S, bb);
+      const h = Math.min(IH, bb.L.h) + 2 * PADY;
+      bb.box = { x: BAND.x0, y: Math.round(BCY - h / 2), w: BW, h };
+      beats.push(bb);
     }
-    return beats;
+    fulls.sort((a, b) => a.t0 - b.t0);
+    if (fulls.length) fulls[fulls.length - 1].lastEnd = fulls[fulls.length - 1].t1 >= D - 0.05;
+    // disclosure chips
+    for (const b of [...beats, ...fulls]) {
+      if (!b.label) continue;
+      ctx.save(); ctx.letterSpacing = '1.5px';
+      const L = fitLine(ctx, b.label.toUpperCase(), F.ui, 24, 18, BW - 60);
+      ctx.restore();
+      b.chip = { L, w: L.w + 2 * 18 + 22, h: 40 };
+    }
+    for (const f of fulls) checkScene(S, f.L);
+    for (const b of beats) if (b.type === TYPES.scene) checkScene(S, b.L);
+    return { fulls, beats };
   }
 
   // ------------------------------------------------------------------ per-frame
@@ -746,16 +799,48 @@
     return c;
   }
 
+  // full scene active at t (each runs [t0, t1); the last one holds to the end)
+  function fullAt(fulls, t) {
+    for (let i = fulls.length - 1; i >= 0; i--) { const f = fulls[i]; if (t >= f.t0) return t < f.t1 || f.lastEnd ? f : null; }
+    return null;
+  }
+
   async function setup(S, ctx) {
     await loadScenes(S);
     const video = !!S.bgVideo;
-    const beats = setupBeats(S, ctx);
-    checkScenes(S, beats);
+    const { fulls, beats } = setupTimeline(S, ctx);
     const dimmer = buildDimmer(S);
-    S.beats = beats;
-    S.info = { beats: beats.length, template: 'ai-explainer' };
+    const scrim = fulls.length ? buildSceneScrim(S) : null;
+    S.beats = beats; S.fullScenes = fulls;
+    S.info = { beats: beats.length, scenes: fulls.length, template: 'ai-explainer' };
     S.layers.creditGlyph = narratorGlyph;
+    const sceneMix = (t) => {
+      const cur = fullAt(fulls, t);
+      if (cur) {
+        const prev = fulls[fulls.indexOf(cur) - 1];
+        const k = cur.t0 <= 0.01 ? 1 : smooth((t - cur.t0) / TX);
+        return { cur, k, prev: prev && prev.t1 >= cur.t0 - 0.05 ? prev : null };
+      }
+      // card mode; a scene that just ended fades out over it
+      for (const f of fulls) if (t >= f.t1 && t < f.t1 + TX) return { cur: null, out: f, k: 1 - smooth((t - f.t1) / TX) };
+      return { cur: null, k: 0 };
+    };
+    const blitScene = (ctx2, f, t, a) => {
+      if (a <= 0.003) return;
+      runScene(S, f.L, t - f.t0, t);
+      ctx2.globalAlpha = a; ctx2.drawImage(f.L.cv, 0, 0); ctx2.globalAlpha = 1;
+    };
+    S.layers.skipBackground = (t) => { const m = sceneMix(t); return !!m.cur && (m.k >= 1 || !!m.prev); };
     S.layers.mid = (ctx2, S2, t, cover) => {
+      const m = sceneMix(t);
+      if (m.cur) {
+        if (m.k < 1 && m.prev) blitScene(ctx2, m.prev, t, 1);
+        else if (m.k < 1) ctx2.drawImage(dimmer, 0, 0); // fading in over the card-mode background
+        blitScene(ctx2, m.cur, t, m.k);
+        ctx2.globalAlpha = m.prev ? 1 : m.k; ctx2.drawImage(scrim, 0, 0); ctx2.globalAlpha = 1;
+        if (m.cur.chip && !cover) { ctx2.save(); ctx2.globalAlpha = m.k; drawLabel(ctx2, S2, m.cur); ctx2.restore(); }
+        return;
+      }
       const b = cover ? null : findBeat(beats, t);
       const an = b ? beatAnim(b, t) : null;
       // background dimmer: always on (generative styles are busy), deeper while a beat is up
@@ -763,18 +848,20 @@
       ctx2.globalAlpha = video ? 0.35 + 0.4 * presence : 0.75 + 0.25 * presence;
       ctx2.drawImage(dimmer, 0, 0);
       ctx2.globalAlpha = 1;
-      if (!b || an.alpha <= 0.003) return;
-      ctx2.save();
-      ctx2.globalAlpha = an.alpha;
-      const cy = b.box.y + b.box.h / 2;
-      ctx2.translate(BCX, cy + an.dy); ctx2.scale(an.scale, an.scale); ctx2.translate(-BCX, -cy);
-      if (b.visual.card !== false) card(ctx2, S2, b.box, video);
-      const top = b.box.y + PADY + Math.max(0, (b.box.h - 2 * PADY - b.L.h) / 2);
-      b.type.draw(ctx2, S2, b.L, BAND.x0 + PADX, top, an.age, b.t1 - b.ts, t, b);
-      ctx2.restore();
-      if (b.chip) { ctx2.save(); ctx2.globalAlpha = an.alpha; drawLabel(ctx2, S2, b); ctx2.restore(); }
+      if (b && an.alpha > 0.003) {
+        ctx2.save();
+        ctx2.globalAlpha = an.alpha;
+        const cy = b.box.y + b.box.h / 2;
+        ctx2.translate(BCX, cy + an.dy); ctx2.scale(an.scale, an.scale); ctx2.translate(-BCX, -cy);
+        if (b.visual.card !== false) card(ctx2, S2, b.box, video);
+        const top = b.box.y + PADY + Math.max(0, (b.box.h - 2 * PADY - b.L.h) / 2);
+        b.type.draw(ctx2, S2, b.L, BAND.x0 + PADX, top, an.age, b.t1 - b.ts, t, b);
+        ctx2.restore();
+        if (b.chip) { ctx2.save(); ctx2.globalAlpha = an.alpha; drawLabel(ctx2, S2, b); ctx2.restore(); }
+      }
+      if (m.out) { blitScene(ctx2, m.out, t, m.k); ctx2.globalAlpha = m.k; ctx2.drawImage(scrim, 0, 0); ctx2.globalAlpha = 1; }
     };
   }
 
-  window.EXPLAINER = { setup, parseStat, fmtStat, fmtVal, TYPES, BAND };
+  window.EXPLAINER = { setup, parseStat, fmtStat, fmtVal, TYPES, BAND, STAGE };
 })();

@@ -288,7 +288,6 @@ class Pipeline(unittest.TestCase):
             self.assertEqual(V.voice(Paths(tmp), tmp / "script.json")["scriptHash"], res["scriptHash"])
 
     def test_duration_guard_fails_before_writing(self):
-        global FAKE_WORDS
         tmp = Path(tempfile.mkdtemp())
         self.addCleanup(shutil.rmtree, tmp, True)
         script = {"id": "t-short", "beats": [{"say": "too short " * 5, "visual": {}}] * 5}

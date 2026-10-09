@@ -43,7 +43,7 @@ out/YYYY-MM-DD/<id>.mp4              final video (+ .cover.png)
   "post": { "title": "...", "caption": "line 1\nSources: The Verge, Google blog\nquestion?", "hashtags": ["#ai"] }
 }
 ```
-- 5-8 beats, 150-185 words total (about 60-75 s at the narrator's pace). Beat 1 is the hook, spoken in <= 3 s.
+- 5-8 beats, 165-195 words total (Kokoro af_heart at speed 0.85 reads ~2.7 words/s, so this gives ~62-72 s). Beat 1 is the hook, spoken in <= 3 s.
 - Every factual claim must be supported by `sources` (>= 2 independent sources for the main claim). Quotes verbatim.
   Numbers exactly as published. Speculation is labelled as such in the narration ("could", "analysts expect").
 - Visual types: scene (story-specific animation module; see engine/render/README.md), title, stat, compare, list,

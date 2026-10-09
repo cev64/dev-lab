@@ -2,7 +2,7 @@
 
 Voice spec (script.json "voice"):
   "default"                      -> DEFAULT_SPEC
-  "kokoro:<voice>"               Kokoro-82M (kokoro-onnx, int8), e.g. kokoro:af_heart, kokoro:bf_emma
+  "kokoro:<voice>"               Kokoro-82M v1.0 (kokoro-onnx), e.g. kokoro:af_heart, kokoro:bf_emma
   "piper:<voice>"                Piper, e.g. piper:en_US-ljspeech-medium
 An optional "@<speed>" suffix overrides the backend's default speed, e.g. "kokoro:af_heart@0.9".
 
@@ -31,9 +31,9 @@ FALLBACK_SPEC = "piper:en_US-ljspeech-medium"
 DEFAULT_SPEED = {"kokoro": 0.85, "piper": 0.9}
 
 _KOKORO_REL = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/"
-KOKORO_FILES = [  # (file, url, sha256)
-    ("kokoro-v1.0.int8.onnx", _KOKORO_REL + "kokoro-v1.0.int8.onnx",
-     "6e742170d309016e5891a994e1ce1559c702a2ccd0075e67ef7157974f6406cb"),
+KOKORO_FILES = [  # (file, url, sha256). fp32 (325 MB) measured ~20% faster than the int8 export here, same WER.
+    ("kokoro-v1.0.onnx", _KOKORO_REL + "kokoro-v1.0.onnx",
+     "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5"),
     ("voices-v1.0.bin", _KOKORO_REL + "voices-v1.0.bin",
      "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d"),
 ]
@@ -121,14 +121,25 @@ def fetch(vs: VoiceSpec) -> None:
             continue
         path.parent.mkdir(parents=True, exist_ok=True)
         tmp = path.with_suffix(path.suffix + ".part")
-        print(f"[tts] downloading {url}", file=sys.stderr)
-        with urllib.request.urlopen(url, timeout=120) as r, open(tmp, "wb") as f:
-            while chunk := r.read(1 << 20):
-                f.write(chunk)
-        if sha and _sha256(tmp) != sha:
-            tmp.unlink(missing_ok=True)
-            raise RuntimeError(f"checksum mismatch for {url}")
-        os.replace(tmp, path)
+        for attempt in range(1, 4):  # the egress proxy occasionally cuts a transfer short
+            print(f"[tts] downloading {url}" + (f" (attempt {attempt})" if attempt > 1 else ""), file=sys.stderr)
+            try:
+                with urllib.request.urlopen(url, timeout=120) as r, open(tmp, "wb") as f:
+                    expected = int(r.headers.get("content-length") or 0)
+                    while chunk := r.read(1 << 20):
+                        f.write(chunk)
+                size = tmp.stat().st_size
+                if expected and size != expected:
+                    raise OSError(f"got {size} of {expected} bytes")
+                if sha and _sha256(tmp) != sha:
+                    raise OSError(f"checksum mismatch ({size} bytes)")
+                os.replace(tmp, path)
+                break
+            except OSError as e:
+                tmp.unlink(missing_ok=True)
+                print(f"[tts] {url}: {e}", file=sys.stderr)
+                if attempt == 3:
+                    raise RuntimeError(f"could not download {url}: {e}") from e
 
 
 def _require(vs: VoiceSpec) -> list[Path]:

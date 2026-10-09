@@ -1,127 +1,85 @@
-// Scene "data-flow": packets flow from labelled sources along curved paths into a glowing server rack.
-// The flow ramps up over the first half of the beat, then holds steady (settled state).
-// params (optional): sources  ["Phones", "Apps", "Sensors", "Cameras"] (2-5)
-//                    label    text under the rack, e.g. "Data center"
+// Scene "data-flow" (full frame). Night city street: people on phones and a laptop send glowing data packets
+// along curved paths over the street into a big data center, which lights up as the flow ramps up.
+// The camera pushes in slowly; the flow settles into a steady stream for the last third.
+// params (optional): sources  labels over the senders (2-3), default ["You", "Apps", "Sensors"]
+//                    label    sign on the data center, default "Data center"
+//                    time     "night" | "dusk" (default "night")
 export default function draw(ctx, t, info) {
-  const H = info.helpers, P = info.params || {};
-  const { clamp, smooth, easeOutCubic, roundRect, rgba, hash } = H;
-  const D = info.duration, ACC = info.accent, W = info.width, HH = info.height;
-  const sources = (P.sources || ['Phones', 'Apps', 'Sensors', 'Cameras']).slice(0, 5);
-  const n = sources.length;
+  const H = info.helpers, K = H.kit, P = info.params || {};
+  const { clamp, smooth, lerp } = H;
+  const D = info.duration, ACC = info.accent;
+  const labels = (P.sources || ['You', 'Apps', 'Sensors']).slice(0, 3);
 
-  // ---- rack geometry
-  const RX = 590, RW = 190, RY = 52, RH = 330, UNITS = 7;
-  const inlet = (i) => RY + 70 + (RH - 140) * (n > 1 ? i / (n - 1) : 0.5);
-  const ramp = (s) => 0.3 + 0.7 * smooth(s / Math.max(0.5, D * 0.5)); // packet density over time
-  const activity = ramp(t) * (0.75 + 0.25 * info.env);
+  // camera: slow push towards the data center
+  const z = lerp(1, 1.1, H.phase(t, 0.5, D)), cx = lerp(487, 560, H.phase(t, 0.5, D)), cy = 725;
+  ctx.save(); ctx.translate(487, 725); ctx.scale(z, z); ctx.translate(-cx, -cy);
 
-  // ---- sources + curved paths (sampled cubic beziers)
-  const sy = (i) => 70 + (HH - 140) * (n > 1 ? i / (n - 1) : 0.5);
-  const paths = sources.map((label, i) => {
-    const fit = H.fitText(ctx, label, 'ui', 26, 18, 170);
-    ctx.font = fit.font;
-    const lw = ctx.measureText(fit.text).width;
-    const x0 = 64 + 26 + lw + 16, y0 = sy(i), x1 = RX - 6, y1 = inlet(i);
-    const cx = (x0 + x1) / 2, pts = [];
-    for (let k = 0; k <= 48; k++) {
-      const u = k / 48, a = 1 - u;
-      pts.push([a * a * a * x0 + 3 * a * a * u * cx + 3 * a * u * u * cx + u * u * u * x1,
-        a * a * a * y0 + 3 * a * a * u * y0 + 3 * a * u * u * y1 + u * u * u * y1]);
-    }
-    return { label: fit, y: y0, pts };
+  const city = K.world.city(ctx, { t, time: P.time || 'night', groundY: 960 });
+  const feet = 1030;
+  // senders: two people with phones + one laptop on a bench-like stand
+  const senders = [
+    { x: 120, kind: 'person', opts: { pose: 'phone', skin: 1, shirt: 1, hair: 4, hairStyle: 'bun', seed: 1 } },
+    { x: 270, kind: 'person', opts: { pose: 'phone', skin: 3, shirt: 2, hair: 0, hairStyle: 'short', seed: 4 } },
+    { x: 410, kind: 'laptop' },
+  ].slice(0, Math.max(2, labels.length));
+  const DC = { x: 735, y: feet - 6, s: 1.12 };
+  const ramp = (s) => 0.25 + 0.75 * smooth(s / Math.max(1, D * 0.55));
+  const act = ramp(t);
+  K.drawDataCenter(ctx, DC.x, DC.y, DC.s, { t, activity: act, label: P.label || 'Data center' });
+
+  // source points + curved paths into the roof of the data center
+  const srcPt = (sd) => (sd.kind === 'laptop' ? [sd.x, feet - 150] : [sd.x + 12, feet - 152]);
+  const paths = senders.map((sd, i) => {
+    const [x0, y0] = srcPt(sd), x1 = DC.x - 120 + i * 90, y1 = DC.y - 180 * DC.s;
+    return K.bezier(x0, y0 - 10, x0 + 40, 480 - i * 30, x1 - 80, 470 + i * 20, x1, y1, 48);
   });
-  const at = (pts, u) => {
-    const f = clamp(u) * (pts.length - 1), k = Math.min(pts.length - 2, Math.floor(f)), r = f - k;
-    return [pts[k][0] + (pts[k + 1][0] - pts[k][0]) * r, pts[k][1] + (pts[k + 1][1] - pts[k][1]) * r];
-  };
-
-  // rack glow (behind everything)
-  H.glow(ctx, RX + RW / 2, RY + RH / 2, 260, ACC, 0.10 + 0.22 * activity * smooth(t / 0.8));
-
-  // paths draw in, staggered
-  paths.forEach((p, i) => {
-    const k = easeOutCubic((t - 0.1 - i * 0.08) / 0.8);
-    if (k <= 0) return;
-    const m = Math.max(1, Math.round(k * (p.pts.length - 1)));
-    ctx.beginPath(); ctx.moveTo(p.pts[0][0], p.pts[0][1]);
-    for (let j = 1; j <= m; j++) ctx.lineTo(p.pts[j][0], p.pts[j][1]);
-    ctx.lineWidth = 4; ctx.strokeStyle = 'rgba(255,255,255,0.16)'; ctx.lineCap = 'round'; ctx.stroke();
+  // paths draw in, then packets stream along them
+  paths.forEach((pts, i) => {
+    const k = K.phase(t, 0.3 + i * 0.15, 1.3 + i * 0.15);
+    ctx.save(); ctx.strokeStyle = H.rgba('#ffffff', 0.16); ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.setLineDash([2, 14]);
+    K.pathDraw(ctx, pts, k); ctx.restore();
   });
-
-  // source nodes + labels
-  paths.forEach((p, i) => {
-    const k = easeOutCubic((t - i * 0.08) / 0.4);
-    ctx.save();
-    ctx.globalAlpha *= k;
-    ctx.beginPath(); ctx.arc(64, p.y, 13, 0, Math.PI * 2); ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,0.75)'; ctx.stroke();
-    ctx.beginPath(); ctx.arc(64, p.y, 5, 0, Math.PI * 2); ctx.fillStyle = info.ink; ctx.fill();
-    ctx.font = p.label.font; ctx.fillStyle = info.ink; ctx.textBaseline = 'middle';
-    ctx.fillText(p.label.text, 64 + 26 - (1 - k) * 12, p.y + 1);
-    ctx.restore();
-  });
-
-  // packets: spawn on a fixed grid per path, kept or skipped by a hash vs the density ramp (deterministic)
-  const GAP = 0.42, TRAVEL = 1.7;
-  const flash = new Array(n).fill(0);
-  paths.forEach((p, i) => {
-    const off = hash(i, 7) * GAP;
-    const kMax = Math.floor((t - off) / GAP), kMin = Math.max(0, Math.floor((t - off - TRAVEL - 0.4) / GAP));
-    for (let k = kMin; k <= kMax; k++) {
-      const s = off + k * GAP + 0.6; // first packets leave once the paths are drawn
-      if (hash(i * 131 + 3, k) > ramp(s)) continue;
-      const u = (t - s) / TRAVEL;
+  const GAP = 0.36, TRAVEL = 1.9;
+  let arriving = 0;
+  paths.forEach((pts, i) => {
+    const off = H.hash(i, 7) * GAP;
+    const k1 = Math.floor((t - off) / GAP), k0 = Math.max(0, Math.floor((t - off - TRAVEL - 0.5) / GAP));
+    for (let k = k0; k <= k1; k++) {
+      const s0 = off + k * GAP + 1.2;
+      if (H.hash(i * 131 + 3, k) > ramp(s0)) continue;
+      const u = (t - s0) / TRAVEL;
       if (u < 0) continue;
-      if (u > 1) { flash[i] = Math.max(flash[i], 1 - (u - 1) * TRAVEL / 0.35); continue; }
-      const e = u * u * (3 - 2 * u) * 0.35 + u * 0.65; // slight ease along the path
-      for (let j = 3; j >= 0; j--) { // short tail
-        const [x, y] = at(p.pts, e - j * 0.018);
-        ctx.globalAlpha = (1 - j * 0.24) * smooth(u / 0.08) * (1 - smooth((u - 0.92) / 0.08));
-        if (j === 0) H.glow(ctx, x, y, 22, ACC, 0.9 * ctx.globalAlpha);
-        ctx.beginPath(); ctx.arc(x, y, j === 0 ? 5 : 3.5 - j * 0.6, 0, Math.PI * 2);
-        ctx.fillStyle = j === 0 ? '#ffffff' : ACC; ctx.fill();
+      if (u > 1) { if (u < 1.15) arriving += 1 - (u - 1) / 0.15; continue; }
+      for (let j = 3; j >= 0; j--) {
+        const [x, y] = K.pathPoint(pts, u - j * 0.02);
+        const a = (1 - j * 0.25) * smooth(u / 0.06) * (1 - smooth((u - 0.94) / 0.06));
+        if (j === 0) K.glow(ctx, x, y, 34, ACC, 0.9 * a);
+        ctx.globalAlpha = a; ctx.beginPath(); ctx.arc(x, y, j === 0 ? 8 : 5.5 - j, 0, Math.PI * 2);
+        ctx.fillStyle = j === 0 ? '#ffffff' : ACC; ctx.fill(); ctx.globalAlpha = 1;
       }
-      ctx.globalAlpha = 1;
     }
   });
+  // roof flash when packets land
+  K.glow(ctx, DC.x, DC.y - 190 * DC.s, 200, ACC, Math.min(0.6, 0.25 * arriving));
 
-  // ---- rack
-  const rk = easeOutCubic(t / 0.6);
-  ctx.save();
-  ctx.globalAlpha *= rk;
-  ctx.translate(0, (1 - rk) * 20);
-  roundRect(ctx, RX, RY, RW, RH, 18);
-  const g = ctx.createLinearGradient(0, RY, 0, RY + RH);
-  g.addColorStop(0, '#1a1d2b'); g.addColorStop(1, '#0d0f18');
-  ctx.fillStyle = g; ctx.fill();
-  ctx.lineWidth = 2.5; ctx.strokeStyle = rgba(ACC, 0.25 + 0.35 * activity); ctx.stroke();
-  const uh = (RH - 36) / UNITS;
-  for (let u = 0; u < UNITS; u++) {
-    const y = RY + 18 + u * uh;
-    roundRect(ctx, RX + 14, y + 4, RW - 28, uh - 8, 6);
-    ctx.fillStyle = 'rgba(255,255,255,0.05)'; ctx.fill();
-    ctx.strokeStyle = 'rgba(255,255,255,0.12)'; ctx.lineWidth = 1.5; ctx.stroke();
-    // vents
-    ctx.fillStyle = 'rgba(255,255,255,0.14)';
-    for (let v = 0; v < 5; v++) ctx.fillRect(RX + 28 + v * 14, y + uh / 2 - 6, 6, 12);
-    // LEDs blink with activity (stepped clock -> deterministic)
-    for (let l = 0; l < 3; l++) {
-      const on = hash(u * 3 + l, Math.floor(t * 7 + u * 0.37 + l * 0.61)) < 0.25 + 0.65 * activity;
-      const lx = RX + RW - 36 - l * 18, ly = y + uh / 2;
-      if (on) H.glow(ctx, lx, ly, 14, ACC, 0.7);
-      ctx.beginPath(); ctx.arc(lx, ly, 4, 0, Math.PI * 2);
-      ctx.fillStyle = on ? ACC : 'rgba(255,255,255,0.18)'; ctx.fill();
+  // senders on top of the street
+  senders.forEach((sd, i) => {
+    const pop = K.popIn(t, 0.15 * i, 0.4);
+    if (pop <= 0) return;
+    ctx.save(); ctx.translate(sd.x, feet); ctx.scale(1, pop); ctx.translate(-sd.x, -feet);
+    if (sd.kind === 'person') {
+      // look up at the packets now and then, otherwise tap the phone
+      K.drawPerson(ctx, sd.x, feet, 0.92, Object.assign({ t, typing: 1, mood: 'happy' }, sd.opts));
+    } else {
+      ctx.fillStyle = K.NEUTRAL.darkL; H.roundRect(ctx, sd.x - 70, feet - 96, 140, 14, 6); ctx.fill();
+      ctx.fillRect(sd.x - 6, feet - 84, 12, 84);
+      K.drawLaptop(ctx, sd.x, feet - 96, 0.5, { t, screen: 'chart', typing: false, shadow: false });
     }
-  }
-  ctx.restore();
-  // inlet flashes where packets arrive
-  flash.forEach((f, i) => { if (f > 0) H.glow(ctx, RX, inlet(i), 40, ACC, 0.8 * f); });
-
-  // label under the rack
-  if (P.label) {
-    const fit = H.fitText(ctx, String(P.label).toUpperCase(), 'ui', 22, 16, RW + 40);
-    ctx.save(); ctx.globalAlpha *= smooth((t - 0.4) / 0.4);
-    ctx.font = fit.font; ctx.letterSpacing = '2px'; ctx.textAlign = 'center'; ctx.fillStyle = info.muted;
-    ctx.fillText(fit.text, RX + RW / 2, RY + RH + 44);
     ctx.restore();
-  }
+    if (labels[i]) {
+      const lp = K.popIn(t, 0.5 + 0.15 * i, 0.4);
+      if (lp > 0) K.drawLabel(ctx, sd.x, (sd.kind === 'laptop' ? feet - 190 : feet - 250) - 10, lp, { text: labels[i], size: 24 });
+    }
+  });
+  ctx.restore();
 }

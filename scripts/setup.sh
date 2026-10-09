@@ -63,4 +63,12 @@ for name in ("base.en", "small.en"):
     print(f"[setup] model {name} ready")
 PY
 
+# 5. Explainer narrator TTS files (Kokoro default + Piper fallback) into ~/.cache/clipper-tts (or $CLIPPER_TTS_CACHE).
+#    Idempotent: files already present with the pinned sha256 are skipped. A failed download only warns, so the
+#    clip pipeline still works; `python -m clipper voice` then says what is missing.
+say "checking TTS voices (kokoro:af_heart, piper:en_US-ljspeech-medium)"
+if ! (cd "$ROOT/engine" && "$VENV/bin/python" -m clipper.tts_backends fetch default piper:en_US-ljspeech-medium); then
+  say "WARNING: TTS voice download failed; explainer narration unavailable until it succeeds"
+fi
+
 say "done. Try: cd engine && ../.venv/bin/python -m clipper status"

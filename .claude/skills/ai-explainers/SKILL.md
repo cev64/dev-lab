@@ -32,7 +32,7 @@ said", "analysts expect"). No motives or guilt; prefer "alleges", "according to"
 publisher URL before citing.
 
 ## 3. Write the script (15 min)
-`work/explainers/<id>/script.json` per the contract. 5-8 beats, **150-185 words, narration >= 62 s**.
+`work/explainers/<id>/script.json` per the contract. 5-8 beats, **165-195 words, narration >= 62 s** (the narrator reads ~2.7 words/s).
 
 | Beat | Job | Words | Visual |
 |---|---|---|---|
