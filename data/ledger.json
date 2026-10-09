@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "episodes": {
+    "jre-2551": {
+      "show": "The Joe Rogan Experience",
+      "title": "#2551 - Daniel Kokotajlo",
+      "link": "",
+      "firstUsed": "2026-10-09",
+      "clips": [
+        {
+          "id": "2026-10-09-jre-2551-elections",
+          "start": 6258.55,
+          "end": 6332.66,
+          "date": "2026-10-09"
+        }
+      ]
+    },
+    "moonshots-301": {
+      "show": "Moonshots with Peter Diamandis",
+      "title": "Why Altman Says \"Accept Some Bad Things Happening\" and What It Means for AI Safety | MOONSHOTS #301",
+      "link": "",
+      "firstUsed": "2026-10-09",
+      "clips": [
+        {
+          "id": "2026-10-09-moonshots-301-workforce",
+          "start": 6128.87,
+          "end": 6191.66,
+          "date": "2026-10-09"
+        }
+      ]
+    }
+  },
+  "clips": [
+    {
+      "eid": "jre-2551",
+      "id": "2026-10-09-jre-2551-elections",
+      "date": "2026-10-09",
+      "start": 6258.55,
+      "end": 6332.66,
+      "title": "Kokotajlo on AI quietly nudging voters",
+      "hook": "How AI could secretly swing an election",
+      "video": "out/2026-10-09/2026-10-09-jre-2551-elections.mp4"
+    },
+    {
+      "eid": "moonshots-301",
+      "id": "2026-10-09-moonshots-301-workforce",
+      "date": "2026-10-09",
+      "start": 6128.87,
+      "end": 6191.66,
+      "title": "A second workforce you can switch on and off",
+      "hook": "100,000 AI workers, summoned overnight",
+      "video": "out/2026-10-09/2026-10-09-moonshots-301-workforce.mp4"
+    }
+  ]
+}
