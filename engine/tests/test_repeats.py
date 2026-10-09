@@ -56,11 +56,11 @@ class PostKitTest(unittest.TestCase):
         kit = post_kit(s)
         self.assertTrue(kit["hashtags"].startswith("#thedailytoken #ai"))
         self.assertEqual(len(kit["hashtags"].split()), 5)
-        self.assertIn("Follow @thedailytoken", kit["tiktok"])
+        self.assertIn("Follow @thedaily_token", kit["tiktok"])
         self.assertIn("Sources: A, B. AI narrator.", kit["tiktok"])
         self.assertTrue(kit["instagram"].startswith("Body line."))  # falls back to the TikTok body
         self.assertEqual((kit["pinned"], kit["cover"]), ("Yes or no?", "Cover"))
-        self.assertIn("Subscribe to @thedailytoken", kit["youtube"])
+        self.assertIn("Subscribe to @thedaily_token", kit["youtube"])
         self.assertTrue(kit["youtube"].startswith("Body line."))
         self.assertEqual(kit["youtubeTitle"], "Claude can quit rude chats")  # falls back to post.title
 
