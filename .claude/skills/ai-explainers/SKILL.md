@@ -48,12 +48,16 @@ Write for the ear: short sentences, concrete nouns, no jargon without a gloss, n
 ("two million", not "2,000,000"; the card shows the digits). Hook formulas that fit: number shock, reversal ("said it
 would never... this week it did"), your-job stake, counter-intuitive, two-sided. No "AI is changing everything".
 
-**Custom animation (required, at least one beat per explainer, ideally two):** write a story-specific animated
-scene — `{"type":"scene","module":"scenes/<name>.js","params":{...}}` — following "Authoring a scene" in
-engine/render/README.md. Animate the story's key moment, not decoration: the chat that gets ended, the price that
-collapses, the agent that books the flight, the packets flowing into a data center. Reuse/adapt modules in
-engine/render/templates/ai-explainer/scenes/ when they fit and save good new ones there for future nights. Always
-preview stills at several t before rendering the full video. Every beat must move.
+**Scenes are the main event (owner decision):** an explainer is a short animated film of what happened — characters
+and objects acting out the story in a setting (a person on a sofa typing at a chatbot, the AI ending the chat, a
+company's rulebook being rewritten, a robot at a desk doing someone's job, money flowing between buildings). At least
+70% of the runtime is full-frame `scene` beats; animated data cards (stat, compare, timeline...) are support, max 1-2
+beats, used only when a number or sequence is the point. Write the scenes for THIS story: use the kit's characters,
+objects and `world` settings, sync key actions to the narration with `info.wordAt(t)`, and let one scene run across
+several beats when the story continues in the same place (`span`). Reuse/adapt modules in
+engine/render/templates/ai-explainer/scenes/ when they fit; save good new ones there for future nights. Plan it like a
+storyboard first (one line per beat: setting, who, what happens, what changes), then write the modules, then preview
+stills at several t before the full render.
 
 **Fully animated, no B-roll (owner decision 2026-10-09):** no stock footage, no AI-generated images. Every beat
 is either a `scene` (preferred for the story's moments: 3+ scenes per explainer) or an animated card (stat, compare,
