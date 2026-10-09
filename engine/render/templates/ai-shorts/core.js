@@ -806,7 +806,8 @@
   }
 
   // opts (all optional; ai-shorts passes none): { setup(S, ctx) -> called after the core layouts are built,
-  // may set S.layers = { mid(ctx, S, t, cover), creditGlyph(ctx, S, x, y, size, color, t) } and S.info;
+  // may set S.layers = { mid(ctx, S, t, cover), creditGlyph(ctx, S, x, y, size, color, t),
+  // skipBackground(t, cover) -> true when mid paints the whole frame } and S.info;
   // sample: preview fixture path }
   async function boot(opts = {}) {
     try {
@@ -875,7 +876,12 @@
       let prof = null;
       const mark = (name) => { if (!prof) return; ctx.getImageData(0, 0, 1, 1); bgCtx.getImageData(0, 0, 1, 1); const n = performance.now(); prof[name] = +(n - prof._t).toFixed(2); prof._t = n; };
       const paint = (t, cover) => {
-        if (S.bgVideo && S.bgVideo.bmp) {
+        if (S.layers.skipBackground && S.layers.skipBackground(t, cover)) {
+          // a template layer (e.g. a full-frame scene) covers the whole frame: skip the generative style
+          ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+          ctx.fillStyle = '#05060b'; ctx.fillRect(0, 0, W, H);
+          mark('background');
+        } else if (S.bgVideo && S.bgVideo.bmp) {
           ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
           ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'medium';
           ctx.drawImage(S.bgVideo.bmp, 0, 0, W, H);

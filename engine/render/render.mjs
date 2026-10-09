@@ -98,8 +98,10 @@ function loadClip(path) {
     if (!existsSync(clip.background.video)) throw new Error(`background video not found: ${clip.background.video}`);
   }
   // ai-explainer "scene" beats: per-story ES modules, served to the pages at /scene/<n>.js
-  for (const b of Array.isArray(clip.beats) ? clip.beats : []) {
+  const sceneRefs = [...(Array.isArray(clip.beats) ? clip.beats : []), ...(Array.isArray(clip.scenes) ? clip.scenes.map((sc) => ({ t0: sc.t0, visual: sc })) : [])];
+  for (const b of sceneRefs) {
     const v = b && b.visual;
+    if (v && !v.type && v.module) v.type = 'scene'; // top-level scenes[] entries
     if (!v || v.type !== 'scene') continue;
     if (!v.module) throw new Error(`scene beat at t0=${b.t0} has no "module"`);
     const file = resolve(dirname(clipPath), v.module);

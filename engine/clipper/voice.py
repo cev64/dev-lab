@@ -259,7 +259,9 @@ def _fill_and_order(timed: list[tuple[float, float] | None], keys: list[str], s0
     res, prev_e = [], s0
     for s, e in out:  # type: ignore[misc]
         s = min(max(s, prev_e, s0), s1)
-        e = min(max(e, s + 0.02), max(s1, s + 0.02))
+        if e - s < min_word:  # too short to read: start earlier into free time (whisper clips short words)
+            s = max(prev_e, s0, min(s, e - min_word))
+        e = min(max(e, s + min_word), max(s1, s + 0.02))
         res.append((r2(s), r2(e)))
         prev_e = e
     return res
@@ -440,7 +442,7 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
     pieces, warnings = [], []
     sr = backend.sample_rate
     for i, b in enumerate(script["beats"]):
-        x, sr = synth_beat(backend, tts_text(b["say"], script.get("lexicon")), out_dir / ".tts-cache")
+        x, sr = synth_beat(backend, tts_text(b["say"], script.get("lexicon")), paths.work / "explainers" / ".tts-cache")
         pieces.append(x)
         d = len(x) / sr
         n = len(beat_tokens[i])
