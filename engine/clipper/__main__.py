@@ -57,6 +57,17 @@ def cmd_status(paths: Paths) -> None:
         print(f"  {c['date']}  {c['id']}  {hms(c['start'])}-{hms(c['end'])}")
 
 
+def print_text(paths: Paths, eid: str, start: float, end: float) -> None:
+    """Segments overlapping [start, end], each prefixed with its start second, so a candidate can be judged and
+    its boundaries chosen precisely."""
+    tr = read_json(paths.episode_dir(eid) / "transcript.json")
+    if not tr:
+        raise SystemExit(f"no transcript for {eid}")
+    for seg in tr["segments"]:
+        if seg["e"] >= start and seg["s"] <= end:
+            print(f"[{seg['s']:8.2f}-{seg['e']:8.2f}] {seg['text'].strip()}")
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="clipper", description=__doc__)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -88,6 +99,11 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--no-package", action="store_true", help="do not touch deliveries/ or the ledger")
     p.add_argument("--force-package", action="store_true", help="package even if no video was rendered")
 
+    p = sub.add_parser("text", help="print the transcript between two times (for re-reading a candidate)")
+    p.add_argument("eid")
+    p.add_argument("start", type=float)
+    p.add_argument("end", type=float)
+
     sub.add_parser("status", help="show work/ and ledger state")
 
     a = ap.parse_args(argv)
@@ -117,6 +133,8 @@ def main(argv: list[str] | None = None) -> int:
                    force_package=a.force_package)
         if any("error" in r for r in res):
             return 1
+    elif a.cmd == "text":
+        print_text(paths, a.eid, a.start, a.end)
     elif a.cmd == "status":
         cmd_status(paths)
     if a.cmd != "status":
