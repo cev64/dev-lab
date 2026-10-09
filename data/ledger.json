@@ -90,6 +90,45 @@
       "title": "Anthropic's rule against being cruel to Claude",
       "followUp": false,
       "drive": "1sWIGmVecXh-HAzEJNde5EzFrhNJId86B1a-y6B0vzk0"
+    },
+    {
+      "id": "2026-10-09-explainer-gemini-agent",
+      "date": "2026-10-09",
+      "hook": "Google's new AI works with your laptop shut",
+      "topic": "AGENTS",
+      "sources": [
+        "https://cloud.google.com/blog/products/ai-machine-learning/welcome-to-gemini-at-work-2026",
+        "https://techcrunch.com/2026/10/08/google-brings-agentic-ai-to-gemini-starting-with-businesses/",
+        "https://9to5google.com/2026/10/08/gemini-agent-google-cloud/",
+        "https://siliconangle.com/2026/10/08/google-cloud-introduces-gemini-agent-to-change-enterprise-work/"
+      ],
+      "video": "out/2026-10-09/2026-10-09-explainer-gemini-agent.mp4"
+    },
+    {
+      "id": "2026-10-09-explainer-artex-closed",
+      "date": "2026-10-09",
+      "hook": "This free AI agent just got locked away",
+      "topic": "AI SECURITY",
+      "sources": [
+        "https://www.investing.com/news/economy-news/chinese-developer-makes-artex-ai-agent-closedsource-after-korean-bank-hack-4940102",
+        "https://www.crowdstrike.com/en-us/blog/unknown-threat-actor-uses-artex-to-target-south-korean-finance/",
+        "https://www.trtworld.com/article/e6d554d35d4a",
+        "https://therecord.media/south-korean-bank-hacks-ai-agents"
+      ],
+      "video": "out/2026-10-09/2026-10-09-explainer-artex-closed.mp4"
+    },
+    {
+      "id": "2026-10-09-explainer-sabi-cap",
+      "date": "2026-10-09",
+      "hook": "This cap wants to read your thoughts",
+      "topic": "WEARABLES",
+      "sources": [
+        "https://pinionnewswire.com/press-release/sabi-raises-50-million-seed-round-led-by-khosla-ventures-to-put-a-brain-ai-interface-inside-a-baseball-cap/",
+        "https://www.forbes.com/sites/rashishrivastava/2026/10/09/vinod-khosla-backs-an-ai-startup-building-a-mind-reading-baseball-cap/",
+        "https://cryptobriefing.com/sabi-raises-50m-brain-ai-interface/",
+        "https://www.sabi.com/"
+      ],
+      "video": "out/2026-10-09/2026-10-09-explainer-sabi-cap.mp4"
     }
   ]
 }

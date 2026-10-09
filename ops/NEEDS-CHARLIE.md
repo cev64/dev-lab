@@ -2,8 +2,6 @@
 
 Short list of things only Charlie can do. Newest first; the nightly run keeps it current.
 
-- [ ] Merge the engine branch `claude/sweet-mendel-glnm0v` into main (GitHub -> Pull requests -> New -> compare
-      `claude/sweet-mendel-glnm0v`). Until then the nightly run works from that branch, which is fine.
 - [ ] Each morning: 3 explainers arrive as files in the night's session (tap the push notification) and on GitHub
       branch `videos/<date>`. Post them morning / midday / evening in the order the delivery note gives, pasting the
       post text from `deliveries/<date>.md`, with the platform's "AI-generated content" label switched ON.

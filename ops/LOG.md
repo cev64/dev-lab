@@ -2,6 +2,25 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-09 (first scheduled nightly run, fired ~17:50 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Google's new AI works with your laptop shut" (Gemini agent, Gemini at Work Oct 8; Google Cloud blog, TechCrunch,
+     9to5Google, SiliconANGLE). Rubric ~75 (fresh 18, stakes 14, surprise 9, visual 9, verif 19, controversy 6).
+     71.4 s, -14.2 LUFS, style neural, 88% scenes.
+  2. "This free AI agent just got locked away" (ARTEX goes closed-source after CrowdStrike linked it to attacks on
+     South Korean financial firms; Reuters, CrowdStrike, AFP, The Record). Rubric ~84 (19/15/13/9/16/12). 72.9 s,
+     -14.3 LUFS, style horizon, 100% scenes. Worded as CrowdStrike's attribution; no person or developer accused.
+  3. "This baseball cap wants to read your thoughts" (Sabi $50M seed led by Khosla Ventures; Sabi release, Forbes,
+     Crypto Briefing). Rubric ~73 (18/10/14/10/13/8). 68.9 s, -14.3 LUFS, style orb, 100% scenes; all capability
+     numbers attributed to Sabi.
+  Dropped: Amazon drops data-center NDAs (rendered, 72.7 s) — failed the freshness gate on review (Amazon announced it
+  Oct 2; Oct 9 coverage added nothing new); replaced by Sabi. Skipped: USA Today v. OpenAI (unproven allegations
+  gate), OpenAI fired safety researchers (named-person misconduct dispute), OpenAI revenue report (single source).
+  Timings: setup ~3 min, news 6 s, producers 13-16 min each in parallel, replacement producer 13 min.
+  Problems: producers 159/158/158 words (below the 165 floor) because Kokoro af_heart@0.85 reads ~2.25 words/s, not
+  2.7 — 165 words would exceed 75 s; whisper base.en hallucinated "Remember," in a silence (checked: not in audio);
+  producers shared the scratchpad and one overwrote another's helper (give each its own scratch subfolder);
+  `clipper explainer` writes ledger/deliveries itself, so a dropped explainer must be removed by hand.
+  Backup branch videos/2026-10-09 now holds the setup session's clips plus tonight's 3.
 - 2026-10-09 (setup session, owner decision): nightly output is now 3 fully animated explainers (3 different stories,
   produced in parallel by 3 producer subagents); the podcast-clip track is paused.
 - 2026-10-09 (setup session, part 2): built the ORIGINAL explainer track. news command (19 feeds + Techmeme + HN
