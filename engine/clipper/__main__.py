@@ -102,6 +102,10 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--no-package", action="store_true", help="do not touch deliveries/ or the ledger")
     p.add_argument("--force-package", action="store_true", help="package even if no video was rendered")
 
+    p = sub.add_parser("news", help="recent AI headlines for the explainer track -> work/news.json")
+    p.add_argument("--days", type=float, default=3)
+    p.add_argument("--limit", type=int, default=40)
+
     p = sub.add_parser("text", help="print the transcript between two times (for re-reading a candidate)")
     p.add_argument("eid")
     p.add_argument("start", type=float)
@@ -136,6 +140,10 @@ def main(argv: list[str] | None = None) -> int:
                    force_package=a.force_package)
         if any("error" in r for r in res):
             return 1
+    elif a.cmd == "news":
+        from .news import news
+
+        news(paths, days=a.days, limit=a.limit)
     elif a.cmd == "text":
         print_text(paths, a.eid, a.start, a.end)
     elif a.cmd == "status":

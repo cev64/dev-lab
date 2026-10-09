@@ -661,7 +661,8 @@
     ctx.beginPath(); ctx.arc(92, cy, 32, 0, Math.PI * 2);
     ctx.fillStyle = 'rgba(10,12,20,0.6)'; ctx.fill();
     ctx.lineWidth = 2; ctx.strokeStyle = rgba(pal.accent, 0.45 + 0.4 * e); ctx.stroke();
-    drawMic(ctx, 92, cy + 1, 38, pal.accent);
+    if (S.layers && S.layers.creditGlyph) S.layers.creditGlyph(ctx, S, 92, cy + 1, 38, pal.accent, t);
+    else drawMic(ctx, 92, cy + 1, 38, pal.accent);
     ctx.restore();
     if (!C.sprite) {
       const top = Math.floor(C.top - 30), c = makeCanvas(W - C.x + 20, LAYOUT.creditBottom + 30 - top), x = c.getContext('2d');
@@ -777,11 +778,41 @@
     if (missing.length) throw new Error('fonts failed to load: ' + missing.join(', '));
   }
 
-  async function boot() {
+  // Optional background video (clip.background.frames, set up by render.mjs): pre-extracted JPEG frames
+  // served by the local server. Frame i is fetched + decoded before painting time t (grabFrame awaits it).
+  function makeBgVideo(fr) {
+    const V = { fps: fr.fps || 30, count: fr.count | 0, url: fr.url, idx: -1, bmp: null };
+    V.index = (t) => clamp(Math.round(t * V.fps), 0, V.count - 1);
+    V.load = async (t) => {
+      const i = V.index(t);
+      if (i === V.idx && V.bmp) return;
+      const r = await fetch(V.url + String(i + 1).padStart(6, '0') + '.jpg');
+      if (!r.ok) throw new Error('background frame ' + i + ' failed: ' + r.status);
+      const bmp = await createImageBitmap(await r.blob());
+      if (V.bmp) V.bmp.close();
+      V.bmp = bmp; V.idx = i;
+    };
+    return V;
+  }
+  // Extra readability scrim over a (photographic) video background: header/card band and caption band.
+  function buildVideoScrim() {
+    const c = document.createElement('canvas'); c.width = W; c.height = H;
+    const g = c.getContext('2d');
+    const lin = (y0, y1, stops) => { const gr = g.createLinearGradient(0, y0, 0, y1); stops.forEach(([o, a]) => gr.addColorStop(o, `rgba(0,0,0,${a})`)); g.fillStyle = gr; g.fillRect(0, y0, W, y1 - y0); };
+    g.fillStyle = 'rgba(0,0,0,0.14)'; g.fillRect(0, 0, W, H);
+    lin(0, 560, [[0, 0.42], [0.7, 0.16], [1, 0]]);
+    lin(960, 1620, [[0, 0], [0.18, 0.34], [0.5, 0.46], [1, 0.4]]);
+    return c;
+  }
+
+  // opts (all optional; ai-shorts passes none): { setup(S, ctx) -> called after the core layouts are built,
+  // may set S.layers = { mid(ctx, S, t, cover), creditGlyph(ctx, S, x, y, size, color, t) } and S.info;
+  // sample: preview fixture path }
+  async function boot(opts = {}) {
     try {
       let clip = window.__CLIP__;
       const preview = !clip;
-      if (!clip) clip = await (await fetch('../../sample/clip.json')).json(); // open index.html?preview in a browser
+      if (!clip) clip = await (await fetch(opts.sample || '../../sample/clip.json')).json(); // open index.html?preview in a browser
       clip.fps = clip.fps || 30;
       clip.words = Array.isArray(clip.words) ? clip.words : [];
       if (!clip.duration) clip.duration = clip.words.length ? clip.words[clip.words.length - 1].e + 0.5 : 60;
@@ -827,6 +858,12 @@
       S.overlay = buildOverlay(S);
       S.wordCache = new Map();
       buildHookSprites(S);
+      S.layers = {};
+      if (clip.background && clip.background.frames && clip.background.frames.count > 0) {
+        S.bgVideo = makeBgVideo(clip.background.frames);
+        S.videoScrim = buildVideoScrim();
+      }
+      if (opts.setup) opts.setup(S, ctx);
       style.init && style.init(S);
       // Backgrounds are drawn at reduced resolution (style.scale, default 0.5) and upscaled: the
       // software rasteriser's cost is per pixel, and soft glows/thin lines lose nothing visible behind
@@ -838,18 +875,27 @@
       let prof = null;
       const mark = (name) => { if (!prof) return; ctx.getImageData(0, 0, 1, 1); bgCtx.getImageData(0, 0, 1, 1); const n = performance.now(); prof[name] = +(n - prof._t).toFixed(2); prof._t = n; };
       const paint = (t, cover) => {
-        bgCtx.setTransform(bgScale, 0, 0, bgScale, 0, 0);
-        bgCtx.globalAlpha = 1; bgCtx.globalCompositeOperation = 'source-over';
-        bgCtx.save();
-        style.draw(bgCtx, S, t);
-        bgCtx.restore();
-        mark('background');
-        ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
-        ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'low';
-        ctx.drawImage(bg, 0, 0, W, H);
-        mark('upscale');
+        if (S.bgVideo && S.bgVideo.bmp) {
+          ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+          ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'medium';
+          ctx.drawImage(S.bgVideo.bmp, 0, 0, W, H);
+          mark('background');
+        } else {
+          bgCtx.setTransform(bgScale, 0, 0, bgScale, 0, 0);
+          bgCtx.globalAlpha = 1; bgCtx.globalCompositeOperation = 'source-over';
+          bgCtx.save();
+          style.draw(bgCtx, S, t);
+          bgCtx.restore();
+          mark('background');
+          ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+          ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'low';
+          ctx.drawImage(bg, 0, 0, W, H);
+          mark('upscale');
+        }
         ctx.drawImage(S.overlay, 0, 0);
+        if (S.videoScrim) ctx.drawImage(S.videoScrim, 0, 0);
         mark('overlay');
+        if (S.layers.mid) { ctx.save(); S.layers.mid(ctx, S, t, cover); ctx.restore(); mark('mid'); }
         if (cover) {
           if (S.hook) blit(ctx, S.cardSprite, 1, 1.04, 40); else blit(ctx, S.dockSprite, 1, 1, 0);
         } else {
@@ -883,6 +929,7 @@
       // With postUrl the encoded bytes are POSTed (binary) to render.mjs's local server instead of
       // being returned as base64 over CDP, which is much cheaper for 1080x1920 frames.
       window.grabFrame = async (t, type = 'jpeg', quality = 0.92, postUrl = null) => {
+        if (S.bgVideo) await S.bgVideo.load(t < 0 ? coverTime() : Math.max(0, t));
         if (t < 0) paint(coverTime(), true); else paint(t, false);
         if (!postUrl) return encode(type, quality);
         const blob = await canvas.convertToBlob({ type: type === 'png' ? 'image/png' : 'image/jpeg', quality });
@@ -890,7 +937,8 @@
         if (!r.ok) throw new Error('frame upload failed: ' + r.status);
         return blob.size;
       };
-      window.__INFO = { style: style.name, palette: palIdx, seed, bgScale, groups: S.groups.length, styles: STYLES.map((s) => s.name) };
+      window.__INFO = Object.assign({ style: style.name, palette: palIdx, seed, bgScale, groups: S.groups.length, styles: STYLES.map((s) => s.name) },
+        S.bgVideo ? { background: 'video:' + S.bgVideo.count + 'f' } : {}, S.info || {});
       window.__S = S;
       window.__READY = true;
       if (preview) {
@@ -908,5 +956,7 @@
     W, H, SAFE, LAYOUT, registerStyle, boot,
     mulberry32, hashStr, hash2, clamp, lerp, smooth, fract, easeOutCubic, easeInOutCubic, spring,
     rgba, mixHex, hexRgb, glow, drawGlow, roundRect, drawSignalLine, drawWaveRing,
+    // shared text/panel helpers for other templates (e.g. ai-explainer)
+    font, capHeight, fitText, wrapBalanced, drawOutlined, glassPanel, makeCanvas, cleanTok, TYPE, HOOKTYPE,
   };
 })();

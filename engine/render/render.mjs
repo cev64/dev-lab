@@ -4,6 +4,10 @@
 //   node render.mjs --clip <clip.json> --out <file.mp4> [--workers 3] [--style auto|neural|flow|horizon|orb]
 //                   [--frames-only 0,45,600 | 0.5s,20s] [--template ai-shorts] [--crf 23] [--quiet]
 //
+// Template: --template, else clip.json "template" (e.g. "ai-explainer"), else theme.template, else ai-shorts.
+// Optional clip.json "background": {"video": "<path>"} replaces the generative background with that video
+// (pre-extracted to JPEG frames at the clip fps, served to the pages, drawn under the overlays).
+//
 // Frame i is drawn at t = i / fps by the page's window.grabFrame(t) (same drawing as renderFrame); nothing
 // depends on wall time, so any frame range can be rendered by any worker. Frames are split into contiguous
 // chunks across N browsers; each page encodes its frame to JPEG in-page and POSTs it to a local server,
@@ -89,7 +93,23 @@ function loadClip(path) {
     clip.envelope = computeEnvelope(clip.audio, clip.fps, clip.duration);
   }
   clip.theme = Object.assign({ style: 'auto' }, clip.theme || {});
+  if (clip.background && clip.background.video) {
+    clip.background.video = resolve(dirname(clipPath), clip.background.video);
+    if (!existsSync(clip.background.video)) throw new Error(`background video not found: ${clip.background.video}`);
+  }
   return clip;
+}
+
+// Background video -> JPEG frames (1080x1920, cover-cropped, clip fps) in dir; returns the frame count.
+// The video is held on its last frame if it is shorter than the clip.
+function extractBackground(video, dir, fps, duration) {
+  run('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-i', video, '-t', String(duration + 0.5),
+    '-vf', `fps=${fps},scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},format=yuvj420p`,
+    '-q:v', '3', join(dir, '%06d.jpg')]);
+  let n = 0;
+  while (existsSync(join(dir, `${String(n + 1).padStart(6, '0')}.jpg`))) n++;
+  if (!n) throw new Error(`no frames extracted from background video ${video}`);
+  return n;
 }
 
 function parseFrameList(spec, fps, total) {
@@ -106,6 +126,7 @@ function parseFrameList(spec, fps, total) {
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json',
   '.woff2': 'font/woff2', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml' };
 const pending = new Map();
+let BG_DIR = null; // background video frames, served at /bgframes/NNNNNN.jpg
 async function startServer() {
   const srv = http.createServer((req, res) => {
     const url = new URL(req.url, 'http://127.0.0.1');
@@ -119,6 +140,11 @@ async function startServer() {
         res.statusCode = done ? 200 : 404; res.end();
       });
       return;
+    }
+    if (BG_DIR && req.method === 'GET' && /^\/bgframes\/\d{6}\.jpg$/.test(url.pathname)) {
+      const f = join(BG_DIR, url.pathname.slice(10));
+      if (!existsSync(f)) { res.statusCode = 404; res.end(); return; }
+      res.setHeader('content-type', 'image/jpeg'); res.end(readFileSync(f)); return;
     }
     const file = normalize(join(HERE, decodeURIComponent(url.pathname)));
     if (req.method !== 'GET' || !file.startsWith(HERE + sep) || file.includes(`${sep}node_modules${sep}`) || !existsSync(file) || !statSync(file).isFile()) {
@@ -196,7 +222,7 @@ async function main() {
   const t0 = Date.now();
   const clip = loadClip(ARGS.clip);
   if (ARGS.style) clip.theme.style = ARGS.style;
-  const template = ARGS.template || clip.theme.template || 'ai-shorts';
+  const template = ARGS.template || clip.template || clip.theme.template || 'ai-shorts';
   const templateHtml = join(HERE, 'templates', template, 'index.html');
   if (!existsSync(templateHtml)) throw new Error(`template not found: ${templateHtml}`);
   const fps = clip.fps;
@@ -207,11 +233,19 @@ async function main() {
 
   const frames = ARGS.framesOnly ? parseFrameList(ARGS.framesOnly, fps, total) : null;
   const nWorkers = Math.max(1, Math.min(ARGS.workers, frames ? frames.length : Math.ceil(total / 30)));
+  if (clip.background && clip.background.video) {
+    BG_DIR = mkdtempSync(join(tmpdir(), 'clip-bg-'));
+    const tb = Date.now();
+    const count = extractBackground(clip.background.video, BG_DIR, fps, clip.duration);
+    clip.background.frames = { url: '/bgframes/', count, fps };
+    log(`background video: ${count} frames extracted in ${((Date.now() - tb) / 1000).toFixed(1)} s`);
+  }
   const server = await startServer();
   const templateUrl = `http://127.0.0.1:${server.address().port}/templates/${encodeURIComponent(template)}/index.html`;
   const workers = await Promise.all(Array.from({ length: nWorkers }, (_, i) => startWorker(clip, templateUrl, i)));
   log(`template=${template} style=${workers[0].info.style} palette=${workers[0].info.palette} seed=${workers[0].info.seed} ` +
-    `groups=${workers[0].info.groups} frames=${frames ? frames.length : total} workers=${nWorkers}`);
+    `groups=${workers[0].info.groups}${workers[0].info.beats != null ? ` beats=${workers[0].info.beats}` : ''}` +
+    `${workers[0].info.background ? ` background=${workers[0].info.background}` : ''} frames=${frames ? frames.length : total} workers=${nWorkers}`);
 
   try {
     if (frames) {
@@ -276,6 +310,7 @@ async function main() {
   } finally {
     await Promise.all(workers.map((w) => w.close().catch(() => {})));
     server.close();
+    if (BG_DIR) rmSync(BG_DIR, { recursive: true, force: true });
   }
 }
 main().catch((e) => { console.error('[render] ERROR', e.message || e); process.exit(1); });
