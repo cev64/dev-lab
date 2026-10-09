@@ -141,6 +141,14 @@
       "kind": "trend",
       "weight": 2,
       "format": "json-algolia"
+    },
+    {
+      "id": "techmeme",
+      "name": "Techmeme",
+      "url": "https://www.techmeme.com/feed.xml",
+      "kind": "trend",
+      "weight": 3,
+      "note": "Aggregates the tech stories people are discussing (incl. on X); filtered to AI by keyword"
     }
   ]
 }
