@@ -9,6 +9,21 @@ The clip track borrows other people's words. This track is ours: our story choic
 visuals, a clearly synthetic narrator. It is the channel's monetizable content, so quality and accuracy matter more
 than speed. Evidence: `docs/explainer-playbook.md`. Formats: `docs/specs/explainer-contract.md`, scenes + illustration kit: `engine/render/README.md`.
 
+## 0. Nightly team workflow (3 explainers)
+Charlie posts three a day (morning, midday, evening), so each night delivers **3 explainers on 3 different stories**.
+1. Lead: run `news`, score the candidates (section 1), pick the best 3 that clear the gates. Make them different:
+   different companies and different kinds of story (e.g. one money/jobs, one product/people, one weird/ethics).
+   If only 1-2 clear the bar, make 1-2 and say why — never pad with weak or unverifiable stories.
+2. Lead: spawn 3 **producer** subagents (model: opus) in parallel, one per story. Give each: the story and its source
+   URLs, this skill's sections 2-5, the id `<date>-explainer-<slug>`, its working folder work/explainers/<id>/,
+   the style it must use (`neural`, `flow`, `horizon` or `orb`; all different), and the instruction to stop after
+   rendering and report: the claim table, the storyboard, the scene modules written, still paths, duration, LUFS.
+   Producers must not commit or deliver.
+3. Lead review (the quality gate): read each claim table against the script (delete or fix any unsupported claim and
+   re-render); look at each explainer's stills; reject anything that fails the rules. Then deliver (section 6).
+4. Producers' good new scenes: the lead copies the best reusable ones into the shared scene library on a branch +
+   PR (they are code), so the library grows every night.
+
 ## 1. Pick the story (10 min)
 ```
 cd engine && python -m clipper news --days 3 && cd ..     # -> work/news.json, top 15 printed
@@ -84,9 +99,11 @@ characters clearly stylised and never resembling a real person. ffprobe: 1080x19
 last time against the final script.
 
 ## 6. Deliver
-Same as the clip track: SendUserFile with the MP4 + cover, `scripts/publish-videos.sh <date>`, delivery block in
-`deliveries/<date>.md` (written by the explainer command, includes sources), ledger entry. In the delivery note,
-remind Charlie to switch ON the platform's AI-generated content label for explainers.
+SendUserFile with the 3 MP4s + `deliveries/<date>.md` (the explainer command writes each block, with sources and
+paste-ready post text). Order them for posting: the strongest hook goes to the evening slot (~6-9pm ET), the next to
+midday (~12pm), the third to the morning (~8am); write that order at the top of the delivery note. Then
+`scripts/publish-videos.sh <date>` (backup branch) and commit the ledger + delivery note. Remind Charlie to switch ON
+the platform's AI-generated content label (synthetic narrator).
 
 ## 7. Corrections
 If a published explainer proves wrong: add it to `ops/NEEDS-CHARLIE.md` the same day (delete or pin a correction),

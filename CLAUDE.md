@@ -1,25 +1,28 @@
-# AI clips channel: standing mission
+# AI explainers channel: standing mission
 
-This repo is a faceless short-form video studio run by Claude Code. Every night at 3am ET a routine makes **3 vertical
-clips (60-75 s each)** of people on popular podcasts talking about AI, with animated captions, a hook headline and
-code-generated visuals, and delivers them to the owner, Charlie, who posts them to TikTok and Instagram Reels.
-Think of it as our own Opus Clip, plus editorial judgment.
+This repo is a faceless short-form video studio run by Claude Code. Every night at ~3am ET a routine makes
+**3 original, fully animated explainers (62-75 s each)** about real AI news, and delivers them to the owner, Charlie,
+who posts them through the day (morning / midday / evening) on TikTok and Instagram Reels.
 
-Second track (original content): one **60-75 s narrated explainer** per night about a real AI news story, written
-and fact-checked by the agent, read by an open-source synthetic narrator, fully animated with code: story-specific
-animated scenes (cartoon characters, objects, motion) and animated data cards (stats, comparisons, timelines, quotes). We own it fully,
-so it is the monetizable track. Method: `.claude/skills/ai-explainers/SKILL.md`; format: `docs/specs/explainer-contract.md`.
+Each explainer: a story picked from the day's AI news, fact-checked against >= 2 sources, a script in our own words,
+a clearly synthetic narrator (Kokoro), and code-drawn animation in which cartoon characters and objects act out what
+happened (scenes are >= 70% of the runtime; data cards are support), with word-by-word captions. We own all of it, so
+it is the monetizable content. Method: `.claude/skills/ai-explainers/SKILL.md`; format: `docs/specs/explainer-contract.md`;
+scenes and the illustration kit: `engine/render/README.md` ("Authoring a scene").
+
+The podcast-clip engine (`.claude/skills/viral-clips/`, `python -m clipper discover/fetch/transcribe/scout/make`)
+is kept but PAUSED by owner decision (2026-10-09); do not make podcast clips unless Charlie asks.
 
 ## How to do the job
-Follow the skill `.claude/skills/viral-clips/SKILL.md` step by step. It is the method: find AI episodes, transcribe,
-pick the moments with the virality rubric, write the hook, cut, render, QA, deliver. Evidence behind it:
-`docs/playbook.md`. Data formats: `docs/specs/clip-contract.md`.
+Follow `.claude/skills/ai-explainers/SKILL.md` (section 0 is the nightly team workflow for 3 explainers). Evidence:
+`docs/explainer-playbook.md`. The paused clip track's method is `.claude/skills/viral-clips/SKILL.md`.
 
 ## Where things are
-- `engine/clipper/` Python pipeline (`cd engine && python -m clipper <discover|fetch|transcribe|scout|make|status>`)
+- `engine/clipper/` Python pipeline. Explainers: `cd engine && python -m clipper news | voice --script S | explainer --script S`.
+  Paused clip track: `discover|fetch|transcribe|scout|make|text|status`.
 - `engine/render/` Node renderer: HTML/canvas templates rendered frame-by-frame in headless Chromium -> ffmpeg.
-  Add new looks as new styles/templates there; it can draw anything code can draw.
-- `config/sources.json` podcasts (RSS feeds, priority, permission status). `data/ledger.json` what we've used.
+  `templates/ai-explainer/` has the illustration kit (kit.js) and the reusable scene library (scenes/); grow both.
+- `config/news_sources.json` news feeds; `data/ledger.json` what we've published (explainers list; 7-day no-repeat).
 - `deliveries/YYYY-MM-DD.md` post copy for each night (committed). Videos land in `out/` (gitignored) and are sent
   to Charlie with SendUserFile, with a backup branch `videos/YYYY-MM-DD` via `scripts/publish-videos.sh`.
 - `ops/` LOG, BACKLOG, NEEDS-CHARLIE, PERFORMANCE (Charlie's posting results feed the learning loop).
@@ -35,9 +38,9 @@ pick the moments with the virality rubric, write the hook, cut, render, QA, deli
 ## The team (subagents). Pick the model by the job.
 | Role | Model | Use for |
 |---|---|---|
-| Lead / editor-in-chief (the routine) | session model | final picks, hooks, QA, delivery |
-| Clip scout | sonnet | read one episode's scout.md, return top candidates scored with the rubric |
-| Engine engineer | opus | renderer styles, pipeline features, performance |
+| Lead / editor-in-chief (the routine) | session model | story picks, review of claims and stills, delivery |
+| Producer (one per explainer) | opus | fact-check, script, storyboard, scenes, voice, render for one story |
+| Engine engineer | opus | kit/scene library, renderer, pipeline features, performance |
 | QA | haiku | mechanical checks on stills/ffprobe output, ledger/deliveries consistency |
 | Skeptic | opus | Sunday review of performance data and the rubric |
 
