@@ -80,7 +80,7 @@ list, quote, timeline, title, keyword), over the generative animated background.
 stylised cartoon characters only — never a real or recognisable person, never a logo.
 
 `post.caption`: line 1 restates the hook as a fact; line 2 `Sources: <Publisher>, <Publisher>. AI narrator.`;
-line 3 a question. Hashtags 3-5 (#ai + topical + #technews + audience).
+line 3 a question. Hashtags 3-5: #thedailytoken + #ai + topical + #technews (the channel is The Daily Token).
 
 ## 4. Voice and render (from engine/; ~10 min)
 ```

@@ -1,4 +1,7 @@
-# AI explainers channel: standing mission
+# The Daily Token (AI explainers channel): standing mission
+
+Channel name: **The Daily Token** (owner decision 2026-10-09). Tagline: "AI news, animated." Handles: @thedailytoken
+where available. Mascot: the kit's robot (white head, dark visor, lime #c4ff3a eyes) on dark navy.
 
 This repo is a faceless short-form video studio run by Claude Code. Every night at ~3am ET a routine makes
 **3 original, fully animated explainers (62-75 s each)** about real AI news, and delivers them to the owner, Charlie,
@@ -23,6 +26,7 @@ Follow `.claude/skills/ai-explainers/SKILL.md` (section 0 is the nightly team wo
 - `engine/render/` Node renderer: HTML/canvas templates rendered frame-by-frame in headless Chromium -> ffmpeg.
   `templates/ai-explainer/` has the illustration kit (kit.js) and the reusable scene library (scenes/); grow both.
 - `config/news_sources.json` news feeds; `data/ledger.json` what we've published (explainers list; 7-day no-repeat).
+- `docs/brand.md` channel name, colors, logo prompts.
 - `deliveries/YYYY-MM-DD.md` post copy for each night (committed). Videos land in `out/` (gitignored) and are sent
   to Charlie with SendUserFile, with a backup branch `videos/YYYY-MM-DD` via `scripts/publish-videos.sh`.
 - `ops/` LOG, BACKLOG, NEEDS-CHARLIE, PERFORMANCE (Charlie's posting results feed the learning loop).
