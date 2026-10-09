@@ -145,11 +145,14 @@ def build_clip(script: dict, voice: dict, vdir: Path, date: str, broll_dir: Path
 
 BRAND_TAG = "#thedailytoken"
 FOLLOW_LINE = "Follow @thedailytoken for AI news, animated. 3 stories a day."
+SUBSCRIBE_LINE = "Subscribe to @thedailytoken for AI news, animated. 3 stories a day."
+YT_TITLE_MAX = 100  # YouTube's title limit; Shorts show ~40-60 chars, so the point goes first
 MAX_TAGS = 5  # brand tag + 4; Instagram recommends 3-5 and TikTok ranks on keywords in the text more than on tags
 
 
 def post_kit(script: dict) -> dict:
-    """Paste-ready post copy for one explainer: cover text, TikTok description, Instagram caption, pinned comment.
+    """Paste-ready post copy for one explainer: cover text, TikTok description, Instagram caption, YouTube Shorts title
+    + description, pinned comment.
     Producers write the bodies (post.tiktok / post.instagram / post.pinnedComment / post.cover); the follow line, the
     sources + "AI narrator" disclosure and the hashtags are added here so every post carries them the same way.
     Older scripts with only post.caption still work (its "Sources:" line is rebuilt)."""
@@ -166,7 +169,13 @@ def post_kit(script: dict) -> dict:
             tags.append(tag)
     tag_line = " ".join(tags[:MAX_TAGS])
     tail = f"\n\n{FOLLOW_LINE}\nSources: {pubs}. AI narrator.\n\n{tag_line}"
+    yt_title = (post.get("youtubeTitle") or post.get("title") or script["hook"]).strip()
+    if len(yt_title) > YT_TITLE_MAX:
+        yt_title = yt_title[:YT_TITLE_MAX - 1].rsplit(" ", 1)[0] + "…"
     return {
+        "youtubeTitle": yt_title,
+        "youtube": (post.get("youtube") or post.get("tiktok") or body).strip()
+        + f"\n\n{SUBSCRIBE_LINE}\nSources: {pubs}. AI narrator.\n\n{tag_line}",
         "cover": (post.get("cover") or script["hook"]).strip(),
         "tiktok": (post.get("tiktok") or body).strip() + tail,
         "instagram": (post.get("instagram") or post.get("tiktok") or body).strip() + tail,
@@ -185,7 +194,8 @@ def delivery_block(script: dict, clip: dict, video_rel: str | None, stock_credit
         f"**Video:** `{video_rel}` ({clip['duration']:.1f} s)  " if video_rel else "**Video:** not rendered  ",
         f"**Cover text:** {kit['cover']}",
         "",
-        "Before posting: switch ON the platform's AI-generated content label. After posting: post the pinned comment"
+        "Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info;"
+        " YouTube: Altered or synthetic content = Yes). After posting: post the pinned comment"
         " from the channel account and pin it; reply to comments in the first hour.",
         "",
         "TikTok description (paste as is):",
@@ -200,7 +210,19 @@ def delivery_block(script: dict, clip: dict, video_rel: str | None, stock_credit
         kit["instagram"],
         "```",
         "",
-        "Pinned comment:",
+        "YouTube Shorts title:",
+        "",
+        "```",
+        kit["youtubeTitle"],
+        "```",
+        "",
+        "YouTube Shorts description:",
+        "",
+        "```",
+        kit["youtube"],
+        "```",
+        "",
+        "Pinned comment (all three platforms):",
         "",
         "```",
         kit["pinned"],

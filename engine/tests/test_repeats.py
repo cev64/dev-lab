@@ -60,6 +60,15 @@ class PostKitTest(unittest.TestCase):
         self.assertIn("Sources: A, B. AI narrator.", kit["tiktok"])
         self.assertTrue(kit["instagram"].startswith("Body line."))  # falls back to the TikTok body
         self.assertEqual((kit["pinned"], kit["cover"]), ("Yes or no?", "Cover"))
+        self.assertIn("Subscribe to @thedailytoken", kit["youtube"])
+        self.assertTrue(kit["youtube"].startswith("Body line."))
+        self.assertEqual(kit["youtubeTitle"], "Claude can quit rude chats")  # falls back to post.title
+
+    def test_youtube_title_is_capped(self):
+        from clipper.explainer import post_kit
+        s = script()
+        s["post"]["youtubeTitle"] = "word " * 40
+        self.assertLessEqual(len(post_kit(s)["youtubeTitle"]), 100)
 
     def test_old_caption_only_scripts_still_work(self):
         from clipper.explainer import post_kit
