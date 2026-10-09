@@ -16,7 +16,6 @@ from pathlib import Path
 from . import audio, ledger
 from .common import FPS, Paths, log, read_json, today_et, write_json
 from .make import STYLES, render_clip, theme_seed
-from .package import hashtags
 
 REPEAT_DAYS = 7  # no-repeat window for stories (skill section 1); a script with "followUp": true may revisit one
 MIN_NARRATION = 58.0  # contract floor; the skill asks for >= 62 s so TikTok's one-minute rule is met
@@ -63,7 +62,8 @@ def drive_card(script: dict, clip: dict, date: str) -> tuple[str, str]:
     lines = [title, "", f"Hook: {script['hook']}", f"Topic: {script.get('topic', '')}",
              f"Length: {clip['duration']:.1f} s", f"Explainer id: {script['id']}",
              f"Video: GitHub cev64/dev-lab, branch videos/{date}, file {script['id']}.mp4", "",
-             "Post text:", post.get("caption", "").strip(), hashtags(post.get("hashtags", [])), "", "Sources:"]
+             "TikTok description:", post_kit(script)["tiktok"], "", "Pinned comment:", post_kit(script)["pinned"], "",
+             "Sources:"]
     lines += [f"- {s.get('publisher', '')}: {s.get('title', '')} {s.get('url', '')}".rstrip() for s in script["sources"]]
     lines += ["", "Narration:"] + [b["say"] for b in script["beats"]]
     return title, "\n".join(lines) + "\n"
@@ -143,20 +143,67 @@ def build_clip(script: dict, voice: dict, vdir: Path, date: str, broll_dir: Path
     return clip
 
 
+BRAND_TAG = "#thedailytoken"
+FOLLOW_LINE = "Follow @thedailytoken for AI news, animated. 3 stories a day."
+MAX_TAGS = 5  # brand tag + 4; Instagram recommends 3-5 and TikTok ranks on keywords in the text more than on tags
+
+
+def post_kit(script: dict) -> dict:
+    """Paste-ready post copy for one explainer: cover text, TikTok description, Instagram caption, pinned comment.
+    Producers write the bodies (post.tiktok / post.instagram / post.pinnedComment / post.cover); the follow line, the
+    sources + "AI narrator" disclosure and the hashtags are added here so every post carries them the same way.
+    Older scripts with only post.caption still work (its "Sources:" line is rebuilt)."""
+    post = script["post"]
+    lines = [ln for ln in post.get("caption", "").strip().splitlines() if ln.strip()]
+    body = "\n".join(ln for ln in lines if not ln.startswith("Sources:"))
+    question = next((ln for ln in reversed(lines) if ln.rstrip().endswith("?")), "")
+    pubs = post.get("sources") or ", ".join(dict.fromkeys(
+        re.split(r"\s*[(:]", s.get("publisher", ""))[0].strip() for s in script["sources"] if s.get("publisher")))
+    tags = []
+    for t in [BRAND_TAG] + list(post.get("hashtags", [])):
+        tag = "#" + re.sub(r"[^\w]", "", t.lstrip("#")).lower()
+        if len(tag) > 1 and tag not in tags:
+            tags.append(tag)
+    tag_line = " ".join(tags[:MAX_TAGS])
+    tail = f"\n\n{FOLLOW_LINE}\nSources: {pubs}. AI narrator.\n\n{tag_line}"
+    return {
+        "cover": (post.get("cover") or script["hook"]).strip(),
+        "tiktok": (post.get("tiktok") or body).strip() + tail,
+        "instagram": (post.get("instagram") or post.get("tiktok") or body).strip() + tail,
+        "pinned": (post.get("pinnedComment") or question).strip(),
+        "hashtags": tag_line,
+    }
+
+
 def delivery_block(script: dict, clip: dict, video_rel: str | None, stock_credits: list[str]) -> str:
     post = script["post"]
-    caption = post.get("caption", "").strip()
-    tags = hashtags(post.get("hashtags", []))
+    kit = post_kit(script)
     lines = [
         f"## Explainer: {post.get('title') or script['hook']}",
         "",
         f"**Hook:** {script['hook']}  ",
-        f"**Video:** `{video_rel}` ({clip['duration']:.1f} s)" if video_rel else "**Video:** not rendered",
+        f"**Video:** `{video_rel}` ({clip['duration']:.1f} s)  " if video_rel else "**Video:** not rendered  ",
+        f"**Cover text:** {kit['cover']}",
         "",
-        "Post text (paste as is). Switch ON the platform's AI-generated content label for this one.",
+        "Before posting: switch ON the platform's AI-generated content label. After posting: post the pinned comment"
+        " from the channel account and pin it; reply to comments in the first hour.",
+        "",
+        "TikTok description (paste as is):",
         "",
         "```",
-        caption + ("\n\n" + tags if tags else ""),
+        kit["tiktok"],
+        "```",
+        "",
+        "Instagram Reels caption (paste as is):",
+        "",
+        "```",
+        kit["instagram"],
+        "```",
+        "",
+        "Pinned comment:",
+        "",
+        "```",
+        kit["pinned"],
         "```",
         "",
         "Sources:",
@@ -192,6 +239,8 @@ def explainer(paths: Paths, script_path: Path, date: str | None = None, render: 
 
     stock = sorted({m["credit"] for m in (read_json(broll_dir / "broll.json") or [])
                     if m.get("kind") == "stock" and m.get("credit")})
+    if video is None and (paths.root / "out" / date / f"{eid}.mp4").exists():  # copy-only re-run (--no-render)
+        video = paths.root / "out" / date / f"{eid}.mp4"
     video_rel = str(video.relative_to(paths.root)) if video else None
     dpath = paths.root / "deliveries" / f"{date}.md"
     dpath.parent.mkdir(parents=True, exist_ok=True)
@@ -203,7 +252,7 @@ def explainer(paths: Paths, script_path: Path, date: str | None = None, render: 
         dpath.write_text(existing, encoding="utf-8")
     else:
         dpath.write_text(existing + block, encoding="utf-8")
-    if video:
+    if render and video:
         data = ledger.load(paths.ledger)
         exp = data.setdefault("explainers", [])
         if not any(e["id"] == eid for e in exp):

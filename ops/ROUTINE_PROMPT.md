@@ -12,7 +12,8 @@ day (morning, midday, evening).
 
 GOAL TONIGHT: deliver 3 ORIGINAL, fully animated explainers (62-75 s each), each a short animated story about one
 real development from the latest AI news (last ~3 days), fact-checked against >= 2 sources, narrated by the synthetic
-narrator, with ready-to-paste post text — 3 different stories.
+narrator, with a ready-to-paste post kit (cover text, TikTok description, Instagram caption, pinned comment, hashtags)
+— 3 different stories.
 
 1. START
    - `git fetch origin && git checkout main && git pull`. If main does not contain `.claude/skills/ai-explainers/`
@@ -39,7 +40,7 @@ narrator, with ready-to-paste post text — 3 different stories.
      script (165-195 words, hook in <= 3 s), storyboards it as a short story, writes the animated scenes (characters
      and objects acting out what happened, >= 70% of runtime; reuse the scene library and kit; cartoon stand-ins
      only, never a real person), voices it, previews stills, renders with `python -m clipper explainer`, and
-     reports back without committing or delivering.
+     writes the post kit (skill section 3), and reports back without committing or delivering.
    - Review each one yourself: every claim in the script must trace to a source in its claim table; look at the
      stills (legible, inside the safe area, nothing at the bottom, every beat moving). Fix or re-render anything that
      fails; drop an explainer rather than ship an unverified claim.

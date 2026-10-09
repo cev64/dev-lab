@@ -45,3 +45,25 @@ class RepeatTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PostKitTest(unittest.TestCase):
+    def test_kit_adds_brand_follow_sources_and_caps_tags(self):
+        from clipper.explainer import post_kit
+        s = script()
+        s["post"].update({"tiktok": "Body line.\nWould you?", "pinnedComment": "Yes or no?", "cover": "Cover",
+                          "hashtags": ["ai", "#AI", "a", "b", "c", "d"]})
+        kit = post_kit(s)
+        self.assertTrue(kit["hashtags"].startswith("#thedailytoken #ai"))
+        self.assertEqual(len(kit["hashtags"].split()), 5)
+        self.assertIn("Follow @thedailytoken", kit["tiktok"])
+        self.assertIn("Sources: A, B. AI narrator.", kit["tiktok"])
+        self.assertTrue(kit["instagram"].startswith("Body line."))  # falls back to the TikTok body
+        self.assertEqual((kit["pinned"], kit["cover"]), ("Yes or no?", "Cover"))
+
+    def test_old_caption_only_scripts_still_work(self):
+        from clipper.explainer import post_kit
+        kit = post_kit(script())
+        self.assertEqual(kit["tiktok"].count("Sources:"), 1)
+        self.assertEqual(kit["pinned"], "Why?")
+        self.assertEqual(kit["cover"], "h")
