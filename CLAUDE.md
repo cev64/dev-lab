@@ -1,6 +1,6 @@
 # The Daily Token (AI explainers channel): standing mission
 
-Channel name: **The Daily Token** (owner decision 2026-10-09). Tagline: "AI news, animated." Handles: @thedailytoken
+Channel name: **The Daily Token** (owner decision 2026-10-09). Tagline: "AI news, animated." Handle: @thedaily_token
 where available. Mascot: the kit's robot (white head, dark visor, lime #c4ff3a eyes) on dark navy.
 
 This repo is a faceless short-form video studio run by Claude Code. Every night at ~3am ET a routine makes

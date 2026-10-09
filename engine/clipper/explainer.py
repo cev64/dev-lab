@@ -144,8 +144,8 @@ def build_clip(script: dict, voice: dict, vdir: Path, date: str, broll_dir: Path
 
 
 BRAND_TAG = "#thedailytoken"
-FOLLOW_LINE = "Follow @thedailytoken for AI news, animated. 3 stories a day."
-SUBSCRIBE_LINE = "Subscribe to @thedailytoken for AI news, animated. 3 stories a day."
+FOLLOW_LINE = "Follow @thedaily_token for AI news, animated. 3 stories a day."
+SUBSCRIBE_LINE = "Subscribe to @thedaily_token for AI news, animated. 3 stories a day."
 YT_TITLE_MAX = 100  # YouTube's title limit; Shorts show ~40-60 chars, so the point goes first
 MAX_TAGS = 5  # brand tag + 4; Instagram recommends 3-5 and TikTok ranks on keywords in the text more than on tags
 

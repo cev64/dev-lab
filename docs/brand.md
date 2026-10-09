@@ -3,7 +3,7 @@
 Owner decision 2026-10-09. A "token" is the word-piece an AI reads and writes, and it's also a coin. The channel hands
 you one AI story at a time.
 
-- Name: **The Daily Token**. Handles: @thedailytoken (fallbacks: @thedailytoken.ai, @dailytokennews).
+- Name: **The Daily Token**. Handle: @thedaily_token on TikTok, Instagram and YouTube (owner, 2026-10-09). Hashtag stays #thedailytoken.
 - Tagline / bio: "AI news, animated. 3 stories a day."
 - Hashtag on every post: #thedailytoken.
 - Colors (same as the videos): lime `#c4ff3a` (accent), yellow `#ffe14a` (highlight), deep navy `#0c0a24` and
