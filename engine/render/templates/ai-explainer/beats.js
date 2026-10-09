@@ -2,9 +2,9 @@
  * Runs on top of the ai-shorts engine (core.js): same hook card -> dock, captions, credit and progress bar.
  * Adds, through CLIPKIT.boot({ setup }):
  *   - a dimmer over the background so the beat visuals read clearly,
- *   - the beat band (glass card, x 60-915, y 530-990) showing clip.beats[i].visual between t0 and t1
+ *   - the beat band (glass card, x 60-915, y 520-1000) showing clip.beats[i].visual between t0 and t1
  *     (spring in ~300 ms at t0, out ~200 ms before t1), types: title, stat, compare, list, quote, timeline, keyword,
- *   - an optional per-beat disclosure chip (beats[i].label, e.g. "AI-generated illustration") at y ~1000,
+ *   - an optional per-beat disclosure chip (beats[i].label, e.g. "AI-generated illustration") at y 1008-1046,
  *   - an "AI narrator" glyph (voice bars) in place of the podcast mic in the credit.
  * Everything is a pure function of t (no state between frames). All text is shrink-to-fit inside the card.
  */
@@ -13,12 +13,12 @@
   const K = window.CLIPKIT;
   const { clamp, lerp, smooth, easeOutCubic, spring, rgba, roundRect, font, capHeight, glow, drawGlow, cleanTok } = K;
 
-  const BAND = { x0: 60, x1: 915, y0: 530, y1: 990 };
+  const BAND = { x0: 60, x1: 915, y0: 520, y1: 1000 };
   const BW = BAND.x1 - BAND.x0, BCX = (BAND.x0 + BAND.x1) / 2, BCY = (BAND.y0 + BAND.y1) / 2;
-  const PADX = 48, PADY = 46;
+  const PADX = 48, PADY = 40;
   const IW = BW - 2 * PADX;                       // inner width of the card
   const IH = BAND.y1 - BAND.y0 - 2 * PADY;        // max inner height of the card
-  const LABEL_Y = 1000;                           // disclosure chip (captions start at ~1050 at the earliest)
+  const LABEL_Y = 1008;                           // disclosure chip (captions start at ~1050 at the earliest)
   const T_IN = 0.3, T_OUT = 0.2;
   const F = {
     heavy: { family: 'Montserrat', weight: 900 },
@@ -133,9 +133,11 @@
     return P.pre + n + P.suf;
   }
   // compact value for bars: 8,000 / 250K / 2M / 1.5B / 0.4 ($0.40)
-  function fmtVal(v, pre) {
+  // dec (optional) forces the decimals of the plain branches, so a count-up keeps the final value's format.
+  function fmtVal(v, pre, dec) {
     const a = Math.abs(v);
     const tr = (x) => String(parseFloat(x.toFixed(Math.abs(x) >= 100 ? 0 : Math.abs(x) >= 10 ? 1 : 2)));
+    if (dec != null && a < 1e5) return (pre || '') + groupInt(v.toFixed(dec).split('.')[0]) + (dec ? '.' + v.toFixed(dec).split('.')[1] : '');
     let s;
     if (a >= 1e12) s = tr(v / 1e12) + 'T';
     else if (a >= 1e9) s = tr(v / 1e9) + 'B';
@@ -278,7 +280,7 @@
       const src = v.source ? (/^source/i.test(String(v.source)) ? String(v.source) : 'Source: ' + v.source) : '';
       const S1 = src ? fitLine(ctx, src, F.uiR, 28, 22, IW) : null;
       const rest = cap + (pct ? 30 + 14 : 0) + 34 + (S1 ? 22 + S1.cap : 0);
-      const B = block(ctx, v.label || '', F.bold, { max: 48, min: 32, maxW: IW, maxLines: 2, maxH: Math.max(60, IH - rest), lineH: 1.16, upper: false });
+      const B = block(ctx, v.label || '', F.bold, { max: 54, min: 32, maxW: IW, maxLines: 2, maxH: Math.max(60, IH - rest), lineH: 1.16, upper: false });
       return { P, size, dw, cap, pct, S1, B, h: rest + B.h };
     },
     draw(ctx, S, L, x0, top, age, dur, t) {
@@ -329,58 +331,62 @@
         if (!log) return x / max;
         return 0.1 + 0.9 * (Math.log10(x) - Math.log10(min)) / Math.max(1e-9, Math.log10(max) - Math.log10(min));
       };
-      let hi = v.highlight != null ? clamp(v.highlight | 0, 0, n - 1) : items.reduce((b, it, i) => (it.value > items[b].value ? i : b), 0);
+      const hi = v.highlight != null ? clamp(v.highlight | 0, 0, n - 1) : items.reduce((b, it, i) => (it.value > items[b].value ? i : b), 0);
       const pre = v.prefix || '';
-      const unit = v.unit ? String(v.unit) : '';
-      const header = v.title ? fitLine(ctx, String(v.title).toUpperCase(), F.ui, 26, 20, IW) : null;
-      const barH = n <= 2 ? 40 : n === 3 ? 34 : 28;
-      const gapRow = n <= 2 ? 40 : n === 3 ? 30 : 24;
-      const valSize = n <= 3 ? 46 : 40;
-      const unitL = unit ? fitLine(ctx, unit, F.uiR, 28, 22, IW * 0.4) : null;
-      const rows = items.map((it, i) => {
-        const vtxt = it.display != null ? String(it.display) : fmtVal(it.value, pre);
-        ctx.font = font(F.heavy, valSize);
-        const vw = ctx.measureText(vtxt).width + (unitL ? 10 + unitL.w : 0);
-        const lab = fitLine(ctx, it.label, F.bold, n <= 3 ? 42 : 38, 26, Math.max(160, IW - vw - 28));
-        return { ...it, vtxt, vw, lab, frac: frac(it.value), hi: i === hi };
-      });
-      const valCap = capHeight(ctx, F.heavy, valSize);
-      const rowH = Math.max(valCap, ...rows.map((r) => r.lab.cap)) + 16 + barH;
-      const foot = log ? 34 : 0;
-      const h = (header ? header.cap + 30 : 0) + n * rowH + (n - 1) * gapRow + foot;
-      return { items: rows, header, barH, gapRow, valSize, valCap, rowH, unitL, log, pre, h };
+      // header: title (left, caps) and the unit (right), shown once instead of after every value
+      const unitL = v.unit ? fitLine(ctx, String(v.unit), F.uiR, 28, 22, IW * 0.45) : null;
+      const header = v.title ? fitLine(ctx, String(v.title).toUpperCase(), F.ui, 26, 20, IW - (unitL ? unitL.w + 24 : 0)) : null;
+      const headH = header || unitL ? Math.max(header ? header.cap : 0, unitL ? unitL.cap : 0) + 28 : 0;
+      const foot = log ? 30 : 0;
+      const gapRow = n <= 2 ? 36 : n === 3 ? 26 : 20;
+      const budget = (IH - headH - foot - gapRow * (n - 1)) / n; // height per row
+      // text size and bar thickness from the budget (big for 2 rows, compact for 4)
+      let ts = Math.max(28, Math.min(n <= 2 ? 52 : 46, Math.floor((budget - 14 - 18) / 0.74)));
+      let rows, textCap;
+      for (; ts >= 28; ts -= 2) {
+        textCap = capHeight(ctx, F.heavy, ts);
+        rows = items.map((it, i) => {
+          const vtxt = it.display != null ? String(it.display) : fmtVal(it.value, pre);
+          ctx.font = font(F.heavy, ts);
+          const vw = ctx.measureText(vtxt).width;
+          const lab = fitLine(ctx, it.label, F.bold, ts - 4, Math.max(24, ts - 16), Math.max(160, IW - vw - 28));
+          const dec = /^[^0-9]*[\d,]+\.(\d+)$/.test(vtxt) ? vtxt.split('.').pop().length : /^[^0-9]*[\d,]+$/.test(vtxt) ? 0 : null;
+          return { ...it, vtxt, vw, lab, dec, frac: frac(it.value), hi: i === hi };
+        });
+        if (budget - textCap - 14 >= 16) break;
+      }
+      const barH = clamp(Math.floor(budget - textCap - 14), 14, n <= 2 ? 44 : 36);
+      const rowH = textCap + 14 + barH;
+      const h = headH + n * rowH + (n - 1) * gapRow + foot;
+      return { items: rows, header, unitL, headH, barH, gapRow, valSize: ts, textCap, rowH, log, pre, h };
     },
     draw(ctx, S, L, x0, top, age) {
       let y = top;
-      if (L.header) {
-        ctx.save(); ctx.letterSpacing = '2px';
-        drawLine(ctx, L.header, x0, y + L.header.cap, 'left', 'rgba(255,255,255,0.62)');
-        ctx.restore();
-        y += L.header.cap + 30;
+      if (L.headH) {
+        const hb = y + L.headH - 28;
+        if (L.header) { ctx.save(); ctx.letterSpacing = '2px'; drawLine(ctx, L.header, x0, hb, 'left', 'rgba(255,255,255,0.62)'); ctx.restore(); }
+        if (L.unitL) drawLine(ctx, L.unitL, x0 + IW, hb, 'right', 'rgba(255,255,255,0.62)');
+        y += L.headH;
       }
-      const capRow = L.rowH - 16 - L.barH;
       L.items.forEach((r, i) => {
         const k = easeOutCubic((age - 0.1 - i * 0.14) / 0.75);
         const a = smooth((age - i * 0.14) / 0.25);
         ctx.save();
         ctx.globalAlpha *= a;
-        const base = y + capRow;
+        const base = y + L.textCap;
         drawLine(ctx, r.lab, x0, base, 'left', r.hi ? WHITE : 'rgba(255,255,255,0.82)');
-        // value (counts up with the bar), right aligned, with the unit after it
-        const vt = r.display != null ? r.vtxt : k >= 1 ? r.vtxt : fmtVal(r.value * k, L.pre);
-        let xr = x0 + IW;
-        if (L.unitL) { drawLine(ctx, L.unitL, xr, base, 'right', 'rgba(255,255,255,0.6)'); xr -= L.unitL.w + 10; }
+        // value counts up with the bar, right aligned
+        const vt = r.display != null || k >= 1 ? r.vtxt : fmtVal(r.value * k, L.pre, r.dec);
         ctx.font = font(F.heavy, L.valSize); ctx.textAlign = 'right'; ctx.fillStyle = r.hi ? S.pal.accent : WHITE;
-        ctx.fillText(vt, xr, base);
-        // bar
-        const by = base + 16;
+        ctx.fillText(vt, x0 + IW, base);
+        const by = base + 14;
         roundRect(ctx, x0, by, IW, L.barH, L.barH / 2); ctx.fillStyle = 'rgba(255,255,255,0.08)'; ctx.fill();
         const bw = Math.max(L.barH, IW * r.frac * k);
         if (k > 0) {
           roundRect(ctx, x0, by, bw, L.barH, L.barH / 2);
           if (r.hi) {
             const g = ctx.createLinearGradient(x0, 0, x0 + bw, 0);
-            g.addColorStop(0, K.mixHex(S.pal.accent, '#000000', 0.25)); g.addColorStop(1, S.pal.accent);
+            g.addColorStop(0, K.mixHex(S.pal.accent, '#000000', 0.3)); g.addColorStop(1, S.pal.accent);
             ctx.fillStyle = g;
           } else ctx.fillStyle = 'rgba(255,255,255,0.42)';
           ctx.fill();
@@ -392,7 +398,7 @@
       if (L.log) {
         ctx.save(); ctx.globalAlpha *= smooth((age - 0.5) / 0.3);
         ctx.font = font(F.uiR, 22); ctx.textAlign = 'right'; ctx.fillStyle = 'rgba(255,255,255,0.5)';
-        ctx.fillText('log scale', x0 + IW, y - L.gapRow + 34);
+        ctx.fillText('log scale', x0 + IW, y - L.gapRow + 28);
         ctx.restore();
       }
     },
@@ -405,7 +411,7 @@
       const gap = n <= 2 ? 44 : n === 3 ? 34 : 26;
       const tw = IW - 92;
       const opt = (max) => ({ max, min: 32, maxW: tw, maxLines: 2, maxH: (IH - gap * (n - 1)) / n, lineH: 1.12, upper: false });
-      let Bs = items.map((it) => block(ctx, it.text, F.bold, opt(56)));
+      let Bs = items.map((it) => block(ctx, it.text, F.bold, opt(n <= 3 ? 64 : 56)));
       const common = Math.min(...Bs.map((B) => B.size));
       Bs = items.map((it) => block(ctx, it.text, F.bold, opt(common))); // one size for every row
       const rows = items.map((it, i) => ({ ...it, B: Bs[i], h: Math.max(64, Bs[i].h) }));
@@ -448,9 +454,9 @@
   TYPES.quote = {
     layout(ctx, v, S) {
       const by = v.by ? fitLine(ctx, '— ' + String(v.by).replace(/^[—–-]\s*/, ''), F.ui, 30, 22, IW - 30) : null;
-      const markH = 64;
-      const B = block(ctx, '“' + String(v.text || '').replace(/^["“]|["”]$/g, '') + '”', F.bold, {
-        max: 60, min: 32, maxW: IW - 30, maxLines: 6, maxH: IH - markH - (by ? 30 + by.cap : 0), lineH: 1.2, upper: false });
+      const markH = 78;
+      const B = block(ctx, String(v.text || '').trim().replace(/^["“]+|["”]+$/g, ''), F.bold, {
+        max: 64, min: 32, maxW: IW - 30, maxLines: 6, maxH: IH - markH - (by ? 30 + by.cap : 0), lineH: 1.2, upper: false });
       return { B, by, markH, h: markH + B.h + (by ? 30 + by.cap : 0) };
     },
     draw(ctx, S, L, x0, top, age) {
@@ -459,7 +465,7 @@
       const k = easeOutCubic(age / 0.35);
       ctx.font = font(F.heavy, 190); ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
       ctx.fillStyle = S.pal.accent; ctx.globalAlpha *= k;
-      ctx.fillText('“', x0 - 6, top + 128 - (1 - k) * 20);
+      ctx.fillText('“', x0 - 8, top + 136 - (1 - k) * 20);
       ctx.restore();
       const tx = x0 + 30;
       ctx.save();
@@ -486,16 +492,16 @@
       const n = Math.max(1, items.length);
       const colW = IW / n;
       // shared sizes so the row reads as one system
-      let ys = 54;
+      let ys = n <= 3 ? 64 : n === 4 ? 54 : 46;
       ctx.font = font(F.heavy, ys);
       for (; ys > 26; ys -= 2) { ctx.font = font(F.heavy, ys); if (items.every((it) => ctx.measureText(it.t).width <= colW - 14)) break; }
-      const opt = (max) => ({ max, min: 22, maxW: colW - 14, maxLines: 3, maxH: 130, lineH: 1.18, upper: false });
-      let Bs = items.map((it) => block(ctx, it.label, F.ui, opt(n <= 3 ? 34 : 30)));
+      const opt = (max) => ({ max, min: 22, maxW: colW - 14, maxLines: 3, maxH: 150, lineH: 1.16, upper: false });
+      let Bs = items.map((it) => block(ctx, it.label, F.ui, opt(n <= 3 ? 38 : n === 4 ? 34 : 30)));
       const common = Math.min(...Bs.map((B) => B.size));
       Bs = items.map((it) => block(ctx, it.label, F.ui, opt(common)));
       const yCap = capHeight(ctx, F.heavy, ys);
       const labH = Math.max(...Bs.map((B) => B.h));
-      const lineY = yCap + 40;            // relative to top
+      const lineY = yCap + 44;            // relative to top
       const h = lineY + 44 + labH;
       return { items, n, colW, ys, yCap, Bs, lineY, h };
     },
@@ -578,9 +584,9 @@
       for (const b of beats) {
         if (!b.label) continue;
         ctx.save(); ctx.letterSpacing = '1.5px';
-        const L = fitLine(ctx, b.label.toUpperCase(), F.ui, 22, 18, BW - 60);
+        const L = fitLine(ctx, b.label.toUpperCase(), F.ui, 24, 18, BW - 60);
         ctx.restore();
-        b.chip = { L, w: L.w + 2 * 18 + 22, h: 38 };
+        b.chip = { L, w: L.w + 2 * 18 + 22, h: 40 };
       }
     }
     return beats;
@@ -606,7 +612,7 @@
     ctx.save();
     roundRect(ctx, box.x, box.y, box.w, box.h, r);
     const g = ctx.createLinearGradient(0, box.y, 0, box.y + box.h);
-    const a0 = video ? 0.8 : 0.66, a1 = video ? 0.7 : 0.5;
+    const a0 = video ? 0.86 : 0.84, a1 = video ? 0.78 : 0.72;
     g.addColorStop(0, `rgba(14,16,28,${a0})`); g.addColorStop(1, `rgba(7,8,15,${a1})`);
     ctx.fillStyle = g; ctx.fill();
     ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(255,255,255,0.13)'; ctx.stroke();

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 import time
 from pathlib import Path
@@ -102,6 +103,11 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--no-package", action="store_true", help="do not touch deliveries/ or the ledger")
     p.add_argument("--force-package", action="store_true", help="package even if no video was rendered")
 
+    p = sub.add_parser("explainer", help="script.json -> narrated, illustrated explainer MP4 (original track)")
+    p.add_argument("--script", required=True, type=Path)
+    p.add_argument("--date", default=None)
+    p.add_argument("--no-render", action="store_true")
+
     p = sub.add_parser("news", help="recent AI headlines for the explainer track -> work/news.json")
     p.add_argument("--days", type=float, default=3)
     p.add_argument("--limit", type=int, default=40)
@@ -140,6 +146,10 @@ def main(argv: list[str] | None = None) -> int:
                    force_package=a.force_package)
         if any("error" in r for r in res):
             return 1
+    elif a.cmd == "explainer":
+        from .explainer import explainer
+
+        print(json.dumps(explainer(paths, a.script, date=a.date, render=not a.no_render), indent=2))
     elif a.cmd == "news":
         from .news import news
 

@@ -313,4 +313,8 @@ async function main() {
     if (BG_DIR) rmSync(BG_DIR, { recursive: true, force: true });
   }
 }
-main().catch((e) => { console.error('[render] ERROR', e.message || e); process.exit(1); });
+main().catch((e) => {
+  console.error('[render] ERROR', e.message || e);
+  if (BG_DIR) rmSync(BG_DIR, { recursive: true, force: true });
+  process.exit(1);
+});

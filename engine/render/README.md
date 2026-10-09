@@ -20,8 +20,16 @@ node render.mjs --clip <clip.json> --out <file.mp4> [--workers 3] [--style auto|
 - `--frames-only` writes PNG stills `<file>.f000045.png` (frame numbers, or seconds with an `s` suffix) plus
   the cover, and skips the video. Use it to review a style or a layout change.
 - `--style` overrides `theme.style` (for testing). Exit code 3 means the page logged console errors.
+- Template: `--template`, else clip.json `"template"`, else `theme.template`, else `ai-shorts`. Podcast clips use
+  `ai-shorts`; original narrated explainers set `"template": "ai-explainer"` (see below).
+- Background video (both templates): `"background": {"video": "<path>"}` (absolute, or relative to the clip file)
+  replaces the generative style with that video (e.g. `engine/broll/` output, already graded). render.mjs extracts
+  it to JPEG frames at the clip fps (cover-cropped to 1080x1920, ~8 s for 40 s of video), serves them to the
+  pages, and each frame draws frame `round(t * fps)` under the overlays (held on the last frame if the video is
+  shorter). A readability scrim is added over the header and caption bands. Faster than generative (~31 fps).
 - Sample: `node render.mjs --clip sample/clip.json --out /tmp/sample.mp4` (66 s of synthetic speech-like audio;
   `node sample/make-sample.mjs` regenerates `sample/clip.json` + `sample/audio.ogg`).
+  Explainer sample (one beat of each visual type, same audio/words): `--clip sample/explainer-clip.json`.
 
 Speed on 4 CPU cores, no GPU: about 23-24 fps with 3 workers, so a 66-70 s clip takes about 90 s.
 Output size is capped by VBV (`--maxrate 1.7M`, buffer 2x) to stay under ~15 MB per minute.
@@ -58,6 +66,44 @@ All text stays inside the safe box x 60-915, y 150-1540 (TikTok/Reels UI covers 
 | Credit | ~y 1400-1484 | mic glyph + show / episode / speakers, Inter >= 30 px, ellipsised if extreme |
 | Progress bar | y 1516, 7 px | inside the safe box |
 
+## Template `ai-explainer` (original narrated explainers)
+Same engine as `ai-shorts` (it loads `../ai-shorts/core.js` and the four styles): hook card -> dock, captions,
+progress bar, credit (here e.g. `{"show": "Original explainer", "episode": "Sources in caption", "speakers": "AI narrator"}`,
+with a voice-bars glyph instead of the mic). Additions, all in `templates/ai-explainer/beats.js`:
+- The background is dimmed (always, deeper while a beat card is up) so the beat visuals read.
+- Beat band: a glass card at x 60-915, centred in y 520-1000, sized to its content, showing the visual of the beat
+  whose `[t0, t1)` contains t. It springs in over ~300 ms at `t0` and fades out over the last 200 ms before `t1`
+  (the last beat stays to the end). Beats that start under the hook card are shown from ~3.2 s. Overlapping
+  beats are clipped to the next `t0`; beats with < 0.5 s visible are skipped; unknown types are skipped (console warn).
+- Optional per-beat `"label"` (e.g. `"AI-generated illustration"`): small disclosure chip at x 60, y 1008-1048
+  while that beat is on screen. Cards are a little more opaque when a background video is used.
+
+```json
+"template": "ai-explainer",
+"beats": [ { "t0": 0.0, "t1": 9.6, "label": "AI-generated illustration", "visual": { "type": "title", "text": "...", "accent": "word" } } ]
+```
+| type | fields | look |
+|---|---|---|
+| title | `text`, `accent`? | 1-3 lines Montserrat 900 caps, shrink-to-fit, accent word = `accent` or first `emphasis` match; lines rise in |
+| stat | `value`, `label`, `source`? | giant accent number counting up over 0.8 s with the original format kept (`40%`, `$100B`, `2,000,000`, `3x`, `1.5 million`; non-numeric like `GPT-5` is static); % values get a meter; label; "Source: ..." line |
+| compare | `items` [{label, value, display?}] 2-4, `unit`?, `prefix`? ("$"), `title`?, `highlight`? (index, default max) | bars grow staggered, values count up (8,000 / 250K / 2M / 1.5B); log scale automatically when max/min > 50 ("log scale" note); unit shown once in the header |
+| list | `items` 2-4 strings or {text, t (absolute s)} | items land one by one across ~70% of the beat (or at `t`), drawn check icons; one shared text size |
+| quote | `text` (<= ~20 words), `by` ("Name, where") | big accent quote mark, words fade in, "— Name, where"; text only |
+| timeline | `items` 2-5 {t, label, at?} | points on a line, the accent point advances across ~72% of the beat (or at `at`), past/now/future states |
+| keyword | `text` | huge Anton word/phrase, letter-by-letter masked rise, accent underline sweep |
+
+All text is shrink-to-fit inside the card (with a uniform-scale emergency fallback), so nothing can reach the
+dock (ends <= ~420) or the captions (>= ~1100). One accent colour per palette (yellow or green), no emoji/logos/photos.
+Review: `node render.mjs --clip sample/explainer-clip.json --out /tmp/x/e.png --frames-only 0.1s,6.4s,14.7s,22.9s,30.8s,40.1s,48.8s,59.5s`.
+Speed: ~25 fps generative (66 s sample: 85 s total), ~31 fps with a background video (+ extraction).
+
+## Engine hooks for other templates
+`CLIPKIT.boot(opts)`: `opts.setup(S, ctx)` runs after the core layouts are built and may set
+`S.layers.mid(ctx, S, t, cover)` (drawn after the background overlay, before progress/hook/captions),
+`S.layers.creditGlyph(ctx, S, x, y, size, color, t)` and `S.info` (merged into `__INFO`); `opts.sample` is the
+preview fixture. Text/panel helpers (`font`, `fitText`, `wrapBalanced`, `capHeight`, `glassPanel`, ...) are exported
+on `CLIPKIT`. With no opts, `ai-shorts` renders byte-identically to before.
+
 ## Adding a style
 1. Create `templates/ai-shorts/styles/<name>.js`:
    ```js
@@ -86,9 +132,9 @@ All text stays inside the safe box x 60-915, y 150-1540 (TikTok/Reels UI covers 
 
 A new template is a new folder under `templates/` with an `index.html` that implements the same page
 contract (`__CLIP__` in, `__READY`/`__ERROR`, `grabFrame(t, type, quality, postUrl)`, `renderFrame(t)`);
-select it with `--template` or `theme.template`.
+select it with `--template`, clip.json `"template"` or `theme.template` (see `templates/ai-explainer/` for one built on the shared engine).
 
 ## Files
-- `render.mjs` CLI; `templates/ai-shorts/` (core.js engine: audio features, captions, hook, credit, overlay;
-  `styles/*.js` backgrounds); `fonts/` (Montserrat 800/900, Anton, Inter 500/700 latin woff2, OFL licences);
-  `sample/` (fixture + generator).
+- `render.mjs` CLI; `templates/ai-shorts/` (core.js engine: audio features, captions, hook, credit, overlay,
+  background video; `styles/*.js` backgrounds); `templates/ai-explainer/` (index.html + beats.js); `fonts/` (Montserrat 800/900, Anton, Inter 500/700 latin woff2, OFL licences);
+  `sample/` (fixtures `clip.json`, `explainer-clip.json` + generator).
