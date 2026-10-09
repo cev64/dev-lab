@@ -117,11 +117,13 @@ def _plural(words: list[str]) -> list[str]:
     return words[:-1] + [last[:-1] + "ies" if last.endswith("y") else last + "s"]
 
 
-_NUM = re.compile(r"(\d[\d,]*(?:\.\d+)?)(st|nd|rd|th|s|k|m|bn|b)?(?![a-z])|(\d[\d,]*(?:\.\d+)?)")
+_NUM = re.compile(r"(\d[\d,]*(?:\.\d+)?)(st|nd|rd|th|s|k|m|bn|b)?(?![a-z\d]|\.\d)|(\d[\d,]*(?:\.\d+)?)")
 
 
 def _number(m: re.Match) -> str:
     raw, suffix = (m.group(1), m.group(2)) if m.group(1) else (m.group(3), None)
+    trail = "," if raw.endswith(",") else ""
+    raw = raw.rstrip(",")
     digits = raw.replace(",", "")
     if "." in digits:
         whole, frac = digits.split(".", 1)
@@ -136,14 +138,13 @@ def _number(m: re.Match) -> str:
         words = _plural(words)
     elif suffix:
         words = words + [_SCALE[suffix]]
-    return " " + " ".join(words) + " "
+    return " " + " ".join(words) + " " + trail
 
 
 def spoken_words(text: str) -> list[str]:
     """Canonical spoken words of some text: lowercase letters only, numbers expanded ("40%" -> forty percent)."""
     t = text.lower().replace("%", " percent ").replace("&", " and ").replace("+", " plus ")
     t = re.sub(r"['’]", "", t)
-    t = re.sub(r"(?<=\d),(?=\d{3})", "", t)
     t = _NUM.sub(_number, t)
     return re.sub(r"[^a-z]+", " ", t).split()
 
@@ -373,7 +374,8 @@ def synth_beat(backend, text: str, cache_dir: Path) -> tuple[np.ndarray, int]:
 
 def script_hash(script: dict, spec_label: str) -> str:
     payload = json.dumps({"v": VERSION, "voice": spec_label, "say": [b["say"] for b in script["beats"]],
-                          "lexicon": script.get("lexicon"), "global": LEXICON.__repr__()}, sort_keys=True)
+                          "lexicon": script.get("lexicon"),
+                          "global": [(p, r if isinstance(r, str) else "fn") for p, r in LEXICON]}, sort_keys=True)
     return hashlib.sha1(payload.encode()).hexdigest()[:16]
 
 
@@ -397,15 +399,12 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
     t_start = time.time()
     backend = tts.load(spec)
     beat_tokens = [caption_tokens(b["say"]) for b in script["beats"]]
-    pieces, speech, warnings = [], [], []
+    pieces, warnings = [], []
     sr = backend.sample_rate
-    t = LEAD
     for i, b in enumerate(script["beats"]):
         x, sr = synth_beat(backend, tts_text(b["say"], script.get("lexicon")), out_dir / ".tts-cache")
-        d = len(x) / sr
-        speech.append((t, t + d))
         pieces.append(x)
-        t += d + (BEAT_GAP if i < len(script["beats"]) - 1 else 0)
+        d = len(x) / sr
         n = len(beat_tokens[i])
         if n >= 4 and not 1.6 <= n / d <= 4.2:
             warnings.append(f"beat {i + 1}: odd pace {n / d:.2f} words/s (garbled or truncated TTS?)")
@@ -418,7 +417,6 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
     for i, x in enumerate(pieces):
         joined += [x] + ([gap] if i < len(pieces) - 1 else [tail])
     narration = np.concatenate(joined)
-    # Speech spans in samples were computed from float durations; recompute them from the sample layout.
     pos, speech = len(lead), []
     for i, x in enumerate(pieces):
         speech.append((pos / sr, (pos + len(x)) / sr))

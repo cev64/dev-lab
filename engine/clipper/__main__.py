@@ -117,6 +117,11 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("start", type=float)
     p.add_argument("end", type=float)
 
+    p = sub.add_parser("voice", help="explainer script.json -> TTS narration voice.wav + word/beat timings voice.json")
+    p.add_argument("--script", required=True, type=Path)
+    p.add_argument("--force", action="store_true", help="rebuild even if voice.json matches the script")
+    p.add_argument("--no-length-check", action="store_true", help="do not fail outside 58-80 s (testing)")
+
     sub.add_parser("status", help="show work/ and ledger state")
 
     a = ap.parse_args(argv)
@@ -156,6 +161,14 @@ def main(argv: list[str] | None = None) -> int:
         news(paths, days=a.days, limit=a.limit)
     elif a.cmd == "text":
         print_text(paths, a.eid, a.start, a.end)
+    elif a.cmd == "voice":
+        from .voice import LengthError, voice
+
+        try:
+            voice(paths, a.script, force=a.force, check_length=not a.no_length_check)
+        except LengthError as e:
+            print(f"voice: {e}", file=sys.stderr)
+            return 3
     elif a.cmd == "status":
         cmd_status(paths)
     if a.cmd != "status":
