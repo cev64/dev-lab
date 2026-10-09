@@ -48,6 +48,13 @@ Write for the ear: short sentences, concrete nouns, no jargon without a gloss, n
 ("two million", not "2,000,000"; the card shows the digits). Hook formulas that fit: number shock, reversal ("said it
 would never... this week it did"), your-job stake, counter-intuitive, two-sided. No "AI is changing everything".
 
+**Custom animation (required, at least one beat per explainer, ideally two):** write a story-specific animated
+scene — `{"type":"scene","module":"scenes/<name>.js","params":{...}}` — following "Authoring a scene" in
+engine/render/README.md. Animate the story's key moment, not decoration: the chat that gets ended, the price that
+collapses, the agent that books the flight, the packets flowing into a data center. Reuse/adapt modules in
+engine/render/templates/ai-explainer/scenes/ when they fit and save good new ones there for future nights. Always
+preview stills at several t before rendering the full video. Panning B-roll alone never counts as the animation.
+
 B-roll per beat (`broll` field, see docs/specs/broll.md): stock footage when a Pexels/Pixabay key exists
 (`{"kind":"stock","query":"server room blue light"}`), else AI illustration (`{"kind":"ai","prompt":"..."}`).
 AI prompts describe generic fictional subjects only: "a young woman reading her phone on a train, photorealistic",
