@@ -23,6 +23,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Mid-run, main gained the brand (The Daily Token) and a Drive archive step: #thedailytoken added to the 3 post
   texts; no Google Drive connector in this session, so no Drive docs were filed and the Drive repeat check was skipped
   (ledger check only).
+  Improve: PR #7 merged — 12 of tonight's scenes promoted to the shared library (9 -> 21), generic defaults, verified
+  with stills; word target corrected to ~150-175 words. Bug: scripts/publish-videos.sh fails on a re-run the same day
+  (a local videos/<date> branch is left behind); worked around by deleting it (backlog).
   Backup branch videos/2026-10-09 now holds the setup session's clips plus tonight's 3.
 - 2026-10-09 (setup session, owner decision): nightly output is now 3 fully animated explainers (3 different stories,
   produced in parallel by 3 producer subagents); the podcast-clip track is paused.

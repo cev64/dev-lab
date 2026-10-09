@@ -4,6 +4,8 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
+- [ ] scripts/publish-videos.sh: delete the leftover local `videos/<date>` branch so a same-day re-run works.
+- [ ] Promote the Sabi scenes after making the product prop a param (claims-pedestal, type-tap-talk, sensor-cap-bench).
 - [ ] Scene library growth: aim for 25+ reusable story scenes (launch event on stage with a generic presenter,
       lawsuit/courtroom, layoffs at an office, chip factory, phone app update, kids using AI at school, doctor's office,
       robot in a warehouse, data center power grid, stock-ticker-free 'money' scenes). Each with params + stills.
