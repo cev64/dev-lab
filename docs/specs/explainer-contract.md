@@ -58,8 +58,7 @@ Same as the clip contract (`audio`, `duration`, `words`, `envelope`, `hook`, `to
 ```
 - `credit` is empty: owner decision, nothing at the bottom of explainers (no credit line, no progress bar). The
   "AI narrator" disclosure lives in the post caption and the platform's AI-generated label.
-```
-```
 - Disclosure: "AI narrator" in the post caption + Charlie switches on the platform's AI-generated label when posting.
-- Layout: hook card -> docked header (same as clips), the beat visual in the middle band (y ~ 560-1020), captions
-  y 1050-1350, credit/sources line y 1400-1500, progress bar ~1520. Safe box x 60-915, y 150-1540.
+- Layout: hook card -> docked header (same as clips); scenes are full-frame with the action in the stage area
+  (x 60-915, y 400-1050); data cards sit in the middle band (y ~ 520-1000); captions y 1050-1350; nothing below the
+  captions. Safe box x 60-915, y 150-1540.
