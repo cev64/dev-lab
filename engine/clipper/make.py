@@ -32,6 +32,9 @@ def clip_id(date: str, eid: str, sel: dict) -> str:
     return f"{date}-{eid}-{slugify(sel.get('topic') or sel.get('title') or sel['hook'], 30)}"
 
 
+STYLES = ["neural", "flow", "horizon", "orb"]  # engine/render/templates/ai-shorts styles
+
+
 def theme_seed(cid: str) -> int:
     return int(hashlib.sha256(cid.encode()).hexdigest()[:8], 16) % 100000
 
@@ -58,6 +61,57 @@ def tidy_words(segments: list[dict], duration: float) -> list[dict]:
             e = min(max(w["e"], s), duration)
             out.append({"w": fix_case(w["w"]), "s": r2(s), "e": r2(e)})
             last = s
+    return out
+
+
+MIN_AGREEMENT = 0.6
+
+
+def word_agreement(expected: list[dict], got: list[dict]) -> float:
+    """Share of the expected (episode transcript) word tokens found in the clip's own transcription. Guards against
+    cutting the wrong audio, e.g. publisher transcripts offset by dynamically inserted ads."""
+    def toks(ws):
+        out: dict[str, int] = {}
+        for w in ws:
+            t = re.sub(r"[^a-z0-9]", "", w["w"].lower())
+            if t:
+                out[t] = out.get(t, 0) + 1
+        return out
+    exp, have = toks(expected), toks(got)
+    total = sum(exp.values())
+    if total == 0:
+        return 1.0
+    return sum(min(n, have.get(t, 0)) for t, n in exp.items()) / total
+
+
+def polish_words(words: list[dict]) -> list[dict]:
+    """Caption cosmetics: re-join numbers whisper splits ("100" ",000" -> "100,000"; "3" ".5" -> "3.5") and capitalise
+    the clip's first word (clips often start mid-paragraph)."""
+    out: list[dict] = []
+    for w in words:
+        if out and re.match(r"^[,.]\d", w["w"]) and re.search(r"\d$", out[-1]["w"]):
+            out[-1] = {**out[-1], "w": out[-1]["w"] + w["w"], "e": w["e"]}
+            continue
+        out.append(dict(w))
+    if out:
+        m = re.match(r"^([^\w]*)(\w)(.*)$", out[0]["w"])
+        if m:
+            out[0]["w"] = m.group(1) + m.group(2).upper() + m.group(3)
+    return out
+
+
+def apply_fixes(words: list[dict], fixes: dict[str, str]) -> list[dict]:
+    """Caption corrections from the selection, e.g. {"Aortman": "Altman"}: whole-word, case-insensitive, punctuation
+    kept. Only for transcription errors (names, jargon) — never to change what the speaker said."""
+    if not fixes:
+        return words
+    table = {k.lower(): v for k, v in fixes.items()}
+    out = []
+    for w in words:
+        m = re.match(r"^([^\w]*)([\w'.-]+?)([^\w]*)$", w["w"])
+        if m and m.group(2).lower() in table:
+            w = {**w, "w": m.group(1) + table[m.group(2).lower()] + m.group(3)}
+        out.append(w)
     return out
 
 
@@ -102,7 +156,7 @@ def pick_emphasis(sel: dict, words: list[dict]) -> list[str]:
     return out[:5]
 
 
-def refine(paths: Paths, eid: str, start: float, end: float) -> tuple[float, float, dict]:
+def refine(paths: Paths, eid: str, start: float, end: float, exact: bool = True) -> tuple[float, float, dict]:
     transcript = read_json(paths.episode_dir(eid) / "transcript.json") or {"segments": []}
     lo, hi = start - boundaries.SEARCH - 2, start + boundaries.MAX_LEN + boundaries.SEARCH + 2
     words = [w for seg in transcript["segments"] for w in seg["words"] if lo <= w["s"] <= hi]
@@ -110,7 +164,7 @@ def refine(paths: Paths, eid: str, start: float, end: float) -> tuple[float, flo
     hop = 0.02
     samples = audio.decode(paths.episode_dir(eid) / "audio.mp3", start=t_origin, duration=hi - t_origin)
     quiet = boundaries.quiet_from_rms(audio.rms_frames(samples, audio.SR, hop), t_origin, hop)
-    return boundaries.snap(words, start, end, quiet)
+    return boundaries.snap(words, start, end, quiet, exact=exact)
 
 
 def make_one(paths: Paths, sel: dict, date: str, *, render: bool = True, do_package: bool = True,
@@ -128,7 +182,7 @@ def make_one(paths: Paths, sel: dict, date: str, *, render: bool = True, do_pack
     if hit:
         raise ValueError(f"{eid} {hms(sel['start'])}-{hms(sel['end'])} overlaps used clip {hit['id']}")
 
-    start, end, info = refine(paths, eid, float(sel["start"]), float(sel["end"]))
+    start, end, info = refine(paths, eid, float(sel["start"]), float(sel["end"]), exact=not sel.get("rough"))
     hit = ledger.find_overlap(led, eid, start, end)
     if hit:
         raise ValueError(f"refined range overlaps used clip {hit['id']}")
@@ -148,6 +202,16 @@ def make_one(paths: Paths, sel: dict, date: str, *, render: bool = True, do_pack
     duration = r2(audio.probe_duration(wav))
     prompt = f"{meta.get('show', '')}. {meta.get('title', '')}. {VOCAB}"
     words, words_note = clip_words(paths, eid, samples, duration, start, prompt)
+    if "fallback" in words_note:
+        raise ValueError("the clip's audio could not be transcribed, so its captions can't be verified against the "
+                         "episode transcript; check the audio or pick another moment")
+    ep_words = [w for seg in read_json(paths.episode_dir(eid) / "transcript.json")["segments"] for w in seg["words"]
+                if start <= w["s"] < end]
+    agree = word_agreement(ep_words, words)
+    if agree < MIN_AGREEMENT:
+        raise ValueError(f"alignment check failed: only {agree:.0%} of the selected transcript words are in the cut "
+                         f"audio (episode transcript timings don't match this audio file; re-transcribe with whisper)")
+    words = polish_words(apply_fixes(words, sel.get("fixes") or {}))
     timings["retranscribe"] = time.time() - t
 
     t = time.time()
@@ -219,6 +283,9 @@ def make(paths: Paths, selections_file: Path, date: str | None = None, **kw) -> 
         sels = [sels]
     date = date or today_et()
     results = []
+    # Give each clip of the night a different visual style (an explicit "style" in a selection wins).
+    for i, sel in enumerate(sels):
+        sel.setdefault("style", STYLES[(theme_seed(date) + i) % len(STYLES)])
     for sel in sels:
         try:
             results.append(make_one(paths, sel, date, **kw))

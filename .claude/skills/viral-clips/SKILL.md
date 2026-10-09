@@ -32,11 +32,14 @@ cd engine && python -m clipper discover --days 45 --limit 30 && cd ..
 ```
 cd engine
 python -m clipper fetch <eid>
-python -m clipper transcribe <eid>          # base.en, cached; add --max-minutes N to test
+python -m clipper transcribe <eid>          # whisper base.en, cached; add --max-minutes N to test
 python -m clipper scout <eid>
 cd ..
 ```
 Run episodes one after another (each uses all 4 cores). While one transcribes, read the scout file of the previous.
+Do not use `--publisher` for timing: feed-provided transcripts (e.g. Diary of a CEO) were offset from the audio we
+download because ads are inserted dynamically — on 2026-10-09 a clip cut at the transcript's timestamp contained a
+different passage. `make` now runs an alignment check and refuses clips whose audio doesn't match the chosen words.
 
 ## 3. Select moments (the core skill)
 Read `work/episodes/<eid>/scout.md`. Start with the AI-dense windows index at the top, but read the surrounding
@@ -45,7 +48,14 @@ subagent (sonnet) with this file's section 3 pasted in, asking for its top 4 can
 (the lead) re-score the finalists yourself and pick.
 
 For every candidate, write down: start/end (s), the first sentence, the last sentence, the one-line idea, and the
-rubric scores. Finding the boundaries:
+rubric scores. Re-read every finalist yourself before choosing:
+```
+cd engine && python -m clipper text <eid> <start> <end>     # transcript lines with their start/end seconds
+```
+Boundaries are EXACT by default: `make` keeps your start/end and only nudges them into the nearest gap between words,
+so give the start time of the first word you want and the end time of the last word (from `text` or
+transcript.json). Add `"rough": true` to a selection only if your times are approximate and you want the engine to
+hunt for nearby sentence breaks. Finding the boundaries:
 - START on the strongest sentence that is understandable cold: a bold claim, a surprising number, a question that
   creates tension. Cut the host's long question; if the answer needs it, keep only its last clause.
 - Never start on "so", "and", "yeah", "I mean", "as I said", or a pronoun whose referent was earlier
@@ -92,6 +102,14 @@ architecture talk without stakes, hedged both-sides answers, inside-baseball nam
 - **title** (file/ledger), **caption** (line 1 new angle on the hook; line 2 `From [Show], ep. "[Title]" with
   [Guest]. Full episode on all podcast apps.`; line 3 a question that invites comments), **hashtags** 3-5: one
   broad (#ai), one topical (#chatgpt/#openai/#agi), one niche (#aiagents/#futureofwork), one audience (#techtok).
+
+- **speakers**: the people heard, from the episode description (e.g. "Steven Bartlett & Jeffrey Ladish"). If you
+  can't tell who is speaking on a panel show, use "<Host> & guests"; never guess a name.
+- **fixes** (optional): caption corrections for transcription errors only, e.g. `{"Aortman": "Altman",
+  "OpenEye": "OpenAI"}`. Scan the clip's words for misheard names before rendering. Never use fixes to change what
+  someone said.
+- **style** (optional): `neural | flow | horizon | orb`. Leave it out and `make` rotates styles so the night's
+  clips all look different.
 
 Write all picks to `work/selections-<date>.json` (format in the clip contract), then:
 ```

@@ -27,19 +27,28 @@ def hashtags(tags: list[str]) -> str:
 
 def delivery_block(clip: dict, sel: dict, meta: dict, credit: str, video_rel: str | None) -> str:
     src = clip["source"]
+    post = sel.get("caption", "").strip()
+    tags = hashtags(sel.get("hashtags", []))
     lines = [
         f"## {sel.get('title') or clip['hook']}",
         "",
-        f"- Clip id: `{clip['id']}` ({clip['duration']:.1f} s)",
-        f"- Video: `{video_rel}`" if video_rel else "- Video: not rendered",
-        f"- Hook: {clip['hook']}",
-        f"- Caption: {sel.get('caption', '')}",
-        f"- Hashtags: {hashtags(sel.get('hashtags', []))}",
-        f"- Credit: {credit}",
-        f"- Source timestamp: {hms(src['start'])}-{hms(src['end'])} ({meta.get('show', '')}, {meta.get('title', '')})",
-        f"- Episode link: {meta.get('link', '')}",
+        f"**Hook:** {clip['hook']}  ",
+        f"**Video:** `{video_rel}` ({clip['duration']:.1f} s)" if video_rel else "**Video:** not rendered",
         "",
+        "Post text (paste as is):",
+        "",
+        "```",
+        post + ("\n\n" + tags if tags else ""),
+        "```",
+        "",
+        f"- Credit: {credit}",
+        f"- Source: {meta.get('show', '')}, {meta.get('title', '')}, {hms(src['start'])}-{hms(src['end'])}",
     ]
+    if meta.get("link"):
+        lines.append(f"- Episode: {meta['link']}")
+    if sel.get("score") is not None:
+        lines.append(f"- Rubric score: {sel['score']}")
+    lines += [f"- Clip id: `{clip['id']}`", ""]
     return "\n".join(lines) + "\n"
 
 

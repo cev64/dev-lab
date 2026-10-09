@@ -86,7 +86,10 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--model", default="base.en")
     p.add_argument("--max-minutes", type=float, default=None, help="only the first N minutes (testing)")
     p.add_argument("--beam", type=int, default=1, help="whisper beam size (1 = greedy, fastest)")
-    p.add_argument("--no-publisher", action="store_true", help="ignore the feed's transcript, use whisper")
+    p.add_argument("--publisher", action="store_true",
+                   help="use the feed's own transcript (fast, but timings can be offset by dynamically inserted ads; "
+                        "make's alignment check will reject misaligned clips)")
+    p.add_argument("--no-publisher", action="store_true", help=argparse.SUPPRESS)  # old flag; whisper is the default
     p.add_argument("--force", action="store_true")
 
     p = sub.add_parser("scout", help="scout.md + windows.json")
@@ -120,7 +123,7 @@ def main(argv: list[str] | None = None) -> int:
     elif a.cmd == "transcribe":
         from .transcribe import transcribe
 
-        transcribe(paths, a.eid, model=a.model, max_minutes=a.max_minutes, use_publisher=not a.no_publisher,
+        transcribe(paths, a.eid, model=a.model, max_minutes=a.max_minutes, use_publisher=a.publisher and not a.no_publisher,
                    force=a.force, beam_size=a.beam)
     elif a.cmd == "scout":
         from .scout import scout

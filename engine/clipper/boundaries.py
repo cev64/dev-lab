@@ -78,9 +78,35 @@ def _length_penalty(d: float) -> float:
     return 0.0
 
 
+EXACT_TOL = 1.0  # exact mode: the requested time must be within this of a word boundary
+
+
+def snap_exact(words: list[dict], start: float, end: float) -> tuple[float, float, dict] | None:
+    """Honour editor-chosen boundaries: cut in the gap before the word that starts nearest `start` and after the
+    word that ends nearest `end`. Returns None if no word boundary is close enough or the length is out of range."""
+    all_gaps = gaps(words)
+    gs = min((g for g in all_gaps if g.next), key=lambda g: abs(g.t1 - start), default=None)
+    ge = min((g for g in all_gaps if g.prev), key=lambda g: abs(g.t0 - end), default=None)
+    if gs is None or ge is None or abs(gs.t1 - start) > EXACT_TOL or abs(ge.t0 - end) > EXACT_TOL:
+        return None
+    s_cut, e_cut = gs.start_cut(), ge.end_cut()
+    if not (MIN_LEN <= e_cut - s_cut <= MAX_LEN):
+        return None
+    info = {"method": "exact", "firstWord": gs.next["w"], "lastWord": ge.prev["w"],
+            "startShift": round(s_cut - start, 2), "endShift": round(e_cut - end, 2)}
+    return round(s_cut, 2), round(e_cut, 2), info
+
+
 def snap(words: list[dict], start: float, end: float,
-         quiet: Callable[[float, float], float] | None = None) -> tuple[float, float, dict]:
-    """Return (start, end, info). `words` are [{w, s, e}] in source time, sorted. `quiet(t0, t1)` -> 0..1."""
+         quiet: Callable[[float, float], float] | None = None, exact: bool = False) -> tuple[float, float, dict]:
+    """Return (start, end, info). `words` are [{w, s, e}] in source time, sorted. `quiet(t0, t1)` -> 0..1.
+
+    exact=True (the default for selections, whose times come from word timestamps) keeps the editor's boundaries and
+    only makes them word-safe; the scored search below is for rough boundaries (selection field "rough": true)."""
+    if exact and words:
+        hit = snap_exact(words, start, end)
+        if hit:
+            return hit
     if not words:
         d = min(max(end - start, MIN_LEN), MAX_LEN)
         return round(start, 2), round(start + d, 2), {"method": "clamp-no-words"}
