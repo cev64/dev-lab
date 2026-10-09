@@ -188,10 +188,11 @@ def _char_pairs(a: str, b: str) -> list[tuple[int, int, bool]]:
     return pairs[::-1]
 
 
-def align_tokens(tokens: list[str], wwords: list[dict], span: tuple[float, float]) -> tuple[list[tuple[float, float]], int]:
+def align_tokens(tokens: list[str], wwords: list[dict],
+                 span: tuple[float, float]) -> tuple[list[tuple[float, float]], list[int]]:
     """Time each script token from whisper words (dicts with w, s, e) inside span (s0, s1).
 
-    Returns ([(s, e)] per token, number of tokens that had to be interpolated)."""
+    Returns ([(s, e)] per token, indices of tokens whisper did not match, whose times were interpolated)."""
     s0, s1 = span
     keys = [spoken_key(t) for t in tokens]
     a_chars, owner = [], []
@@ -219,7 +220,7 @@ def align_tokens(tokens: list[str], wwords: list[dict], span: tuple[float, float
             timed.append((times[h[0][0]][0], times[h[-1][0]][1]))
         else:
             timed.append(None)
-    missing = sum(t is None for t in timed)
+    missing = [k for k, t in enumerate(timed) if t is None]
     return _fill_and_order(timed, keys, s0, s1), missing
 
 
@@ -262,6 +263,43 @@ def _fill_and_order(timed: list[tuple[float, float] | None], keys: list[str], s0
         res.append((r2(s), r2(e)))
         prev_e = e
     return res
+
+
+def snap_to_speech(words: list[dict], samples: np.ndarray, sr: int, floor_db: float = -35.0,
+                   min_gap: float = 0.12, min_word: float = 0.08) -> None:
+    """Whisper often starts a word where the previous one ended, swallowing the pause between them (and sometimes
+    runs a word's end into the next pause). If a word's span contains a real pause (>= min_gap of audio
+    `floor_db` below the loud level), move its start to after the pause / its end to before it. In place; spans
+    only shrink, so order and non-overlap are preserved."""
+    hop = 0.01
+    rms = audio.rms_frames(samples, sr, hop)
+    if len(rms) == 0:
+        return
+    db = 20 * np.log10(rms + 1e-9)
+    quiet = db < float(np.percentile(db, 95)) + floor_db
+    need = int(round(min_gap / hop))
+    for w in words:
+        a, b = int(round(w["s"] / hop)), int(round(w["e"] / hop))
+        runs, k = [], a
+        while k < b:  # silent runs [i, j) inside the word
+            if quiet[k] if k < len(quiet) else True:
+                j = k
+                while j < b and (j >= len(quiet) or quiet[j]):
+                    j += 1
+                if j - k >= need:
+                    runs.append((k, j))
+                k = j
+            else:
+                k += 1
+        for i, j in reversed(runs):  # speech starts after the last long pause that leaves room for the word
+            if (b - j) * hop >= min_word:
+                w["s"] = r2(j * hop)
+                break
+        a = int(round(w["s"] / hop))
+        for i, j in runs:  # and ends before the first long pause after it
+            if i > a and (i - a) * hop >= min_word:
+                w["e"] = r2(i * hop)
+                break
 
 
 def word_error_rate(ref: list[str], hyp: list[str]) -> float:
@@ -463,13 +501,14 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
     for w in wwords:
         mid = (w["s"] + w["e"]) / 2
         per_beat[next(k for k, c in enumerate(cuts) if mid < c)].append(w)
-    words, unaligned = [], 0
+    words, unaligned = [], []
     for k, (toks, span) in enumerate(zip(beat_tokens, speech)):
         timed, missing = align_tokens(toks, per_beat[k], span)
-        unaligned += missing
+        unaligned += [len(words) + m for m in missing]
         words += [{"w": tok, "s": s, "e": e} for tok, (s, e) in zip(toks, timed)]
-        if missing > max(2, 0.2 * len(toks)):
-            warnings.append(f"beat {k + 1}: {missing}/{len(toks)} words not found by whisper (timings interpolated)")
+        if len(missing) > max(2, 0.2 * len(toks)):
+            warnings.append(f"beat {k + 1}: {len(missing)}/{len(toks)} words not found by whisper (timings interpolated)")
+    snap_to_speech(words, final, audio.SR)
 
     result = {
         "id": script["id"],
@@ -482,7 +521,8 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
         "lufs": loud["lufs"],
         "truePeak": loud["truePeak"],
         "loudnorm": norm["pass2"].get("normalization_type"),
-        "unaligned": unaligned,
+        "interpolated": [words[i]["w"] for i in unaligned],
+        "transcript": " ".join(s["text"] for s in segs),
         "warnings": warnings,
         "beats": beat_windows(speech, duration),
         "words": words,
@@ -491,7 +531,7 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
     }
     write_json(json_path, result)
     log(f"voice: {duration:.1f} s, WER {wer:.1%}, {loud['lufs']:.1f} LUFS / {loud['truePeak']:.1f} dBTP, "
-        f"{unaligned} interpolated words, whisper {whisper_s:.0f} s -> {wav_path}")
+        f"{len(unaligned)} interpolated words, whisper {whisper_s:.0f} s -> {wav_path}")
     for w in warnings:
         log(f"voice: WARNING {w}")
     return result
