@@ -7,7 +7,7 @@ Short list of things only Charlie can do. Newest first; the nightly run keeps it
       post text from `deliveries/<date>.md`, with the platform's "AI-generated content" label switched ON.
 - [ ] Add the Google Drive connector to the nightly routine (claude.ai -> Routines -> "AI explainers nightly run"
       -> connectors). The run files one doc per video in Drive folder DailyToken and checks it for repeats.
-- [ ] Create the TikTok and Instagram accounts as **The Daily Token** (handle @thedailytoken, or @thedailytoken.ai /
+- [ ] Create the TikTok, Instagram and YouTube accounts as **The Daily Token** (handle @thedailytoken, or @thedailytoken.ai /
       @dailytokennews if taken; bio: "AI news, animated. 3 stories a day."). Logo: generate it from the prompt in
       `docs/brand.md` and set it as the profile picture on both.
 - [ ] Once a week, add a row per posted video to `ops/PERFORMANCE.md` (views, avg watch %, shares). The Sunday run
