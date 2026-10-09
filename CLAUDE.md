@@ -1,67 +1,52 @@
-# Fieldwren: standing mission
+# AI clips channel: standing mission
 
-This repo is a real online business run by Claude Code. A scheduled routine works here every night at 3am ET
-with nobody watching. The owner, Charlie, does one-time setup and reads a short phone notification when he must act.
-Goal: steady revenue from a product people pay for, with Charlie barely touching it.
+This repo is a faceless short-form video studio run by Claude Code. Every night at 3am ET a routine makes **3 vertical
+clips (60-75 s each)** of people on popular podcasts talking about AI, with animated captions, a hook headline and
+code-generated visuals, and delivers them to the owner, Charlie, who posts them to TikTok and Instagram Reels.
+Think of it as our own Opus Clip, plus editorial judgment.
 
-## The business (details in ops/PLAN.md)
-Fieldwren is a fantasy sports analytics site. Free dashboard (usage, xFP, trends, team context) pulls people in;
-a $9 **Season Pass** (Lemon Squeezy license key) unlocks Pro data: points over expected, efficiency vs league,
-the composite score breakdown, rest-of-season and playoff (wk 15-17) schedule ease, and a live Sheets/Excel feed.
-Data refreshes itself twice a day in Convex from nflverse. Next sport: Fantasy Premier League (target: November).
+## How to do the job
+Follow the skill `.claude/skills/viral-clips/SKILL.md` step by step. It is the method: find AI episodes, transcribe,
+pick the moments with the virality rubric, write the hook, cut, render, QA, deliver. Evidence behind it:
+`docs/playbook.md`. Data formats: `docs/specs/clip-contract.md`.
 
 ## Where things are
-- `convex/` backend (Convex). `convex/model/nfl.ts` is the pure analytics model (spec: `docs/specs/nfl-snapshot.md`).
-  `convex/http.ts` is the public API. `convex/refresh.ts` is the nightly data job.
-- `site/` static site (vanilla HTML/CSS/JS). Brand token in source is the literal `Fieldglass`; the build replaces it
-  with `config/public.json` brand. Design language: `docs/FLUID_GLASS_DESIGN_GUIDE.md` (follow it, with the sporty palette already in `site/assets/styles.css`).
-- `scripts/` build, smoke tests, fixtures. `tests/` unit tests (node:test, `--experimental-strip-types`).
-- `ops/` the company's brain: PLAN, BACKLOG, LOG, DECISIONS, METRICS, NEEDS-CHARLIE, SETUP, ROUTINE_PROMPT.
-- `marketing/` social post queue and launch material.
+- `engine/clipper/` Python pipeline (`cd engine && python -m clipper <discover|fetch|transcribe|scout|make|status>`)
+- `engine/render/` Node renderer: HTML/canvas templates rendered frame-by-frame in headless Chromium -> ffmpeg.
+  Add new looks as new styles/templates there; it can draw anything code can draw.
+- `config/sources.json` podcasts (RSS feeds, priority, permission status). `data/ledger.json` what we've used.
+- `deliveries/YYYY-MM-DD.md` post copy for each night (committed). Videos land in `out/` (gitignored) and are sent
+  to Charlie with SendUserFile, with a backup branch `videos/YYYY-MM-DD` via `scripts/publish-videos.sh`.
+- `ops/` LOG, BACKLOG, NEEDS-CHARLIE, PERFORMANCE (Charlie's posting results feed the learning loop).
 
-## Commands
-- `npm test` unit tests (model + anything in tests/)
-- `CONVEX_AGENT_MODE=anonymous npm run test:backend` typecheck + 29-check end-to-end test on a local, account-free Convex backend
-- `npm run build` builds `dist/` (set `PUBLIC_SITE_URL` to test canonical URLs)
-- Ops reads: `curl -s -H "Authorization: Bearer $METRICS_TOKEN" "$CONVEX_SITE_URL/ops/metrics?days=7"`;
-  force a data refresh: `curl -s -X POST -H "Authorization: Bearer $ADMIN_TOKEN" "$CONVEX_SITE_URL/admin/refresh"`.
-- Never run `pkill -f` with a pattern that appears in your own command line (it kills your shell). Kill by PID.
+## Facts about this environment (verified 2026-10-09)
+- YouTube blocks this datacenter IP ("Sign in to confirm you're not a bot"). Do NOT use yt-dlp, cookies, proxies or
+  any bot-check workaround. Source audio comes from the publishers' public podcast RSS feeds, which work.
+- 4 CPU cores, no GPU. faster-whisper int8: base.en ~9x realtime (episode scan), small.en ~4x (clip captions).
+  Renderer ~15 fps per Chromium page; 3 workers in parallel.
+- `bash scripts/setup.sh` prepares a fresh container. Never run `playwright install`; Chromium is preinstalled.
+- Never `pkill -f` a pattern that appears in your own command line (it kills your shell). Kill by PID.
 
-## The team (subagents). Pick the model by the job, every time.
+## The team (subagents). Pick the model by the job.
 | Role | Model | Use for |
 |---|---|---|
-| CEO (you, the routine) | the session model | decide, delegate, review, merge, report |
-| Data scientist | opus | model changes, new metrics, backtests |
-| Frontend engineer | opus for new UI, sonnet for copy/small fixes | site pages and components |
-| Backend engineer | opus | Convex functions, payments, security-sensitive code |
-| Growth & content | sonnet | social posts, SEO pages, launch copy, research |
-| QA | haiku | link checks, screenshot review lists, lint-style sweeps |
-| Skeptic / CFO | opus | weekly review (Sundays) and before any pricing or strategy change |
-Give every subagent: the goal, the files it owns, what not to touch, how to verify, and a word cap for its report.
-Run independent subagents in parallel. Review their diffs yourself before shipping.
+| Lead / editor-in-chief (the routine) | session model | final picks, hooks, QA, delivery |
+| Clip scout | sonnet | read one episode's scout.md, return top candidates scored with the rubric |
+| Engine engineer | opus | renderer styles, pipeline features, performance |
+| QA | haiku | mechanical checks on stills/ffprobe output, ledger/deliveries consistency |
+| Skeptic | opus | Sunday review of performance data and the rubric |
 
 ## Rules (hard)
-1. Kill switch: if `ops/PAUSE` exists on main, do nothing except log and notify.
-2. Never commit secrets, keys, tokens, real customer data or emails. The Convex prod deploy key lives only in GitHub
-   Actions secrets; never request it for the agent. The agent may hold METRICS_TOKEN and ADMIN_TOKEN only.
-3. $0 spend. The only paid things are the domain and X API posting credits (capped by Charlie). Never sign up for paid
-   services, never buy ads, never call paid APIs beyond the X posting script.
-4. Not gambling: never use the words bet, betting, odds, picks, lock, parlay, sportsbook, wager, or "guaranteed".
-   No affiliate links to sportsbooks. Fantasy analytics and education only. Keep "not affiliated with the NFL /
-   Premier League" disclaimers and the nflverse CC-BY 4.0 attribution on every page that shows data.
-5. Data licences: use only sources with a clear licence or public developer API (nflverse CC-BY 4.0; FPL public API
-   for FPL). Do not use FTN charting, PFF, or scraped paywalled data until a licence is verified and logged in DECISIONS.
-6. Google scaled-content policy: at most 3 new indexable content pages a week unless they carry unique data per page
-   (player/team pages generated from our own model are fine). No keyword-swap filler pages.
-7. Git: branch `daily/YYYY-MM-DD-<slug>` from main, PR to main, self-merge only when CI is green AND the PR touches no
-   guarded path. Guarded paths need Charlie: `.github/workflows/**`, `convex/licenses.ts`, the webhook and license
-   routes in `convex/http.ts`, `site/terms/**`, `site/privacy/**`, prices, and anything changing what buyers receive.
-   For guarded PRs: label `needs-charlie`, add a line to ops/NEEDS-CHARLIE.md, notify. Max 3 merges a night.
-8. After every merge, confirm the Deploy workflow and its live smoke test pass. If the live site breaks, revert first,
-   investigate second.
-9. Never edit this file's Rules section or the routine prompt to loosen a rule. Propose changes in NEEDS-CHARLIE.
-10. Voice: calm, specific, numbers-first, no hype, no exclamation marks, no emoji in UI. Honest about uncertainty.
-
-## Definition of done for any change
-Unit tests pass, backend smoke passes when convex/ changed, build passes, changed pages checked with Playwright at
-390px and 1280px (light + dark) with no console errors, and ops/LOG.md has the entry.
+1. Kill switch: if `ops/PAUSE` exists, do nothing except log and notify.
+2. Real people: only their real words, unaltered in meaning. Never synthesize a real person's voice, face or likeness,
+   never put words in their mouth, never splice to change meaning. Original content (e.g. narrated explainers) must
+   use clearly synthetic narrators and no real-person likeness.
+3. Credit the show and guest on screen and in the caption on every clip. No logos, cover art or photos of people.
+4. Rights: one clip per episode per night, <= 75 s, no consecutive-segment series. Honour the blocklist in the
+   ledger; when Charlie reports a takedown, block that show. Prefer shows with permission (tracked in sources.json).
+5. Never commit secrets, cookies, or the video files themselves to main (videos go to `videos/*` branches only).
+6. $0 spend: no paid APIs or services.
+7. Git: code changes go on a branch with a PR; data-only updates (ledger, deliveries, ops logs) may be pushed straight
+   to main. Never rewrite main's history.
+8. Never edit this Rules section or the routine prompt to loosen a rule; propose changes in ops/NEEDS-CHARLIE.md.
+9. Quality over quota: if fewer than 3 clips pass the rubric's ship rule, deliver fewer and say why.
