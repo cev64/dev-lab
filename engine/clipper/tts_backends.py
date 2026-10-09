@@ -74,7 +74,8 @@ def parse_spec(spec: str | None, speed: float | None = None) -> VoiceSpec:
     engine, voice = spec.split(":", 1)
     if engine not in DEFAULT_SPEED:
         raise ValueError(f"unknown TTS engine {engine!r} (kokoro or piper)")
-    if any(b in voice for b in BLOCKED[engine]):
+    name = voice.split("-")[1] if engine == "piper" and voice.count("-") >= 2 else voice
+    if name in BLOCKED[engine]:
         raise ValueError(f"voice {spec} is blocked (licence or likeness risk; see docs/specs/voice-notes.md)")
     speed = DEFAULT_SPEED[engine] if speed is None else float(speed)
     if not 0.5 <= speed <= 2.0:

@@ -97,8 +97,20 @@ function loadClip(path) {
     clip.background.video = resolve(dirname(clipPath), clip.background.video);
     if (!existsSync(clip.background.video)) throw new Error(`background video not found: ${clip.background.video}`);
   }
+  // ai-explainer "scene" beats: per-story ES modules, served to the pages at /scene/<n>.js
+  for (const b of Array.isArray(clip.beats) ? clip.beats : []) {
+    const v = b && b.visual;
+    if (!v || v.type !== 'scene') continue;
+    if (!v.module) throw new Error(`scene beat at t0=${b.t0} has no "module"`);
+    const file = resolve(dirname(clipPath), v.module);
+    if (!existsSync(file) || !statSync(file).isFile()) throw new Error(`scene module not found: ${file}`);
+    let n = SCENES.indexOf(file);
+    if (n < 0) { SCENES.push(file); n = SCENES.length - 1; }
+    v.__url = `/scene/${n}.js`; v.__src = file;
+  }
   return clip;
 }
+const SCENES = [];
 
 // Background video -> JPEG frames (1080x1920, cover-cropped, clip fps) in dir; returns the frame count.
 // The video is held on its last frame if it is shorter than the clip.
@@ -145,6 +157,12 @@ async function startServer() {
       const f = join(BG_DIR, url.pathname.slice(10));
       if (!existsSync(f)) { res.statusCode = 404; res.end(); return; }
       res.setHeader('content-type', 'image/jpeg'); res.end(readFileSync(f)); return;
+    }
+    const sm = req.method === 'GET' && url.pathname.match(/^\/scene\/(\d+)\.js$/);
+    if (sm) {
+      const f = SCENES[+sm[1]];
+      if (!f) { res.statusCode = 404; res.end(); return; }
+      res.setHeader('content-type', 'text/javascript'); res.setHeader('cache-control', 'no-store'); res.end(readFileSync(f)); return;
     }
     const file = normalize(join(HERE, decodeURIComponent(url.pathname)));
     if (req.method !== 'GET' || !file.startsWith(HERE + sep) || file.includes(`${sep}node_modules${sep}`) || !existsSync(file) || !statSync(file).isFile()) {

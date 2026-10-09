@@ -863,7 +863,7 @@
         S.bgVideo = makeBgVideo(clip.background.frames);
         S.videoScrim = buildVideoScrim();
       }
-      if (opts.setup) opts.setup(S, ctx);
+      if (opts.setup) await opts.setup(S, ctx); // may be async (e.g. loading scene modules)
       style.init && style.init(S);
       // Backgrounds are drawn at reduced resolution (style.scale, default 0.5) and upscaled: the
       // software rasteriser's cost is per pixel, and soft glows/thin lines lose nothing visible behind
