@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NFL player board · Fieldglass</title>
+<meta name="description" content="Fantasy football player board: expected fantasy points, points over expected, efficiency percentiles, usage, team environments, defense matchups and a Weeks 15-17 playoff planner.">
+<link rel="canonical" href="https://example.com/nfl/">
+<meta name="theme-color" content="#F1F5F0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#07130E" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fieldglass">
+<meta property="og:title" content="NFL player board · Fieldglass">
+<meta property="og:description" content="Fantasy football player board: expected fantasy points, points over expected, efficiency percentiles, usage, team environments, defense matchups and a Weeks 15-17 playoff planner.">
+<meta property="og:url" content="https://example.com/nfl/">
+<meta property="og:image" content="https://example.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/barlow-condensed-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/styles.css">
+<script src="../assets/config.js"></script>
+<script type="module" src="../assets/nfl.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Fieldglass NFL dashboard", "url": "https://example.com/nfl/", "applicationCategory": "SportsApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+</head><body class="has-bnav">
+<a class="skip" href="#main">Skip to content</a>
+<div class="backdrop" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="var(--accent)"/><path d="M8 8v16M24 8v16" stroke="var(--on-accent)" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="16" r="6.5" fill="none" stroke="var(--on-accent)" stroke-width="2.5"/></svg><span data-brand>Fieldglass</span></a>
+    <span class="compact-title" aria-hidden="true">Player board</span>
+    <nav class="topnav" aria-label="Primary"><a href="../nfl/" aria-current="page">Dashboard</a><a href="../pro/">Season Pass</a><a href="../glossary/">Glossary</a><a href="../about/">About</a></nav>
+  </div>
+</header>
+<nav class="bottom-nav" aria-label="Primary (mobile)"><a href="../"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>Home</span></a><a href="../nfl/" aria-current="page"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg><span>Dashboard</span></a><a href="../pro/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 17v2M13 11v2"/></svg><span>Pass</span></a><a href="../about/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span>About</span></a></nav>
+<main id="main">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="micro">NFL &middot; <span id="season">2026</span> season</p>
+      <h1 class="display page-title" id="view-title">Player board</h1>
+      <p class="status-line"><span id="updated">Loading data&hellip;</span><span class="tier" id="tier">Free</span></p>
+    </header>
+    <div class="glass callout" id="key-error" hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"/><path d="m21 2-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/></svg><p></p><a class="btn small" href="../pro/#unlock">Check key</a></div>
+    <div class="toolbar">
+      <div class="tb-row">
+        <div class="seg" id="views" role="tablist" aria-label="View"><button type="button" role="tab" id="tab-players" aria-controls="panel" aria-selected="false" tabindex="-1"><span class="long">Players</span><span class="short" aria-hidden="true">Players</span></button><button type="button" role="tab" id="tab-risers" aria-controls="panel" aria-selected="false" tabindex="-1"><span class="long">Risers &amp; Fallers</span><span class="short" aria-hidden="true">Risers</span></button><button type="button" role="tab" id="tab-playoffs" aria-controls="panel" aria-selected="false" tabindex="-1"><span class="long">Playoff Planner</span><span class="short" aria-hidden="true">Playoffs</span></button><button type="button" role="tab" id="tab-teams" aria-controls="panel" aria-selected="false" tabindex="-1"><span class="long">Teams</span><span class="short" aria-hidden="true">Teams</span></button><button type="button" role="tab" id="tab-defenses" aria-controls="panel" aria-selected="false" tabindex="-1"><span class="long">Defenses</span><span class="short" aria-hidden="true">Defense</span></button><span class="thumb" aria-hidden="true"></span></div>
+        <div class="field">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <label class="sr-only" for="search">Search</label>
+          <input class="input" id="search" type="search" placeholder="Search player or team" autocomplete="off" spellcheck="false">
+        </div>
+      </div>
+      <div class="tb-row">
+        <div id="lens"><div class="seg small" role="tablist" aria-label="Lens"><button type="button" role="tab" id="lens-usage" aria-controls="panel" aria-selected="false" tabindex="-1"><span class="long">Usage</span><span class="short" aria-hidden="true">Usage</span></button><button type="button" role="tab" id="lens-opportunity" aria-controls="panel" aria-selected="false" tabindex="-1"><span class="long">Opportunity</span><span class="short" aria-hidden="true">Opportunity</span></button><button type="button" role="tab" id="lens-efficiency" aria-controls="panel" aria-selected="false" tabindex="-1"><span class="long">Efficiency</span><span class="short" aria-hidden="true">Efficiency</span></button><span class="thumb" aria-hidden="true"></span></div></div>
+        <div class="chips" id="chips" role="group" aria-label="Position"><button type="button" class="chip" data-pos="ALL" aria-pressed="true">ALL</button><button type="button" class="chip" data-pos="QB" aria-pressed="false"><span class="dot QB" aria-hidden="true"></span>QB</button><button type="button" class="chip" data-pos="RB" aria-pressed="false"><span class="dot RB" aria-hidden="true"></span>RB</button><button type="button" class="chip" data-pos="WR" aria-pressed="false"><span class="dot WR" aria-hidden="true"></span>WR</button><button type="button" class="chip" data-pos="TE" aria-pressed="false"><span class="dot TE" aria-hidden="true"></span>TE</button></div>
+        <label class="sr-only" for="sort">Sort by</label>
+        <select class="sort-select" id="sort"></select>
+      </div>
+    </div>
+    <div id="panel" role="tabpanel" aria-labelledby="tab-players" tabindex="-1">
+      <div class="glass panel"><div class="empty">Loading&hellip;</div></div>
+    </div>
+    <noscript><p class="muted">The dashboard needs JavaScript.</p></noscript>
+    <section class="section" id="signup" aria-labelledby="signup-title">
+    <div class="glass signup">
+      <div>
+        <h2 class="section-title" id="signup-title">Weekly usage risers, every Tuesday</h2>
+        <p class="muted" style="margin-top:8px">One short email with the week's biggest risers and fallers. Unsubscribe any time.</p>
+      </div>
+      <form data-subscribe="dashboard" novalidate>
+        <div class="form-row">
+          <label class="sr-only" for="email-dashboard">Email address</label>
+          <input class="input" id="email-dashboard" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+          <button class="btn primary" type="submit">Sign up</button>
+        </div>
+        <p class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+  </div>
+</main>
+<div class="modal" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+  <div class="sheet">
+    <div class="grabber" aria-hidden="true"></div>
+    <div class="sheet-head">
+      <div class="title"><h2 class="title" id="sheet-title">Player</h2><p class="row-meta" id="sheet-meta"></p></div>
+      <button class="icon-btn" type="button" id="sheet-close" aria-label="Close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </div>
+    <div class="sheet-body"></div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="../"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="var(--accent)"/><path d="M8 8v16M24 8v16" stroke="var(--on-accent)" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="16" r="6.5" fill="none" stroke="var(--on-accent)" stroke-width="2.5"/></svg><span data-brand>Fieldglass</span></a>
+    <nav aria-label="Footer">
+      <a href="../nfl/">Dashboard</a><a href="../pro/">Season Pass</a><a href="../about/">About</a>
+      <a href="../glossary/">Metric glossary</a><a href="../terms/">Terms</a><a href="../privacy/">Privacy</a>
+    </nav>
+    <p><a href="https://github.com/nflverse/nflverse-data" rel="noopener">Data: nflverse (CC-BY 4.0)</a>. Not affiliated with or endorsed by the NFL or any team. Team abbreviations are used for identification only. For entertainment and informational purposes.</p>
+    <p>&copy; <span data-year>2026</span> <span data-brand>Fieldglass</span></p>
+  </div>
+</footer>
+</body>
+</html>
