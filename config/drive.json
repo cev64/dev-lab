@@ -1,0 +1,5 @@
+{
+  "_doc": "Charlie's Google Drive archive (Google Drive connector on the routine). One Google Doc per explainer, titled '<date> · <topic title>', made from out/<date>/<id>.drive.json. Folder found by id, else by name.",
+  "folderName": "DailyToken",
+  "folderId": "1Okf02WxCUillYt9D6rdv3MzL0CdRZMsp"
+}

@@ -18,6 +18,7 @@ from .common import FPS, Paths, log, read_json, today_et, write_json
 from .make import STYLES, render_clip, theme_seed
 from .package import hashtags
 
+REPEAT_DAYS = 7  # no-repeat window for stories (skill section 1); a script with "followUp": true may revisit one
 MIN_NARRATION = 58.0  # contract floor; the skill asks for >= 62 s so TikTok's one-minute rule is met
 
 
@@ -36,6 +37,36 @@ def load_script(path: Path) -> dict:
         if not b.get("say") or not (b.get("visual") or {}).get("type"):
             raise ValueError(f"beat {i} needs 'say' and 'visual.type'")
     return script
+
+
+def check_repeat(script: dict, explainers: list[dict], date: str, days: int = REPEAT_DAYS) -> None:
+    """Refuse a script that retells a story we published in the last `days` days (shares a source URL with it),
+    unless the script says it is a follow-up on a new development ("followUp": true)."""
+    if script.get("followUp"):
+        return
+    from datetime import date as _d
+    urls = {s.get("url") for s in script["sources"]} - {None, ""}
+    for e in explainers:
+        if e["id"] == script["id"] or not e.get("date"):
+            continue
+        age = (_d.fromisoformat(date) - _d.fromisoformat(e["date"])).days
+        if 0 <= age <= days and urls & set(e.get("sources", [])):
+            raise SystemExit(f"repeat: {script['id']} shares sources with {e['id']} ({e['date']}); pick another "
+                             'story, or set "followUp": true if there is a genuinely new development')
+
+
+def drive_card(script: dict, clip: dict, date: str) -> tuple[str, str]:
+    """Title + text of the small Google Doc the nightly run files in Charlie's Drive folder (config/drive.json):
+    one per explainer, named by topic, so the archive is searchable and repeats are easy to spot."""
+    post = script["post"]
+    title = f"{date} · {(post.get('title') or script['hook']).strip()}"
+    lines = [title, "", f"Hook: {script['hook']}", f"Topic: {script.get('topic', '')}",
+             f"Length: {clip['duration']:.1f} s", f"Explainer id: {script['id']}",
+             f"Video: GitHub cev64/dev-lab, branch videos/{date}, file {script['id']}.mp4", "",
+             "Post text:", post.get("caption", "").strip(), hashtags(post.get("hashtags", [])), "", "Sources:"]
+    lines += [f"- {s.get('publisher', '')}: {s.get('title', '')} {s.get('url', '')}".rstrip() for s in script["sources"]]
+    lines += ["", "Narration:"] + [b["say"] for b in script["beats"]]
+    return title, "\n".join(lines) + "\n"
 
 
 def ensure_voice(script_path: Path, vdir: Path) -> dict:
@@ -141,6 +172,7 @@ def explainer(paths: Paths, script_path: Path, date: str | None = None, render: 
     date = date or today_et()
     script = load_script(script_path)
     eid = script["id"]
+    check_repeat(script, (ledger.load(paths.ledger) or {}).get("explainers", []), date)
     vdir = explainer_dir(paths, eid)
     vdir.mkdir(parents=True, exist_ok=True)
     voice = ensure_voice(script_path, vdir)
@@ -155,6 +187,8 @@ def explainer(paths: Paths, script_path: Path, date: str | None = None, render: 
     if render:
         out = paths.root / "out" / date / f"{eid}.mp4"
         video = render_clip(paths, clip_path, out)
+        title, text = drive_card(script, clip, date)
+        write_json(out.with_suffix(".drive.json"), {"title": title, "text": text})
 
     stock = sorted({m["credit"] for m in (read_json(broll_dir / "broll.json") or [])
                     if m.get("kind") == "stock" and m.get("credit")})
@@ -174,6 +208,7 @@ def explainer(paths: Paths, script_path: Path, date: str | None = None, render: 
         exp = data.setdefault("explainers", [])
         if not any(e["id"] == eid for e in exp):
             exp.append({"id": eid, "date": date, "hook": script["hook"], "topic": script.get("topic", ""),
+                        "title": script["post"].get("title", ""), "followUp": bool(script.get("followUp")),
                         "sources": [s.get("url", "") for s in script["sources"]], "video": video_rel})
             ledger.save(paths.ledger, data)
     return {"id": eid, "video": video_rel, "duration": clip["duration"]}

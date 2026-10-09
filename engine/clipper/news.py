@@ -123,6 +123,19 @@ def merge_stories(items: list[dict], threshold: float = 0.6) -> list[dict]:
     return sorted(stories, key=lambda s: -s["score"])
 
 
+def mark_covered(stories: list[dict], explainers: list[dict], threshold: float = 0.5) -> list[dict]:
+    """Flag stories we already made an explainer about (a shared source URL, or a headline close to its title/hook),
+    so the lead can skip repeats; a story with a genuinely new development may still run as a follow-up."""
+    for s in stories:
+        urls = {x["url"] for x in s["sources"]}
+        for e in explainers:
+            if urls & set(e.get("sources", [])) or any(
+                    similar(s["title"], e.get(k) or "") >= threshold for k in ("title", "hook")):
+                s["covered"] = {"id": e["id"], "date": e.get("date", "")}
+                break
+    return stories
+
+
 def news(paths: Paths, days: float = 3, limit: int = 40) -> dict:
     cfg = read_json(paths.root / "config" / "news_sources.json") or {}
     # JSON entries (e.g. the Hacker News Algolia API) are a trending signal, fetched by hn_front_titles(), not a feed.
@@ -149,12 +162,13 @@ def news(paths: Paths, days: float = 3, limit: int = 40) -> dict:
                 items.append(it)
                 kept += 1
             log(f"news: {feed.get('name')}: {len(got)} items, {kept} recent AI")
-    stories = merge_stories(items)[:limit]
+    stories = mark_covered(merge_stories(items)[:limit], (read_json(paths.ledger) or {}).get("explainers", []))
     out = {"generated": now, "days": days, "hnTitles": len(hn), "errors": errors, "stories": stories}
     write_json(paths.work / "news.json", out)
     for i, s in enumerate(stories[:15], 1):
         pubs = ", ".join(sorted({x["publisher"] for x in s["sources"]}))
-        log(f"{i:2d}. [{s['score']:.2f}] {s['title'][:90]}  ({pubs})")
+        seen = f"  ALREADY COVERED: {s['covered']['id']}" if s.get("covered") else ""
+        log(f"{i:2d}. [{s['score']:.2f}] {s['title'][:90]}  ({pubs}){seen}")
     if errors:
         log(f"news: {len(errors)} feeds failed: " + "; ".join(e["feed"] for e in errors))
     return out

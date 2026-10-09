@@ -32,7 +32,9 @@ Score the top ~8 stories with the rubric (playbook section 3; weights sum to 100
 freshness 20 · mass-audience stakes 20 · surprise/number 15 · visual potential 10 · verifiability 20 ·
 controversy without defamation 15. Gates: < 2 independent sources; > 72 h old with nothing new; single-outlet rumour;
 accuses a named person/company of wrongdoing not established by a court, regulator or their own admission; only
-tellable as stock/medical/legal advice; already covered in the last 7 days (check `data/ledger.json` "explainers");
+tellable as stock/medical/legal advice; already covered (`news` prints ALREADY COVERED from `data/ledger.json`; also
+compare with the doc titles in Charlie's Drive folder DailyToken, config/drive.json), unless there is a genuinely new
+development, told as a follow-up (`"followUp": true` in the script; the hook says what is new);
 needs a real person's voice or likeness. Ship score >= 70, else skip tonight and log why.
 
 Prefer stories a non-technical person would retell at dinner: money, jobs, kids, privacy, safety, a strange new
@@ -102,7 +104,11 @@ last time against the final script.
 SendUserFile with the 3 MP4s + `deliveries/<date>.md` (the explainer command writes each block, with sources and
 paste-ready post text). Order them for posting: the strongest hook goes to the evening slot (~6-9pm ET), the next to
 midday (~12pm), the third to the morning (~8am); write that order at the top of the delivery note. Then
-`scripts/publish-videos.sh <date>` (backup branch) and commit the ledger + delivery note. Remind Charlie to switch ON
+`scripts/publish-videos.sh <date>` (backup branch) and commit the ledger + delivery note. Drive archive: for each
+explainer, read `out/<date>/<id>.drive.json` and create a Google Doc in the DailyToken folder (Google Drive connector
+`create_file`: `title`, `textContent` = text, `contentMimeType` "text/plain", `parentId` from config/drive.json; first
+check the folder has no doc with that title). The MP4s themselves are too big to pass through the connector: they go to
+Charlie in chat and on the `videos/<date>` branch. No Drive connector in the session: log it and carry on. Remind Charlie to switch ON
 the platform's AI-generated content label (synthetic narrator).
 
 ## 7. Corrections
