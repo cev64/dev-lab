@@ -82,8 +82,16 @@ is either a `scene` (preferred for the story's moments: 3+ scenes per explainer)
 list, quote, timeline, title, keyword), over the generative animated background. People in scenes are the kit's
 stylised cartoon characters only — never a real or recognisable person, never a logo.
 
-`post.caption`: line 1 restates the hook as a fact; line 2 `Sources: <Publisher>, <Publisher>. AI narrator.`;
-line 3 a question. Hashtags 3-5: #thedailytoken + #ai + topical + #technews (the channel is The Daily Token).
+**Post kit** (`post` in script.json; the `explainer` command turns it into paste-ready blocks in the delivery note):
+- `cover`: <= 7 words for the cover/title text, usually the hook.
+- `tiktok`: line 1 is the hook as a searchable sentence with the names people type into TikTok search (company,
+  product, topic) + one emoji; then 1-2 sentences of what happened; last line one easy question + 👇.
+- `instagram`: same facts, a little fuller (2-3 sentences); then `💬` + the question and `📤` + a share/tag prompt
+  ("Send this to the coworker who...", "Tag the friend who...") — shares and saves drive Reels reach.
+- `pinnedComment`: an either/or emoji poll that takes one tap to answer ("🔓 = keep it open, 🔒 = lock it down").
+- `sources`: publisher names; `hashtags`: 3-4 topical (broad #ai + 2 niche + #technews). The command adds the follow
+  line, "Sources: ... AI narrator." and #thedailytoken (5 tags max). No #fyp/#viral spam, no bait ("part 2?") we
+  won't deliver, and every fact in the post text must be in the claim table.
 
 ## 4. Voice and render (from engine/; ~10 min)
 ```
@@ -102,8 +110,9 @@ characters clearly stylised and never resembling a real person. ffprobe: 1080x19
 last time against the final script.
 
 ## 6. Deliver
-SendUserFile with the 3 MP4s + `deliveries/<date>.md` (the explainer command writes each block, with sources and
-paste-ready post text). Order them for posting: the strongest hook goes to the evening slot (~6-9pm ET), the next to
+SendUserFile with the 3 MP4s + `deliveries/<date>.md` (the explainer command writes each block: cover text, TikTok
+description, Instagram caption, pinned comment, sources). To fix post copy after rendering, edit `post` and re-run
+`explainer --no-render --date <date>` (rewrites that block only). Order them for posting: the strongest hook goes to the evening slot (~6-9pm ET), the next to
 midday (~12pm), the third to the morning (~8am); write that order at the top of the delivery note. Then
 `scripts/publish-videos.sh <date>` (backup branch) and commit the ledger + delivery note. Drive archive: for each
 explainer, read `out/<date>/<id>.drive.json` and create a Google Doc in the DailyToken folder (Google Drive connector
