@@ -200,12 +200,41 @@ offset, `bob(t, amp, speed, phase)`, `shake(t, start, dur, amp)`, `typewriter(te
 `pathDraw(ctx, pts, progress)`, `pathPoint(pts, u)`, `bezier(x0, y0, x1, y1, x2, y2, x3, y3, n)` -> points,
 `camera(ctx, t, [{t, zoom, x, y}])` (x, y = scene point brought to the stage centre 487,725; zoom >= 1), `cameraShake(ctx, t, start, dur, amp)`.
 
-Example scenes in `templates/ai-explainer/scenes/` (all full-frame, generic placeholder text by default):
+Scene library `templates/ai-explainer/scenes/` (all full-frame, generic placeholder text by default; each file's
+header comment lists its params and the story types it fits). Reference one from a story clip with a path relative
+to the clip.json (or absolute), e.g. `"module": "/home/user/dev-lab/engine/render/templates/ai-explainer/scenes/agent-handoff.js"`,
+and pass the story's text as `params`. Before writing a new scene, check whether one of these fits with params.
+Cue params (`cue`, `*Cue`) are narration words; without them a scene uses fixed fractions of its duration.
+
+Everyday life / reactions:
 - `chat-ends.js` (sofa at night, angry typing, zoom into the phone, chat ended, stare) params: messages, replies, title, ended, burst, endWord
-- `data-flow.js` (people/devices stream packets into a data center) params: sources, label, time
+- `sofa-reply.js` (person on the sofa after a chat ends, status label, then a short spoken line) params: status, line, cue, statusCue
+- `verdicts.js` (row of people doing ordinary things; each gets FINE, one gets NOT OK) params: cases, banned, okText, noText
+- `ai-wonders.js` (robot by the window thinking, growing "?" bubble, open-question label) params: question, thought, cue
+
+AI agents / products:
 - `robot-does-job.js` (robot works at a desk, documents stack, coworker reacts, DONE stamp) params: task, reaction impressed|worried, done, cue
+- `agent-handoff.js` (an agent robot arrives in a light beam; the worker's step list is crossed out and a GOAL card goes to the robot) params: agent, event, goal, banner, arrive, orbit, cue
+- `agent-splits.js` (agent plans steps, links to servers, splits into 3 helper bots working in 3 app windows) params: steps, stepCues, apps, cue, label, goal
+- `laptop-closed.js` (bots keep working in a cloud while the clock races and the worker leaves; DONE stack on return) params: cloud, words, cloudCue, spinCue, closeCue, backCue, done
+- `model-router.js` (agent routes task cards to 2 model chips, then reaches phone/desktop/email/chat tiles) params: models, modelCues, title, reachCue, places, placeCues, kinds
+- `preview-rope.js` (velvet rope + lit sign; business person first, consumer later, calendar "?") params: sign, bizLabel, laterLabel, dateText, signCue, bizCue, laterCue, dateCue
+
+Open source / security:
+- `open-toolbox.js` (open toolbox of code chips; robot checks a shield; people take free copies) params: title, tag, sub, test, hole, cue, time
+- `toolbox-locked.js` (the toolbox slams shut, chains + padlock + CLOSED stamp, project page vanishes) params: title, who, sign, stamp, page, gone, signCue, cue, pageCue, time
+- `two-sides.js` (defender and hooded attacker both take a chip from the toolbox; "OPEN OR CLOSED?") params: left, right, question, title, leftCue, fixCue, cue, qCue
+- `vault-heist.js` (2 beats: hooded figure + robot crack a vault; records fly out, figure counts up) params: source, agent, helper, target, when, inst, count, countLabel, agentCue, helperCue, cue, whenCue, instCue, countCue
+
+Money / rules / places:
 - `money-flow.js` (coins arc between two labelled buildings, amount counts up) params: from, to, amount, caption, time
+- `data-flow.js` (people/devices stream packets into a data center) params: sources, label, time
 - `rule-stamp.js` (rule book opens, gavel strikes, stamp lands) params: text, kind, title, note, cue
+- `rulebook-list.js` (rule topics pop from a book on a lectern; the robot steps in; final topic stamped) params: items, final, title, stamp, robot
+- `nda-signing.js` (2 beats: an official signs a secret paper, padlock, whisper; then it tears) params: docTitle, whisper, note, official, company, signCue, lockCue, quietCue, tearCue
+- `town-site.js` (giant building under a tarp: "hidden" redacted tags / "reveal" data center + questions) params: mode, tags, cues, bubbles, ask, sign, talkCue, askCue
+- `backlash-signs.js` (two company towers get pledge stamps; crowd with protest signs; counter) params: towers, chips, stamp, signs, count, suffix, caption, sub, firstCue, crowdCue, countCue
+
 Scenes with 3+ beats (`span`) use the beat boundaries as their phases; otherwise fractions of the duration.
 
 ## Adding a style
