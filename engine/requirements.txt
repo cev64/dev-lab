@@ -1,0 +1,4 @@
+# Clip engine (engine/clipper). Installed into .venv by scripts/setup.sh.
+# Audio is decoded with the system ffmpeg, so faster-whisper's PyAV path is never used.
+faster-whisper==1.2.1
+numpy>=1.26,<3

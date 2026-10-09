@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "notes": "Podcasts the clip engine pulls from (public RSS audio only). priority: 1 = pull first, 3 = filler. creditFormat placeholders: {show} {episode}. hosts = default speakers for the on-screen credit. Feeds verified (HTTP 200, correct show, episodes within the last month) on 2026-10-09.",
+  "sources": [
+    { "slug": "jre", "name": "The Joe Rogan Experience", "feed": "https://feeds.megaphone.fm/GLT1412515089", "priority": 1, "hosts": "Joe Rogan", "creditFormat": "Clip from {show} {episode}" },
+    { "slug": "lex", "name": "Lex Fridman Podcast", "feed": "https://lexfridman.com/feed/podcast/", "priority": 1, "hosts": "Lex Fridman", "creditFormat": "Clip from {show} {episode}" },
+    { "slug": "dwarkesh", "name": "Dwarkesh Podcast", "feed": "https://api.substack.com/feed/podcast/69345.rss", "priority": 1, "hosts": "Dwarkesh Patel", "creditFormat": "Clip from {show}: {episode}" },
+    { "slug": "doac", "name": "The Diary Of A CEO", "feed": "https://feeds.megaphone.fm/thediaryofaceo", "priority": 1, "hosts": "Steven Bartlett", "creditFormat": "Clip from {show}: {episode}" },
+    { "slug": "hardfork", "name": "Hard Fork", "feed": "https://feeds.simplecast.com/l2i9YnTd", "priority": 1, "hosts": "Kevin Roose & Casey Newton", "creditFormat": "Clip from {show}: {episode}" },
+    { "slug": "allin", "name": "All-In Podcast", "feed": "https://allinchamathjason.libsyn.com/rss", "priority": 1, "hosts": "Chamath Palihapitiya, Jason Calacanis, David Sacks & David Friedberg", "creditFormat": "Clip from {show}: {episode}" },
+    { "slug": "moonshots", "name": "Moonshots with Peter Diamandis", "feed": "https://feeds.megaphone.fm/DVVTS2890392624", "priority": 1, "hosts": "Peter Diamandis", "creditFormat": "Clip from {show}: {episode}" },
+    { "slug": "startalk", "name": "StarTalk", "feed": "https://feeds.simplecast.com/4T39_jAj", "priority": 2, "hosts": "Neil deGrasse Tyson", "creditFormat": "Clip from {show}: {episode}" },
+    { "slug": "theovon", "name": "This Past Weekend w/ Theo Von", "feed": "https://feeds.megaphone.fm/thispastweekend", "priority": 2, "hosts": "Theo Von", "creditFormat": "Clip from {show} {episode}" },
+    { "slug": "nopriors", "name": "No Priors", "feed": "https://feeds.megaphone.fm/nopriors", "priority": 2, "hosts": "Sarah Guo & Elad Gil", "creditFormat": "Clip from {show}: {episode}" },
+    { "slug": "bigtech", "name": "Big Technology Podcast", "feed": "https://feeds.megaphone.fm/LI3617121267", "priority": 2, "hosts": "Alex Kantrowitz", "creditFormat": "Clip from {show}: {episode}" },
+    { "slug": "lenny", "name": "Lenny's Podcast", "feed": "https://api.substack.com/feed/podcast/10845.rss", "priority": 2, "hosts": "Lenny Rachitsky", "creditFormat": "Clip from {show}: {episode}" },
+    { "slug": "latentspace", "name": "Latent Space", "feed": "https://api.substack.com/feed/podcast/1084089.rss", "priority": 3, "hosts": "Alessio Fanelli & swyx", "creditFormat": "Clip from {show}: {episode}" },
+    { "slug": "cogrev", "name": "The Cognitive Revolution", "feed": "https://feeds.megaphone.fm/RINTP3108857801", "priority": 3, "hosts": "Nathan Labenz", "creditFormat": "Clip from {show}: {episode}" }
+  ]
+}

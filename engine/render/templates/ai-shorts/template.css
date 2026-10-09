@@ -1,0 +1,7 @@
+@font-face { font-family: 'Montserrat'; font-weight: 800; font-style: normal; src: url('../../fonts/montserrat-latin-800-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Montserrat'; font-weight: 900; font-style: normal; src: url('../../fonts/montserrat-latin-900-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Anton'; font-weight: 400; font-style: normal; src: url('../../fonts/anton-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 500; font-style: normal; src: url('../../fonts/inter-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 700; font-style: normal; src: url('../../fonts/inter-latin-700-normal.woff2') format('woff2'); }
+html, body { margin: 0; padding: 0; background: #000; overflow: hidden; width: 1080px; height: 1920px; }
+canvas { display: block; width: 1080px; height: 1920px; }
