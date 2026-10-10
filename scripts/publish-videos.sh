@@ -13,6 +13,8 @@ ls "$SRC"/*.mp4 >/dev/null 2>&1 || { echo "no mp4 files in $SRC"; exit 1; }
 TMP="$(mktemp -d)"
 trap 'cd "$ROOT"; git worktree remove --force "$TMP" >/dev/null 2>&1 || true; rm -rf "$TMP"' EXIT
 git -C "$ROOT" worktree add --detach "$TMP" >/dev/null
+# A same-day re-run finds the local branch left by the previous run: drop it (the push below is forced anyway).
+git -C "$ROOT" branch -D "videos/$DATE" >/dev/null 2>&1 || true
 cd "$TMP"
 git checkout -q --orphan "videos/$DATE"
 git rm -rfq . >/dev/null 2>&1 || true
