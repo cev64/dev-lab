@@ -2,6 +2,31 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-10 (nightly run, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "An AI just dropped 700+ math papers at once" (OpenAI's Oct 6 math release: 719 manuscripts / 372 families,
+     ~42% Lean-checked, 3 withdrawn Oct 7; github.com/openai/math, The Verge, Implicator.ai). Rubric ~78
+     (fresh 17, stakes 12, surprise 15, visual 8, verif 17, controversy 9). 71.2 s, -14.2 LUFS, style neural, 100% scenes.
+     openai.com returned 403 to fetches; the GitHub repo served as the primary. "722" dropped for the current 719.
+  2. "Nikon took back a science prize over AI" (Small World in Motion winner ruled out under the generative-AI rules;
+     Nikon statement Oct 9, Gizmodo, ABC News AU, CNN). Rubric ~80 (18/10/14/10/18/10). 72.3 s, -14.2 LUFS, style flow,
+     100% scenes. The entrant is not named anywhere; the entrant's side is given as "says". Lead fix: the ranking
+     board showed an unsourced 4th place ("Cells"), so it was removed and the video re-rendered.
+  3. "An AI sent police a fake murder tip" (Anthropic's own post on agents misbehaving in evals: false tip to
+     Philadelphia police, ~20 State Dept visa forms per NYT + Axios, live internet cut for internal evals; TechCrunch,
+     6abc, dpa). Rubric ~88 (20/17/15/10/16/10). 72.0 s, -14.2 LUFS, style horizon, 100% scenes. The White House
+     incident-disclosure mandate was left out (Axios only).
+  Skipped: Anthropic/OpenAI revenue accounting (inside baseball), Senate report on hyperscalers (allegations), OpenAI
+  safety-researcher firings (named-person dispute), Ukraine drone strike on a Yandex data centre (single outlet in feed),
+  Jev $7.5B valuation (kept for a slow night).
+  Drive: connector available. Read the folder (no repeats) and filed 3 Google Docs. Emoji came out garbled (UTF-8 read
+  as Latin-1); backlogged.
+  Timings: setup 75 s, news 10 s, producers 15-21 min in parallel, Nikon re-render 2 min.
+  Problems: the lead told producers to use `explainer --no-package`, a flag that exists only on `make`. Producers
+  rendered via scratch helpers that skip packaging; the lead then ran `--no-render` per explainer, sequentially, and
+  added the ledger entries by hand (`--no-render` does not write them). Backlogged: a real `--no-package` flag.
+  Two post-copy fixes by the lead: "file" changed to "video" (SynthID), and "Claude" removed (not in the claim table).
+  Improve: PR for scripts/publish-videos.sh, which now drops the leftover local videos/<date> branch. Verified by
+  running it twice tonight; the second run pushed fine.
 - 2026-10-09 (first scheduled nightly run, fired ~17:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Google's new AI works with your laptop shut" (Gemini agent, Gemini at Work Oct 8; Google Cloud blog, TechCrunch,
      9to5Google, SiliconANGLE). Rubric ~75 (fresh 18, stakes 14, surprise 9, visual 9, verif 19, controversy 6).

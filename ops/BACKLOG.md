@@ -4,7 +4,13 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
-- [ ] scripts/publish-videos.sh: delete the leftover local `videos/<date>` branch so a same-day re-run works.
+- [ ] `clipper explainer --no-package`: render + drive.json without touching deliveries/ledger (parallel producers),
+      and let `--no-render` add the ledger entry when the MP4 exists.
+- [ ] Drive docs: emoji arrive garbled (text/plain upload read as Latin-1). Try `contentMimeType` "text/plain; charset=utf-8"
+      or base64Content; or strip emoji from the drive card.
+- [ ] Promote tonight's scenes (tip-form, pull-the-plug, form-flood, loophole-run, spam-delay, paper-flood, proof-checker,
+      claimed-proof, prize-stage, microscope-cilia, experts-check, two-claims) into the shared library with stills.
+- [x] scripts/publish-videos.sh: delete the leftover local `videos/<date>` branch so a same-day re-run works (PR 2026-10-10).
 - [ ] Promote the Sabi scenes after making the product prop a param (claims-pedestal, type-tap-talk, sensor-cap-bench).
 - [ ] Scene library growth: aim for 25+ reusable story scenes (launch event on stage with a generic presenter,
       lawsuit/courtroom, layoffs at an office, chip factory, phone app update, kids using AI at school, doctor's office,
