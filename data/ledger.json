@@ -178,6 +178,57 @@
         "https://www.yahoo.com/news/us/articles/anthropic-ai-submits-false-tip-053339693.html"
       ],
       "video": "out/2026-10-10/2026-10-10-explainer-rogue-agents.mp4"
+    },
+    {
+      "id": "2026-10-11-explainer-ai-brake",
+      "date": "2026-10-11",
+      "hook": "Microsoft's boss: assume your AI is compromised",
+      "topic": "AI SAFETY",
+      "title": "Microsoft's CEO says: assume your AI is compromised",
+      "followUp": false,
+      "sources": [
+        "https://x.com/satyanadella/status/2108931348857827686",
+        "https://techcrunch.com/2026/10/10/microsofts-satya-nadella-says-ai-models-need-an-emergency-brake/",
+        "https://en.wikipedia.org/wiki/Microsoft_Copilot"
+      ],
+      "video": "out/2026-10-11/2026-10-11-explainer-ai-brake.mp4",
+      "drive": "1A_GeoCIe0zkuC2xSReKzg4h4fyo5OEdgnAPzIPoUOtc"
+    },
+    {
+      "id": "2026-10-11-explainer-game-ports",
+      "date": "2026-10-11",
+      "hook": "Old Xbox games now run in a browser",
+      "topic": "AI CODING",
+      "title": "Old Xbox games now run in a browser tab",
+      "followUp": false,
+      "sources": [
+        "https://kotaku.com/we-might-be-cooked-as-these-vibe-coded-web-browser-ports-of-halo-the-simpsons-hit-and-run-and-gta-vice-city-seem-to-work-perfectly-2000743300",
+        "https://www.notebookcheck.net/Halo-Combat-Evolved-now-playable-with-web-browser-for-free.1412338.0.html",
+        "https://80.lv/articles/halo-combat-evolved-can-now-be-played-in-a-browser/",
+        "https://www.notebookcheck.net/Grand-Theft-Auto-Vice-City-is-now-playable-everywhere-through-a-browser-port.1189117.0.html",
+        "https://www.digitalcitizen.life/halo-combat-evolved-browser-port-no-game-data/",
+        "https://www.videogameschronicle.com/news/banjo-kazooie-pc-port-decomp-developer-says-ai-generated-pc-ports-are-a-race-to-the-bottom-and-disrespectful/"
+      ],
+      "video": "out/2026-10-11/2026-10-11-explainer-game-ports.mp4",
+      "drive": "1Qoj9b2Z_QrdQvjN-f_FRP_3VWOenKxVbWl-1ulWtUK0"
+    },
+    {
+      "id": "2026-10-11-explainer-chip-swap",
+      "date": "2026-10-11",
+      "hook": "Real AI servers out. Dummy servers in.",
+      "topic": "CHIPS",
+      "title": "Supermicro consultant pleads guilty in AI server smuggling case",
+      "followUp": false,
+      "sources": [
+        "https://www.justice.gov/opa/pr/three-charged-conspiring-unlawfully-divert-cutting-edge-us-artificial-intelligence",
+        "https://www.mlex.com/mlex/articles/2536559/supermicro-consultant-pleads-guilty-in-us-to-role-in-ai-server-diversion-scheme",
+        "https://cryptobriefing.com/super-micro-contractor-pleads-guilty-nvidia-chips/",
+        "https://www.upi.com/Top_News/World-News/2026/03/20/9721774021211/",
+        "https://www.enca.com/news/three-charged-sneaking-nvidia-ai-chips-us-china",
+        "https://www.implicator.ai/super-micro-co-founder-charged-in-2-5-billion-nvidia-chip-smuggling-scheme/"
+      ],
+      "video": "out/2026-10-11/2026-10-11-explainer-chip-swap.mp4",
+      "drive": "1fBAewHjGA09jc9-zhSthoe1aTNBuV-9aNCDyjKJAfD8"
     }
   ]
 }

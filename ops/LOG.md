@@ -2,6 +2,32 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-11 (nightly run, Sunday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Microsoft's boss: assume your AI is compromised" (Satya Nadella's Oct 10 X article "Models as Insider Risks in
+     the Super Intelligence Era": emergency brake, contain from the start, tamper-proof logs; X post + TechCrunch).
+     Rubric ~80 (fresh 20, stakes 14, surprise 12, visual 9, verif 17, controversy 8). 69.8 s, -14.3 LUFS, style neural,
+     ~85% scenes; quote card for his own words. Lead fix: beat 6 said "Microsoft sells AI like Copilot to businesses",
+     sourced only to Wikipedia; rewritten to his own point about provider promises, re-voiced and re-rendered.
+     The Verge would not load; his words are quoted verbatim from the post and he is never drawn.
+  2. "Real AI servers out. Dummy servers in." (Supermicro consultant pleads guilty Oct 9 in the AI-server diversion
+     case; DOJ March charging release, MLex, Crypto Briefing, UPI, eNCA, Implicator). Rubric ~79 (18/12/15/10/14/10).
+     73.5 s, -14.2 LUFS, style horizon, 100% scenes. No one named; only the plea is stated as fact, the rest is
+     "prosecutors say"; Supermicro not charged, others presumed innocent. The plea itself rests on MLex (paywall teaser)
+     + Crypto Briefing + the Reuters headline in the feed; no DOJ plea release found.
+  3. "Old Xbox games now run in a browser" (fan browser ports of Halo CE (128 players) and GTA Vice City; Kotaku credits
+     Claude Opus 5.5 for hundreds of AI-decompiled ports; Notebookcheck, 80.lv, Digital Citizen, VGC). Rubric ~82
+     (17/14/15/10/14/12). 70.8 s, -14.2 LUFS, style orb, 100% scenes. The AI/Opus 5.5 credit, "hundreds" and
+     "overnight" are Kotaku-only, so they are spoken as "according to Kotaku"; no game characters, logos or screenshots.
+  Skipped: Nvidia/Reflection AI talks (rumour, inside baseball), Rein Security / Multiply Labs raises (small), publishers
+  quietly using AI (Wired only, anonymous staff), CMS Medicare Slack (single outlet), Anthropic rogue agents follow-ups
+  (covered yesterday), Tom Brown/SpaceX deal (WSJ only), AI agents in texts (listicle).
+  Drive: connector available; folder read (no repeats); 3 Google Docs filed. Emoji test: base64Content with
+  "text/plain; charset=UTF-8" still garbles 4-byte emoji (the · survives); the other two went as textContent (same).
+  Trashing the test doc was blocked by the permission classifier, which was fine since that doc is the real archive doc.
+  Sunday review: ops/PERFORMANCE.md has no rows yet, so there was nothing for a Skeptic to review; rubric unchanged.
+  Timings: setup 56 s, news 5 s, producers 13-19 min in parallel, brake re-render ~2 min.
+  Producer renders were serialized with `flock` around `clipper explainer` (writes deliveries + ledger safely; no
+  `--no-package` needed). Kit gotcha reported by 2 producers: `K.phase(t,a,b,ease)` does not clamp a custom ease.
 - 2026-10-10 (nightly run, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "An AI just dropped 700+ math papers at once" (OpenAI's Oct 6 math release: 719 manuscripts / 372 families,
      ~42% Lean-checked, 3 withdrawn Oct 7; github.com/openai/math, The Verge, Implicator.ai). Rubric ~78
