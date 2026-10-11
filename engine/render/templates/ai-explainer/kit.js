@@ -80,8 +80,9 @@
       // local times of items revealed one after another: [t - delay, t - delay - step, ...]
       stagger: (items, t, step = 0.15, delay = 0) => items.map((_, i) => t - delay - i * step),
       ease: easeInOutCubic, easeOut: easeOutCubic, easeOutBack, spring, smooth,
-      // progress 0..1 of window [a, b] with an ease
-      phase: (t, a, b, ease = easeInOutCubic) => ease((t - a) / Math.max(1e-6, b - a)),
+      // progress 0..1 of window [a, b] with an ease; the raw progress is clamped to [0, 1] first, so a custom
+      // ease (e.g. k => k * k) never sees values outside the window (built-in eases already clamp)
+      phase: (t, a, b, ease = easeInOutCubic) => ease(clamp((t - a) / Math.max(1e-6, b - a))),
       // stroke a polyline up to `progress` (0..1) of its length; set strokeStyle/lineWidth first
       pathDraw(ctx, pts, progress) {
         if (pts.length < 2 || progress <= 0) return;

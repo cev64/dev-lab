@@ -235,6 +235,20 @@ Money / rules / places:
 - `town-site.js` (giant building under a tarp: "hidden" redacted tags / "reveal" data center + questions) params: mode, tags, cues, bubbles, ask, sign, talkCue, askCue
 - `backlash-signs.js` (two company towers get pledge stamps; crowd with protest signs; counter) params: towers, chips, stamp, signs, count, suffix, caption, sub, firstCue, crowdCue, countCue
 
+AI safety / oversight:
+- `emergency-brake.js` (agent robot on a rail cart; glass box drops around it; operator pulls a red brake lever, STOPPED stamp; `mode: "payoff"` = settled room + quote + question) params: mode, compLabel, cageLabel, pauseLabel, lever, stamp, compCue, cageCue, brakeCue, pullCue, stopCue, quote, quoteCue, question, qCue
+- `audit-log.js` (console outside the model, harness around the robot, every action flies as a receipt into a locked ACTION LOG a person reads) params: entries, title, controlsLabel, harnessLabel, logLabel, controlsCue, harnessCue, actionCue, logCue
+- `robot-decodes.js` (disc streams machine code into a robot that types readable code; MONTHS calendar crossed out, OVERNIGHT lands) params: lines, input, panel, done, before, after, source, readCue, monthsCue, nightCue
+
+Crime / courts / trade:
+- `court-plea.js` (`mode: "plea"` defendant before the bench, gavel + PLEADED GUILTY stamp, then an allegation panel moving an item from origin to destination; `mode: "caveat"` company hands files over, "Not charged" / "cooperating" pills, "presumed innocent" banner) params: mode, date, court, who, stamp, by, what, origin, dest, cue, whoCue, courtCue, chipCue, destCue; caveat: company, notCharged, coop, innocent, notCue, cue, innocentCue
+- `swap-for-fakes.js` (warehouse: courier wheels real servers out, DUMMY look-alikes take their place, auditor ticks them; modes hook | audit | payoff) params: mode, by, dummy, many, paper, gone, dest, stay, question, dummyCue, paperCue, realCue, fakeCue, qCue
+- `cargo-route.js` (abstract sea map: ship carries servers origin -> stopover -> destination, two figures count up, 3-week calendar, cargo turns into unmarked boxes) params: a, b, c, amount1, cap1, amount2, cap2, weeks, boxes, by, buyCue, weeksCue, arriveCue, boxCue
+
+Apps / games / copyright (these carry their own `gameProps()` helper: browser windows with generic shape mini games shooter|driving|platform|skate):
+- `copies-multiply.js` (night city: one app window multiplies across the sky, big count word, passers-by point; a robot rises in a beam with a credit pill) params: count, sub, credit, source, tab, n, games, countCue, creditCue
+- `legal-letter.js` (fan-made game window tagged "Unofficial"; a cartoon lawyer holds up a letter; the window dims under a hedged "Could be taken down ?") params: letter, label, maybe, game, tab, letterCue, downCue
+
 Scenes with 3+ beats (`span`) use the beat boundaries as their phases; otherwise fractions of the duration.
 
 ## Adding a style
