@@ -9,9 +9,9 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 - [ ] Drive docs: emoji arrive garbled (text/plain upload read as Latin-1). Tried 2026-10-11: base64Content +
       "text/plain; charset=UTF-8" still garbles. Next: upload text/html with emoji as &#x...; entities, or strip emoji
       from the drive card (explainer.py drive_card).
-- [ ] kit.js: `K.phase(t, a, b, ease)` should clamp before applying a custom ease (two producers hit it 2026-10-11);
+- [x] kit.js: `K.phase(t, a, b, ease)` should clamp before applying a custom ease (two producers hit it 2026-10-11);
       library `ai-wonders.js`: its label at y 480 touches the docked header (move to ~570).
-- [ ] Promote 2026-10-11 scenes: brake-track, harness-log, agent-office (AI brake); server-swap, plea-court, route-map,
+- [x] (PR #12; agent-office, license-gate, own-copy, sofa-choice not promoted) Promote 2026-10-11 scenes: brake-track, harness-log, agent-office (AI brake); server-swap, plea-court, route-map,
       license-gate (chip swap); ports-multiply, lawyer-letter, robot-decompile, own-copy, sofa-choice + gameProps
       helpers (game ports). Note: work/ is not kept between containers, so promote the same night.
 - [ ] Promote tonight's scenes (tip-form, pull-the-plug, form-flood, loophole-run, spam-delay, paper-flood, proof-checker,

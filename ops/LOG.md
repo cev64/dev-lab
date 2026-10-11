@@ -28,6 +28,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Timings: setup 56 s, news 5 s, producers 13-19 min in parallel, brake re-render ~2 min.
   Producer renders were serialized with `flock` around `clipper explainer` (writes deliveries + ledger safely; no
   `--no-package` needed). Kit gotcha reported by 2 producers: `K.phase(t,a,b,ease)` does not clamp a custom ease.
+  Improve: PR #12 merged: 8 of tonight's scenes promoted (library 21 -> 29: emergency-brake, audit-log, robot-decodes,
+  court-plea, swap-for-fakes, cargo-route, copies-multiply, legal-letter), kit phase() clamp, ai-wonders label fix;
+  verified with default-param stills and stills of tonight's clips.
 - 2026-10-10 (nightly run, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "An AI just dropped 700+ math papers at once" (OpenAI's Oct 6 math release: 719 manuscripts / 372 families,
      ~42% Lean-checked, 3 withdrawn Oct 7; github.com/openai/math, The Verge, Implicator.ai). Rubric ~78
