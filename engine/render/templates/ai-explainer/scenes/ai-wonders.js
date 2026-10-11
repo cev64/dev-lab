@@ -27,6 +27,6 @@ export default function draw(ctx, t, info) {
     K.drawSpeechBubble(ctx, 700, 650, bp * (1 + 0.02 * Math.sin(t * 2)), { text: P.thought || '?', size: 96, tail: 'left', pop: bp });
   }
   const lp = K.popIn(t, labelAt, 0.5);
-  if (lp > 0) K.drawLabel(ctx, 487, 480, lp, { text: P.question || 'Open question', size: 38, accent: true, dot: true });
+  if (lp > 0) K.drawLabel(ctx, 450, 570, lp, { text: P.question || 'Open question', size: 38, accent: true, dot: true });
   ctx.restore();
 }
