@@ -15,7 +15,7 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 - [x] (PR #12; agent-office, license-gate, own-copy, sofa-choice not promoted) Promote 2026-10-11 scenes: brake-track, harness-log, agent-office (AI brake); server-swap, plea-court, route-map,
       license-gate (chip swap); ports-multiply, lawyer-letter, robot-decompile, own-copy, sofa-choice + gameProps
       helpers (game ports). Note: work/ is not kept between containers, so promote the same night.
-- [ ] Promote 2026-10-12 scenes: strike-map (appearAt), cloud-reveal, apps-fail, go-underground, both-sides (Yandex);
+- [x] (PR #13) Promote 2026-10-12 scenes: strike-map (appearAt), cloud-reveal, apps-fail, go-underground, both-sides (Yandex);
       grad-ladder, lectern-warning (real speaker as text on a screen), job-tsunami, two-roads (first jobs); si-order,
       rename-street (+ kit primitives drawSignBoard/drawCivic/drawLift) (SI rebrand).
 - [ ] Promote tonight's scenes (tip-form, pull-the-plug, form-flood, loophole-run, spam-delay, paper-flood, proof-checker,

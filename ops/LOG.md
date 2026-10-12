@@ -27,6 +27,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   entities STILL garbles 4-byte emoji (first-jobs doc), so the other two went as text/plain with emoji written as
   [names]. Fix belongs in explainer.py drive_card (backlogged).
   Timings: setup ~3 min, news 5 s, producers 19-26 min in parallel, two lead-requested re-renders ~5-8 min each.
+  Improve: PR #13 merged: 9 of tonight's scenes promoted (library 29 -> 38: strike-map, cloud-reveal, apps-fail,
+  go-underground, grad-ladder, lectern-warning, job-tsunami, rename-street, order-renames); verified with default-param
+  stills and 48/48 byte-identical frames of tonight's clips rendered from the library copies.
 - 2026-10-11 (nightly run, Sunday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Microsoft's boss: assume your AI is compromised" (Satya Nadella's Oct 10 X article "Models as Insider Risks in
      the Super Intelligence Era": emergency brake, contain from the start, tamper-proof logs; X post + TechCrunch).
