@@ -229,6 +229,61 @@
       ],
       "video": "out/2026-10-11/2026-10-11-explainer-chip-swap.mp4",
       "drive": "1fBAewHjGA09jc9-zhSthoe1aTNBuV-9aNCDyjKJAfD8"
+    },
+    {
+      "id": "2026-10-12-explainer-yandex-datacenters",
+      "date": "2026-10-12",
+      "hook": "Drones hit three data centers in four days",
+      "topic": "AI INFRASTRUCTURE",
+      "title": "Drones hit three Yandex data centers in four days",
+      "followUp": false,
+      "sources": [
+        "https://www.thestar.com.my/news/world/2026/10/08/drones-hit-yandex-data-centre-in-first-major-attack-on-russian-data-hub",
+        "https://www.internazionale.it/ultime-notizie-reuters/2026/10/08/drones-hit-yandex-data-centre-in-first-major-attack-on-russian-data-hub",
+        "https://www.newsweek.com/ukraine-strikes-second-data-center-of-russias-google-in-two-days-12546205",
+        "https://www.aljazeera.com/news/2026/10/9/ukraine-takes-aim-at-russias-ai-data-infrastructure",
+        "https://www.kyivpost.com/post/86594",
+        "https://kyivindependent.com/third-yandex-data-center-in-russia-shut-down-following-reported-drone-attack/",
+        "https://newsukraine.rbc.ua/news/drones-hit-yandex-s-third-data-center-disrupting-1791695816.html",
+        "https://united24media.com/war-in-ukraine/russias-yandex-under-fire-as-drones-hit-third-data-center-in-four-days-23321",
+        "https://www.ukrinform.net/rubric-ato/4173162-drones-attack-yandex-data-center-in-russia-for-third-time-in-a-week-media.html"
+      ],
+      "video": "out/2026-10-12/2026-10-12-explainer-yandex-datacenters.mp4"
+    },
+    {
+      "id": "2026-10-12-explainer-si-rebrand",
+      "date": "2026-10-12",
+      "hook": "The word AI is being painted over",
+      "topic": "SUPER INTELLIGENCE",
+      "title": "AI is being renamed SI: who's switching and who isn't",
+      "followUp": false,
+      "sources": [
+        "https://www.whitehouse.gov/presidential-actions/2026/09/inaugurating-the-era-of-super-intelligence/",
+        "https://thenextweb.com/news/trump-super-intelligence-executive-order-signed",
+        "https://thenextweb.com/news/salesforce-aiforce-siforce-trump-super-intelligence",
+        "https://www.aol.com/articles/trumps-ai-rebrand-catching-elon-040201000.html",
+        "https://www.fastcompany.com/91621645/trump-ai-rebrand-raises-awkward-question-for-openai",
+        "https://www.cnn.com/2026/10/11/politics/super-intelligence-trump-ai",
+        "https://www.khaleejtimes.com/world/americas/musk-renames-spacexai-to-spacexsi-trumps-super-intelligence",
+        "https://www.notateslaapp.com/news/4770/musk-spacexai-will-be-renamed-spacexsi-dropping-ai"
+      ],
+      "video": "out/2026-10-12/2026-10-12-explainer-si-rebrand.mp4"
+    },
+    {
+      "id": "2026-10-12-explainer-first-jobs",
+      "date": "2026-10-12",
+      "hook": "AI is shrinking demand for first jobs",
+      "topic": "JOBS",
+      "title": "AI is shrinking demand for first jobs",
+      "followUp": false,
+      "sources": [
+        "https://www.yahoo.com/news/world/articles/singapores-president-warns-ais-risk-040106986.html",
+        "https://www.thestandard.com.hk/finance/article/345223/Singapores-President-warns-of-AIs-risk-to-employment-for-fresh-graduates",
+        "https://www.thejakartapost.com/business/2026/10/12/ai-investment-keeps-global-growth-around-3-with-major-asia-benefits-imf",
+        "https://www.kaohooninternational.com/economics/592508",
+        "https://www.tabla.com.sg/news/singapore/president-tharman-warns-fresh-grad-job-risk-ai"
+      ],
+      "video": "out/2026-10-12/2026-10-12-explainer-first-jobs.mp4"
     }
   ]
 }

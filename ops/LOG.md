@@ -2,6 +2,31 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-12 (nightly run, Monday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "AI is shrinking demand for first jobs" (Singapore President Tharman at the IMF/World Bank meetings in Bangkok,
+     Oct 12; IMF: AI spending keeps growth ~3%, Georgieva "slow-moving tsunami", 40% of jobs; Reuters via Yahoo / The
+     Standard / Jakarta Post, Kaohoon International). Rubric ~80 (fresh 20, stakes 18, surprise 12, visual 8, verif 16,
+     controversy 6). 71.0 s, -14.2 LUFS, style flow, 100% scenes; speakers named on a screen, never drawn.
+     Lead fix: his "new divergence" quote was Reuters-only, so beat 6 now uses the IMF's Asia growth ranges (Reuters +
+     Kaohoon); the two-roads scene was scaled up to fill the frame. Re-voiced and re-rendered.
+  2. "Drones hit three data centers in four days" (Yandex Sasovo Oct 8, Kaluga Oct 9, Vladimir Oct 11; Reuters,
+     Newsweek, Al Jazeera, Kyiv Independent, Kyiv Post, RBC-Ukraine, UNITED24, Ukrinform). Rubric ~79 (19/12/15/10/15/8).
+     72.8 s, -14.3 LUFS, style horizon, 100% scenes. No attribution beyond the sources: Zelensky's "respond in kind"
+     paraphrased; "all three supercomputers offline", "80+ services", banking outages left out (single source).
+     Lead fix: map sites showed through the hook title card; producer added `appearAt` to strike-map and re-rendered.
+  3. "The word AI is being painted over" (Trump's Sept 29 "Super Intelligence" order for federal agencies; Musk
+     SpaceXAI -> SpaceXSI (Oct 4), Benioff AIForce -> SIForce (Fri Oct 9), Altman "no plans"; White House, TNW, BI, Fast
+     Company, CNN, Khaleej Times, Not a Tesla App). Rubric ~82 (16/12/15/10/17/12). 72.4 s, -14.3 LUFS, style orb, 100%
+     scenes; neutral tone, no one drawn, "THE ENEMY" post left out. The lead's brief said Benioff posted Oct 10; the
+     producer caught that it was Friday Oct 9.
+  Skipped: Axios "AI companies plot the day after" (single-outlet scoop on anonymous sources), US restores UK AISI
+  access (Telegraph scoop relayed by Reuters), Amazon/Decart $7B talks (WSJ only), Nous Research $90M (Oct 7, too old),
+  OpenAI film "Artificial" (premiered Oct 5, nothing new), TSMC record profit (not reported yet), Qualcomm 100B
+  on-device (2028 date not sourced).
+  Drive: connector available; folder checked (no repeats); 3 Google Docs filed. Emoji test: text/html with &#x...;
+  entities STILL garbles 4-byte emoji (first-jobs doc), so the other two went as text/plain with emoji written as
+  [names]. Fix belongs in explainer.py drive_card (backlogged).
+  Timings: setup ~3 min, news 5 s, producers 19-26 min in parallel, two lead-requested re-renders ~5-8 min each.
 - 2026-10-11 (nightly run, Sunday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Microsoft's boss: assume your AI is compromised" (Satya Nadella's Oct 10 X article "Models as Insider Risks in
      the Super Intelligence Era": emergency brake, contain from the start, tamper-proof logs; X post + TechCrunch).

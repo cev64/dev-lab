@@ -6,7 +6,8 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 ## Next
 - [ ] `clipper explainer --no-package`: render + drive.json without touching deliveries/ledger (parallel producers),
       and let `--no-render` add the ledger entry when the MP4 exists.
-- [ ] Drive docs: emoji arrive garbled (text/plain upload read as Latin-1). Tried 2026-10-11: base64Content +
+- [ ] Drive docs: emoji arrive garbled (2026-10-12: text/html with &#x..; entities ALSO garbles; writing emoji as
+      [unicode name] works -> do that in explainer.py drive_card) (text/plain upload read as Latin-1). Tried 2026-10-11: base64Content +
       "text/plain; charset=UTF-8" still garbles. Next: upload text/html with emoji as &#x...; entities, or strip emoji
       from the drive card (explainer.py drive_card).
 - [x] kit.js: `K.phase(t, a, b, ease)` should clamp before applying a custom ease (two producers hit it 2026-10-11);
@@ -14,6 +15,9 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 - [x] (PR #12; agent-office, license-gate, own-copy, sofa-choice not promoted) Promote 2026-10-11 scenes: brake-track, harness-log, agent-office (AI brake); server-swap, plea-court, route-map,
       license-gate (chip swap); ports-multiply, lawyer-letter, robot-decompile, own-copy, sofa-choice + gameProps
       helpers (game ports). Note: work/ is not kept between containers, so promote the same night.
+- [ ] Promote 2026-10-12 scenes: strike-map (appearAt), cloud-reveal, apps-fail, go-underground, both-sides (Yandex);
+      grad-ladder, lectern-warning (real speaker as text on a screen), job-tsunami, two-roads (first jobs); si-order,
+      rename-street (+ kit primitives drawSignBoard/drawCivic/drawLift) (SI rebrand).
 - [ ] Promote tonight's scenes (tip-form, pull-the-plug, form-flood, loophole-run, spam-delay, paper-flood, proof-checker,
       claimed-proof, prize-stage, microscope-cilia, experts-check, two-claims) into the shared library with stills.
 - [x] scripts/publish-videos.sh: delete the leftover local `videos/<date>` branch so a same-day re-run works (PR 2026-10-10).
