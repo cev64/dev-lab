@@ -249,6 +249,21 @@ Apps / games / copyright (these carry their own `gameProps()` helper: browser wi
 - `copies-multiply.js` (night city: one app window multiplies across the sky, big count word, passers-by point; a robot rises in a beam with a credit pill) params: count, sub, credit, source, tab, n, games, countCue, creditCue
 - `legal-letter.js` (fan-made game window tagged "Unofficial"; a cartoon lawyer holds up a letter; the window dims under a hedged "Could be taken down ?") params: letter, label, maybe, game, tab, letterCue, downCue
 
+Infrastructure / outages:
+- `strike-map.js` (abstract night map, no real borders: data-center sites get hit one by one (distant drone silhouette, flash, small roof fire, lights out, status note); top pill slots change e.g. a date) params: sites [{name, x, y, note, cue, noteCue, hit, idle, fire, drone}], ref, slots [{text, cue, accent, size}], appearAt, zoom
+- `cloud-reveal.js` (a cartoon cloud with a sign splits apart to reveal a data-center building full of racks; chip tiles pop up) params: cloud, reveal, revealCue, chipsCue
+- `apps-fail.js` (person at the curb with a phone: a generic ride app's spinner turns into an error as its data center goes dark; app tiles grey out with a cross) params: app, finding, error, tiles [{kind voice|music, text, cue}], darkCue, failCue
+- `go-underground.js` (payoff: ground cross-section, a data center sinks into a bunker, vents breathe, big "?") params: tag, real, question, realCue, targetCue, moveCue
+
+Jobs / careers:
+- `grad-ladder.js` (graduate in cap and gown at a career ladder; modes intro | vanish (a robot carries off the first rung) | payoff (rung missing, can't reach, "?")) params: mode, rung, headline, lessLabel, note, act, question, lessCue, noteCue, actCue, climbCue, qCue
+- `lectern-warning.js` (conference hall: empty spot-lit lectern + mic (speaker never drawn), screen shows event / place then role + name as text, warning chip; optional mortarboards on the audience) params: event, place, date, role, name, warning, grads, eventCue, placeCue, dateCue, nameCue, warnCue, gradCue
+- `job-tsunami.js` (ten workers on a beach as a slow wave builds; name + quote chips, outcome chips, big share counts up and that share of workers get rings) params: name, quote, estimate, chips, chipCues, share, unit, nameCue, waveCue, estCue, shareCue
+
+Names / rebrands:
+- `order-renames.js` (2 beats: painter on a ladder paints over a civic letter sign; an order is signed and stamped, copies fly to three agencies and their signs flip) params: from, to, agencies, docTitle, date, stamp, law, agenciesLabel, signCue, agenciesCue, stampCue, flipCue, lawCue, dateCue
+- `rename-street.js` (3-5 beats: dusk street, camera dollies from an agency (renamed sign, locked cabinet) to 1-3 company towers that each `pending` / `flip` / `keep` the new name with a quote card; payoff letter board flips and settles on "?") params: gov {sign, building, label, keep, keepChip}, towers [{from, to, label, mode, quote, by, chip, bubble, cue, chipCue, quoteCue}], privateLabel, question, board, rest, privateCue, anywayCue, keepCue, govCue, towersCue, qCue
+
 Scenes with 3+ beats (`span`) use the beat boundaries as their phases; otherwise fractions of the duration.
 
 ## Adding a style
