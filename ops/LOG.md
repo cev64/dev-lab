@@ -26,6 +26,8 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Problems: one producer cleared a shared scratchpad qa/ folder another was using (stills only; fixed by telling
   producers to use their own subfolders next time). The demand-queue beat (chip casino) has a robot partly off the
   right edge (scenery). Timeline card labels ~22 px (below the 24 px floor; backlogged).
+  Improve: PR #14 merged: all 12 of tonight's scenes promoted (library 38 -> 50); verified with default-param stills
+  and 48/48 byte-identical frames of tonight's clips rendered from the library copies.
 - 2026-10-12 (nightly run, Monday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "AI is shrinking demand for first jobs" (Singapore President Tharman at the IMF/World Bank meetings in Bangkok,
      Oct 12; IMF: AI spending keeps growth ~3%, Georgieva "slow-moving tsunami", 40% of jobs; Reuters via Yahoo / The

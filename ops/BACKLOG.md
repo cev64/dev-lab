@@ -6,6 +6,7 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 ## Next
 - [ ] `clipper explainer --no-package`: render + drive.json without touching deliveries/ledger (parallel producers),
       and let `--no-render` add the ledger entry when the MP4 exists.
+- [ ] Library defaults: make self-graded (me=Meta), muse-paywall (Muse/Wonder) and fund-link (kospi*/sp* names) generic; pass old values explicitly in old clips.
 - [ ] Timeline card: label text ~22 px, below the 24 px legibility floor (2026-10-13); raise it.
 - [ ] Producer brief: each producer uses its own scratchpad subfolder for QA stills (2026-10-13 collision).
 - [ ] Drive docs: emoji arrive garbled (2026-10-12: text/html with &#x..; entities ALSO garbles; writing emoji as
@@ -20,7 +21,7 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 - [x] (PR #13) Promote 2026-10-12 scenes: strike-map (appearAt), cloud-reveal, apps-fail, go-underground, both-sides (Yandex);
       grad-ladder, lectern-warning (real speaker as text on a screen), job-tsunami, two-roads (first jobs); si-order,
       rename-street (+ kit primitives drawSignBoard/drawCivic/drawLift) (SI rebrand).
-- [ ] Promote 2026-10-13 scenes: launch-stage, muse-paywall, power-bet, self-graded (Muse Wonder); chip-casino, market-board, factory-dim, fund-link, demand-queue (chip casino); smart-home-hop, tv-box-lab, no-off-switch (self-replicate).
+- [x] (PR #14) Promote 2026-10-13 scenes: launch-stage, muse-paywall, power-bet, self-graded (Muse Wonder); chip-casino, market-board, factory-dim, fund-link, demand-queue (chip casino); smart-home-hop, tv-box-lab, no-off-switch (self-replicate).
 - [ ] Promote tonight's scenes (tip-form, pull-the-plug, form-flood, loophole-run, spam-delay, paper-flood, proof-checker,
       claimed-proof, prize-stage, microscope-cilia, experts-check, two-claims) into the shared library with stills.
 - [x] scripts/publish-videos.sh: delete the leftover local `videos/<date>` branch so a same-day re-run works (PR 2026-10-10).
