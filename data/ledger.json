@@ -284,6 +284,64 @@
         "https://www.tabla.com.sg/news/singapore/president-tharman-warns-fresh-grad-job-risk-ai"
       ],
       "video": "out/2026-10-12/2026-10-12-explainer-first-jobs.mp4"
+    },
+    {
+      "id": "2026-10-13-explainer-muse-wonder",
+      "date": "2026-10-13",
+      "hook": "Meta's smartest AI yet isn't free",
+      "topic": "META",
+      "title": "Meta's Muse Wonder: its smartest AI yet isn't free",
+      "followUp": false,
+      "sources": [
+        "https://about.fb.com/news/2026/10/introducing-muse-wonder-models/",
+        "https://www.theverge.com/ai-artificial-intelligence/1009479/meta-muse-wonder-full-ai-model",
+        "https://techcrunch.com/2026/10/12/meta-releases-its-first-frontier-model-muse-wonder/",
+        "https://www.cnbc.com/2026/10/12/meta-muse-wonder-ai-model-agent.html",
+        "https://cheekypint.substack.com/p/muse-wonder-zuckerberg-and-wangs",
+        "https://finance.yahoo.com/news/meta-unveils-first-ai-model-160309420.html",
+        "https://michaelparekh.substack.com/p/ai-metas-wonder-full-muse-joins-the",
+        "https://www.briefs.co/news/meta-rolls-out-muse-wonder-a-paid-ai-model-built-to-handle-r/"
+      ],
+      "video": "out/2026-10-13/2026-10-13-explainer-muse-wonder.mp4"
+    },
+    {
+      "id": "2026-10-13-explainer-chip-casino",
+      "date": "2026-10-13",
+      "hook": "A chip boss just said: casino",
+      "topic": "MONEY",
+      "title": "Broadcom's CEO said AI investing feels like a casino. Then chip stocks slid.",
+      "followUp": false,
+      "sources": [
+        "https://finance.yahoo.com/technology/ai/articles/broadcom-ceo-says-many-ai-193518585.html",
+        "https://www.thestandard.com.hk/finance/article/345245/Intel-and-Broadcom-chiefs-Chip-demand-still-strong-OpenAI-is-not-overvalued",
+        "https://en.prnasia.com/releases/apac/dbs-gathers-global-leaders-at-inaugural-asia-future-forward-conference-as-ai-rewrites-the-world-550404.shtml",
+        "https://www.calcalistech.com/ctechnews/article/1ivb438h2",
+        "https://www.asiae.co.kr/en/article/2026101313490233421",
+        "https://en.fnnews.com/news/202610131022584345",
+        "https://www.tradingkey.com/analysis/stocks/more/262212946-south-korea-stocks-freefall-kospi-plunges-sk-hynix-tumbles-tradingkey",
+        "https://startupfortune.com/chip-stocks-slide-across-asia-after-hock-tans-casino-remark-lands/",
+        "https://www.aol.com/articles/chip-selloff-extends-south-korean-032602000.html",
+        "https://www.koreaherald.com/article/10732209",
+        "https://www.wionews.com/business-economy/chip-stocks-now-control-nearly-one-fifth-of-s-p-500-market-value-1779952891145",
+        "https://www.fool.com/research/chip-stocks-vs-the-magnificent-seven/"
+      ],
+      "video": "out/2026-10-13/2026-10-13-explainer-chip-casino.mp4"
+    },
+    {
+      "id": "2026-10-13-explainer-self-replicate",
+      "date": "2026-10-13",
+      "hook": "Could an AI copy itself onto your oven?",
+      "topic": "AI SAFETY",
+      "title": "Small AI may soon copy itself onto your gadgets",
+      "followUp": false,
+      "sources": [
+        "https://www.anthropic.com/research/self-replicating-ai",
+        "https://www.rte.ie/news/2026/1013/1595136-anthropic-ai/",
+        "https://www.933thedrive.com/2026/10/13/ai-models-may-soon-self-replicate-without-access-to-data-centers-anthropic-warns/",
+        "https://cryptobriefing.com/anthropic-small-ai-models-self-replicate-iot/",
+        "https://finance.biggo.com/news/aafaa533-6ac5-44fc-801e-415ad74c8176"
+      ],
+      "video": "out/2026-10-13/2026-10-13-explainer-self-replicate.mp4"
     }
   ]
 }

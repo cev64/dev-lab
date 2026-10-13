@@ -2,6 +2,30 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-13 (nightly run, Tuesday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Meta's smartest AI yet isn't free" (Meta's Muse Wonder / Wonder Full, Oct 12; paid-first: $20/$100 Muse app,
+     $50/$200 Muse Code; Zuckerberg's "$100 billion, $200 billion" bet as on-screen text; Meta newsroom, TechCrunch, The
+     Verge, CNBC, Cheeky Pint podcast, Reuters Apr 8). Rubric ~78 (fresh 20, stakes 14, surprise 12, visual 8, verif 16,
+     controversy 8). 73.4 s, -14.2 LUFS, style orb, ~82% scenes (one timeline card). Lead check: prices re-confirmed via
+     CNBC + MarketScreener + NewsBytes search results. No Reuters copy of the Oct 12 story loaded.
+  2. "A chip boss just said: casino." (Broadcom CEO Hock Tan at DBS Asia Future Forward, Singapore, Oct 12; Samsung
+     >8%, SK Hynix >9%, KOSPI >6% intraday Oct 13; Bloomberg via Yahoo, The Standard, DBS release, Asiae, FnNews,
+     TradingKey, CTech). Rubric ~80 (20/16/14/9/14/7). 69.9 s, -14.3 LUFS, style horizon, 100% scenes. FT's exact
+     8.8%/9.2% and Micron 4% left out (FT would not load); "no clue" quote left out (Bloomberg only); not-advice line
+     spoken and in the post. Hock Tan never drawn (shared lectern-warning scene shows his name on a screen).
+  3. "Could an AI copy itself onto your oven?" (Anthropic Frontier Red Team post, Oct 12: small models may be months
+     away from self-replicating on IoT devices; 15 TV boxes ~$55, 8 of 9 hardware types; Reuters via RTÉ / 93.3,
+     Crypto Briefing, BigGo). Rubric ~84 (19/16/15/10/16/8). 74.1 s, -14.2 LUFS, style neural, ~86% scenes. Producer
+     caught that ovens are only named as example targets (the demo used TV boxes); narration says "like smart ovens".
+  Skipped: Nvidia China share -44% (IDC; kept as fallback, not needed), Epic "AI first" (Bloomberg scoop relayed),
+  NTT Data/Anthropic Osaka DC (sources-only), Microsoft Maia 300 (inside baseball), Anthropic distillation measures
+  (too technical), Amazon 1M robots (feature, not news), banking watchdogs (Reuters exclusive, anonymous sources).
+  Drive: connector available; folder checked (no repeats); 3 Google Docs filed as text/plain with 4-byte emoji written
+  as [names] (lead did the conversion by hand; explainer.py drive_card fix still backlogged).
+  Timings: setup ~3 min, news 5 s, producers 14-19 min in parallel (renders serialized with flock), no re-renders.
+  Problems: one producer cleared a shared scratchpad qa/ folder another was using (stills only; fixed by telling
+  producers to use their own subfolders next time). The demand-queue beat (chip casino) has a robot partly off the
+  right edge (scenery). Timeline card labels ~22 px (below the 24 px floor; backlogged).
 - 2026-10-12 (nightly run, Monday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "AI is shrinking demand for first jobs" (Singapore President Tharman at the IMF/World Bank meetings in Bangkok,
      Oct 12; IMF: AI spending keeps growth ~3%, Georgieva "slow-moving tsunami", 40% of jobs; Reuters via Yahoo / The
