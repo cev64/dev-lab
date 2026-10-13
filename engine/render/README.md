@@ -264,6 +264,24 @@ Names / rebrands:
 - `order-renames.js` (2 beats: painter on a ladder paints over a civic letter sign; an order is signed and stamped, copies fly to three agencies and their signs flip) params: from, to, agencies, docTitle, date, stamp, law, agenciesLabel, signCue, agenciesCue, stampCue, flipCue, lawCue, dateCue
 - `rename-street.js` (3-5 beats: dusk street, camera dollies from an agency (renamed sign, locked cabinet) to 1-3 company towers that each `pending` / `flip` / `keep` the new name with a quote card; payoff letter board flips and settles on "?") params: gov {sign, building, label, keep, keepChip}, towers [{from, to, label, mode, quote, by, chip, bubble, cue, chipCue, quoteCue}], privateLabel, question, board, rest, privateCue, anywayCue, keepCue, govCue, towersCue, qCue
 
+Launches / products / paywalls:
+- `launch-stage.js` (span of 2 beats: dark launch stage, a presenter by two cloth-covered cases; cloths whip off robot 1 then robot 2 with name plates, date chip + claim pill; presenter leaves and two rival robots rise with a "VS" chip) params: a, b, rivals, date, tag, unveilCue, fullCue, tagCue, rivalCue
+- `muse-paywall.js` (generic chat app's best model goes paid; modes price (sofa + phone, padlock on the model button, plan cards, extra pill) | free (free vs paid phones, "next" arrow, calendar "?") | payoff (price tag swings on the lock, big question)) params: mode, app, model; price: tiers, coder, lockCue, tierCue, coderCue; free: freeLabel, paidLabel, next, date, freeCue, nextCue, dateCue; payoff: tagText, question, tagCue, qCue
+- `self-graded.js` (night race track: three labelled robots, the claimant wins and cheers; judge's booth sign shows who judged with a "?", a report pill with an hourglass) params: me, rivals, judge, report, raceCue, judgeCue, reportCue
+- `power-bet.js` (giant data center wired by pylons to a tiny phone chat bubble; coins pour in, verbatim quote panel + amount, power badge and energy pulses down the cable) params: quote, by, amount, gw, site, bubble, betCue, moneyCue, gwCue
+
+Markets / chips / bubble:
+- `chip-casino.js` (casino room: computer chips as betting chips, robot dealer, wheel, cartoon investors; modes hook (bets slide in, wheel spins) | payoff (investors jump back, big question)) params: mode, sign, question, betCue, spinCue, jumpCue, qCue
+- `market-board.js` (trading hall quote board: a falling line, header flips to market/date, rows pop with down arrows and counted-up figures; investors worry and leave) params: rows [{name, value, cue}] (max 4), title, titleCue, rushCue, note, board
+- `factory-dim.js` (dusk skyline: a quote pill bursts into sparks over a chip fab, a rival fab rises with its own sign, a question cloud dims the first fab; clean-room worker looks between them) params: home, rival, spark, doubt, sparkCue, rivalCue, doubtCue
+- `fund-link.js` (living-room wall screen with two donut charts sweeping in to published shares; a person's phone gets a "Your index fund" pill as chip tokens stream into it) params: kospi, sp, kospiShare, spShare, kospiLabel, spLabel, fund, kospiCue, spCue, fundCue
+- `demand-queue.js` (server hall balance scale: order slips pile on DEMAND, few crates on SUPPLY, beam tips; calendar "?" pill and "Not financial advice" pill) params: demand, supply, unknown, advice, demandCue, supplyCue, unknownCue, adviceCue
+
+Devices / self-replicating AI:
+- `smart-home-hop.js` (home at night: a tiny AI robot copies itself gadget to gadget (oven, TV box, vacuum, speaker, camera), each shows its lime eyes; modes story (estimate pill, "no data center" inset, numbered step pills, "No human help") | payoff (fix pills: shields, locks, traffic magnifier; question)) params: mode, estimate, estimateBy, dcText, steps, stepCues, helpText, ovenCue, estCue, boxCue, dcCue, helpCue; payoff: fixes, fixCues, question, qCue
+- `tv-box-lab.js` (lab bench: cheap streaming boxes pop in with a count and price tag, one model runs across them as a token snakes box to box and a robot hologram rises; then a 3x3 hardware grid ticks n of 9) params: count, price, hw, hwLabel, hits, boxesCue, priceCue, runCue, smallCue, hwCue
+- `no-off-switch.js` (3 phases in one beat: a copy runs a ring of device nodes to a FULL CYCLE stamp; a small robot climbs a staircase toward a dashed level line with date + estimate pills; a person shrugs among blinking gadgets by an empty switch plate "?") params: simple, strong, cycle, level, small, when, whenNote, switchText, strongCue, cycleCue, climbCue, whenCue, noteCue, switchCue
+
 Scenes with 3+ beats (`span`) use the beat boundaries as their phases; otherwise fractions of the duration.
 
 ## Adding a style
