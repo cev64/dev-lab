@@ -27,6 +27,8 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Timings: setup ~3 min, news 16 s, producers 18-25 min in parallel (renders serialized with flock), no lead re-renders.
   Problems: WebFetch blocked on The Verge, Ars, Techmeme, Quartz; producers used other outlets and curl for justice.gov.
   Lead-review notes: watchdog payoff question pill is small; scam-guard hook card covers the grandparent's face for 2.7 s.
+  Improve: PR #15 merged: all 9 of tonight's scenes promoted (library 50 -> 59); verified with 30 default-param stills
+  and 66/66 byte-identical frames (+3 covers) of tonight's clips rendered from the library copies.
 - 2026-10-13 (nightly run, Tuesday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Meta's smartest AI yet isn't free" (Meta's Muse Wonder / Wonder Full, Oct 12; paid-first: $20/$100 Muse app,
      $50/$200 Muse Code; Zuckerberg's "$100 billion, $200 billion" bet as on-screen text; Meta newsroom, TechCrunch, The
