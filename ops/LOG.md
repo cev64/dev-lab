@@ -2,6 +2,31 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-14 (nightly run, Wednesday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Four hundred scientists want an AI watchdog" (open letter, Oct 13: 406 signatories from 34 countries incl. Hinton
+     and Bengio; air-gap cyber-capable models, an international body for containment standards + an incident registry
+     made public eventually; LeCun did not sign; letter at ai-security-letter.org, Reuters via WHBL, BetaKit, MercoPress for
+     the Sept 29 voluntary White House accord). Rubric ~78 (fresh 20, stakes 15, surprise 12, visual 8, verif 16,
+     controversy 7). 72.9 s, -14.3 LUFS, style flow, ~87% scenes (one list card). Names as text only, never drawn.
+     BetaKit's "OpenAI model escaped its test environment" left out (single source). Hook ends ~3.4 s (slightly long).
+  2. "Your phone could soon catch a scam mid-chat" (Google DeepMind + GovTech Singapore on-device Gemma scam detector,
+     unveiled Oct 14 at SICW; S$4B+ lost since 2019; consent-based, no launch date, no accuracy figures; DeepMind post,
+     Minister Teo's CSA speech, e27, Crypto Briefing, Straits Times via ANN/HeadTopics). Rubric ~80 (20/18/12/10/14/6).
+     69.6 s, -14.2 LUFS, style orb, 100% scenes. "Android", "WhatsApp/Telegram", "80% of losses" left out (single source).
+  3. "OpenAI's meeting room was bugged" (OpenAI engineer arrested Oct 9, charged with intercepting oral communications;
+     recorder found Sept 30 behind an exec-room TV, hidden in toilet paper per the complaint; OpenAI says its own models
+     helped trace it; DOJ release, SF Standard, BleepingComputer, Fox Business, NBC; $14 board "according to Bloomberg").
+     Rubric ~85 (20/12/15/10/17/11). 70.5 s, -14.3 LUFS, style neural, 100% scenes. Not named, no nationality; "prosecutors
+     allege", "presumed innocent", up to 5 years if convicted. Spouse-account chatbot detail left out (third party).
+  Skipped: Gemini 4 Argon wide release (paid-first model launch, too close to yesterday's Muse Wonder story; fallback),
+  ASML can't meet 2027-28 demand (chip-demand story ran yesterday), OpenAI/Trail of Bits talks (The Information scoop),
+  OpenAI loop-transformer safety (The Information only), Apple v. OpenAI discovery order (procedural), Shopify agents,
+  Cerebras CEO doom pushback (opinion), SpaceXSI bundle (single outlet).
+  Drive: connector available; folder checked (no 2026-10-14 titles); 3 Google Docs filed as text/plain with 4-byte emoji
+  written as [names] (converted by a lead script; explainer.py drive_card fix still backlogged).
+  Timings: setup ~3 min, news 16 s, producers 18-25 min in parallel (renders serialized with flock), no lead re-renders.
+  Problems: WebFetch blocked on The Verge, Ars, Techmeme, Quartz; producers used other outlets and curl for justice.gov.
+  Lead-review notes: watchdog payoff question pill is small; scam-guard hook card covers the grandparent's face for 2.7 s.
 - 2026-10-13 (nightly run, Tuesday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Meta's smartest AI yet isn't free" (Meta's Muse Wonder / Wonder Full, Oct 12; paid-first: $20/$100 Muse app,
      $50/$200 Muse Code; Zuckerberg's "$100 billion, $200 billion" bet as on-screen text; Meta newsroom, TechCrunch, The

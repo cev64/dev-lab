@@ -342,6 +342,58 @@
         "https://finance.biggo.com/news/aafaa533-6ac5-44fc-801e-415ad74c8176"
       ],
       "video": "out/2026-10-13/2026-10-13-explainer-self-replicate.mp4"
+    },
+    {
+      "id": "2026-10-14-explainer-scam-guard",
+      "date": "2026-10-14",
+      "hook": "Your phone could soon catch a scam mid-chat",
+      "topic": "SCAMS",
+      "title": "Google DeepMind and Singapore's GovTech unveil an on-device scam detector",
+      "followUp": false,
+      "sources": [
+        "https://deepmind.google/blog/on-device-ai-scam-detection-mddi/",
+        "https://www.csa.gov.sg/news-events/speeches/opening-address-by-minister-josephine-teo-at-the-singapore-international-cyber-week-day-2-on-14-oct-2026/",
+        "https://e27.co/singapore-wants-googles-ai-to-catch-scammers-before-victims-hit-send-20261014/",
+        "https://www.unite.ai/google-deepmind-and-govtech-unveil-on-device-scam-detection-model/",
+        "https://cryptobriefing.com/deepmind-govtech-singapore-ai-scam-tool/",
+        "https://www.cxodigitalpulse.com/google-deepmind-and-govtech-singapore-build-on-device-ai-to-detect-scam-conversations/",
+        "https://asianews.network/over-us323mil-lost-to-scams-in-singapore-in-first-half-of-2026/",
+        "https://sg.headtopics.com/news/google-deepmind-govtech-developing-first-of-its-kind-scam-88782397"
+      ],
+      "video": "out/2026-10-14/2026-10-14-explainer-scam-guard.mp4"
+    },
+    {
+      "id": "2026-10-14-explainer-ai-watchdog",
+      "date": "2026-10-14",
+      "hook": "Four hundred scientists want an AI watchdog",
+      "topic": "AI SAFETY",
+      "title": "400 scientists call for an international AI watchdog",
+      "followUp": false,
+      "sources": [
+        "https://ai-security-letter.org/",
+        "https://whbl.com/2026/10/13/scientists-call-for-international-body-to-oversee-advanced-ai/",
+        "https://betakit.com/geoffrey-hinton-yoshua-bengio-join-400-scientists-calling-for-international-ai-regulator/",
+        "https://en.mercopress.com/2026/09/30/trump-and-six-tech-companies-sign-a-voluntary-artificial-intelligence-safety-accord"
+      ],
+      "video": "out/2026-10-14/2026-10-14-explainer-ai-watchdog.mp4"
+    },
+    {
+      "id": "2026-10-14-explainer-office-bug",
+      "date": "2026-10-14",
+      "hook": "OpenAI's meeting room was bugged",
+      "topic": "SECURITY",
+      "title": "OpenAI's own AI helped trace a hidden recorder",
+      "followUp": false,
+      "sources": [
+        "https://www.justice.gov/opa/pr/saudi-national-arrested-installing-surreptitious-audio-recording-device-openai",
+        "https://sfstandard.com/2026/10/13/openai-engineer-arrested-alleged-bugging-executive-conference-room/",
+        "https://www.bleepingcomputer.com/news/artificial-intelligence/openai-engineer-arrested-for-allegedly-planting-spy-device-in-office/",
+        "https://www.foxbusiness.com/technology/saudi-national-accused-planting-recording-device-openai-executive-conference-room",
+        "https://www.nbcnews.com/tech/tech-news/openai-employee-arrested-hidden-listening-device-company-says-rcna603262",
+        "https://www.techmeme.com/261013/p49",
+        "https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html"
+      ],
+      "video": "out/2026-10-14/2026-10-14-explainer-office-bug.mp4"
     }
   ]
 }
