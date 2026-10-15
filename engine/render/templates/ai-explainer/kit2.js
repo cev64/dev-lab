@@ -190,7 +190,23 @@
     POSES['sit-laptop'] = sitArms({ sN: 0.6, eN: 0.95, sF: 0.5, eF: 1.0, nod: 0.25, handN: 'open', handF: 'open' });
     POSES['sit-talk'] = sitArms({ sN: 0.34, eN: 1.35, sF: 0.22, eF: 1.0, handN: 'open' });
     POSES['sit-reach'] = sitArms({ sN: 1.4, eN: 0.06, sF: 0.22, eF: 1.0, lean: 0.18, handN: 'open' });
-    function poseOf(p) { return Object.assign({}, POSES.stand, typeof p === 'string' ? (POSES[p] || POSES.stand) : p || {}); }
+    // poseOf(p, base): a named pose sits on stand; a partial custom object merges onto `base` (the pose it is
+    // blended from, so { sN: 1.4 } on a seated pose stays seated), else onto sit when it says sit, else stand.
+    function poseOf(p, base) {
+      if (typeof p === 'string') return Object.assign({}, POSES.stand, POSES[p] || POSES.stand);
+      return Object.assign({}, base || (p && p.sit ? POSES.sit : POSES.stand), p || {});
+    }
+    // poseBlend(a, b, k): pose-to-pose mix that keeps arms clear of the face. When an arm passes the shoulder
+    // line (down <-> raised) it is routed through a straightened, out-to-the-side intermediate instead of
+    // sweeping a bent forearm across the head. Use it with M.keyed-style tweens too.
+    function poseBlend(a, b, k) {
+      const A = poseOf(a), B = poseOf(b, A), out = M.mix(A, B, k), bump = Math.sin(PI * clamp(k));
+      for (const [sk, ek] of [['sN', 'eN'], ['sF', 'eF']]) {
+        const upA = Math.abs(A[sk]) > PI / 2, upB = Math.abs(B[sk]) > PI / 2;
+        if (upA !== upB) out[ek] *= 1 - 0.75 * bump;
+      }
+      return out;
+    }
 
     // drawHuman(ctx, x, y, s, opts): articulated generic person, ~380 px tall at scale 1 (adult).
     function drawHuman(ctx, x, y, s, o = {}) {
@@ -201,7 +217,7 @@
       const bt = BODY[o.body] || BODY.average;
       // pose: name or object, blended with pose2 by poseMix (pose-to-pose)
       let P = poseOf(o.pose);
-      if (o.pose2 != null && o.poseMix > 0) P = Object.assign(P, M.mix(P, poseOf(o.pose2), clamp(o.poseMix)));
+      if (o.pose2 != null && o.poseMix > 0) P = poseBlend(P, poseOf(o.pose2, P), clamp(o.poseMix));
       if (o.rig) P = Object.assign(P, o.rig);
       const ex = o.exag == null ? 1 : o.exag;
       // secondary action: breathing, weight shift, fidget
@@ -282,7 +298,17 @@
       if (o.pose === 'wave' || P.wave) eN += Math.sin(t * 9 + seed) * 0.32;
       sN += fid.hand * 0.4; sF -= fid.hand * 0.3;
       const armFK = (sh, a, e) => { const el = [sh[0] + Math.sin(a) * upA, sh[1] + Math.cos(a) * upA]; const wr = [el[0] + Math.sin(a + e) * foA, el[1] + Math.cos(a + e) * foA]; return { sh, el, wr, fa: a + e }; };
-      const armN = armFK(shoulderN, sN * (sN > 0.6 ? ex : 1), eN), armF = armFK(shoulderF, sF * (sF < -0.6 ? ex : 1), eF);
+      // exaggeration grows raised arms continuously (no pop at 0.6); face guard: a raised arm never swings past
+      // vertical over the head and its forearm never folds across the face (think/phone hands stay low, unaffected)
+      const exA = (a, sg) => (a * sg > 0.6 ? a + (a - 0.6 * sg) * (ex - 1) : a);
+      const guard = (a, e, sg) => {
+        const aa = Math.min(a * sg, 2.85) * sg;
+        let fa = aa + e;
+        if (aa * sg > 1.9 && fa * sg > PI) fa = PI * sg;
+        return [aa, fa - aa];
+      };
+      const [aN, eN2] = guard(exA(sN, 1), eN, 1), [aF, eF2] = guard(exA(sF, -1), eF, -1);
+      const armN = armFK(shoulderN, aN, eN2), armF = armFK(shoulderF, aF, eF2);
       if (o.reach) { // IK-lite: aim the near hand at a point (local, unscaled coords relative to the feet)
         const tx = o.reach[0] * dirS, ty = o.reach[1];
         const dx = tx - shoulderN[0], dy = ty - shoulderN[1], dist = Math.min(upA + foA - 0.5, Math.hypot(dx, dy));
@@ -963,7 +989,7 @@
         if (o.shadow !== false) contactShadow(ctx, 0, 0, 200, 0.45);
         solid(ctx, () => { ctx.beginPath(); ctx.ellipse(0, -14, 70, 16, 0, 0, TAU); }, mat(dark(wood, 0.1), L), [-70, -30, 140, 32], L.dir, { rim: 2, top: 0.5 });
         rr(ctx, -70, -16, 140, 14, 7, dark(wood, 0.3));
-        ctx.save(); ctx.translate(80, -40); ctx.rotate(-0.9 * (1 - hit) - 0.05);
+        ctx.save(); ctx.translate(80, -40); ctx.rotate(0.9 * (1 - hit) - 0.05); // + lifts the head (handle points left)
         limbSeg(ctx, [0, 0], [-120, -6], 7, 6, mat(wood, L), L.dir);
         ctx.translate(-120, -6);
         solid(ctx, () => roundRect(ctx, -26, -50, 52, 92, 16), mat(wood, L), [-26, -50, 52, 92], L.dir, { rim: 2, top: 0.3 });
@@ -1566,7 +1592,7 @@
       wafer: [250, 120], building: [260, 460], musicPlayer: [300, 110], headphones: [170, 170], shield: [140, 165], trophy: [150, 230], lamp: [120, 200] };
     return {
       motion: M, ACCENT: A, MASCOT, SKIN, HAIR, EYES, CLOTH, AGE, POSES, EXPR, SIZE, font, mat,
-      drawHuman, drawRobot, drawAssistant,
+      drawHuman, poseBlend, drawRobot, drawAssistant,
       drawPhone, drawLaptop, drawDesk, drawChair, drawSofa, drawDocument, drawFolder, drawGavel, drawCoin, drawBills, drawChip, drawWafer,
       drawBuilding, drawMusicPlayer, drawHeadphones, drawShield, drawTrophy, drawLamp,
       world2, cam, depth, light, contactShadow, castShadow, grain, texture, glow: glowAt, solid, limb: limbSeg, cached,
