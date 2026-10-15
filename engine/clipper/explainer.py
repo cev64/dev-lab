@@ -11,6 +11,7 @@ import json
 import re
 import subprocess
 import sys
+import unicodedata
 from pathlib import Path
 
 from . import audio, ledger
@@ -66,7 +67,19 @@ def drive_card(script: dict, clip: dict, date: str) -> tuple[str, str]:
              "Sources:"]
     lines += [f"- {s.get('publisher', '')}: {s.get('title', '')} {s.get('url', '')}".rstrip() for s in script["sources"]]
     lines += ["", "Narration:"] + [b["say"] for b in script["beats"]]
-    return title, "\n".join(lines) + "\n"
+    return drive_safe(title), drive_safe("\n".join(lines) + "\n")
+
+
+def drive_safe(text: str) -> str:
+    """The Drive connector garbles 4-byte characters (emoji) in uploaded docs, so write each as [its name]
+    and drop emoji variation selectors / joiners."""
+    out = []
+    for ch in text:
+        if ord(ch) > 0xFFFF:
+            out.append(f"[{unicodedata.name(ch, 'emoji').lower()}]")
+        elif ch not in "\ufe0f\u200d":
+            out.append(ch)
+    return "".join(out)
 
 
 def ensure_voice(script_path: Path, vdir: Path) -> dict:
