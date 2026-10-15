@@ -2,6 +2,35 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-15 (nightly run, Thursday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "The AI chip factory just broke its record. Again." (TSMC Q3 2026, Oct 15: revenue NT$1.49T +50.9%, net income
+     NT$763.06B +68.7%, sixth straight record profit, 51.1% net margin, HPC 68% of revenue, 3nm 33% of wafer revenue,
+     CFO quote verbatim and attributed by role; TSMC release (lead re-checked it), CNBC, Reuters via KSL, Crypto Briefing,
+     TechFlow, Taiwan News). Rubric ~76 (fresh 20, stakes 12, surprise 14, visual 8, verif 18, controversy 4). 73.3 s,
+     -14.3 LUFS, style flow, 100% scenes. Not-advice line spoken and in the post. Q4 guidance and USD figure left out.
+     This was the fallback: McKinsey's AI-client interview avatar failed the gate (every outlet relays one WSJ report;
+     no on-record McKinsey statement).
+  2. "Is that song you love even human?" (YouTube Music AI labels, Oct 14: player-page label, Fully/Partly/No Gen AI
+     partner declarations + YouTube detection, Auto-Tune/AI mastering = No Gen AI, coming to main YouTube app; Deezer
+     ~90,000 fully AI tracks/day, >50% of new deliveries on peak days; YouTube blog + Help Center, TechCrunch, MBW, Music
+     Week). Rubric ~80 (20/15/13/9/17/6). 66.3 s, -14.2 LUFS, style orb, 100% scenes. TechCrunch's "still eligible for
+     monetization" left out (MBW contradicts).
+  3. "Eight states just sued OpenAI over kids" (AZ, AR, ID, IA, KS, MT, NE, WV filed separate suits Oct 14; allegations
+     framed as such; OpenAI's verbatim response; Florida sued alone in June; AG releases, Reuters via TimesLIVE, NBC, UPI,
+     azfamily, Common Dreams). Rubric ~86 (20/19/13/9/17/8). 70.8 s, -14.2 LUFS, style neural, 100% scenes. Lead fixes
+     (re-voiced + re-rendered): the "nudged kids away from parents" claim is Arizona's only, now attributed to Arizona;
+     the ChatGPT stand-in robot was our mascot's look, redrawn as a teal boxy bot. Left out: "half the chatbot market"
+     (AG releases only), overdose case (graphic), WV revenue/IPO framing (one outlet).
+  Skipped: Hassabis "early warning shots" (Reuters only; safety theme ran yesterday), OpenAI/Google models tricked into
+  nudes (Ars only so far), McKinsey AI client (single WSJ report), Meta $6.6B tax credits letter (senators' letter only),
+  Apate undercover scam agents (startup feature; scam story ran yesterday), Turkle Q&A / Figma / Amp (not news for a mass
+  audience), Asian chip selloff (stock-move story; chip casino ran 10-13).
+  Drive: connector available; folder checked (no 2026-10-15 titles); 3 Google Docs filed as text/plain, 4-byte emoji
+  converted by the new drive_safe() (read back fine; 3-byte symbols like ▶ ⏭ ⚖ survive).
+  Timings: setup ~3 min, news 13 s, producers 13-14 min in parallel (renders under flock), one lead-requested re-render
+  ~4 min. Problems: WebFetch blocked on The Verge and pr.tsmc.com via curl (Cloudflare); WebFetch worked for TSMC.
+  TSMC producer hand-set 13 word timings in voice.json for beat 5 (whisper skipped words); re-check if re-voiced.
+  Improve: PR for drive_safe() in explainer.py (Drive emoji backlog item).
 - 2026-10-14 (nightly run, Wednesday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Four hundred scientists want an AI watchdog" (open letter, Oct 13: 406 signatories from 34 countries incl. Hinton
      and Bengio; air-gap cyber-capable models, an international body for containment standards + an incident registry

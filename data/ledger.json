@@ -394,6 +394,61 @@
         "https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html"
       ],
       "video": "out/2026-10-14/2026-10-14-explainer-office-bug.mp4"
+    },
+    {
+      "id": "2026-10-15-explainer-states-sue",
+      "date": "2026-10-15",
+      "hook": "Eight states just sued OpenAI over kids",
+      "topic": "LAWSUIT",
+      "title": "Eight states sue OpenAI over ChatGPT and kids",
+      "followUp": false,
+      "sources": [
+        "https://www.iowaattorneygeneral.gov/newsroom/attorney-general-brenna-bird-announces-lawsuit-against-openai-for-deceiving-iowa-parents-and-iowans/",
+        "https://www.azag.gov/press-release/attorney-general-mayes-announces-lawsuit-against-openai-deceiving-arizonans-about",
+        "https://www.ag.idaho.gov/newsroom/ag-labrador-announces-lawsuit-against-openai-for-deceiving-idaho-parents-about-the-safety-of-chatgpt/",
+        "https://www.timeslive.co.za/news/world/2026-10-15-eight-us-states-sue-openai-claim-chatgpt-harms-young-users/",
+        "https://www.nbcnews.com/tech/tech-news/openai-sued-eight-states-alleged-harm-chatgpt-rcna603614",
+        "https://www.upi.com/Top_News/US/2026/10/15/states-sue-OpenAI-ChatGPT/5571792042846",
+        "https://www.azfamily.com/2026/10/15/arizona-ag-sues-openai-alleges-chatgpt-harms-children-deceives-parents/",
+        "https://www.commondreams.org/news/openai-lawsuit"
+      ],
+      "video": "out/2026-10-15/2026-10-15-explainer-states-sue.mp4"
+    },
+    {
+      "id": "2026-10-15-explainer-ai-music-label",
+      "date": "2026-10-15",
+      "hook": "Is that song you love even human?",
+      "topic": "AI MUSIC",
+      "title": "YouTube Music now labels AI-generated songs",
+      "followUp": false,
+      "sources": [
+        "https://blog.youtube/news-and-events/youtube-music-ai-labels/",
+        "https://support.google.com/youtube/answer/17124251",
+        "https://techcrunch.com/2026/10/14/youtube-music-launches-new-labels-as-ai-generated-music-floods-streaming-platforms/",
+        "https://www.musicbusinessworldwide.com/youtube-music-starts-labeling-ai-generated-songs-using-partner-disclosures-and-its-own-detection-tools/",
+        "https://www.musicbusinessworldwide.com/deezer-to-let-users-block-ai-generated-music-from-search-results/",
+        "https://www.musicweek.com/digital/read/deezer-to-let-users-filter-out-ai-generated-music/095235"
+      ],
+      "video": "out/2026-10-15/2026-10-15-explainer-ai-music-label.mp4"
+    },
+    {
+      "id": "2026-10-15-explainer-tsmc-record",
+      "date": "2026-10-15",
+      "hook": "The AI chip factory just broke its record. Again.",
+      "topic": "AI CHIPS",
+      "title": "TSMC posts a record profit for the sixth quarter in a row",
+      "followUp": false,
+      "sources": [
+        "https://pr.tsmc.com/english/news/3346",
+        "https://www.cnbc.com/2026/10/15/tsmc-third-quarter-profit-global-ai-.html",
+        "https://cryptobriefing.com/tsmc-q3-2026-earnings-revenue-up-41/",
+        "https://www.ksl.com/article/51633790/tsmcs-third-quarter-revenue-surges-50-yy-beating-market-forecast",
+        "https://technode.global/2026/10/09/tsmc-record-q3-revenue/",
+        "https://www.taiwannews.com.tw/news/6454456",
+        "https://news.ssbcrack.com/tsmc-reports-record-third-quarter-profit-driven-by-ai-chip-demand/",
+        "https://www.techflowpost.com/en-US/newsletter/140061"
+      ],
+      "video": "out/2026-10-15/2026-10-15-explainer-tsmc-record.mp4"
     }
   ]
 }
