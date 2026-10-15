@@ -207,6 +207,7 @@ and pass the story's text as `params`. Before writing a new scene, check whether
 Cue params (`cue`, `*Cue`) are narration words; without them a scene uses fixed fractions of its duration.
 
 Everyday life / reactions:
+- `v2-showcase.js` (kit v2: night living room, kid grabs a buzzing phone and does a take, adult walks in, mascot pops up and waves; timings stretch with the beat) params: kidSkin, adultSkin, sofa
 - `chat-ends.js` (sofa at night, angry typing, zoom into the phone, chat ended, stare) params: messages, replies, title, ended, burst, endWord
 - `sofa-reply.js` (person on the sofa after a chat ends, status label, then a short spoken line) params: status, line, cue, statusCue
 - `verdicts.js` (row of people doing ordinary things; each gets FINE, one gets NOT OK) params: cases, banned, okText, noText
@@ -318,6 +319,106 @@ Earnings / chip makers (defaults are the 2026-10-15 chip-foundry record-quarter 
 
 Scenes with 3+ beats (`span`) use the beat boundaries as their phases; otherwise fractions of the duration.
 
+## Kit v2: storybook realism + motion principles
+Owner feedback (2026-10-15): "more lifelike instead of super duper cartoony, still playful; focus on the 12 Basic
+Principles of Animation". Kit v2 is a second, additive illustration kit in the style of modern feature-animation 2D.
+`kit.js` is unchanged (old scenes render byte-identically); v2 is opt-in per scene. Files:
+`templates/ai-explainer/motion.js` (`info.helpers.motion`, `window.EXPLAINER_MOTION`) and
+`templates/ai-explainer/kit2.js` (`info.helpers.kit2`, created lazily per scene; also `K2.motion`).
+Reference scene: `scenes/v2-showcase.js` (sample `sample/v2-showcase-clip.json`, 12 s).
+
+```js
+export default function draw(ctx, t, info) {
+  const K2 = info.helpers.kit2, M = info.helpers.motion, D = info.duration;
+  const cam = K2.cam(t, [{ t: 0, x: -120, y: 80, zoom: 1.5 }, { t: D, x: 20, y: 40, zoom: 1.12 }]); // parallax camera
+  const W = K2.world2.livingRoom(ctx, { t, cam });               // back + mid layers (cached), light shafts
+  const hop = M.act(t, info.timeOf('phone') ?? 2, { timing: 'take' }); // anticipation -> action -> settle
+  W.stage(ctx, () => {                                            // the characters' plane (depth 1)
+    K2.drawHuman(ctx, 300, W.sofa.feetY, 1.3, { t, age: 'kid', pose: 'sit-phone', seatH: W.sofa.seatH / 1.3,
+      light: W.light, expr: hop.v > 0.5 ? 'joy' : 'curious', squash: M.squashImpact(t, hop.hit, 0.15) });
+    K2.drawRobot(ctx, 650, 1050, 0.9, { t, state: 'happy', pose: 'wave', light: W.light });
+  });
+  W.front(ctx);                                                   // foreground layers + lighting pass + grain
+}
+```
+
+**Style rules (v2).** Proportions closer to real: adults ~5.3 heads, teens ~4.9, kids ~3.9, real necks, shoulders,
+hands with thumbs, clothes with folds. Volume from a key light + a rim light (the world's `W.light`, pass it to every
+character and prop as `light`), contact shadows where things touch the floor, subtle texture (grain, wood, fabric).
+Settings are layered (background, mid, foreground) and lit (lamps, windows, light shafts, vignette). Keep the action
+in the stage (x 60-915, y 400-1050) and push the camera in on small characters (zoom 1.3-1.6). Generic people only:
+never a real or recognisable person, never a logo. The mascot (`drawRobot`) keeps its white head, dark visor and lime
+#c4ff3a eyes; any other AI is `drawAssistant` (a lilac pebble with a light-strip face). Do not mix kit and kit2 in one
+frame. Speed: ~1.5x the old kit (12 s showcase 26 s vs 17 s for an old 12 s sofa scene, 3 workers).
+
+**Principles checklist for scene authors** (check every big moment):
+1. Squash & stretch: impacts and jumps (`squash`, `squashImpact`, `opts.squash` on characters), volume preserved.
+2. Anticipation: every big action winds up first (`act` wind-up phase, `anticipate`).
+3. Staging: one thing happens at a time; camera keys (`K2.cam`) frame it; others go to a moving hold.
+4. Straight ahead / pose-to-pose: key poses with eased in-betweens (`keyed`, `pose` + `pose2` + `poseMix`).
+5. Follow-through & overlapping action: hair, ties, ponytails, drawstrings, antennae lag (`drive`/`driveY` on
+   characters; `follow`, `chain`, `settle` for your own props); bodies settle after stopping.
+6. Slow in & slow out: never linear (`ease.*`, `keyed`, `cam`).
+7. Arcs: limbs and moving things travel on curves (`arc`, `arcPath`, `along`; `reach` on drawHuman uses IK).
+8. Secondary action: breathing, blinks, weight shifts and fidgets are built in (seeded by `seed`).
+9. Timing: `TIMING` presets (snappy, normal, heavy, floaty, take) chosen by weight and mood.
+10. Exaggeration: `exag` on `act` and on characters (1 = as authored, 1.2-1.4 for comedy beats).
+11. Solid drawing: 3/4 views (`facing`), near/far limbs, volume shading (kit2 does this).
+12. Appeal: clear silhouettes, readable faces (expressions below), generic but friendly characters.
+No linear motion, and no frozen held pose: a held pose is always a moving hold (the rigs breathe and blink by
+themselves; add `M.hold` drift to props and the camera already drifts).
+
+### motion.js (`info.helpers.motion`): pure functions of t
+- `ease.{linear,in,out,inOut,sine,back,backIn,elastic}(k, p)`, `slowInOut(k)`; `TIMING`, `timing(name, speed)`.
+- `act(t, start, {timing, wind, overshoot, exag, speed})` -> `{v, phase before|anticipate|action|settle|done, k, wind,
+  vel, impact, hit, end}`: one action 0 -> 1 with a wind-up dip, an overshoot and a damped settle.
+- `anticipate(t, start, dur, depth)`; `squash(s)` -> `{sx, sy}` (sx = 1/sy); `squashImpact(t, tHit, amount, dur)`;
+  `stretchFromVelocity(vx, vy, k, max)` -> `{s, angle}`; `squashTransform(ctx, x, y, s, angle)`.
+- `spring(t, t0, from, to, freq, damp)`, `settle(t, t0, amp, freq, decay)`, `follow(fn, t, {freq, damp})` ->
+  `{v, lag}` (a spring dragged by `fn(time)`, re-integrated each call), `lag(fn, t, delay)`, `chain(fn, t, n, {gain})`
+  -> angle offsets for n dangling segments.
+- `arc(p0, p1, k, height, ease)` -> `[x, y, angle]`, `arcPath(pts, k)`, `along(pts, t, t0, t1, ease)`,
+  `swingArc(cx, cy, r, a0, a1, k)`.
+- `breathe(t, seed)`, `blink(t, seed)` (0 open .. 1 shut), `weightShift(t, seed)`, `fidget(t, seed, amt)`,
+  `sway(t, seed, amp, speed)`, `noise(t, seed)`, `hold(t, seed, amp)` (moving hold), `beatsOf(t, starts)`,
+  `stagger(n, t, step, delay)`, `focusWeight(t, t0, t1, fade)`, `exaggerate(v, rest, amount)`,
+  `keyed(t, [{t, v, ease}])` (v = number | array | flat object), `mix(a, b, k)`, `hash`, `clamp`, `lerp`.
+
+### kit2.js (`info.helpers.kit2`): bottom-centre anchored, `opts.t`, `opts.light`
+- `drawHuman(ctx, x, y, s, o)` ~380 px tall at s = 1 (adult). `age` kid|teen|adult|older, `body`
+  slim|average|broad|round, `skin` 0-5|hex, `hair` 0-6|hex, `hairStyle` short|buzz|long|bob|ponytail|bun|curly|afro|
+  none, `eyes` 0-4|hex, `glasses`, `outfit` tee|hoodie|office|suit|pajamas|dress|cardigan|lab|cleanroom|robe with
+  `top`/`bottom`/`shoes`/`tie` (`K2.CLOTH` names or hex), `pose` stand|point|shrug|cheer|phone|type|talk|wave|reach|
+  hips|think|present|sit|sit-phone|sit-laptop|sit-talk|sit-reach (or an angle object, see `K2.POSES`) blended to
+  `pose2` by `poseMix`, `rig` (angle overrides), `walk` (cycle time; with `cadence`, `stride`), `seatH` (seat height
+  above `y` when sitting; feet may dangle), `facing` -1..1 (3/4 view, sign = direction), `look` -1..1, `nod`, `lean`,
+  `expr` neutral|happy|joy|surprised|shocked|worried|sad|angry|thinking|focused|smirk|sleepy|curious (or `{brow, lid,
+  low, mouth, open}`) blended to `expr2` by `exprMix`, `talk` 0..1 (lip flap, e.g. `info.env`), `blink`, `hold`
+  phone|mug|paper, `screen` (phone glow on the face), `reach` [x, y] (aim the near hand, local px from the feet),
+  `squash`, `drive(time)` / `driveY(time)` (the character's x / y over time: drives follow-through), `idle` (0..1
+  secondary-action amount), `exag`, `seed`, `shadow`, `out` (object: receives `hand`, `farHand`, `head`, `top`).
+- `drawRobot(ctx, x, y, s, o)` the mascot, ~330 px: `state` idle|happy|thinking|talk|surprised|working, `pose`
+  stand|wave|point|cheer|shrug|present|type, `talk`, `look`, `tilt`, `facing`, `squash`, `hover`, `drive`/`driveY`
+  (antenna follow-through), `glow`, `out`. `drawAssistant(ctx, x, y, s, o)` generic non-mascot AI: `color`,
+  `faceColor`, `mood` happy|neutral|thinking|alert, `talk`, `facing`, `squash`.
+- Props (`K2.SIZE`): `drawPhone` {screen chat|call|alert|blank, glow, buzz, lying, bubbles}, `drawLaptop` {screen
+  code|chart|chat|blank, typing}, `drawDesk` {color}, `drawChair` {kind office|wood|stool, color}, `drawSofa` {color}
+  -> {seatY, x0, x1}, `drawDocument` {lines, title, sign, seal, tilt}, `drawFolder` {open, label, color}, `drawGavel`
+  {hit}, `drawCoin` {spin, symbol, count, color}, `drawBills` {count, color}, `drawChip` {glow, label}, `drawWafer`
+  {lit, spin}, `drawBuilding` {floors, lit, color, label}, `drawMusicPlayer` (turntable) {playing}, `drawHeadphones`,
+  `drawShield` {check, color}, `drawTrophy` {label, color}, `drawLamp` {on}.
+- `world2.<name>(ctx, {t, cam, behind})` -> W: `livingRoom` {sofa, lamp} (anchors sofa {x, seatY, feetY, seatH},
+  door, lamp, phoneSpot), `office` {time day|dusk|night} (desk), `courtroom` (bench, podium; draw a judge with
+  `behind(ctx, W)`), `cityStreet` {time} (groundY, shops), `factory` = `cleanroom` (tool, window), `studio` =
+  `recordStore` (counter). W: `light`, `floorY`, `feetY`, `stage(ctx, fn, depth = 1)`, `enter/exit`,
+  `toScreen(x, y, d)`, `front(ctx, extra)` (foreground + lighting pass; `extra` overrides the pass spec).
+- Camera + light: `cam(t, keys, {drift})` (keys {t, x, y, zoom}: pan of the depth-1 plane, slow in/out, moving hold),
+  `depth(ctx, cam, d)`, `light(ctx, {t, pools, rays, vignette, grade, grain, haze}, cam)`.
+- Shading helpers: `contactShadow(ctx, x, y, w, alpha)`, `castShadow(ctx, x, y, w, h, lightX, alpha)`,
+  `grain(ctx, t, amount)`, `texture(ctx, wood|fabric|speckle|brushed|stripes, x, y, w, h, color, alpha)`,
+  `mat(color, light)`, `solid(ctx, pathFn, mat, box, lightDir)`, `limb(ctx, a, b, ra, rb, mat, lightDir)`,
+  `glow`, `cached(key, w, h, paint)` (offscreen cache per scene for your own static art).
+
 ## Adding a style
 1. Create `templates/ai-shorts/styles/<name>.js`:
    ```js
@@ -350,5 +451,5 @@ select it with `--template`, clip.json `"template"` or `theme.template` (see `te
 
 ## Files
 - `render.mjs` CLI; `templates/ai-shorts/` (core.js engine: audio features, captions, hook, credit, overlay,
-  background video; `styles/*.js` backgrounds); `templates/ai-explainer/` (index.html, beats.js, kit.js, scenes/); `fonts/` (Montserrat 800/900, Anton, Inter 500/700 latin woff2, OFL licences);
+  background video; `styles/*.js` backgrounds); `templates/ai-explainer/` (index.html, beats.js, kit.js, motion.js, kit2.js, scenes/); `fonts/` (Montserrat 800/900, Anton, Inter 500/700 latin woff2, OFL licences);
   `sample/` (fixtures `clip.json`, `explainer-clip.json` (cards), `explainer-story-clip.json` (scenes) + generator).

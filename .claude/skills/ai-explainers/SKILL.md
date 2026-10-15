@@ -82,6 +82,16 @@ is either a `scene` (preferred for the story's moments: 3+ scenes per explainer)
 list, quote, timeline, title, keyword), over the generative animated background. People in scenes are the kit's
 stylised cartoon characters only — never a real or recognisable person, never a logo.
 
+**v2 style (owner feedback 2026-10-15: "more lifelike, still playful", the 12 principles of animation):** new
+scenes use kit v2 (`info.helpers.kit2`, "storybook realism") and the motion library (`info.helpers.motion`); see
+engine/render/README.md "Kit v2". In short: a `world2` setting with the `K2.cam` parallax camera, characters drawn
+inside `W.stage(...)` with `light: W.light`, then `W.front(ctx)` for the lighting pass. Every big action gets
+anticipation -> action -> settle (`motion.act`), people move on arcs, hair/ties/antennae follow through (`drive`),
+impacts squash and stretch, and nobody freezes: holds are moving holds (breathing, blinks, drift). Reference:
+`scenes/v2-showcase.js`. The rules above are unchanged: characters stay generic (never a real or recognisable
+person, never a logo), the mascot keeps its white head, dark visor and lime eyes, and other AIs use the generic
+`drawAssistant`, never the mascot. The old kit stays available; do not mix the two kits in one frame.
+
 **Post kit** (`post` in script.json; the `explainer` command turns it into paste-ready blocks in the delivery note):
 - `cover`: <= 7 words for the cover/title text, usually the hook.
 - `tiktok`: line 1 is the hook as a searchable sentence with the names people type into TikTok search (company,
