@@ -93,7 +93,7 @@ export default function draw(ctx, t, info) {
     if (t < liftAt) K2.drawPhone(ctx, phoneSpot[0], phoneSpot[1], 0.62, { t, lying: true, light: L, buzz, glow: 0.4 + 0.6 * buzz, screen: 'alert' });
     K2.drawHuman(ctx, kx, ky, ks, {
       t, seed: 2, age: 'kid', outfit: 'pajamas', top: '#5a78c8', hairStyle: 'ponytail', hair: 2, skin: P.kidSkin ?? 3, eyes: 0,
-      pose, pose2, poseMix, reach: reachPt, hold, lean, seatH: W.sofa.seatH / ks, facing: 0.55, light: L,
+      pose, pose2, poseMix, reach: reachPt, hold, lean, seatH: W.sofa.seatH / ks, cushion: W.sofa.color, facing: 0.55, light: L,
       look: kidLook, expr: kidExpr, expr2: kidExpr2, exprMix: kidMix, squash, driveY: bounceY, screen: 1,
     });
     // robot spawn spot (anticipation): ring of lime light + rising sparks

@@ -351,6 +351,15 @@ never a real or recognisable person, never a logo. The mascot (`drawRobot`) keep
 #c4ff3a eyes; any other AI is `drawAssistant` (a lilac pebble with a light-strip face). Do not mix kit and kit2 in one
 frame. Speed: ~1.5x the old kit (12 s showcase 26 s vs 17 s for an old 12 s sofa scene, 3 workers).
 
+**Framing tip: frame characters large.** On a phone, a character needs to be big to read: an adult about
+600-800 px tall on screen, a seated kid's face at least ~110 px. Get there with `K2.cam` pushes rather than huge
+`scale` values (zoom 1.4-1.8 on the subject, x/y = subject point - (487, 725)), then open up (zoom 1.05-1.15) only
+when a second character enters. Faces, hands (palm + thumb mitten) and fabric folds are drawn to hold up at that size.
+**Sitting:** pass `seatH` (seat height above `y`, e.g. `W.sofa.seatH / scale`) and `cushion: W.sofa.color` (any
+seat colour) so the hips sink, the seat bulges beside them and a contact shadow lands on the cushion; the torso leans
+into the backrest, thighs foreshorten toward the viewer with `facing` ~0.3-0.6, adults' feet reach the floor and a
+small kid's feet dangle (and swing a little). `sink` 0..1 (default 1) tunes how far the hips sink.
+
 **Principles checklist for scene authors** (check every big moment):
 1. Squash & stretch: impacts and jumps (`squash`, `squashImpact`, `opts.squash` on characters), volume preserved.
 2. Anticipation: every big action winds up first (`act` wind-up phase, `anticipate`).
@@ -395,7 +404,7 @@ themselves; add `M.hold` drift to props and the camera already drifts).
   `expr` neutral|happy|joy|surprised|shocked|worried|sad|angry|thinking|focused|smirk|sleepy|curious (or `{brow, lid,
   low, mouth, open}`) blended to `expr2` by `exprMix`, `talk` 0..1 (lip flap, e.g. `info.env`), `blink`, `hold`
   phone|mug|paper, `screen` (phone glow on the face), `reach` [x, y] (aim the near hand, local px from the feet),
-  `squash`, `drive(time)` / `driveY(time)` (the character's x / y over time: drives follow-through), `idle` (0..1
+  `cushion` (seat colour: sink + bulge + cushion shadow when sitting), `sink`, `squash`, `drive(time)` / `driveY(time)` (the character's x / y over time: drives follow-through), `idle` (0..1
   secondary-action amount), `exag`, `seed`, `shadow`, `out` (object: receives `hand`, `farHand`, `head`, `top`).
 - `drawRobot(ctx, x, y, s, o)` the mascot, ~330 px: `state` idle|happy|thinking|talk|surprised|working, `pose`
   stand|wave|point|cheer|shrug|present|type, `talk`, `look`, `tilt`, `facing`, `squash`, `hover`, `drive`/`driveY`

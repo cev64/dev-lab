@@ -183,7 +183,7 @@
       hips: { sN: 0.6, eN: -1.75, sF: -0.6, eF: 1.75, handN: 'fist', handF: 'fist' },
       think: { sN: 0.18, eN: 2.75, sF: 0.32, eF: 1.25, tilt: 0.08, nod: -0.15, handN: 'fist', handF: 'relax', farFront: true },
       present: { sN: 1.2, eN: 0.35, sF: -0.1, eF: 0.3, handN: 'open', handF: 'relax' },
-      sit: { sit: 1, hN: 1.52, kN: -1.5, hF: 1.48, kF: -1.46, sN: 0.32, eN: 0.95, sF: 0.22, eF: 1.0, handN: 'relax', handF: 'relax' },
+      sit: { sit: 1, lean: -0.07, hN: 1.52, kN: -1.5, hF: 1.48, kF: -1.46, sN: 0.32, eN: 0.95, sF: 0.22, eF: 1.0, handN: 'relax', handF: 'relax' },
     };
     const sitArms = (p) => Object.assign({}, POSES.sit, p, { sit: 1, hN: POSES.sit.hN, kN: POSES.sit.kN, hF: POSES.sit.hF, kF: POSES.sit.kF });
     POSES['sit-phone'] = sitArms({ sN: 0.3, eN: 2.3, sF: 0.12, eF: 2.05, nod: 0.45, farFront: true, handN: 'hold', handF: 'hold', hold: 'phone' });
@@ -232,18 +232,23 @@
         kN = -(0.08 + 1.0 * Math.pow(Math.max(0, Math.cos(wph + 0.55)), 2)); kF = -(0.08 + 1.0 * Math.pow(Math.max(0, Math.cos(wph + PI + 0.55)), 2));
       } else if (!P.sit) { hN += ws * 0.03; hF += ws * 0.03; kN -= Math.max(0, ws) * 0.07; kF -= Math.max(0, -ws) * 0.07; }
       const ff = P.sit ? lerp(0.32, 1, f) : 1; // thigh foreshortening when seated facing the camera
+      // seated: the thighs come toward the viewer, so the knee drops below the hip on screen (foreshortening)
+      const drop = P.sit ? (1 - ff) * thigh * 0.62 : 0;
       const legFK = (hx, hy, h, k) => {
-        const kx = hx + Math.sin(h) * thigh * ff, ky = hy + Math.cos(h) * thigh;
+        const kx = hx + Math.sin(h) * thigh * ff, ky = hy + Math.cos(h) * thigh + drop;
         const ax = kx + Math.sin(h + k) * shin, ay = ky + Math.cos(h + k) * shin;
         return { hip: [hx, hy], knee: [kx, ky], ankle: [ax, ay] };
       };
       let hipY;
       const hxN = xs(hipW * 0.5), hxF = xs(-hipW * 0.5);
-      if (P.sit) hipY = -(o.seatH != null ? o.seatH : shin + footH + 4) - limbR * 0.6;
+      const seatH = o.seatH != null ? o.seatH : shin + footH + 4;
+      // weight on the seat: the hip joint sits at the back of the cushion and sinks into it (o.sink, 0..1)
+      if (P.sit) hipY = -seatH - drop * 0.85 - limbR * (0.75 - 0.45 * (o.sink == null ? 1 : o.sink));
       else {
         const a = legFK(0, 0, hN, kN), b = legFK(0, 0, hF, kF);
         hipY = -Math.max(a.ankle[1], b.ankle[1]) - footH;
       }
+      if (P.sit && !walking && seatH > shin + footH + 10 && !o.rig) { const sw = Math.sin(t * 1.7 + seed) * 0.13 * (o.idle == null ? 1 : o.idle); kN += sw; kF -= sw * 0.8; }
       const crouch = (P.crouch || 0) * H * 0.08;
       hipY += crouch;
       const legN = legFK(hxN, hipY, hN, kN), legF = legFK(hxF, hipY, hF, kF);
@@ -306,22 +311,23 @@
         ctx.restore();
       };
       const hand = (wr, fa, mode, isFar) => {
-        const hs = H * 0.062 * (o.age === 'kid' ? 1.15 : 1), m = isFar ? mat(dark(skin, 0.1), L, true) : mSkin;
+        const hs = H * 0.071 * (o.age === 'kid' ? 1.12 : 1), m = isFar ? mat(dark(skin, 0.1), L, true) : mSkin;
         ctx.save(); ctx.translate(wr[0], wr[1]); ctx.rotate(-fa);
         // local frame: +y runs out of the wrist along the forearm; the thumb sits on the +x side
         const fist = mode === 'fist' || mode === 'point' || mode === 'hold';
         const palm = () => {
           ctx.beginPath();
-          if (fist) ctx.ellipse(0, hs * 0.5, hs * 0.42, hs * 0.48, 0, 0, TAU);
-          else { ctx.moveTo(-hs * 0.36, hs * 0.05); ctx.quadraticCurveTo(-hs * 0.46, hs * 0.65, -hs * 0.3, hs * 1.05); ctx.quadraticCurveTo(0, hs * 1.22, hs * 0.3, hs * 1.02); ctx.quadraticCurveTo(hs * 0.42, hs * 0.6, hs * 0.34, hs * 0.05); ctx.closePath(); }
+          if (fist) ctx.ellipse(0, hs * 0.45, hs * 0.44, hs * 0.48, 0, 0, TAU);
+          else { ctx.moveTo(-hs * 0.34, -hs * 0.08); ctx.quadraticCurveTo(-hs * 0.5, hs * 0.6, -hs * 0.32, hs * 1.02); ctx.quadraticCurveTo(0, hs * 1.2, hs * 0.32, hs * 1.0); ctx.quadraticCurveTo(hs * 0.48, hs * 0.55, hs * 0.36, -hs * 0.08); ctx.closePath(); }
         };
         solid(ctx, palm, m, [-hs * 0.46, 0, hs * 0.92, hs * 1.2], ld, { rim: 1.3 });
         ctx.strokeStyle = rgba(m.deep, 0.45); ctx.lineWidth = 1.1;
         if (!fist) for (const k of [-0.13, 0.05, 0.2]) { ctx.beginPath(); ctx.moveTo(hs * k, hs * 0.78); ctx.lineTo(hs * k * 1.1, hs * 1.1); ctx.stroke(); }
         else { ctx.beginPath(); ctx.moveTo(-hs * 0.3, hs * 0.72); ctx.quadraticCurveTo(0, hs * 0.82, hs * 0.3, hs * 0.7); ctx.stroke(); }
-        const th = mode === 'open' ? 1.0 : mode === 'hold' ? 0.75 : fist ? 0.45 : 0.55;
-        limbSeg(ctx, [hs * 0.26, hs * 0.3], [hs * 0.26 + Math.sin(th) * hs * 0.5, hs * 0.3 + Math.cos(th) * hs * 0.5], hs * 0.17, hs * 0.14, m, ld);
-        if (mode === 'point') limbSeg(ctx, [-hs * 0.05, hs * 0.85], [-hs * 0.05, hs * 1.7], hs * 0.14, hs * 0.12, m, ld);
+        // thumb: short and thick, rooted in the side of the palm
+        const th = mode === 'open' ? 0.8 : mode === 'hold' ? 0.6 : fist ? 0.25 : 0.42;
+        limbSeg(ctx, [hs * 0.2, hs * 0.2], [hs * 0.22 + Math.sin(th) * hs * 0.4, hs * 0.22 + Math.cos(th) * hs * 0.4], hs * 0.19, hs * 0.15, m, ld);
+        if (mode === 'point') limbSeg(ctx, [-hs * 0.08, hs * 0.7], [-hs * 0.08, hs * 1.45], hs * 0.15, hs * 0.13, m, ld);
         ctx.restore();
       };
       const arm = (A2, isFar, handMode) => {
@@ -375,6 +381,8 @@
       backHair(ctx, hs, rx, ry, hu, mHair, ld, dangle, t, seed, f);
       ctx.restore();
       // legs (far, then near)
+      const cushion = P.sit && o.cushion ? mat(typeof o.cushion === 'string' ? o.cushion : '#3f6f86', L) : null;
+      if (cushion) { contactShadow(ctx, 0, -seatH + limbR * 0.2, hipW * 4.6, 0.6, 0.22); contactShadow(ctx, (legN.knee[0] + legF.knee[0]) * 0.5, legN.knee[1] + limbR * 1.1, limbR * 5, 0.45, 0.3); }
       if (outfit !== 'robe') { leg(legF, mBot, true); leg(legN, mBot, false); }
       if (outfit === 'dress' && P.sit) { // skirt drapes over the thighs to the knees
         const kx = Math.max(legN.knee[0], legF.knee[0]) + limbR * 1.6, ky = legN.knee[1];
@@ -435,6 +443,16 @@
       // belt line for tucked outfits
       if (outfit === 'office') { rr(ctx, xs(-waistW * 1.0), hipY - H * 0.03, xs(waistW * 1.0) - xs(-waistW * 1.0), H * 0.011, 2, rgba(mBot.deep, 0.85)); rr(ctx, xs(waistW * 0.05) + fx * 0.3, hipY - H * 0.032, H * 0.02, H * 0.015, 2, '#b9a77a'); }
       ctx.restore();
+      // cushion squash: the seat bulges up beside the hips (weight), with soft creases toward the body
+      if (cushion) {
+        for (const k of [-1, 1]) {
+          const bx = xs(k * hipW * 1.32), by = hipY + limbR * 1.05, brx = hipW * (k < 0 ? 0.62 : 0.75), bry = limbR * 0.95;
+          const g = ctx.createLinearGradient(0, by - bry, 0, by + bry); g.addColorStop(0, cushion.lit); g.addColorStop(0.45, cushion.base); g.addColorStop(0.8, rgba(cushion.base, 0.6)); g.addColorStop(1, rgba(cushion.base, 0));
+          ctx.beginPath(); ctx.ellipse(bx, by, brx, bry, 0, PI, TAU); ctx.lineTo(bx + brx, by + bry * 0.6); ctx.lineTo(bx - brx, by + bry * 0.6); ctx.closePath(); ctx.fillStyle = g; ctx.fill();
+          ctx.strokeStyle = rgba(cushion.deep, 0.55); ctx.lineWidth = 1.6; ctx.lineCap = 'round';
+          ctx.beginPath(); ctx.moveTo(bx - k * brx * 0.9, by - bry * 0.1); ctx.quadraticCurveTo(bx - k * brx * 0.2, by - bry * 0.55, bx + k * brx * 0.6, by - bry * 0.35); ctx.stroke();
+        }
+      }
       // neck
       const nw = hu * (o.age === 'kid' ? 0.2 : 0.17) * (bt.w * 0.5 + 0.5);
       limbSeg(ctx, [fx * 0.25, shY + 2], [fx * 0.3, neckTopY - hu * 0.05], nw, nw * 0.95, mat(dark(skin, 0.18), L), ld);
@@ -635,7 +653,7 @@
       if (hs === 'curly' || hs === 'afro') {
         const R = hs === 'afro' ? 1.32 : 1.12;
         for (let i = 0; i < 9; i++) { const an = PI * 1.08 + (i / 8) * PI * 0.84; circle(ctx, Math.cos(an) * rx * R * 0.92 + fx * 0.2, -ry * 0.3 + Math.sin(an) * ry * R * 0.86, rx * 0.36, i % 3 === 0 ? m.shade : m.base); }
-        for (let i = 0; i < 5; i++) { const an = PI * 1.25 + (i / 4) * PI * 0.5; circle(ctx, Math.cos(an) * rx * 0.75 + fx * 0.3 - ld * 3, -ry * 0.45 + Math.sin(an) * ry * 0.75, rx * 0.2, rgba(m.spec, 0.25)); }
+        for (let i = 0; i < 5; i++) { const an = PI * 1.25 + (i / 4) * PI * 0.5; circle(ctx, Math.cos(an) * rx * 0.75 + fx * 0.3 - ld * 3, -ry * 0.45 + Math.sin(an) * ry * 0.75, rx * 0.14, rgba(m.spec, 0.1)); }
         return;
       }
       const cap = () => {
@@ -1322,7 +1340,7 @@
         const fy = 850;
         return buildWorld(ctx, 'livingRoom', o, {
           key: { sofaC, lamp }, L,
-          anchors: { floorY: fy, feetY: 1030, sofa: { x: 420, seatY: 878, feetY: 1030, seatH: 1030 - 880, left: 220, right: 620 }, door: { x: 955, y: fy + 8 }, lamp: { x: 105, y: 430 }, phoneSpot: { x: 560, y: 880 } },
+          anchors: { floorY: fy, feetY: 1030, sofa: { x: 420, seatY: 878, feetY: 1030, seatH: 1030 - 880, left: 220, right: 620, color: sofaC },  door: { x: 955, y: fy + 8 }, lamp: { x: 105, y: 430 }, phoneSpot: { x: 560, y: 880 } },
           layers: [
             { id: 'back', d: 0.55, paint: (g) => {
               paintWall(g, -MX, -MY, CW + MX, fy, '#2b2f5c', '#232749', { stripes: 0.05 });
