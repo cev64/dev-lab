@@ -30,7 +30,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Timings: setup ~3 min, news 13 s, producers 13-14 min in parallel (renders under flock), one lead-requested re-render
   ~4 min. Problems: WebFetch blocked on The Verge and pr.tsmc.com via curl (Cloudflare); WebFetch worked for TSMC.
   TSMC producer hand-set 13 word timings in voice.json for beat 5 (whisper skipped words); re-check if re-voiced.
-  Improve: PR for drive_safe() in explainer.py (Drive emoji backlog item).
+  Improve: PR #16 merged: drive_safe() in explainer.py (Drive emoji backlog item, verified on tonight's 3 docs). PR #17
+  merged: all 13 of tonight's scenes promoted (library 59 -> 72); 66/66 frames + 3 covers byte-identical from the library
+  copies; default-param stills clean (sofa-hooked YES bubbles brush a pill on fallback timings only).
 - 2026-10-14 (nightly run, Wednesday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Four hundred scientists want an AI watchdog" (open letter, Oct 13: 406 signatories from 34 countries incl. Hinton
      and Bengio; air-gap cyber-capable models, an international body for containment standards + an incident registry
