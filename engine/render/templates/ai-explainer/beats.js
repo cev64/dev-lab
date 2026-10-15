@@ -609,10 +609,13 @@
     const toks = words.map((x) => cleanTok(x.w));
     const beats = (beatTimes && beatTimes.length ? beatTimes : [[t0, t1]]).map(([a, b]) => Object.freeze({ t0: a - t0, t1: b - t0 }));
     const kit = window.EXPLAINER_KIT ? window.EXPLAINER_KIT.create({ accent: S.pal.accent, width: w, height: h }) : null;
+    // kit v2 (storybook realism) is created lazily on first use, so scenes that only use kit.js pay nothing
+    let kit2 = null;
+    const getKit2 = () => (kit2 || (kit2 = window.EXPLAINER_KIT2 ? window.EXPLAINER_KIT2.create({ accent: S.pal.accent, width: w, height: h }) : null));
     return {
       full, w, h, cv, ctx: cv.getContext('2d'), draw: mod.default, src: v.__src || v.module, t0, t1, dur: t1 - t0,
       params: Object.freeze(Object.assign({}, v.params || {})), seed: K.hashStr(String(v.__src || v.module) + JSON.stringify(v.params || {}) + t0),
-      words: Object.freeze(words), beats: Object.freeze(beats), kit,
+      words: Object.freeze(words), beats: Object.freeze(beats), kit, getKit2,
       wordAt: (tt) => { for (const x of words) if (tt >= x.s && tt < x.e + 0.08) return x; return null; },
       timeOf: (word, nth = 0) => { const k = cleanTok(String(word)); let c = 0; for (let i = 0; i < toks.length; i++) if (toks[i] === k && c++ === nth) return words[i].s; return null; },
     };
@@ -634,6 +637,9 @@
       fonts: { display: 'Montserrat 900', bold: 'Montserrat 800', condensed: 'Anton', ui: 'Inter 700', body: 'Inter 500' },
       helpers: Object.assign({ rng: K.mulberry32(L.seed), kit: L.kit, world: L.kit && L.kit.world, camera: L.kit && L.kit.camera }, SCENE_HELPERS),
     };
+    // kit v2 + the 12-principles motion library (templates/ai-explainer/kit2.js, motion.js)
+    info.helpers.motion = window.EXPLAINER_MOTION || null;
+    Object.defineProperty(info.helpers, 'kit2', { get: L.getKit2, enumerable: true });
     try { guarded(() => L.draw(c, Math.max(0, age), info)); }
     catch (e) { throw new Error(`scene ${L.src} threw at t=${age.toFixed(2)}: ${(e && e.message) || e}`); }
     finally { c.restore(); }
