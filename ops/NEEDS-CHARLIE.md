@@ -2,6 +2,8 @@
 
 Short list of things only Charlie can do. Newest first; the nightly run keeps it current.
 
+- [ ] Compare v1 vs v2 (storybook realism) for 2026-10-15 (comparison MP4s on branch videos/2026-10-15-v2). If you
+      like v2: merge PR #18 (makes v2 the nightly default) or tell the routine to. If not, say what to change.
 - [ ] Each morning: 3 explainers arrive as files in the night's session (tap the push notification) and on GitHub
       branch `videos/<date>`. Post them morning / midday / evening in the order the delivery note gives, pasting the
       post text from `deliveries/<date>.md`, with the platform's "AI-generated content" label switched ON.

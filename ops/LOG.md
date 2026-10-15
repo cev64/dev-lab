@@ -2,6 +2,14 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-15 (owner request, afternoon): v2 remakes of tonight's 3 explainers for comparison. Charlie asked for "more lifelike,
+  still playful" and the 12 principles of animation. Engine engineer built kit2.js ("storybook realism": articulated
+  human rig, shading, lit parallax worlds) + motion.js (one helper family per principle); 3 opus producers remade all
+  scenes with the same voice, words, beats and on-screen text (no new claims); lead review sent states-sue and tsmc
+  back once each (caption-band/header intrusions). QA (haiku): all 3 v2 MP4s 1080x1920, 30 fps, same durations as v1,
+  -14.2/-14.3 LUFS; side-by-side comparison MP4s made. Videos on branch videos/2026-10-15-v2. Code: PR #18, left OPEN
+  for Charlie's decision (merging makes v2 the nightly default via SKILL.md). Old kit is byte-identical. v2 renders
+  ~1.5x slower.
 - 2026-10-15 (nightly run, Thursday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "The AI chip factory just broke its record. Again." (TSMC Q3 2026, Oct 15: revenue NT$1.49T +50.9%, net income
      NT$763.06B +68.7%, sixth straight record profit, 51.1% net margin, HPC 68% of revenue, 3nm 33% of wafer revenue,
