@@ -22,6 +22,7 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 - [x] (PR #13) Promote 2026-10-12 scenes: strike-map (appearAt), cloud-reveal, apps-fail, go-underground, both-sides (Yandex);
       grad-ladder, lectern-warning (real speaker as text on a screen), job-tsunami, two-roads (first jobs); si-order,
       rename-street (+ kit primitives drawSignBoard/drawCivic/drawLift) (SI rebrand).
+- [x] (branch daily/2026-10-16-scenes) Promote 2026-10-16 scenes: tab-peek (ChatGPT in Chrome; mode atlas -> switch, product-name defaults made generic), deepfake-court (deepfake evidence; generic survey/date defaults), lab-inspectors (was inspectors), no-veto, bank-examiner, outside-look (AI inspectors).
 - [x] (branch daily/2026-10-15-scenes) Promote 2026-10-15 scenes: eight-filings, sofa-hooked, court-asks, company-reply, kids-question (states sue); player-label, track-sorter, song-flood, app-hop (AI music labels; track-sorter gains detectLabel/tagged/untagged, sofa-hooked gains yes); fab-trophies, earnings-vault, profit-split, wafer-lab (chip-foundry record).
 - [x] (PR #15) Promote 2026-10-14 scenes: open-letter-wall, sandbox-escape, incident-logbook, watchdog-payoff, bug-room, ai-traces, cheap-board, charged-caveat, scam-guard.
 - [x] (PR #14) Promote 2026-10-13 scenes: launch-stage, muse-paywall, power-bet, self-graded (Muse Wonder); chip-casino, market-board, factory-dim, fund-link, demand-queue (chip casino); smart-home-hop, tv-box-lab, no-off-switch (self-replicate).
