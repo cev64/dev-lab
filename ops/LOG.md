@@ -27,6 +27,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   (renders under flock), no re-renders. Lead review: all claims trace to claim tables; stills clean.
   Problems: The Verge, Ars, help.openai.com and reuters.com blocked fetches; OpenAI's learn.chatgpt.com guide served as primary.
   PR #18 (v2 kit) still open awaiting Charlie; tonight used the v1 kit on main.
+  Improve: PR #19 merged: 6 of tonight's scenes promoted (library 72 -> 78: tab-peek, deepfake-court, lab-inspectors,
+  no-veto, bank-examiner, outside-look); 60/60 frames + 3 covers byte-identical from library copies; default stills
+  reviewed. Follow-up nit: a few pills/tiles touch x 915 / x 60 late in a beat (deepfake stakes, no-veto, lab payoff).
 - 2026-10-15 (owner request, afternoon): v2 remakes of tonight's 3 explainers for comparison. Charlie asked for "more lifelike,
   still playful" and the 12 principles of animation. Engine engineer built kit2.js ("storybook realism": articulated
   human rig, shading, lit parallax worlds) + motion.js (one helper family per principle); 3 opus producers remade all
