@@ -2,6 +2,31 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-16 (nightly run, Friday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "The AI inspectors just moved in." (Anthropic, Oct 15: six METR researchers get employee-level access: laptops,
+     office space, internal tools; METR publishes without an Anthropic veto, redactions only for customer data, privilege,
+     model architecture; bank resident-examiner analogy, "isn't exact" per Anthropic; Anthropic post, TechCrunch,
+     Cryptopolitan, Dainik Jagran English). Rubric ~76 (fresh 20, stakes 12, surprise 13, visual 9, verif 17, controversy 5).
+     72.9 s, -14.3 LUFS, style neural, 86% scenes (one caveat list card). Left out (TechCrunch only): OpenAI pledged the same,
+     accord signatories, incident cadence. Narrator lexicon METR -> "meter". Not a follow-up to 10-14's watchdog letter.
+  2. "Judges heard it: humans can't spot deepfakes" (OpenAI and Meta at the federal Advisory Committee on Evidence Rules,
+     Boston, Oct 15; 15 of 931 judges survey; draft Rule 901(c) not approved; Reuters via Investing.com, uscourts.gov agenda
+     book (panel list, draft rule, survey), Esquire, Womble Bond Dickinson). Rubric ~78 (20/16/14/9/14/5). 70.6 s, -14.3 LUFS,
+     style orb, 100% scenes. Speakers' words are Reuters-only, so spoken as "according to Reuters", paraphrased, speakers
+     not named or drawn. DOJ opposition and Rule 707 left out.
+  3. "ChatGPT can now see your open tabs." (ChatGPT Chrome extension update, Oct 15: reads open tabs; Work mode sends
+     messages, fills forms, downloads, groups tabs; asks per new site; always asks for history/downloads; Atlas shut Aug 9;
+     OpenAI guide, Unite.AI, PiunikaWeb, Digit, TechBytes/Verge, MacRumors, 36Kr). Rubric ~82 (20/18/12/10/15/7). 73.6 s,
+     -14.3 LUFS, style horizon, 100% scenes. Left out: 7M users (one outlet), Work-mode plan tiers (outlets conflict).
+     Shopping prices on screen are illustrative.
+  Skipped: ChatGPT ads push (The Information only), FTC probe "report" (Ars; probe itself ran Sept 30), Rivian agents (no
+  timeline), CERN/Mistral Flare (could not confirm beyond Reuters headline), Apple Intelligence China (approval was July),
+  Anthropic IPO valuation (sources-say), Trump AI-edited photo (real person, politics), AI nudes jailbreak (sensitive).
+  Drive: connector available; folder checked (no 2026-10-16 titles); 3 Google Docs filed as text/plain.
+  Timings: setup ~3 min (Piper fallback voice download failed 3x; Kokoro fine), news 5 s, producers 15-17 min in parallel
+  (renders under flock), no re-renders. Lead review: all claims trace to claim tables; stills clean.
+  Problems: The Verge, Ars, help.openai.com and reuters.com blocked fetches; OpenAI's learn.chatgpt.com guide served as primary.
+  PR #18 (v2 kit) still open awaiting Charlie; tonight used the v1 kit on main.
 - 2026-10-15 (owner request, afternoon): v2 remakes of tonight's 3 explainers for comparison. Charlie asked for "more lifelike,
   still playful" and the 12 principles of animation. Engine engineer built kit2.js ("storybook realism": articulated
   human rig, shading, lit parallax worlds) + motion.js (one helper family per principle); 3 opus producers remade all

@@ -449,6 +449,54 @@
         "https://www.techflowpost.com/en-US/newsletter/140061"
       ],
       "video": "out/2026-10-15/2026-10-15-explainer-tsmc-record.mp4"
+    },
+    {
+      "id": "2026-10-16-explainer-chrome-tabs",
+      "date": "2026-10-16",
+      "hook": "ChatGPT can now see your open tabs",
+      "topic": "AI PRIVACY",
+      "title": "ChatGPT's Chrome extension can now see and work in your open tabs",
+      "followUp": false,
+      "sources": [
+        "https://learn.chatgpt.com/docs/chrome-extension",
+        "https://www.unite.ai/openai-brings-computer-use-to-chrome-with-chatgpt-tab-controls/",
+        "https://piunikaweb.com/2026/10/16/chatgpt-chrome-extension-tab-control-automation/",
+        "https://www.digit.in/news/general/chatgpt-can-now-access-your-google-chrome-tabs-to-gather-information-and-complete-tasks-here-is-how.html",
+        "https://techbytes.app/posts/chatgpt-can-peek-at-your-chrome-tabs-now/",
+        "https://www.macrumors.com/2026/07/10/openais-chatgpt-atlas-browser-shutting-down/",
+        "https://eu.36kr.com/en/p/3933002676534663"
+      ],
+      "video": "out/2026-10-16/2026-10-16-explainer-chrome-tabs.mp4"
+    },
+    {
+      "id": "2026-10-16-explainer-deepfake-court",
+      "date": "2026-10-16",
+      "hook": "Judges heard it: humans can't spot deepfakes",
+      "topic": "DEEPFAKES",
+      "title": "OpenAI and Meta warn judges about deepfake evidence",
+      "followUp": false,
+      "sources": [
+        "https://www.investing.com/news/stock-market-news/openai-and-meta-warn-us-judicial-panel-about-deepfake-evidence-4952449",
+        "https://www.uscourts.gov/sites/default/files/document/2026-10_evidence_rules_agenda_book_9-23_final.pdf",
+        "https://www.esquiresolutions.com/federal-judges-set-bar-for-deepfake-evidence-challenges/",
+        "https://www.womblebonddickinson.com/us/insights/blogs/ai-generated-deepfakes-court-emerging-threat-evidence-authenticity"
+      ],
+      "video": "out/2026-10-16/2026-10-16-explainer-deepfake-court.mp4"
+    },
+    {
+      "id": "2026-10-16-explainer-ai-inspectors",
+      "date": "2026-10-16",
+      "hook": "The AI inspectors just moved in",
+      "topic": "AI SAFETY",
+      "title": "Anthropic lets six METR researchers work inside, and can't veto what they publish",
+      "followUp": false,
+      "sources": [
+        "https://www.anthropic.com/news/an-update-on-independent-evaluators",
+        "https://techcrunch.com/2026/10/15/anthropic-is-letting-metr-researchers-look-under-the-hood-with-employee-level-access/",
+        "https://www.cryptopolitan.com/anthropic-gives-up-veto-metr-safety-reports/",
+        "https://english.dainikjagranmpcg.com/technology/anthropic-gives-metr-employee-level-access-for-ai-safety-reviews/article-38882"
+      ],
+      "video": "out/2026-10-16/2026-10-16-explainer-ai-inspectors.mp4"
     }
   ]
 }
