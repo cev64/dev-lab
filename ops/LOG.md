@@ -33,6 +33,10 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Timings: setup ~3 min, news 7 s, producers 11-17 min in parallel (renders under flock), one lead-requested re-render
   of rogue-agents (~4 min). Problems: Techmeme 403 to WebFetch; WebSearch index lagged on yesterday's stories (found
   them via direct fetch / extended mode). PR #18 (v2 kit) still open; v1 kit used.
+  Improve: PR #20 merged: 9 of tonight's scenes promoted (library 78 -> 87: hire-door, time-clock, manager-hands,
+  hq-report, app-review-gate, lab-to-live, keys-lying-around, wall-off-test, who-checks-locks); defaults made generic;
+  64/64 frames + 3 covers byte-identical from library copies; default-param stills reviewed. Nits: app-review-gate
+  switch-mode pill touches the developer panel; keys-lying-around "Reported by" pill small mid pop-in.
 - 2026-10-16 (nightly run, Friday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "The AI inspectors just moved in." (Anthropic, Oct 15: six METR researchers get employee-level access: laptops,
      office space, internal tools; METR publishes without an Anthropic veto, redactions only for customer data, privilege,
