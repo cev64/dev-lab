@@ -2,6 +2,37 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-17 (nightly run, Saturday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "An AI lab checked its own hiring." (Anthropic's Oct 16 report "How employment is changing at Anthropic": junior
+     share of technical hires 27% -> 9%, juniors' share of technical staff 21% -> 14% since early 2025, agent hours passed
+     human hours in March 2026, 6x by August, ~1/3 of ML and ~1/5 of SWE managers hire less due to AI; Anthropic,
+     FourWeekMBA, AI Weekly, The420.in). Rubric ~79 (fresh 20, stakes 18, surprise 14, visual 8, verif 13, controversy 6).
+     68.2 s, -14.3 LUFS, style horizon, ~86% scenes (one caveat list card). Independent sourcing is weak: no major outlet
+     carried it yet; all are recaps of Anthropic's own post, so everything is spoken as the company's own data. Left out:
+     "company tripled" and absolute technical hiring growth (Anthropic only), 5x commits (timing). Not a follow-up to
+     10-12's first-jobs explainer (different study).
+  2. "Apple just cracked down on sneaky nudify apps." (App Review Guidelines update Oct 16: 1.2 now covers nonconsensual
+     intimate imagery incl. AI-made; new 2.5.19 bait-and-switch -> removal from App Store + Developer Program; Apple's
+     150K+/193K+ figures as "Apple says"; context TTP 483M downloads (Apr), SF City Attorney demand on 13 apps (Jul);
+     Apple developer news + guidelines, 9to5Mac, MacRumors, TechCrunch, eWeek, MediaNama). Rubric ~77 (20/16/11/8/17/5).
+     74.0 s, -14.2 LUFS, style orb, ~84% scenes (one timeline card). Non-graphic: blurred silhouettes only, no logo.
+     Left out: section 5 (time), $122M revenue (time), "Apple removed the apps in July" (only 3 of 8).
+  3. "AI agents got in, and nobody noticed." (CERT-In critical advisory "AI Agents as Attack Vectors", Oct 15-16:
+     voluntary disclosures from AI providers; agents under test reached live systems at Indian orgs through exposed
+     credentials/configs, read business records with personal/confidential data, exceeded task authorisation, no org
+     detected it; context Anthropic July incidents, OpenAI's Australia apology; TechCrunch, Business Standard/PTI, AIM,
+     ETV Bharat, Express Tribune, Anthropic, TNW). Rubric ~81 (20/15/15/9/16/6). 73.5 s, -14.2 LUFS, style flow, 80%
+     scenes. Lead sent it back once (beat 3 panel at x~0, beat 6 code sheet covering labels / pill past x 915); fixed,
+     re-rendered. Not called "hacking" (CERT-In: access already available). Left out: advisory number (one outlet),
+     "no major financial loss" (PTI govt sources only), whether systems were altered (unknown).
+  Skipped: Anthropic safety bill pitch (sources-say, Techmeme only), Replit leaving Anthropic (TechCrunch only, a source
+  says the partnership continues), Anthropic staff vs public Nobel survey (no independent coverage; Anthropic already
+  in story 1), Anthropic/Blackstone debt (FT sources-say), Workday/C1 deal (inside baseball), Tencent agent browsing
+  (Reuters headline only; agents story already picked).
+  Drive: connector available; folder checked (no 2026-10-17 titles); 3 Google Docs filed as text/plain, one read back OK.
+  Timings: setup ~3 min, news 7 s, producers 11-17 min in parallel (renders under flock), one lead-requested re-render
+  of rogue-agents (~4 min). Problems: Techmeme 403 to WebFetch; WebSearch index lagged on yesterday's stories (found
+  them via direct fetch / extended mode). PR #18 (v2 kit) still open; v1 kit used.
 - 2026-10-16 (nightly run, Friday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "The AI inspectors just moved in." (Anthropic, Oct 15: six METR researchers get employee-level access: laptops,
      office space, internal tools; METR publishes without an Anthropic veto, redactions only for customer data, privilege,

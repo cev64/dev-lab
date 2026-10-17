@@ -497,6 +497,59 @@
         "https://english.dainikjagranmpcg.com/technology/anthropic-gives-metr-employee-level-access-for-ai-safety-reviews/article-38882"
       ],
       "video": "out/2026-10-16/2026-10-16-explainer-ai-inspectors.mp4"
+    },
+    {
+      "id": "2026-10-17-explainer-junior-hires",
+      "date": "2026-10-17",
+      "hook": "An AI lab checked its own hiring",
+      "topic": "AI & JOBS",
+      "title": "Anthropic's own report: junior tech hires fell from 27% to 9%",
+      "followUp": false,
+      "sources": [
+        "https://www.anthropic.com/research/employment-at-anthropic",
+        "https://fourweekmba.com/ai-anthropics-junior-tech-hires-fell-to-9-as-agents-hit-6x/",
+        "https://aiweekly.co/alerts/anthropic-report-junior-technical-hires-fell-from-27-to-9",
+        "https://the420.in/anthropic-cuts-junior-hiring-ai-agents-work-hours/"
+      ],
+      "video": "out/2026-10-17/2026-10-17-explainer-junior-hires.mp4"
+    },
+    {
+      "id": "2026-10-17-explainer-nudify-ban",
+      "date": "2026-10-17",
+      "hook": "Apple just cracked down on sneaky nudify apps",
+      "topic": "APP SAFETY",
+      "title": "Apple cracks down on AI nudify and bait-and-switch apps",
+      "followUp": false,
+      "sources": [
+        "https://developer.apple.com/news/?id=vvzx6cul",
+        "https://developer.apple.com/app-store/review/guidelines/",
+        "https://9to5mac.com/2026/10/16/apples-new-app-store-rules-crack-down-on-ai-nudification-and-bait-and-switch-apps/",
+        "https://www.macrumors.com/2026/10/16/app-store-rules-deepfakes/",
+        "https://fourweekmba.com/ai-apple-rewrites-app-review-rules-to-target-ai-nudify-apps/",
+        "https://techcrunch.com/2026/07/17/apple-and-google-ordered-to-purge-nudify-apps-from-app-stores/",
+        "https://www.macrumors.com/2026/07/17/demand-to-pull-nudify-apps/",
+        "https://www.eweek.com/news/apple-google-nudify-app-searches/",
+        "https://www.medianama.com/2026/04/223-apple-google-steer-users-nudify-apps-reports/"
+      ],
+      "video": "out/2026-10-17/2026-10-17-explainer-nudify-ban.mp4"
+    },
+    {
+      "id": "2026-10-17-explainer-rogue-agents",
+      "date": "2026-10-17",
+      "hook": "AI agents got in, and nobody noticed",
+      "topic": "AI SECURITY",
+      "title": "India's CERT-In: AI agents under test reached live company systems",
+      "followUp": false,
+      "sources": [
+        "https://techcrunch.com/2026/10/16/india-becomes-the-latest-country-to-report-rogue-ai-agent-activity/",
+        "https://www.business-standard.com/amp/technology/artificial-intelligence/cert-in-alert-on-ai-agents-an-early-warning-no-major-financial-loss-126101601525_1.html",
+        "https://analyticsindiamag.com/ai-news/cert-in-warns-ai-agents-are-accessing-indian-systems-without-authorisation",
+        "https://www.etvbharat.com/en/technology/cert-in-warns-of-ai-agents-accessing-indian-firms-systems-confidential-data-enn26101601992",
+        "https://tribune.com.pk/story/2635213/rogue-ai-agents-broke-into-indian-firms-live-systems-government-says",
+        "https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals",
+        "https://thenextweb.com/news/openai-apologises-australia-four-agencies-taskforce"
+      ],
+      "video": "out/2026-10-17/2026-10-17-explainer-rogue-agents.mp4"
     }
   ]
 }
