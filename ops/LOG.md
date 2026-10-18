@@ -38,6 +38,10 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   also softened the wallet post copy (no "turned phrases into keys" in the text posts; narration unchanged). WebFetch
   blocked on arstechnica.com, theverge.com and niemanlab.org (Nieman read via its RSS feed).
   Sunday review: ops/PERFORMANCE.md still has no rows, so no Skeptic review; rubric unchanged.
+  Improve: PR #21 merged: 10 of tonight's scenes promoted (library 87 -> 97: terms-rewrite, web-crawlers, shop-site,
+  agent-door, id-check, door-row, bank-vault, click-buy, order-overturned, site-bypass); defaults made generic;
+  53/53 frames + 3 covers byte-identical from library copies; default stills reviewed. wallet-raid.js not promoted
+  (story-specific). Nits: order-overturned case pill on emblem, site-bypass counter covers sign, door-row stamp small.
 - 2026-10-17 (nightly run, Saturday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "An AI lab checked its own hiring." (Anthropic's Oct 16 report "How employment is changing at Anthropic": junior
      share of technical hires 27% -> 9%, juniors' share of technical staff 21% -> 14% since early 2025, agent hours passed
