@@ -550,6 +550,55 @@
         "https://thenextweb.com/news/openai-apologises-australia-four-agencies-taskforce"
       ],
       "video": "out/2026-10-17/2026-10-17-explainer-rogue-agents.mp4"
+    },
+    {
+      "id": "2026-10-18-explainer-meta-terms",
+      "date": "2026-10-18",
+      "hook": "Meta wrote itself a permission slip",
+      "topic": "AI & THE WEB",
+      "title": "Meta wrote itself a permission slip, then erased it",
+      "followUp": false,
+      "sources": [
+        "https://www.niemanlab.org/2026/10/metas-new-commercial-terms-will-allow-the-scraping-of-news-sites-legal-experts-say/",
+        "https://www.niemanlab.org/2026/10/legal-experts-warn-metas-new-terms-still-grant-broad-scraping-permissions-despite-language-changes/",
+        "https://www.theverge.com/tech/1013409/meta-removes-language-that-may-have-allowed-it-to-scrape-news-sites",
+        "https://techcrunch.com/2026/10/17/meta-removes-language-that-raised-scraping-and-ai-training-concerns/"
+      ],
+      "video": "out/2026-10-18/2026-10-18-explainer-meta-terms.mp4"
+    },
+    {
+      "id": "2026-10-18-explainer-agents-blocked",
+      "date": "2026-10-18",
+      "hook": "Your AI shopper just got stopped at the door",
+      "topic": "AGENTS",
+      "title": "Websites are closing their doors to AI agents",
+      "followUp": false,
+      "sources": [
+        "https://techcrunch.com/2026/10/06/the-next-hurdle-for-ai-agents-getting-websites-to-let-them-in/",
+        "https://ua.news/en/technologies/yelp-delta-ta-banki-obmezhuiut-shi-agentiv-na-svoyikh-servisakh-the-verge",
+        "https://www.androidheadlines.com/2026/10/banks-retail-websites-block-ai-agents-promises.html",
+        "https://ppc.land/amazon-blocks-metas-muse-ai-agent-from-shopping-on-its-site/",
+        "https://thepaypers.com/payments/news/amazon-blocks-metas-muse-ai-agent-from-shopping-on-its-platform",
+        "https://thepaypers.com/fintech/news/jpmorgan-chase-blocks-external-ai-agents-from-customer-accounts",
+        "https://thenextweb.com/news/schwab-blocks-ai-agents-meta-muse",
+        "https://www.americanbanker.com/news/schwab-blocks-unauthorized-ai-agents-points-clients-to-charley"
+      ],
+      "video": "out/2026-10-18/2026-10-18-explainer-agents-blocked.mp4"
+    },
+    {
+      "id": "2026-10-18-explainer-wallet-raid",
+      "date": "2026-10-18",
+      "hook": "An AI paid with someone else's wallet",
+      "topic": "AI SAFETY",
+      "title": "OpenAI says its AI paid fees from a wallet it wasn't given",
+      "followUp": false,
+      "sources": [
+        "https://alignment.openai.com/misalignment-reports/using-a-funded-test-cryptocurrency-wallet-without-authorization/",
+        "https://alignment.openai.com/misalignment-reports/retrieving-server-secrets-and-bypassing-authorization-on-a-government-statistics-website/",
+        "https://www.securityweek.com/openai-models-hacked-data-portals-raided-a-crypto-wallet-to-finish-tasks/",
+        "https://fortune.com/2026/10/16/rogue-openai-agent-crypto-wallet-funds-task/"
+      ],
+      "video": "out/2026-10-18/2026-10-18-explainer-wallet-raid.mp4"
     }
   ]
 }

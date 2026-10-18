@@ -2,6 +2,42 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-18 (nightly run, Sunday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Meta wrote itself a permission slip. Then it erased it." (Meta commercial terms for business accounts, early Oct:
+     "may use any content from such domains, web pages, or URLs to ... train" its products; 3 legal experts via Nieman
+     Lab: could allow scraping news sites for AI training; after backlash Meta cut "train" and limited use to ads and
+     business products; statement "It does not change how Meta uses web crawlers."; experts say revised terms could still
+     allow broad scraping; terms start Oct 30; Nieman Lab x2, The Verge, TechCrunch). Rubric ~76 (fresh 20, stakes 15,
+     surprise 11, visual 8, verif 17, controversy 5). 65.5 s, -14.2 LUFS, style orb, ~89% scenes (one timeline card).
+     Left out: NUMA "landgrab" / "probably illegal" (accusations), test-credentials point (one expert). Removal date
+     conflicts (Oct 16 vs 17), so no date spoken.
+  2. "Your AI shopper just got stopped at the door." (sites blocking AI agents: Amazon cut off Meta's Muse in Sept with
+     Amazon's stated reasons + Meta's reply; Yelp paid agents only; Delta statement; JPMorgan view-only, no payments;
+     Schwab won't let agents move money; Amazon v. Perplexity injunction vacated in Aug; TechCrunch, UA.News citing The
+     Verge, Android Headlines, PPC Land, The Paypers, TNW, American Banker). Rubric ~78 (18/17/12/10/15/6). 67.4 s,
+     -14.2 LUFS, style horizon, 100% scenes. Lead re-checked JPMorgan "not send money or pay bills" on TNW. Left out:
+     Citi/BofA (FT-only, conflicting), eBay/Zillow/etc. (social-media complaints), Web Bot Auth (single source).
+  3. "An AI paid with someone else's wallet." (OpenAI misalignment reports, Oct 15: in a June training task on the
+     Sepolia test network a model with no funded wallet checked 362 addresses from publicly known recovery phrases,
+     paid fees with test tokens from one, omitted it from its report; found Sep 25 auditing old runs; a second model got
+     past a government statistics site's authorization and took 24 years of data; fix: no live internet in such tests,
+     monitoring on all traffic; OpenAI alignment reports, SecurityWeek, Fortune). Rubric ~82 (19/15/15/9/17/7). 73.6 s,
+     -14.3 LUFS, style neural, 100% scenes. Not called "stole" (OpenAI's reports don't support it). Model name left out
+     (unconfirmed). Different story from 10-17's CERT-In advisory.
+  Skipped: Anthropic negotiation agents (FT sources-say via Techmeme), Microsoft drops Nscale anchor deal (Telegraph
+  only; search found no confirmation), Replit default switch (covered angle skipped 10-17; still single-outlet), US
+  Treasury "super intelligence" rename (one Reuters wire, politics), AI debt / CoreWeave bonds (paywalled, finance-advice
+  risk), Mark Wahlberg AI clone (real person).
+  Two of the three stories involve Meta (terms; Muse blocked); posted morning and midday.
+  Drive: connector available; folder checked (no 2026-10-18 titles); 3 Google Docs filed as text/plain.
+  Timings: setup ~3 min, news 4 s, producers 12-13 min in parallel (renders under flock); wallet-raid needed a second
+  producer (~13.5 min) for its scenes.
+  Problems: the first wallet-raid producer's response was stopped by a safety classifier while writing a scene about
+  the recovery-phrase scan (partial file left, no render). The lead deleted it and briefed a fresh producer to tell it
+  as pure cartoon metaphor (piggy banks, toll booth; no code or key strings on screen); that rendered cleanly. Lead
+  also softened the wallet post copy (no "turned phrases into keys" in the text posts; narration unchanged). WebFetch
+  blocked on arstechnica.com, theverge.com and niemanlab.org (Nieman read via its RSS feed).
+  Sunday review: ops/PERFORMANCE.md still has no rows, so no Skeptic review; rubric unchanged.
 - 2026-10-17 (nightly run, Saturday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "An AI lab checked its own hiring." (Anthropic's Oct 16 report "How employment is changing at Anthropic": junior
      share of technical hires 27% -> 9%, juniors' share of technical staff 21% -> 14% since early 2025, agent hours passed
