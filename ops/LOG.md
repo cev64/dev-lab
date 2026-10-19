@@ -2,6 +2,38 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-19 (nightly run, Monday, fired ~06:57 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Anthropic set aside 5% of itself." (Anthropic Public Benefit Fund, Oct 18: 5% of shares into a wholly-owned LLC,
+     subject to stockholder approval; +2% at the board's discretion per 50% rise above an undisclosed baseline; no
+     lobbying/political giving; ~20% of shares for the public good incl. co-founders' 80% pledges + employee match;
+     governance "in the coming months"; Business Insider's own "about $48 billion" at May's valuation, attributed;
+     Anthropic, TechCrunch, Reuters via Yahoo, BI via Yahoo). Rubric ~80 (fresh 20, stakes 13, surprise 14, visual 8,
+     verif 19, controversy 6). 70.8 s, -14.3 LUFS, style neural, 100% scenes. Neutral; Amodei's "crisis of trust" as
+     attributed text only. Left out: $200M research commitment (time), the ~$960B valuation itself.
+  2. "Is the banker on your video call even human?" (World ID for banking and finance, Money20/20, Sun Oct 18: Zoom
+     check matching selfie + live video + Orb image, agent tool; no bank customer named, no price; context: $25.6M Hong
+     Kong deepfake call (Arup, unnamed), Deloitte's $40B-by-2027 forecast, Bavarian privacy order Dec 2024 + World's
+     appeal; World blog x2, The Block, TNW, Crypto Briefing, Deloitte, PurpleSec, Euronews, TechCrunch). Rubric ~78
+     (20/15/12/10/15/6). 69.9 s, -14.3 LUFS, style horizon, 88% scenes (one Deloitte card). Altman never drawn; Orb is
+     a generic sphere. Left out: "first industry-specific offering" and "testing since April" (not in World's post /
+     single outlet), design partners (lists differ 4 vs 5). Weakest row: the $25.6M case's second source (PurpleSec).
+  3. "Arrested for standing in a robot's way." (Philadelphia woman arrested Wed Oct 14, reported Oct 16, for repeatedly
+     blocking an Uber Eats sidewalk robot (Avride) near Reading Terminal Market; police say she ignored multiple orders;
+     charged with disorderly conduct; her own words to 6abc; Uber declined to comment + its March launch quote; robots
+     ~$10K each; 6abc, PhillyVoice, Inquirer, Hoodline). Rubric ~84 (17/16/15/10/16/10). 67.6 s, -14.3 LUFS, style flow,
+     100% scenes. Private person: never named, no age/former job; "charged is not convicted" spoken; both sides.
+     The brief's "Serve Robotics" was wrong; producer corrected to Avride. Freshness: arrest 5 days old, first reports
+     3 days old, The Verge picked it up Oct 18.
+  Skipped: Stripe Link agentic 38x (Upstarts Media only, no second source found), China GDP (not AI), World's economists
+  survey / neoclouds / Nvidia NVHBM / El Nino forecasting (FT or The Information, paywalled or sources-say), Replit
+  default switch (still single-outlet), Anthropic safety bill pitch (Politico via Reuters, sources-say; Anthropic
+  already picked), Jack Clark GDP forecast (Anthropic again), "Pro-AI bias in LLMs" (arXiv v2 of a January paper).
+  Drive: connector available; folder checked (no repeats); 3 Google Docs filed as text/plain, one read back OK. In the
+  robot doc the lead relabelled the PhillyVoice source line as "Philly woman arrested over Uber Eats robot protest"
+  (the real headline names her former job); URL unchanged; the delivery note keeps the real headline.
+  Timings: setup ~3 min, news 5 s, producers 13-17.5 min in parallel (renders under flock); no lead re-renders.
+  Lead review nits (not fixed): robot "x2" chip touches the "Move, please" bubble; World ID "for Agents" card briefly
+  overlaps the Zoom card as the cards fly out.
 - 2026-10-18 (nightly run, Sunday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Meta wrote itself a permission slip. Then it erased it." (Meta commercial terms for business accounts, early Oct:
      "may use any content from such domains, web pages, or URLs to ... train" its products; 3 legal experts via Nieman

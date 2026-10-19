@@ -599,6 +599,58 @@
         "https://fortune.com/2026/10/16/rogue-openai-agent-crypto-wallet-funds-task/"
       ],
       "video": "out/2026-10-18/2026-10-18-explainer-wallet-raid.mp4"
+    },
+    {
+      "id": "2026-10-19-explainer-robot-blocked",
+      "date": "2026-10-19",
+      "hook": "Arrested for standing in a robot's way",
+      "topic": "ROBOTS & JOBS",
+      "title": "Philadelphia woman arrested for blocking an Uber Eats delivery robot",
+      "followUp": false,
+      "sources": [
+        "https://6abc.com/19941323/",
+        "https://www.phillyvoice.com/philly-woman-arrested-uber-eats-robot-protest/",
+        "https://www.inquirer.com/food/restaurants/uber-eats-food-delivery-robots-philadelphia-20260310.html",
+        "https://www.phillyvoice.com/uber-eats-delivery-robots-philadelphia-avride/",
+        "https://hoodline.com/2026/10/philadelphia-woman-charged-after-blocking-uber-delivery-robot/"
+      ],
+      "video": "out/2026-10-19/2026-10-19-explainer-robot-blocked.mp4"
+    },
+    {
+      "id": "2026-10-19-explainer-benefit-fund",
+      "date": "2026-10-19",
+      "hook": "Anthropic set aside 5% of itself",
+      "topic": "AI MONEY",
+      "title": "Anthropic puts 5% of its shares into a Public Benefit Fund",
+      "followUp": false,
+      "sources": [
+        "https://www.anthropic.com/news/public-benefit-fund",
+        "https://techcrunch.com/2026/10/18/anthropic-says-its-committing-5-of-its-shares-to-a-public-benefit-fund/",
+        "https://finance.yahoo.com/technology/ai/articles/anthropic-commit-5-stake-public-191115841.html",
+        "https://finance.yahoo.com/technology/ai/articles/anthropic-commits-billions-public-benefit-184601337.html",
+        "https://techcrunch.com/2026/08/16/anthropic-ceo-says-ai-backlash-is-fundamentally-a-crisis-of-trust/"
+      ],
+      "video": "out/2026-10-19/2026-10-19-explainer-benefit-fund.mp4"
+    },
+    {
+      "id": "2026-10-19-explainer-human-check",
+      "date": "2026-10-19",
+      "hook": "Is the banker on your video call even human?",
+      "topic": "DEEPFAKES",
+      "title": "World ID for banks: a human check for video calls",
+      "followUp": false,
+      "sources": [
+        "https://world.org/blog/announcements/world-id-banking-finance-ai-safe",
+        "https://world.org/blog/announcements/world-id-for-zoom-proof-of-human-video-meetings",
+        "https://www.theblock.co/news/ecosystems/2026-10-18-world-launches-world-id-suite-banks-418869",
+        "https://thenextweb.com/news/world-id-banking-finance-zoom-ai-agents-money2020",
+        "https://cryptobriefing.com/world-id-zoom-deepfake-banks-suite/",
+        "https://www.deloitte.com/us/en/insights/industry/financial-services/deepfake-banking-fraud-risk-on-the-rise.html",
+        "https://purplesec.us/breach-report/arup-deepfake/",
+        "https://www.euronews.com/next/2024/12/19/german-watchdog-orders-sam-altmans-biometric-id-project-world-to-delete-data",
+        "https://techcrunch.com/2024/12/19/worldcoin-must-let-europeans-comprehensively-delete-their-data-under-privacy-order"
+      ],
+      "video": "out/2026-10-19/2026-10-19-explainer-human-check.mp4"
     }
   ]
 }
