@@ -24,7 +24,7 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
      100% scenes. Private person: never named, no age/former job; "charged is not convicted" spoken; both sides.
      The brief's "Serve Robotics" was wrong; producer corrected to Avride. Freshness: arrest 5 days old, first reports
      3 days old, The Verge picked it up Oct 18.
-  Skipped: Stripe Link agentic 38x (Upstarts Media only, no second source found), China GDP (not AI), World's economists
+  Skipped: Stripe Link agentic 38x (Upstarts Media only, no second source found), China GDP (not AI), FT economists
   survey / neoclouds / Nvidia NVHBM / El Nino forecasting (FT or The Information, paywalled or sources-say), Replit
   default switch (still single-outlet), Anthropic safety bill pitch (Politico via Reuters, sources-say; Anthropic
   already picked), Jack Clark GDP forecast (Anthropic again), "Pro-AI bias in LLMs" (arXiv v2 of a January paper).
@@ -34,6 +34,11 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Timings: setup ~3 min, news 5 s, producers 13-17.5 min in parallel (renders under flock); no lead re-renders.
   Lead review nits (not fixed): robot "x2" chip touches the "Move, please" bubble; World ID "for Agents" card briefly
   overlaps the Zoom card as the cards fly out.
+  Improve: PR #22 merged: 13 of tonight's scenes promoted (library 97 -> 110: robot-standoff (6 modes, "word#n" cues),
+  slice-off, value-steps, fund-paths, share-grid, fine-print, trust-question, call-human, scanner-launch, deepfake-wire,
+  three-match, agent-tether, launch-caveats); defaults made generic; 98/98 frames + covers byte-identical from library
+  copies; 57 default stills reviewed. Nits: robot-standoff protest quote over sign with default text, launch-caveats
+  sheet drops from above the header (~0.5 s), slice-off date pill close under the header.
 - 2026-10-18 (nightly run, Sunday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Meta wrote itself a permission slip. Then it erased it." (Meta commercial terms for business accounts, early Oct:
      "may use any content from such domains, web pages, or URLs to ... train" its products; 3 legal experts via Nieman
