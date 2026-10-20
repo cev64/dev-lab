@@ -2,6 +2,35 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-20 (nightly run, Tuesday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Hackers stole AI keys and ran up the bills." (OpenCode Console breach, Oct 19: attackers reached an older system
+     where some users stored AI API keys; 1.4% of Console users hit; spend alerts/charges on OpenAI, Anthropic, Google
+     accounts, hundreds of dollars, a few over $1,000 (TechCrunch, attributed); Anthropic/Google blocked keys, OpenAI
+     refunding (TechCrunch, attributed); AI defence agents refused once safety filters tripped, until OpenCode joined an
+     OpenAI program for vetted defenders; open-source app not affected; how they got in undisclosed; revoke and replace;
+     TechCrunch, Notebookcheck, The Hacker News, OfficeChai). Rubric ~82 (fresh 19, stakes 14, surprise 14, visual 9,
+     verif 17, controversy 9). 73.6 s, -14.2 LUFS, style neural, 100% scenes (6 new modules). Cut: "distillation
+     attack" (OpenCode's disputed claim), "48 hours", Daybreak Blue name. Pure cartoon metaphor, no code/key strings.
+  2. "People are making their smart TVs dumb. On purpose." (TechCrunch Oct 19: people pointing AI coding agents like
+     Claude Code at smart TVs to strip ads/bloatware/tracking; cleanyourtv removed 25 Xiaomi packages on the dev's
+     parents' TV; dumbtv's goal quote; ACR context from Consumer Reports; TechCrunch: could disrupt TV ad business;
+     one bricked Android TV, one stuck Fire TV; GitHub READMEs, cleanyour.tv, Consumer Reports). Rubric ~80
+     (19/16/12/10/15/8). 73.8 s, -14.3 LUFS, style flow, 100% scenes. No how-to steps; private people unnamed. Cut:
+     "a few thousand" users, 192->83 MB launcher (single tweet). Lead changed the TikTok copy's "first run" to "AI".
+  3. "Alone on an island, this AI started playing." (MIT paper arXiv 2610.07130, not peer reviewed + MIT Technology
+     Review Oct 19: copies of Claude Opus 4.7 "Eko", 30 h alone on a virtual island, no task; block hearts and
+     constellations, own basketball, 50-catch juggling record self-cancelled; played copies placed 10.3 objects vs 3.5
+     fresh; erasing a trick from notes hurt that task; caveats: role-play (author), soul file, outside expert "we don't
+     know based on the paper"). Rubric ~81 (19/10/15/10/18/9). 71.4 s, -14.3 LUFS, style horizon, 100% scenes.
+  Skipped: Inception Mercury 3 (benchmark claims, inside baseball), ECHOTRIBBLE (leaked military docs, single outlet),
+  OpenAI ~$30B raise / Nscale-Anthropic $45B (sources-say), Microsoft "agents as insider threats" (corporate, weaker
+  hook), hacker vs John Deere/SharkNinja (Verge only; search found no second source; names companies as victims),
+  accused OpenAI spy (criminal case, named person), Anthropic watchdog access (Anthropic covered 10-17/10-19).
+  Two stories mention Claude (island subject; Claude Code as one tool in the TV story); different kinds of story.
+  Drive: connector available; folder checked (no 2026-10-20 titles); 3 Google Docs filed as text/plain, one read back OK.
+  Timings: setup ~3 min, news 10 s, producers 13.5-22 min in parallel; no lead re-renders.
+  Lead review nits (not fixed): island juggling counter ring overlaps its "catches in a row" label; key-heist hook
+  title card overlaps the shop sign for ~1 s; dumb-tv toolbox enters frame just ahead of the robot (~9 s).
 - 2026-10-19 (nightly run, Monday, fired ~06:57 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Anthropic set aside 5% of itself." (Anthropic Public Benefit Fund, Oct 18: 5% of shares into a wholly-owned LLC,
      subject to stockholder approval; +2% at the board's discretion per 50% rise above an undisclosed baseline; no

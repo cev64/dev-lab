@@ -651,6 +651,51 @@
         "https://techcrunch.com/2024/12/19/worldcoin-must-let-europeans-comprehensively-delete-their-data-under-privacy-order"
       ],
       "video": "out/2026-10-19/2026-10-19-explainer-human-check.mp4"
+    },
+    {
+      "id": "2026-10-20-explainer-dumb-tv",
+      "date": "2026-10-20",
+      "hook": "People are making smart TVs dumb, on purpose",
+      "topic": "AI AGENTS",
+      "title": "People are using AI to make their smart TVs dumb again",
+      "followUp": false,
+      "sources": [
+        "https://techcrunch.com/2026/10/19/people-are-using-ai-to-make-their-smart-tvs-dumb-again/",
+        "https://github.com/humblemuzzu/dumbtv",
+        "https://github.com/Gathin23/cleanyourtv",
+        "https://cleanyour.tv/",
+        "https://www.consumerreports.org/electronics/privacy/how-to-turn-off-smart-tv-snooping-features-a4840102036/"
+      ],
+      "video": "out/2026-10-20/2026-10-20-explainer-dumb-tv.mp4"
+    },
+    {
+      "id": "2026-10-20-explainer-island-play",
+      "date": "2026-10-20",
+      "hook": "Alone on an island, this AI started playing",
+      "topic": "AI AGENTS",
+      "title": "Researchers left an AI alone on an island. It started to play.",
+      "followUp": false,
+      "sources": [
+        "https://www.technologyreview.com/2026/10/19/1147095/ai-stranded-claude-virtual-desert-island-play/",
+        "https://arxiv.org/abs/2610.07130"
+      ],
+      "video": "out/2026-10-20/2026-10-20-explainer-island-play.mp4"
+    },
+    {
+      "id": "2026-10-20-explainer-key-heist",
+      "date": "2026-10-20",
+      "hook": "Hackers stole AI keys and ran up the bills",
+      "topic": "AI SECURITY",
+      "title": "OpenCode hack: stolen AI API keys ran up users' bills",
+      "followUp": false,
+      "sources": [
+        "https://techcrunch.com/2026/10/19/hackers-hit-ai-coding-tool-opencode-running-up-charges-on-users-ai-accounts/",
+        "https://www.notebookcheck.net/OpenCode-hacked-users-urged-to-revoke-their-API-keys.1426957.0.html",
+        "https://thehackernews.com/2026/10/opencode-console-breach-may-have.html",
+        "https://officechai.com/ai/getting-blocked-by-ai-agent-cyber-safeguards-while-fighting-malicious-ai-agents-says-opencode-co-founder-dax-raad-after-hack/",
+        "https://x.com/opencode/status/2111519637049319818"
+      ],
+      "video": "out/2026-10-20/2026-10-20-explainer-key-heist.mp4"
     }
   ]
 }
