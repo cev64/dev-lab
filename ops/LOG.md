@@ -31,6 +31,11 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Timings: setup ~3 min, news 10 s, producers 13.5-22 min in parallel; no lead re-renders.
   Lead review nits (not fixed): island juggling counter ring overlaps its "catches in a row" label; key-heist hook
   title card overlaps the shop sign for ~1 s; dumb-tv toolbox enters frame just ahead of the robot (~9 s).
+  Improve: PR #23 merged: all 8 of tonight's scenes promoted (library 110 -> 118: key-wall-heist, spend-meters,
+  key-card, guard-refuses, breach-caveat, key-rotate, smart-tv-strip (6 modes), island-play (7 modes)); defaults made
+  generic; 114/114 frames + 3 covers byte-identical from library copies; 65 default stills reviewed. Nits: smart-tv-strip
+  long project pill can pass x 60, AD cards cover Screens chip; island-play hours counter completes late; key-card
+  figure enters off the left edge.
 - 2026-10-19 (nightly run, Monday, fired ~06:57 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Anthropic set aside 5% of itself." (Anthropic Public Benefit Fund, Oct 18: 5% of shares into a wholly-owned LLC,
      subject to stockholder approval; +2% at the board's discretion per 50% rise above an undisclosed baseline; no
