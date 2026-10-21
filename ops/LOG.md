@@ -27,6 +27,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Timings: setup ~3 min, news 8 s, producers 12.4-17.1 min in parallel; no lead re-renders.
   Lead review nits (not fixed): muse link chip passes the phone edge; Share button floats above head in payoff;
   watchdog report sheet covers REPORTS label <1 s; slop signal-scanner action small; slop quote card 8.7 s.
+  Improve: PR #24 merged: 10 of tonight's scenes promoted (library 118 -> 128: share-sofa, dns-phonebook, open-pages,
+  share-paused, signpost-question, slop-factory, signal-scanner, persona-mask, skip-sofa, watchdog-room (5 modes));
+  defaults made generic; 226/226 frames + 3 covers byte-identical from library copies; 54 default stills reviewed.
 - 2026-10-20 (nightly run, Tuesday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Hackers stole AI keys and ran up the bills." (OpenCode Console breach, Oct 19: attackers reached an older system
      where some users stored AI API keys; 1.4% of Console users hit; spend alerts/charges on OpenAI, Anthropic, Google
