@@ -6,6 +6,9 @@
 //                        title (name on the box, default none),
 //                        leftCue / fixCue / cue / qCue  narration words: left label / shield check / right figure /
 //                               question (else 1 s / 25% / 55% / 70% of the scene)
+//                        notes [{text, cue, accent}] up to 2 pills; the first one's cue moves the question up and
+//                               shrinks it, the pills land under it (else 80% / 90% of the scene);
+//                               without notes the scene is unchanged
 export default function draw(ctx, t, info) {
   const H = info.helpers, K = info.helpers.kit, P = info.params || {};
   const { clamp, lerp, smooth, easeOutCubic } = H;
@@ -48,15 +51,22 @@ export default function draw(ctx, t, info) {
   const lp = K.popIn(t, tL, 0.4); if (lp > 0) K.drawLabel(ctx, 230, 620, lp, { text: P.left || 'Defenders', size: 30, dot: true });
   const rp = K.popIn(t, tR + 0.4, 0.4); if (rp > 0) K.drawLabel(ctx, 745, 620, rp, { text: P.right || 'Attackers', size: 30, dot: true });
   // question
+  const notes = (P.notes || []).slice(0, 2);
+  const tN = notes.map((n, i) => at(n.cue, D * (0.8 + 0.1 * i)) - 0.2);
+  const mv = notes.length ? smooth((t - tN[0]) / 0.5) : 0;
   const qp = K.popIn(t, tQ, 0.5);
   if (qp > 0) {
     const q = String(P.question || 'OPEN OR CLOSED?');
-    ctx.save(); ctx.translate(487, 535); ctx.scale(qp, qp); ctx.rotate(Math.sin(t * 2) * 0.012);
+    ctx.save(); ctx.translate(487, lerp(535, 452, mv)); ctx.scale(qp * lerp(1, 0.7, mv), qp * lerp(1, 0.7, mv)); ctx.rotate(Math.sin(t * 2) * 0.012);
     const ft = H.fitText(ctx, q, 'display', 84, 44, 780);
     ctx.font = ft.font; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic'; ctx.lineJoin = 'round';
     ctx.lineWidth = 16; ctx.strokeStyle = 'rgba(6,7,14,0.9)'; ctx.strokeText(q, 0, 0); ctx.fillStyle = ACC; ctx.fillText(q, 0, 0);
     ctx.restore();
   }
+  notes.forEach((n, i) => {
+    const k = K.popIn(t, tN[i], 0.45);
+    if (k > 0) K.drawLabel(ctx, 487, 514 + i * 56 + K.bob(t, 2, 1.2, i), Math.min(1.05, k), { text: n.text, size: 28, dot: !n.accent, accent: !!n.accent });
+  });
   ctx.restore();
 }
 
