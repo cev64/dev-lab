@@ -33,6 +33,11 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Lead review nits (not fixed): Walmart rules panels a little plain, arm/robots touch left edge 12-15 s; PHP quote
   panel covers NSA pill after it is spoken, payoff question card nudges laptop; managers hook card wraps to 3 lines,
   "?" bubble touches the ruler in B5. Producers shared one scratchpad (stray stills): give each its own subfolder.
+  Improve: PR #25 merged: 13 of tonight's scenes promoted (library 128 -> 141: welcome-door, two-doors, agent-profiles,
+  agent-rules, beta-gate, allowance-payoff, survey-table, bots-outnumber, whose-work, review-rubric, agent-oversight,
+  foundation-flaw (from php-foundation), server-door) + two-sides gains optional `notes`; defaults made generic;
+  104/104 frames + 3 covers byte-identical from library copies; 19 default scene/mode stills reviewed. Nits: several
+  pills/hands touch the x 60/915 edges (two-doors, agent-rules, agent-profiles, allowance-payoff, foundation-flaw).
 - 2026-10-21 (nightly run, Wednesday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Your private AI chat had a public address." (Meta paused Muse chat sharing after security firm Claroc found 6,800+
      share hostnames in passive-DNS records; addresses built from the chat title; pages opened with no login; a few
