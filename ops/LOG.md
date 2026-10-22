@@ -2,6 +2,37 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-22 (nightly run, Thursday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Your boss may soon manage more bots than people." (Nielsen survey commissioned by monday.com, Oct 21: 1,701
+     directors/senior managers, 7 countries; 58% expect to manage more agents than people within a year; 53% harder to
+     judge employees' own work; nearly half more time reviewing (TechCrunch/TokenPost, report gated); 78% changed
+     performance criteria; 46% top worry too little human oversight; 35% fear accountability for agents' decisions;
+     caveat: feelings/predictions, commissioned by a work-software seller; Business Wire release, monday.com, TechCrunch,
+     TokenPost). Rubric ~77 (fresh 19, stakes 16, surprise 13, visual 8, verif 15, controversy 6). 70.4 s, -14.2 LUFS,
+     style horizon, ~87% scenes (1 caveat list card), 5 new modules. Dropped: 39% draft reviews with AI (TC only),
+     46% "inform decisions" (conflicting wording), Levi quote (TC-only interview).
+  2. "Walmart now lets your AI shop." (FOLLOW-UP to 10-18 agents-blocked: Walmart Agent Gateway + Agent Profiles, Oct 21;
+     works with Muse/ChatGPT/Gemini; profiles next month, approve every purchase by default or $50/$100/$200 limit; no
+     card numbers; returns apply; rule-breakers blocked; beta for companies/developers first; Amazon blocks outside
+     agents incl. Muse; Walmart newsroom, TechCrunch, Unite.AI, Android Headlines, Retail Gazette). Rubric ~80
+     (20/16/12/10/17/5). 65.9 s, -14.2 LUFS, style flow, 100% scenes, 6 new modules. Dropped: "no Walmart+ needed",
+     MCP/Anthropic protocol detail (not on Walmart's page).
+  3. "AI just found holes under most of the web." (PHP2Shell: PHP patched two critical flaws Oct 21 found with AI by Wiz
+     (Wiz Atlas + Gemini + GPT models) and a security firm in OpenAI's effort; CVSS 9.2; no-login code execution +
+     memory disclosure; Wiz: every version from the last decade; ~70% of websites; NSA warning; PHP "updating is the
+     only safe choice"; details leaked a day early; no confirmed break-in; Wiz, php.net, TechCrunch, The Hacker News,
+     The Next Web, Information Age). Rubric ~86 (20/18/15/9/17/7). 69.6 s, -14.3 LUFS, style neural, 100% scenes,
+     3 new modules. No exploit/CVE detail. Cut: "since PHP 5 / 2004" (Wiz says 5.4), govt sites down (maintenance,
+     single outlet), "exploit attempts" (THN only), NSA "take it offline" (TC only).
+  Skipped: Claude Duet (product launch, agents theme already in Walmart; Anthropic recent), OpenAI agent lied (covered
+  10-21), ChatGPT Ads 26 countries (primary 403, search found conflicting figures), Microsoft ARTEX/China hackers
+  (attribution, overlaps security slot), Recursive Flint (benchmark claims), Meta share class (inside baseball).
+  Drive: connector available; folder checked (no 2026-10-22 titles); 3 Google Docs filed as text/plain, one read back:
+  emojis came through mojibake and the last ~20 chars were cut (likely latin-1 decode of text/plain); added to BACKLOG.
+  Timings: setup ~4 min, news 5 s, producers 13-15 min in parallel; no lead re-renders.
+  Lead review nits (not fixed): Walmart rules panels a little plain, arm/robots touch left edge 12-15 s; PHP quote
+  panel covers NSA pill after it is spoken, payoff question card nudges laptop; managers hook card wraps to 3 lines,
+  "?" bubble touches the ruler in B5. Producers shared one scratchpad (stray stills): give each its own subfolder.
 - 2026-10-21 (nightly run, Wednesday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Your private AI chat had a public address." (Meta paused Muse chat sharing after security firm Claroc found 6,800+
      share hostnames in passive-DNS records; addresses built from the chat title; pages opened with no login; a few

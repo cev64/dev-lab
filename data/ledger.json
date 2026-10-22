@@ -738,6 +738,54 @@
         "https://www.avclub.com/spotify-removes-50-million-ai-generated-tracks"
       ],
       "video": "out/2026-10-21/2026-10-21-explainer-ai-slop.mp4"
+    },
+    {
+      "id": "2026-10-22-explainer-walmart-agents",
+      "date": "2026-10-22",
+      "hook": "Walmart now lets your AI shop",
+      "topic": "AGENTS",
+      "title": "Walmart opens its door to AI shopping agents",
+      "followUp": true,
+      "sources": [
+        "https://corporate.walmart.com/news/2026/10/Making-It-Possible-for-Agents-to-Shop-on-Behalf-of-Customers",
+        "https://techcrunch.com/2026/10/21/while-amazon-blocks-ai-agents-walmart-rolls-out-the-welcome-mat/",
+        "https://www.unite.ai/walmart-introduces-agent-profiles-gateway-for-ai-shopping-agents/",
+        "https://www.androidheadlines.com/2026/10/walmart-ai-agent-shopping-profiles-gateway.html",
+        "https://www.retailgazette.co.uk/blog/2026/09/amazon-blocks-metas-new-ai-shopping-agent-from-its-website/"
+      ],
+      "video": "out/2026-10-22/2026-10-22-explainer-walmart-agents.mp4"
+    },
+    {
+      "id": "2026-10-22-explainer-ai-managers",
+      "date": "2026-10-22",
+      "hook": "Your boss may soon manage more bots than people",
+      "topic": "JOBS",
+      "title": "Managers expect to oversee more AI agents than people",
+      "followUp": false,
+      "sources": [
+        "https://www.businesswire.com/news/home/20261021280713/en/",
+        "https://monday.com/gp/ai-report-2026",
+        "https://techcrunch.com/2026/10/21/ai-promises-productivity-but-for-managers-its-mostly-a-headache-for-now-says-new-survey/",
+        "https://www.tokenpost.com/news/technology/37295"
+      ],
+      "video": "out/2026-10-22/2026-10-22-explainer-ai-managers.mp4"
+    },
+    {
+      "id": "2026-10-22-explainer-php-holes",
+      "date": "2026-10-22",
+      "hook": "AI just found holes under most of the web",
+      "topic": "SECURITY",
+      "title": "AI found critical holes in PHP, the code behind ~70% of websites",
+      "followUp": false,
+      "sources": [
+        "https://www.wiz.io/blog/php2shell-php-rce",
+        "https://www.php.net/",
+        "https://techcrunch.com/2026/10/21/php-armageddon-openai-googles-wiz-find-ancient-holes-panicking-the-internet/",
+        "https://thehackernews.com/2026/10/php-issues-emergency-patches-for-two.html",
+        "https://thenextweb.com/news/php2shell-php-rce-ai-openai-wiz",
+        "https://ia.acs.org.au/article/2026/govt-sites-go-down-after-ai-finds--critical--php-vulnerabilities.html"
+      ],
+      "video": "out/2026-10-22/2026-10-22-explainer-php-holes.mp4"
     }
   ]
 }
