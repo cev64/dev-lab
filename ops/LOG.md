@@ -2,6 +2,38 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-23 (nightly run, Friday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "AI giants just broke their lobbying records." (Q3 2026 federal LDA filings: Nvidia $2.2M (filing $2.15M), Anthropic
+     $2.1M, OpenAI $1.5M, each its highest quarter; OpenAI under $1M/quarter before 2026; Meta ~$5.9M, Google $3M+;
+     topics: KOSA AI provisions, chip exports, AI safety oversight, Ratepayer Protection Act; forms list topics, not
+     positions; The Verge, Semafor, lda.gov filings). Rubric ~76 (fresh 17, stakes 13, surprise 12, visual 8, verif 19,
+     controversy 7). 72.9 s, -14.2 LUFS, style orb, 100% scenes (1 new 6-mode module lobby-hill). In-house spend only
+     (outside firms file separately, not mentioned). Cut: Apple record, White House accord, antitrust angle.
+  2. "Every Uber employee just got an AI agent." (Uber rolls ChatGPT Work out to 30,000+ employees, Oct 22; agent for
+     multi-step tasks; Gmail/Drive/Calendar/Slack; 1,000-person pilot; engineers keep Codex; July: Uber cut 10% of
+     customer-service staff, first layoffs it tied to AI (Bloomberg via The Star, TNW); cost/time saved not disclosed;
+     OpenAI page 403 to fetch, so facts rest on TechCrunch, TNW, Unite.AI). Rubric ~76 (18/16/10/9/17/6). 69.9 s,
+     -14.2 LUFS, style flow, 100% scenes (5 new modules + library fine-print). Cut: "80% of pilot users non-engineers"
+     (TC only), VP quotes (TC only), Sept layoffs. Lead: layoff line kept as context; next beat says job effect unknown.
+  3. "Microsoft's AI beat doctors on the hardest cases." (Science study Oct 22: MAI Diagnostic Orchestrator 83% on 304
+     NEJM cases vs 36% for generalists with textbooks/internet; ER cases 80% vs 47%; Suleyman "medical superintelligence"
+     (text only, never drawn); caveats: gain mostly from underlying models like GPT-5 (TechCrunch, Medical Economics),
+     text-only simulation, no specialists; prospective hospital study planned; Microsoft AI, TechCrunch, Medical
+     Economics; science.org 403, lead re-checked figures on Microsoft's post). Rubric ~82 (18/18/14/9/16/7). 71.6 s,
+     -14.2 LUFS, style horizon, 100% scenes, 5 new modules (first medical scenes: doctor/clinic helpers). Cut: cost
+     claims (sources conflict), physician count.
+  Dropped mid-run: Switch 2 jailbroken with Codex help (The Verge): the producer subagent was stopped by the API's cyber
+  safeguard; replaced by Uber. Avoid hacking/jailbreak stories for producers (or keep them non-technical in the brief).
+  Skipped: OpenAI fired researchers/leak suspicion (named people, unproven wrongdoing, WSJ single source), Agent Skills
+  donated (inside baseball), OpenAI-NASK partnership (promo), OpenAI valuation cut (FT sources only), 1Password agent
+  logins (agents/security themes heavy this week), Canva Craft (product promo).
+  Drive: connector available; folder checked (no 2026-10-23 titles); 3 Google Docs filed. Root cause of the 10-22
+  mojibake/truncation: the connector treats text/plain as Latin-1 and cuts the text by its UTF-8 byte excess, so any
+  non-ASCII char (BMP emoji like U+270D, "·") breaks it. Tonight's text was made pure ASCII (+ "(end)" tail); read back:
+  complete and clean.
+  Timings: setup ~4 min, news 5 s, producers 14-17 min in parallel (Uber started ~5 min late); no lead re-renders.
+  Lead review nits (not fixed): lobbying "$1.5M" label overlaps a coin briefly in the tank; one caption page splits
+  "$3 / million"; doctors' numbers count up over ~1.3 s.
 - 2026-10-22 (nightly run, Thursday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Your boss may soon manage more bots than people." (Nielsen survey commissioned by monday.com, Oct 21: 1,701
      directors/senior managers, 7 countries; 58% expect to manage more agents than people within a year; 53% harder to

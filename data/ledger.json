@@ -786,6 +786,55 @@
         "https://ia.acs.org.au/article/2026/govt-sites-go-down-after-ai-finds--critical--php-vulnerabilities.html"
       ],
       "video": "out/2026-10-22/2026-10-22-explainer-php-holes.mp4"
+    },
+    {
+      "id": "2026-10-23-explainer-ai-doctors",
+      "date": "2026-10-23",
+      "hook": "Microsoft's AI beat doctors on the hardest cases",
+      "topic": "AI IN MEDICINE",
+      "title": "Microsoft's AI beat doctors on hard cases. Here's the catch.",
+      "followUp": false,
+      "sources": [
+        "https://microsoft.ai/news/building-medical-superintelligence/",
+        "https://techcrunch.com/2026/10/22/microsofts-mustafa-suleyman-says-its-ai-outperforms-doctors-on-hard-cases-as-he-chases-medical-superintelligence/",
+        "https://www.medicaleconomics.com/view/ai-system-outperforms-physicians-on-diagnostic-accuracy-in-microsoft-study",
+        "https://www.science.org/doi/10.1126/science.aeh7930"
+      ],
+      "video": "out/2026-10-23/2026-10-23-explainer-ai-doctors.mp4"
+    },
+    {
+      "id": "2026-10-23-explainer-ai-lobbying",
+      "date": "2026-10-23",
+      "hook": "AI giants just broke their lobbying records",
+      "topic": "POLICY",
+      "title": "OpenAI, Anthropic and Nvidia had record lobbying quarters",
+      "followUp": false,
+      "sources": [
+        "https://www.theverge.com/policy/1016585/openai-anthropic-nvidia-lobbying-records",
+        "https://www.semafor.com/article/10/21/2026/meta-tops-big-tech-lobbying-as-ai-labs-talk-antitrust",
+        "https://lda.gov/filings/public/filing/017c32c9-d63b-43f1-bf16-8e1e70da4b7d/print/",
+        "https://lda.gov/filings/public/filing/d0b9f104-2212-4fcc-8304-5c978c366768/print/",
+        "https://lda.gov/filings/public/filing/81e83fa3-9a11-4cbd-be37-3032cb4696f4/print/",
+        "https://lda.gov/filings/public/filing/de1c1bae-7ae1-4902-8168-8c6c78696409/print/",
+        "https://lda.gov/filings/public/filing/08837d92-519d-4607-b01a-9186702f755c/print/"
+      ],
+      "video": "out/2026-10-23/2026-10-23-explainer-ai-lobbying.mp4"
+    },
+    {
+      "id": "2026-10-23-explainer-uber-chatgpt",
+      "date": "2026-10-23",
+      "hook": "Every Uber employee just got an AI agent",
+      "topic": "AI AT WORK",
+      "title": "Uber gives all its staff an AI agent",
+      "followUp": false,
+      "sources": [
+        "https://openai.com/index/uber-chatgpt-work-rollout",
+        "https://techcrunch.com/2026/10/22/uber-puts-all-30000-employees-on-chatgpt-work/",
+        "https://thenextweb.com/news/uber-chatgpt-work-30000-employees",
+        "https://www.unite.ai/uber-rolls-out-chatgpt-work-to-more-than-30-000-employees/",
+        "https://www.thestar.com.my/tech/tech-news/2026/07/24/uber-cuts-10-of-customer-service-jobs-to-embrace-ai"
+      ],
+      "video": "out/2026-10-23/2026-10-23-explainer-uber-chatgpt.mp4"
     }
   ]
 }
