@@ -34,6 +34,11 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Timings: setup ~4 min, news 5 s, producers 14-17 min in parallel (Uber started ~5 min late); no lead re-renders.
   Lead review nits (not fixed): lobbying "$1.5M" label overlaps a coin briefly in the tank; one caption page splits
   "$3 / million"; doctors' numbers count up over ~1.3 s.
+  Improve: PR #26 merged: drive_card writes the doc body as pure ASCII + "(end)" tail (fixes 10-22 mojibake/cut; tests
+  69/69). PR #27 merged: 11 of tonight's scenes promoted (library 141 -> 152: lobby-hill (6 modes), diagnosis-panel,
+  case-race, doctor-alone, engine-reveal, exam-room, rollout-tower, agent-apps, pilot-grow, inbox-agent,
+  coworker-payoff); defaults made generic; 85/85 frames + 3 covers byte-identical from library copies; default stills
+  reviewed. Nits: pilot-grow robot past x 915; doctor drawing duplicated in 4 files (kit candidate, in BACKLOG).
 - 2026-10-22 (nightly run, Thursday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Your boss may soon manage more bots than people." (Nielsen survey commissioned by monday.com, Oct 21: 1,701
      directors/senior managers, 7 countries; 58% expect to manage more agents than people within a year; 53% harder to
