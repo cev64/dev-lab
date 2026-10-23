@@ -67,17 +67,29 @@ def drive_card(script: dict, clip: dict, date: str) -> tuple[str, str]:
              "Sources:"]
     lines += [f"- {s.get('publisher', '')}: {s.get('title', '')} {s.get('url', '')}".rstrip() for s in script["sources"]]
     lines += ["", "Narration:"] + [b["say"] for b in script["beats"]]
-    return drive_safe(title), drive_safe("\n".join(lines) + "\n")
+    lines += ["", "(end)"]  # a visible tail: a cut-off upload is easy to spot
+    return drive_safe(title), drive_safe("\n".join(lines) + "\n", ascii_only=True)
 
 
-def drive_safe(text: str) -> str:
+ASCII_PUNCT = {"\u00b7": "-", "\u2014": "-", "\u2013": "-", "\u2018": "'", "\u2019": "'", "\u201c": '"',
+               "\u201d": '"', "\u2026": "...", "\u2192": "->", "\u00a0": " ", "\u2212": "-", "\u00d7": "x"}
+
+
+def drive_safe(text: str, ascii_only: bool = False) -> str:
     """The Drive connector garbles 4-byte characters (emoji) in uploaded docs, so write each as [its name]
-    and drop emoji variation selectors / joiners."""
+    and drop emoji variation selectors / joiners. With ascii_only (the doc body): text/plain uploads are read as
+    Latin-1 and cut short by their UTF-8 byte excess (2026-10-22), so every non-ASCII char becomes plain ASCII."""
     out = []
     for ch in text:
-        if ord(ch) > 0xFFFF:
-            out.append(f"[{unicodedata.name(ch, 'emoji').lower()}]")
-        elif ch not in "\ufe0f\u200d":
+        if ch in "\ufe0f\u200d":
+            continue
+        if ord(ch) > 0xFFFF or (ascii_only and ord(ch) > 0x7F):
+            if ascii_only and ch in ASCII_PUNCT:
+                out.append(ASCII_PUNCT[ch])
+                continue
+            plain = unicodedata.normalize("NFKD", ch).encode("ascii", "ignore").decode() if ascii_only else ""
+            out.append(plain or f"[{unicodedata.name(ch, 'emoji').lower()}]")
+        else:
             out.append(ch)
     return "".join(out)
 

@@ -4,8 +4,8 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
-- [ ] Drive archive: text/plain docs mangle emojis (mojibake) and drop the last ~20 chars (2026-10-22). Try
-      contentMimeType "text/plain; charset=utf-8", or strip emojis from drive.json text, or upload as HTML.
+- [x] (PR 2026-10-23: drive_card body is pure ASCII + "(end)" tail; read back clean) Drive archive: text/plain docs mangle emojis (mojibake) and drop the last ~20 chars (2026-10-22). Cause: Latin-1 read +
+      cut by the UTF-8 byte excess, so ANY non-ASCII char (BMP emoji, "·") breaks it.
 - [ ] `clipper explainer --no-package`: render + drive.json without touching deliveries/ledger (parallel producers),
       and let `--no-render` add the ledger entry when the MP4 exists.
 - [ ] Library defaults: make self-graded (me=Meta), muse-paywall (Muse/Wonder), fund-link (kospi*/sp* names), and (2026-10-14)

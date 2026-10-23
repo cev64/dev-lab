@@ -41,6 +41,14 @@ class RepeatTest(unittest.TestCase):
         self.assertIn("https://b.com/x", text)
         self.assertIn("#thedailytoken", text)
         self.assertIn("videos/2026-10-10", text)
+        self.assertTrue(text.isascii())  # Drive reads text/plain as Latin-1 (2026-10-22)
+        self.assertTrue(text.rstrip().endswith("(end)"))
+
+    def test_drive_safe_ascii_body(self):
+        from clipper.explainer import drive_safe
+        self.assertEqual(drive_safe("a \u00b7 b \u2014 it\u2019s caf\u00e9 \u270d\ufe0f \U0001f447", ascii_only=True),
+                         "a - b - it's cafe [writing hand] [white down pointing backhand index]")
+        self.assertEqual(drive_safe("2026 \u00b7 x \U0001f447"), "2026 \u00b7 x [white down pointing backhand index]")
 
 
 if __name__ == "__main__":
