@@ -835,6 +835,53 @@
         "https://www.thestar.com.my/tech/tech-news/2026/07/24/uber-cuts-10-of-customer-service-jobs-to-embrace-ai"
       ],
       "video": "out/2026-10-23/2026-10-23-explainer-uber-chatgpt.mp4"
+    },
+    {
+      "id": "2026-10-25-explainer-offline-ai",
+      "date": "2026-10-25",
+      "hook": "OpenAI now trains AI offline",
+      "topic": "AI SAFETY",
+      "title": "OpenAI's top AI now trains offline",
+      "followUp": true,
+      "sources": [
+        "https://openai.com/index/securing-our-frontier-model-training-environment/",
+        "https://techcrunch.com/2026/10/23/openai-says-it-will-no-longer-train-its-ai-models-on-the-live-internet-citing-significant-risks/",
+        "https://thenextweb.com/news/openai-frontier-training-no-live-internet",
+        "https://www.engadget.com/2296019/openai-says-its-cutting-off-internet-access-for-frontier-model-training/",
+        "https://fortune.com/2026/10/16/ai-agents-are-going-rogue-the-labs-own-training-choices-are-to-blame-reinforcement-learning"
+      ],
+      "video": "out/2026-10-25/2026-10-25-explainer-offline-ai.mp4"
+    },
+    {
+      "id": "2026-10-25-explainer-robot-duck",
+      "date": "2026-10-25",
+      "hook": "A tiny robot duck just stole a tech keynote",
+      "topic": "ROBOTS",
+      "title": "Nvidia keynote's robot duck: 20,000+ preorders, CEO says",
+      "followUp": false,
+      "sources": [
+        "https://techcrunch.com/2026/10/23/hottest-toy-for-christmas-nvidia-ceo-plays-with-adorable-microduck-robots-20000-sell/",
+        "https://superpowerdaily.com/posts/jensen-huang-puts-four-tiny-microduck-robots-through-a-stumbling-live-demo",
+        "https://www.cryptopolitan.com/nvidias-399-microduck-20000-preorders/",
+        "https://www.engadget.com/2245407/huggingface-and-pollen-robotics-opn-pre-orders-for-the-399-microduck/",
+        "https://thenextweb.com/news/hugging-face-microduck-399-open-source-robot",
+        "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000078/nvda-20260902.htm"
+      ],
+      "video": "out/2026-10-25/2026-10-25-explainer-robot-duck.mp4"
+    },
+    {
+      "id": "2026-10-25-explainer-ballot-bots",
+      "date": "2026-10-25",
+      "hook": "Two AIs picked opposite parties",
+      "topic": "ELECTIONS",
+      "title": "Forced to pick, Grok and GPT backed opposite parties",
+      "followUp": false,
+      "sources": [
+        "https://convovo.ai/ballot/",
+        "https://techcrunch.com/2026/10/24/forced-to-pick-groks-ai-model-chooses-republicans-openais-picks-democrats/",
+        "https://www.tokenpost.com/news/technology/40272"
+      ],
+      "video": "out/2026-10-25/2026-10-25-explainer-ballot-bots.mp4"
     }
   ]
 }

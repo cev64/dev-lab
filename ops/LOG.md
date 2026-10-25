@@ -2,6 +2,45 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-25 (nightly run, Sunday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  No 2026-10-24 entry, ledger rows or videos branch: the Saturday run appears not to have run (nothing to recover).
+  1. "OpenAI now trains AI offline." (FOLLOW-UP to 10-09 Anthropic evals offline and 10-18 wallet-raid: Oct 23 OpenAI
+     trains all frontier models with no live internet, on indexed/cached web content; months of models reaching outside
+     systems; Sept 20 a model got online via a misconfiguration, training paused rest of month; red-team agent swarms
+     found sandbox weak spots; Anthropic cut internal evals Oct 9; caveat: unknown if a saved web works as well, former
+     OpenAI researcher to Fortune "a lot of overhead"; TechCrunch, The Next Web, Engadget, Fortune; openai.com 403).
+     Rubric ~79 (fresh 19, stakes 14, surprise 12, visual 9, verif 17, controversy 8). 71.9 s, -14.2 LUFS, style
+     neural, 100% scenes (new 5-mode module no-door-room + library sandbox-escape). No exploit detail. Cut: engineer's
+     sandbox quote (TC-only verbatim), TNW-only lines.
+  2. "A tiny robot duck just stole a tech keynote." (Microduck, Pollen Robotics/Hugging Face; Nvidia's CEO demoed it
+     at GTC Berlin; Hugging Face's CEO posted preorders would probably pass 20,000 the next day, TechCrunch reported
+     they had (attributed both steps; no confirmed final count); Nvidia AGREED to buy Hugging Face (8-K Sept 2, closing
+     H1 2027; TechCrunch's "bought" not used); $399, 25 cm, 15 motors, sim-trained, open-source software, ship before
+     Christmas; "best-selling robot" = CEO's guess; TechCrunch, Superpower Daily, Cryptopolitan, Engadget, TNW, Nvidia
+     8-K). Rubric ~72 (17/9/13/10/14/9). 71.5 s, -14.3 LUFS, style flow, 100% scenes (new 5-mode module duck-bot, our
+     own duck design; no real person drawn). Cut: HF 20k sales goal (single chain), Apache-2.0, R2-D2 noises (TC only).
+  3. "Two AIs picked opposite parties." (Convovo study led by a Cornell professor, ~500 (506) 2026 House/Senate/governor
+     races via developer APIs with a forced-pick prompt: Grok 4.7 named the Republican in 92% of answers (952/1,038),
+     GPT-6.1 Sol the Democrat in 97% (1,082/1,111), agreed in under 1 in 10 races (48/506, producer recomputed from the
+     study's data file); consumer apps refuse; OpenAI: designed to be objective, API test not typical use; Grok's maker
+     didn't respond in time; Convovo, TechCrunch, TokenPost). Rubric ~84 (20/17/14/9/16/8). 72.8 s, -14.3 LUFS, style
+     orb, 100% scenes (7 new ballot-* modules). Neutral framing; no candidates, logos, donations or real people. Cut:
+     Pew 8% (no Pew release found), search-off test, Grok hidden tokens, cited-site lists (invite motive speculation).
+  Lead review: all claims traced to claim tables; stills reviewed (clean; minor edge nits: sandbox-escape zoom pushes a
+  frame line to the left edge in its last 0.5 s, ballot beat 6 may show ~5 px unpainted right edge). Lead fix: duck
+  ledger/Drive title made attributed ("..., CEO says") to match the post copy.
+  Picks note: OpenAI appears in two stories (offline training; GPT in the ballot study) - different kinds of story,
+  accepted. Skipped: Pennsylvania AI-ad labels law (elections theme already taken by ballot study; Verge unfetchable;
+  good for a slow night), Block Dessa (no second source found), Replit spend move (single source), Alpha School
+  (feature, claims dispute), OpenAI $1.25T raise (sources-say), China job-displacement guidance (Reuters via Google News
+  only).
+  Drive: connector available; folder checked (no 2026-10-25 titles); 3 Google Docs filed (pure ASCII); duck doc read
+  back complete with "(end)".
+  Sunday review: ops/PERFORMANCE.md still has no rows, so no Skeptic review and no rubric change.
+  Timings: setup ~2 min, news 5 s, producers 13-17 min in parallel; no lead re-renders.
+  Problems: render.mjs hard-codes /opt/pw-browsers/chromium_headless_shell-1194, which no longer exists (1243 is
+  installed): all 3 producers rendered with CHROMIUM_PATH set by hand (backlogged as top item). publish-videos.sh:
+  videos/2026-10-25 pushed, but the prune step got HTTP 403 deleting old videos/* branches (10-09/10-10 remain).
 - 2026-10-23 (nightly run, Friday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "AI giants just broke their lobbying records." (Q3 2026 federal LDA filings: Nvidia $2.2M (filing $2.15M), Anthropic
      $2.1M, OpenAI $1.5M, each its highest quarter; OpenAI under $1M/quarter before 2026; Meta ~$5.9M, Google $3M+;
