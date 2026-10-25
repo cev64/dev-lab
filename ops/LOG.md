@@ -41,6 +41,8 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Problems: render.mjs hard-codes /opt/pw-browsers/chromium_headless_shell-1194, which no longer exists (1243 is
   installed): all 3 producers rendered with CHROMIUM_PATH set by hand (backlogged as top item). publish-videos.sh:
   videos/2026-10-25 pushed, but the prune step got HTTP 403 deleting old videos/* branches (10-09/10-10 remain).
+  Improve: PR #28 merged: render.mjs picks the newest /opt/pw-browsers/chromium_headless_shell-* automatically
+  (CHROMIUM_PATH still overrides); verified with frames-only render of the duck clip with CHROMIUM_PATH unset.
 - 2026-10-23 (nightly run, Friday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "AI giants just broke their lobbying records." (Q3 2026 federal LDA filings: Nvidia $2.2M (filing $2.15M), Anthropic
      $2.1M, OpenAI $1.5M, each its highest quarter; OpenAI under $1M/quarter before 2026; Meta ~$5.9M, Google $3M+;

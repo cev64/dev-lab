@@ -4,7 +4,7 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
-- [ ] (2026-10-25) render.mjs hard-codes chromium_headless_shell-1194 (gone; 1243 installed): pick the newest
+- [x] (PR #28 merged 2026-10-25: newest build auto-picked; prune 403 still open) render.mjs hard-coded chromium_headless_shell-1194 (gone; 1243 installed): pick the newest
       /opt/pw-browsers/chromium_headless_shell-*/ automatically. Also publish-videos.sh prune gets 403 deleting old videos/*.
 - [x] (PR 2026-10-23: drive_card body is pure ASCII + "(end)" tail; read back clean) Drive archive: text/plain docs mangle emojis (mojibake) and drop the last ~20 chars (2026-10-22). Cause: Latin-1 read +
       cut by the UTF-8 byte excess, so ANY non-ASCII char (BMP emoji, "·") breaks it.
