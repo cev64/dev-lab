@@ -16,7 +16,7 @@
 // (<out minus .mp4>.cover.png) is written alongside.
 import { chromium } from 'playwright-core';
 import { spawn, spawnSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync, mkdirSync, statSync } from 'node:fs';
+import { existsSync, readdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync, mkdirSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import http from 'node:http';
 import { dirname, join, resolve, normalize, sep, extname } from 'node:path';
@@ -24,10 +24,18 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const W = 1080, H = 1920;
-const CHROME_CANDIDATES = [
-  process.env.CHROMIUM_PATH,
-  '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell',
-].filter(Boolean);
+// Preinstalled browsers live in /opt/pw-browsers/chromium_headless_shell-<build>/ and the build number changes when
+// the container image is updated, so take the newest build found (both binary layouts Playwright has used).
+function preinstalledShells(root = '/opt/pw-browsers') {
+  let dirs = [];
+  try { dirs = readdirSync(root).filter((d) => /^chromium_headless_shell-\d+$/.test(d)); } catch { return []; }
+  dirs.sort((a, b) => parseInt(b.split('-')[1], 10) - parseInt(a.split('-')[1], 10));
+  return dirs.flatMap((d) => [
+    join(root, d, 'chrome-headless-shell-linux64', 'chrome-headless-shell'),
+    join(root, d, 'chrome-linux', 'headless_shell'),
+  ]);
+}
+const CHROME_CANDIDATES = [process.env.CHROMIUM_PATH, ...preinstalledShells()].filter(Boolean);
 
 // ------------------------------------------------------------------ args
 function parseArgs(argv) {
