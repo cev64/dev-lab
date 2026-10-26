@@ -121,6 +121,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--script", required=True, type=Path)
     p.add_argument("--force", action="store_true", help="rebuild even if voice.json matches the script")
     p.add_argument("--no-length-check", action="store_true", help="do not fail outside 58-80 s (testing)")
+    p.add_argument("--align", choices=("whisper", "tts"), default="whisper",
+                   help="word timings: whisper (default) or tts (from the TTS phrase spans, when whisper is unavailable)")
 
     sub.add_parser("status", help="show work/ and ledger state")
 
@@ -165,7 +167,7 @@ def main(argv: list[str] | None = None) -> int:
         from .voice import LengthError, voice
 
         try:
-            voice(paths, a.script, force=a.force, check_length=not a.no_length_check)
+            voice(paths, a.script, force=a.force, check_length=not a.no_length_check, align=a.align)
         except LengthError as e:
             print(f"voice: {e}", file=sys.stderr)
             return 3

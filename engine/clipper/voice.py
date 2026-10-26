@@ -2,11 +2,17 @@
 
   python -m clipper voice --script work/explainers/<id>/script.json [--force] [--no-length-check]
 
-1. Each beat's `say` is synthesized on its own (TTS input passes through the pronunciation LEXICON), trimmed of
-   edge silence and joined with BEAT_GAP pauses, so every beat's start/end sample is known exactly.
+1. Each beat's `say` is synthesized in one pass (so intonation flows across its sentences; TTS input passes through
+   the pronunciation LEXICON and the cadence markup below), trimmed of edge silence, and then the pause at every
+   sentence end / colon / semicolon / dash is found in the audio and lengthened to PAUSE_AFTER (more air around a
+   one- or two-word punchline). Beats are joined with BEAT_GAP, so every beat's start/end sample is known exactly.
+   Cadence markup in `say` (never shown in captions): `*word*` stresses a word the TTS would read weakly (misaki
+   stress), `|` is a deliberate breath (the beat is split there, BREATH s pause), and a beat's `"pace"` (0.85-1.15)
+   scales its speaking rate.
 2. Narration must be 58-80 s (contract). Outside that it stops before the slow steps and says how many words to
    cut/add at the measured pace (LengthError, CLI exit 3).
-3. Two-pass loudnorm to -14 LUFS / -1 dBTP (audio.extract_normalized) -> voice.wav (48 kHz stereo s16).
+3. Voice polish (POLISH: rumble/box cut, presence lift, gentle compression), then two-pass loudnorm to -14 LUFS /
+   -1 dBTP (audio.extract_normalized) -> voice.wav (48 kHz stereo s16).
 4. faster-whisper small.en transcribes voice.wav for timings only. Script tokens are the caption source of truth:
    they are aligned to whisper's words on a character level of their *spoken* form ("40%" ~ "forty percent",
    "2,000,000" ~ "2 million"), so a script token is timed over whatever words whisper wrote for it. Tokens whisper
@@ -22,6 +28,7 @@ import hashlib
 import json
 import math
 import re
+import subprocess
 import time
 import wave
 from pathlib import Path
@@ -31,10 +38,20 @@ import numpy as np
 from . import audio
 from .common import Paths, log, r2, read_json, write_json
 
-VERSION = 2  # bump when synthesis/assembly changes so cached voice.json is rebuilt
+VERSION = 4  # bump when synthesis/assembly changes so cached voice.json is rebuilt
 MIN_S, MAX_S = 58.0, 80.0
 TARGET_LO, TARGET_HI = 62.0, 75.0  # what the cut/add advice aims for (playbook: >= 62 s for creator programs)
-LEAD, BEAT_GAP, TAIL = 0.15, 0.25, 0.6  # seconds of silence: before beat 1, between beats, after the last beat
+LEAD, BEAT_GAP, TAIL = 0.15, 0.4, 0.6  # seconds of silence: before beat 1, between beats, after the last beat
+# Minimum pause after a phrase inside a beat, by how it ends. The TTS makes its own (often shorter) pauses there;
+# they are found in the audio and lengthened to at least this.
+PAUSE_AFTER = {".": 0.42, "!": 0.42, "?": 0.4, ":": 0.26, ";": 0.3, "—": 0.22, "–": 0.22}
+PUNCH_WORDS = 2  # a sentence this short ("Flat.") is a punchline: extra air before and after it
+PUNCH_AIR = 0.15
+BREATH = 0.32  # `|` in a beat: a deliberate pause the writer asked for
+PACE_RANGE = (0.85, 1.15)
+# Broadcast-style voice polish before loudnorm: cut rumble and boxiness, lift presence, gentle compression.
+POLISH = ("highpass=f=75,equalizer=f=250:t=q:w=1.2:g=-2.5,equalizer=f=3200:t=q:w=1.0:g=2.5,"
+          "acompressor=threshold=-20dB:ratio=2.5:attack=8:release=140:makeup=2")
 WHISPER_MODEL = "small.en"
 WHISPER_BEAM = 5
 
@@ -156,7 +173,7 @@ def spoken_key(token: str) -> str:
 def caption_tokens(say: str) -> list[str]:
     """Whitespace tokens of a beat; punctuation-only tokens (an em dash) are glued to the previous token."""
     out: list[str] = []
-    for tok in say.split():
+    for tok in clean_say(say).split():
         if not spoken_key(tok) and out:
             out[-1] += " " + tok
         elif out and not spoken_key(out[-1]):
@@ -164,6 +181,119 @@ def caption_tokens(say: str) -> list[str]:
         else:
             out.append(tok)
     return out
+
+
+_ABBREV = re.compile(r"(?:\b(?:[A-Za-z]\.){1,3}|\b(?:Mr|Mrs|Ms|Dr|St|Jr|Sr|Inc|Co|Corp|Ltd|vs|etc|No)\.)$")
+_EMPH = re.compile(r"\*([^*\s]+)\*")
+_CLOSERS = "\"')”’»)]*"
+
+
+def clean_say(say: str) -> str:
+    """Narration text without cadence markup: what captions, the delivery note and WER see."""
+    return " ".join(_EMPH.sub(r"\1", say).replace("|", " ").split())
+
+
+def tts_markup(text: str) -> str:
+    """Cadence markup -> misaki input: *word* -> [word](+2) (stress it). `|` is handled by the caller."""
+    return _EMPH.sub(lambda m: f"[{m.group(1).rstrip('.,!?;:')}](+2){m.group(1)[len(m.group(1).rstrip('.,!?;:')):]}", text)
+
+
+def _end(tok: str) -> str:
+    t = tok.rstrip(_CLOSERS)
+    return t[-1:] if t else ""
+
+
+def boundaries(text: str) -> list[tuple[int, float]]:
+    """[(index of the token a pause follows, minimum pause s)] inside one clean phrase run (not after its last
+    token): sentence ends, colons, semicolons and dashes, not abbreviations (U.S., Dr., vs.). A one- or two-word
+    sentence ("Flat.") gets PUNCH_AIR more on both sides."""
+    toks = text.split()
+    out: list[tuple[int, float]] = []
+    for k, w in enumerate(toks[:-1]):
+        e = _end(w)
+        if e in PAUSE_AFTER and not (e == "." and _ABBREV.search(w.rstrip(_CLOSERS))) and spoken_key(toks[k + 1]) \
+                or w in ("—", "–"):
+            out.append((k, PAUSE_AFTER.get(e, PAUSE_AFTER["—"])))
+    # punchlines: sentences of <= PUNCH_WORDS words between two sentence ends
+    ends = [-1] + [k for k, _p in out if _end(toks[k]) in ".!?"] + [len(toks) - 1]
+    extra = {}
+    for a, b in zip(ends, ends[1:]):
+        if 0 < b - a <= PUNCH_WORDS and _end(toks[b]) in ".!?":
+            if a >= 0:
+                extra[a] = PUNCH_AIR
+            if b < len(toks) - 1:
+                extra[b] = PUNCH_AIR
+    return [(k, p + extra.get(k, 0.0)) for k, p in out]
+
+
+def phrases(say: str) -> list[str]:
+    """A clean beat split at its pause points (used for word timing without whisper)."""
+    toks = clean_say(say).split()
+    cuts = [k for k, _p in boundaries(" ".join(toks))]
+    out, a = [], 0
+    for k in cuts:
+        out.append(" ".join(toks[a:k + 1]))
+        a = k + 1
+    return out + ([" ".join(toks[a:])] if a < len(toks) else [])
+
+
+def quiet_runs(x: np.ndarray, sr: int, floor_db: float = -38.0, min_len: float = 0.05) -> list[tuple[float, float]]:
+    """Internal silent runs (s, e) in seconds (not touching either edge)."""
+    rms = audio.rms_frames(x, sr, 0.01)
+    if len(rms) == 0:
+        return []
+    db = 20 * np.log10(rms + 1e-9)
+    q = db < db.max() + floor_db
+    runs, k = [], 0
+    while k < len(q):
+        if q[k]:
+            j = k
+            while j < len(q) and q[j]:
+                j += 1
+            if k > 0 and j < len(q) and (j - k) * 0.01 >= min_len:
+                runs.append((k * 0.01, j * 0.01))
+            k = j
+        else:
+            k += 1
+    return runs
+
+
+def stretch_pauses(x: np.ndarray, sr: int, text: str) -> tuple[np.ndarray, list[float | None]]:
+    """Lengthen the TTS's own pauses at `text`'s boundaries to their minimum. Each boundary is matched, in order, to
+    the longest silent run near where it should fall (by spoken length); unmatched ones are left alone (None).
+    Returns the new audio and, per boundary, the cut time (middle of its pause) in the new audio."""
+    bnds = boundaries(text)
+    if not bnds or len(x) == 0:
+        return x, [None] * len(bnds)
+    toks = text.split()
+    weights = np.array([len(spoken_key(t)) + 1 for t in toks], dtype=float)
+    cum = np.cumsum(weights) / weights.sum()
+    dur = len(x) / sr
+    runs = quiet_runs(x, sr)
+    window = max(0.6, 0.15 * dur)
+    picked, last = [], -1.0
+    for k, _p in bnds:
+        t_exp = cum[k] * dur
+        cands = [r for r in runs if r[0] > last and abs((r[0] + r[1]) / 2 - t_exp) <= window]
+        if not cands:
+            picked.append(None)
+            continue
+        r = max(cands, key=lambda r: (round(r[1] - r[0], 2), -abs((r[0] + r[1]) / 2 - t_exp)))
+        picked.append(r)
+        last = r[1]
+    parts, pos, cuts, added = [], 0, [], 0.0
+    for (_k, want), r in zip(bnds, picked):
+        if r is None:
+            cuts.append(None)
+            continue
+        mid = int(round((r[0] + r[1]) / 2 * sr))
+        extra = max(0.0, want - (r[1] - r[0]))
+        parts += [x[pos:mid], np.zeros(int(round(extra * sr)), dtype=x.dtype)]
+        cuts.append(mid / sr + added + extra / 2)
+        added += extra
+        pos = mid
+    parts.append(x[pos:])
+    return np.concatenate(parts), cuts
 
 
 # ---------- alignment ----------
@@ -397,13 +527,14 @@ def read_wav16(path: Path) -> tuple[np.ndarray, int]:
     return data.astype(np.float32) / 32767, sr
 
 
-def synth_beat(backend, text: str, cache_dir: Path) -> tuple[np.ndarray, int]:
-    """Synthesize + trim one beat, cached by (voice, text) so editing one beat only re-voices that beat."""
-    key = hashlib.sha1(f"{VERSION}|{backend.spec.label}|{text}".encode()).hexdigest()[:16]
+def synth_phrase(backend, text: str, cache_dir: Path, rate: float = 1.0) -> tuple[np.ndarray, int]:
+    """Synthesize + trim one phrase, cached by (voice, G2P, rate, text) so editing one beat only re-voices it."""
+    g2p = getattr(backend, "g2p_name", "")
+    key = hashlib.sha1(f"{VERSION}|{backend.spec.label}|{g2p}|{rate:g}|{text}".encode()).hexdigest()[:16]
     cached = cache_dir / f"{key}.wav"
     if cached.exists():
         return read_wav16(cached)
-    x = backend.synth(text)
+    x = backend.synth(text, rate)
     if len(x) == 0 or not np.all(np.isfinite(x)):
         raise RuntimeError(f"TTS returned empty or invalid audio for: {text[:60]!r}")
     x = trim_silence(x, backend.sample_rate)
@@ -413,14 +544,18 @@ def synth_beat(backend, text: str, cache_dir: Path) -> tuple[np.ndarray, int]:
 
 # ---------- command ----------
 
-def script_hash(script: dict, spec_label: str) -> str:
-    payload = json.dumps({"v": VERSION, "voice": spec_label, "say": [b["say"] for b in script["beats"]],
+def script_hash(script: dict, spec_label: str, align: str = "whisper") -> str:
+    payload = json.dumps({"v": VERSION, "voice": spec_label, "align": align, "say": [b["say"] for b in script["beats"]],
+                          "pace": [b.get("pace") for b in script["beats"]],
                           "lexicon": script.get("lexicon"),
                           "global": [(p, r if isinstance(r, str) else "fn") for p, r in LEXICON]}, sort_keys=True)
     return hashlib.sha1(payload.encode()).hexdigest()[:16]
 
 
-def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bool = True) -> dict:
+def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bool = True,
+          align: str = "whisper") -> dict:
+    """align: "whisper" (default; measures WER too) or "tts" (timings from the TTS phrase spans, for when the
+    whisper model is unavailable)."""
     from . import tts_backends as tts
 
     script = read_json(Path(script_path))
@@ -431,7 +566,7 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
     spec = tts.parse_spec(script.get("voice"), script.get("voiceSpeed"))
     out_dir = paths.work / "explainers" / script["id"]
     wav_path, json_path = out_dir / "voice.wav", out_dir / "voice.json"
-    h = script_hash(script, spec.label)
+    h = script_hash(script, spec.label, align)
     cached = read_json(json_path)
     if cached and not force and cached.get("scriptHash") == h and wav_path.exists():
         log(f"voice: cached {json_path} ({cached['duration']:.1f} s)")
@@ -440,10 +575,30 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
     t_start = time.time()
     backend = tts.load(spec)
     beat_tokens = [caption_tokens(b["say"]) for b in script["beats"]]
-    pieces, warnings = [], []
+    pieces, warnings, phrase_spans = [], [], []  # phrase_spans: (beat, clean phrase text, s, e) within the beat
     sr = backend.sample_rate
+    cache = paths.work / "explainers" / ".tts-cache"
     for i, b in enumerate(script["beats"]):
-        x, sr = synth_beat(backend, tts_text(b["say"], script.get("lexicon")), paths.work / "explainers" / ".tts-cache")
+        pace = float(b.get("pace") or 1.0)
+        if not PACE_RANGE[0] <= pace <= PACE_RANGE[1]:
+            raise SystemExit(f"beat {i + 1}: pace {pace} outside {PACE_RANGE[0]}-{PACE_RANGE[1]}")
+        parts, pos = [], 0
+        segs = [seg for seg in b["say"].split("|") if clean_say(seg)]
+        for j, seg in enumerate(segs):
+            x, sr = synth_phrase(backend, tts_text(tts_markup(" ".join(seg.split())), script.get("lexicon")),
+                                 cache, pace)
+            text = clean_say(seg)
+            x, cuts = stretch_pauses(x, sr, text)
+            toks, a0, t0 = text.split(), 0, 0.0
+            for (k, _p), c in zip(boundaries(text), cuts):
+                if c is not None:
+                    phrase_spans.append((i, " ".join(toks[a0:k + 1]), pos + int(t0 * sr), pos + int(c * sr)))
+                    a0, t0 = k + 1, c
+            phrase_spans.append((i, " ".join(toks[a0:]), pos + int(t0 * sr), pos + len(x)))
+            gap = np.zeros(int(round(BREATH * sr)) if j < len(segs) - 1 else 0, dtype=np.float32)
+            parts += [x, gap]
+            pos += len(x) + len(gap)
+        x = np.concatenate(parts)
         pieces.append(x)
         d = len(x) / sr
         n = len(beat_tokens[i])
@@ -462,12 +617,14 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
     for i, x in enumerate(pieces):
         speech.append((pos / sr, (pos + len(x)) / sr))
         pos += len(x) + (len(gap) if i < len(pieces) - 1 else 0)
+    phrase_spans = [(i, text, speech[i][0] + a / sr, speech[i][0] + e / sr) for i, text, a, e in phrase_spans]
     duration = len(narration) / sr
     n_words = sum(len(t) for t in beat_tokens)
     speech_s = sum(e - s for s, e in speech)
     wps = n_words / speech_s
-    log(f"voice: {spec.label}, {len(pieces)} beats, {n_words} words, {duration:.1f} s "
-        f"({wps:.2f} words/s of speech), synth {synth_s:.0f} s ({duration / max(synth_s, 1e-6):.1f}x realtime)")
+    log(f"voice: {spec.label} ({getattr(backend, 'g2p_name', 'espeak')} phonemes), {len(pieces)} beats, "
+        f"{len(phrase_spans)} phrases, {n_words} words, {duration:.1f} s ({wps:.2f} words/s of speech), "
+        f"synth {synth_s:.0f} s ({duration / max(synth_s, 1e-6):.1f}x realtime)")
     problem = length_problem(duration, n_words, speech_s)
     if problem and check_length:
         raise LengthError(problem)
@@ -476,8 +633,12 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
 
     raw = out_dir / "voice.raw.wav"
     write_wav16(raw, narration, sr)
-    norm = audio.extract_normalized(raw, wav_path, 0.0, duration)
+    polished = out_dir / "voice.polished.wav"
+    subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(raw), "-af", POLISH, "-ar", str(sr),
+                    "-c:a", "pcm_s16le", str(polished)], check=True)
+    norm = audio.extract_normalized(polished, wav_path, 0.0, duration)
     raw.unlink(missing_ok=True)
+    polished.unlink(missing_ok=True)
     loud = audio.measure_loudness(wav_path)
     if abs(loud["lufs"] + 14) > 1.0 or loud["truePeak"] > -0.5:
         warnings.append(f"loudness {loud['lufs']:.1f} LUFS / {loud['truePeak']:.1f} dBTP (target -14 / -1)")
@@ -486,28 +647,43 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
     if clipped:
         warnings.append(f"{clipped} clipped samples after normalisation")
 
-    from .transcribe import whisper_segments
+    if align == "tts":
+        # No whisper (e.g. its model can't be downloaded): every phrase's exact span is known from synthesis, so
+        # spread its tokens over it by spoken length and let snap_to_speech move starts past real pauses.
+        segs, wer, whisper_s = [], None, 0.0
+        warnings.append("word timings estimated from TTS phrase spans (no whisper): check caption sync")
+        words, unaligned = [], []
+        for k, toks in enumerate(beat_tokens):
+            spans = [(caption_tokens(t), (s, e)) for i, t, s, e in phrase_spans if i == k]
+            if [x for ts, _ in spans for x in ts] != toks:  # tokenisation differs at a phrase edge: whole beat
+                spans = [(toks, speech[k])]
+            for ts, (s0, s1) in spans:
+                timed = _fill_and_order([None] * len(ts), [spoken_key(x) for x in ts], s0, s1)
+                words += [{"w": tok, "s": s, "e": e} for tok, (s, e) in zip(ts, timed)]
+    else:
+        from .transcribe import whisper_segments
 
-    t_w = time.time()
-    segs = whisper_segments(final, WHISPER_MODEL, vad=False, beam_size=WHISPER_BEAM)
-    wwords = [w for s in segs for w in s["words"]]
-    whisper_s = time.time() - t_w
-    hyp = [w for s in segs for w in spoken_words(s["text"])]
-    ref = [w for b in script["beats"] for w in spoken_words(b["say"])]
-    wer = word_error_rate(ref, hyp)
-    if wer > 0.08:
-        warnings.append(f"whisper WER {wer:.1%}: narration may be garbled; check pronunciation/lexicon")
+        t_w = time.time()
+        segs = whisper_segments(final, WHISPER_MODEL, vad=False, beam_size=WHISPER_BEAM)
+        wwords = [w for s in segs for w in s["words"]]
+        whisper_s = time.time() - t_w
+        hyp = [w for s in segs for w in spoken_words(s["text"])]
+        ref = [w for b in script["beats"] for w in spoken_words(clean_say(b["say"]))]
+        wer = word_error_rate(ref, hyp)
+        if wer > 0.08:
+            warnings.append(f"whisper WER {wer:.1%}: narration may be garbled; check pronunciation/lexicon")
 
-    # match the whole narration at once (whisper may put a beat's first word inside the previous pause),
-    # then clamp/interpolate inside each beat's exact spoken span
-    raw = match_tokens([t for toks in beat_tokens for t in toks], wwords)
-    words, unaligned = [], []
-    for k, (toks, span) in enumerate(zip(beat_tokens, speech)):
-        timed, missing = align_tokens(toks, [], span, raw=raw[len(words): len(words) + len(toks)])
-        unaligned += [len(words) + m for m in missing]
-        words += [{"w": tok, "s": s, "e": e} for tok, (s, e) in zip(toks, timed)]
-        if len(missing) > max(2, 0.2 * len(toks)):
-            warnings.append(f"beat {k + 1}: {len(missing)}/{len(toks)} words not found by whisper (timings interpolated)")
+        # match the whole narration at once (whisper may put a beat's first word inside the previous pause),
+        # then clamp/interpolate inside each beat's exact spoken span
+        raw = match_tokens([t for toks in beat_tokens for t in toks], wwords)
+        words, unaligned = [], []
+        for k, (toks, span) in enumerate(zip(beat_tokens, speech)):
+            timed, missing = align_tokens(toks, [], span, raw=raw[len(words): len(words) + len(toks)])
+            unaligned += [len(words) + m for m in missing]
+            words += [{"w": tok, "s": s, "e": e} for tok, (s, e) in zip(toks, timed)]
+            if len(missing) > max(2, 0.2 * len(toks)):
+                warnings.append(f"beat {k + 1}: {len(missing)}/{len(toks)} words not found by whisper "
+                                "(timings interpolated)")
     snap_to_speech(words, final, audio.SR)
 
     result = {
@@ -517,7 +693,8 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
         "sampleRate": 48000,
         "wordsPerSecond": round(wps, 2),
         "speechSeconds": r2(speech_s),
-        "wer": round(wer, 4),
+        "wer": None if wer is None else round(wer, 4),
+        "align": align,
         "lufs": loud["lufs"],
         "truePeak": loud["truePeak"],
         "loudnorm": norm["pass2"].get("normalization_type"),
@@ -530,7 +707,7 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
         "timing": {"synthSeconds": round(synth_s, 1), "whisperSeconds": round(whisper_s, 1)},
     }
     write_json(json_path, result)
-    log(f"voice: {duration:.1f} s, WER {wer:.1%}, {loud['lufs']:.1f} LUFS / {loud['truePeak']:.1f} dBTP, "
+    log(f"voice: {duration:.1f} s, WER {'n/a' if wer is None else f'{wer:.1%}'}, {loud['lufs']:.1f} LUFS / {loud['truePeak']:.1f} dBTP, "
         f"{len(unaligned)} interpolated words, whisper {whisper_s:.0f} s -> {wav_path}")
     for w in warnings:
         log(f"voice: WARNING {w}")

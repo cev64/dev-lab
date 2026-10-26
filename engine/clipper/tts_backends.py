@@ -2,9 +2,12 @@
 
 Voice spec (script.json "voice"):
   "default"                      -> DEFAULT_SPEC
-  "kokoro:<voice>"               Kokoro-82M v1.0 (kokoro-onnx), e.g. kokoro:af_heart, kokoro:bf_emma
+  "kokoro:<voice>"               Kokoro-82M v1.0 (kokoro-onnx), e.g. kokoro:am_michael, kokoro:af_heart
   "piper:<voice>"                Piper, e.g. piper:en_US-ljspeech-medium
 An optional "@<speed>" suffix overrides the backend's default speed, e.g. "kokoro:af_heart@0.9".
+
+Kokoro is given misaki phonemes (the G2P Kokoro was trained with: better word stress than raw espeak-ng) when misaki
+is installed, and falls back to kokoro-onnx's own espeak-ng phonemizer otherwise.
 
 Model files live in CACHE (env CLIPPER_TTS_CACHE, default ~/.cache/clipper-tts) and are downloaded once by
 scripts/setup.sh via `python -m clipper.tts_backends fetch <spec>...`. Licences: docs/specs/voice-notes.md.
@@ -23,12 +26,12 @@ from pathlib import Path
 import numpy as np
 
 CACHE = Path(os.environ.get("CLIPPER_TTS_CACHE", "~/.cache/clipper-tts")).expanduser()
-DEFAULT_SPEC = "kokoro:af_heart"
+DEFAULT_SPEC = "kokoro:am_michael"  # owner pick 2026-10-26 (sample 4: male voice, retuned)
 FALLBACK_SPEC = "piper:en_US-ljspeech-medium"
 
-# Default speed per engine. Kokoro at 1.0 reads ~3.0 words/s; 0.85 gives ~2.6-2.7 words/s, which puts the
-# contract's 150-185 words at ~60-75 s (measurements in docs/specs/voice-notes.md).
-DEFAULT_SPEED = {"kokoro": 0.85, "piper": 0.9}
+# Default speed per engine. Kokoro is most natural at its trained speed 1.0; slowing it (0.85 until 2026-10-26)
+# drags every word evenly and sounds synthetic. Scripts are written longer instead (docs/specs/voice-notes.md).
+DEFAULT_SPEED = {"kokoro": 1.0, "piper": 0.9}
 
 _KOKORO_REL = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/"
 KOKORO_FILES = [  # (file, url, sha256). fp32 (325 MB) measured ~20% faster than the int8 export here, same WER.
@@ -152,13 +155,31 @@ def _require(vs: VoiceSpec) -> list[Path]:
 
 
 class Backend:
-    """synth(text) -> mono float32 samples at self.sample_rate."""
+    """synth(text, rate) -> mono float32 samples at self.sample_rate. `rate` multiplies the spec's speed (phrase-level
+    pacing: voice.py reads short punchy lines a little slower and long set-up lines a little faster)."""
 
     sample_rate: int
     spec: VoiceSpec
 
-    def synth(self, text: str) -> np.ndarray:  # pragma: no cover - interface
+    def synth(self, text: str, rate: float = 1.0) -> np.ndarray:  # pragma: no cover - interface
         raise NotImplementedError
+
+
+@lru_cache(maxsize=1)
+def misaki_g2p():
+    """misaki English G2P (Apache-2.0) with espeak-ng for out-of-vocabulary words, or None if not installed."""
+    try:
+        import espeakng_loader
+        from phonemizer.backend.espeak.wrapper import EspeakWrapper
+
+        EspeakWrapper.set_library(espeakng_loader.get_library_path())
+        os.environ.setdefault("ESPEAK_DATA_PATH", espeakng_loader.get_data_path())
+        from misaki import en, espeak
+
+        return en.G2P(trf=False, british=False, fallback=espeak.EspeakFallback(british=False))
+    except Exception as e:  # noqa: BLE001 - any import/model problem means "use the espeak path"
+        print(f"[tts] misaki G2P unavailable ({e}); using kokoro-onnx's espeak phonemes", file=sys.stderr)
+        return None
 
 
 class KokoroBackend(Backend):
@@ -169,11 +190,18 @@ class KokoroBackend(Backend):
         self.spec = vs
         self.engine = Kokoro(str(model), str(voices))
         if vs.voice not in self.engine.voices:
-            raise SystemExit(f"kokoro voice {vs.voice!r} not found; try af_heart, af_bella, bf_emma, am_michael")
+            raise SystemExit(f"kokoro voice {vs.voice!r} not found; try am_michael, af_heart, af_bella, bf_emma")
         self.sample_rate = 24000
+        self.g2p = misaki_g2p()
+        self.g2p_name = "misaki" if self.g2p is not None else "espeak"
 
-    def synth(self, text: str) -> np.ndarray:
-        audio, sr = self.engine.create(text, voice=self.spec.voice, speed=self.spec.speed, lang="en-us")
+    def synth(self, text: str, rate: float = 1.0) -> np.ndarray:
+        speed = min(2.0, max(0.5, self.spec.speed * rate))
+        if self.g2p is not None:
+            phonemes, _tokens = self.g2p(text)
+            audio, sr = self.engine.create(phonemes, voice=self.spec.voice, speed=speed, is_phonemes=True)
+        else:
+            audio, sr = self.engine.create(text, voice=self.spec.voice, speed=speed, lang="en-us")
         self.sample_rate = sr
         return np.asarray(audio, dtype=np.float32).ravel()
 
@@ -189,10 +217,10 @@ class PiperBackend(Backend):
         self.voice = PiperVoice.load(str(model), config_path=str(config))
         self.sample_rate = self.voice.config.sample_rate
 
-    def synth(self, text: str) -> np.ndarray:
+    def synth(self, text: str, rate: float = 1.0) -> np.ndarray:
         from piper.config import SynthesisConfig
 
-        cfg = SynthesisConfig(length_scale=1.0 / self.spec.speed)
+        cfg = SynthesisConfig(length_scale=1.0 / (self.spec.speed * rate))
         parts = []
         gap = np.zeros(int(self.SENTENCE_GAP * self.sample_rate), dtype=np.float32)
         for chunk in self.voice.synthesize(text, syn_config=cfg):

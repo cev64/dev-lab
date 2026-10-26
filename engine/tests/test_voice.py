@@ -187,9 +187,42 @@ class LengthGuard(unittest.TestCase):
         self.assertIn("CUT at least 11 words", msg)
 
 
+class Cadence(unittest.TestCase):
+    def test_markup_is_stripped_for_captions(self):
+        say = "It's *not* the giants. | So far? *Zero*, he says."
+        self.assertEqual(V.clean_say(say), "It's not the giants. So far? Zero, he says.")
+        self.assertEqual(V.caption_tokens(say), ["It's", "not", "the", "giants.", "So", "far?", "Zero,", "he", "says."])
+        self.assertEqual(V.tts_markup("It's *not* the giants. *Zero*, he says."),
+                         "It's [not](+2) the giants. [Zero](+2), he says.")
+
+    def test_boundaries_skip_abbreviations_and_pad_punchlines(self):
+        text = "The U.S. split the other 493 companies. Flat. His verdict: zero payoff outside tech."
+        b = dict(V.boundaries(text))
+        toks = text.split()
+        self.assertEqual(sorted(b), [toks.index("companies."), toks.index("Flat."), toks.index("verdict:")])
+        self.assertAlmostEqual(b[toks.index("companies.")], V.PAUSE_AFTER["."] + V.PUNCH_AIR)
+        self.assertAlmostEqual(b[toks.index("Flat.")], V.PAUSE_AFTER["."] + V.PUNCH_AIR)
+        self.assertAlmostEqual(b[toks.index("verdict:")], V.PAUSE_AFTER[":"])
+        self.assertEqual(V.phrases(text), ["The U.S. split the other 493 companies.", "Flat.", "His verdict:",
+                                           "zero payoff outside tech."])
+
+    def test_stretch_lengthens_the_pause_at_the_sentence_end(self):
+        sr = 24000
+        tone = lambda s: 0.4 * np.sin(2 * np.pi * 180 * np.arange(int(s * sr)) / sr)  # noqa: E731
+        gap = lambda s: np.zeros(int(s * sr))  # noqa: E731
+        # "aaa bbb. ccc ddd": a short comma-like gap after aaa, a 0.15 s sentence gap after bbb.
+        x = np.concatenate([tone(0.5), gap(0.08), tone(0.5), gap(0.15), tone(0.5), gap(0.08), tone(0.5)]).astype(np.float32)
+        text = "aaa bbb. ccc ddd"  # two-word sentences, so the pause gets punchline air too
+        want = dict(V.boundaries(text))[1]
+        y, cuts = V.stretch_pauses(x, sr, text)
+        self.assertAlmostEqual(len(y) / sr - len(x) / sr, want - 0.15, delta=0.02)
+        self.assertAlmostEqual(cuts[0], 1.08 + want / 2, delta=0.03)
+        self.assertGreaterEqual(V.longest_pause(y, sr), want - 0.02)
+
+
 class Specs(unittest.TestCase):
     def test_parse(self):
-        self.assertEqual(tts.parse_spec("default"), tts.VoiceSpec("kokoro", "af_heart", tts.DEFAULT_SPEED["kokoro"]))
+        self.assertEqual(tts.parse_spec("default"), tts.VoiceSpec("kokoro", "am_michael", tts.DEFAULT_SPEED["kokoro"]))
         self.assertEqual(tts.parse_spec(None).engine, "kokoro")
         vs = tts.parse_spec("piper:en_US-ljspeech-medium@1.1")
         self.assertEqual((vs.engine, vs.voice, vs.speed), ("piper", "en_US-ljspeech-medium", 1.1))
@@ -213,7 +246,7 @@ class FakeBackend:
     def __init__(self, spec):
         self.spec = spec
 
-    def synth(self, text):
+    def synth(self, text, rate=1.0):
         sr, out = self.sample_rate, []
         t = np.arange(int(0.3 * sr)) / sr
         for _ in text.split():
@@ -286,6 +319,23 @@ class Pipeline(unittest.TestCase):
         # second run is served from cache
         with mock.patch.object(tts, "load", side_effect=AssertionError("should be cached")):
             self.assertEqual(V.voice(Paths(tmp), tmp / "script.json")["scriptHash"], res["scriptHash"])
+
+    def test_tts_alignment_without_whisper(self):
+        tmp = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, tmp, True)
+        say = [" ".join(f"w{b}x{i}" for i in range(13)) + ". Flat. " + " ".join(f"v{b}y{i}" for i in range(13)) + "."
+               for b in range(6)]
+        write_json(tmp / "script.json", {"id": "t-tts", "beats": [{"say": s, "visual": {}} for s in say]})
+        with mock.patch.object(tts, "load", lambda spec: FakeBackend(spec)), \
+                mock.patch("clipper.transcribe.whisper_segments", side_effect=AssertionError("no whisper")):
+            res = V.voice(Paths(tmp), tmp / "script.json", align="tts")
+        self.assertIsNone(res["wer"])
+        self.assertEqual([w["w"] for w in res["words"]], [w for s in say for w in s.split()])
+        for b, k in zip(res["beats"], range(0, 6 * 27, 27)):
+            self.assertAlmostEqual(res["words"][k]["s"], b["speech"][0], delta=0.05)
+            self.assertLessEqual(res["words"][k + 26]["e"], b["speech"][1] + 0.01)
+        for a, b in zip(res["words"], res["words"][1:]):
+            self.assertLessEqual(a["e"], b["s"])
 
     def test_duration_guard_fails_before_writing(self):
         tmp = Path(tempfile.mkdtemp())

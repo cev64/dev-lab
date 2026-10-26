@@ -6,3 +6,10 @@ numpy>=1.26,<3
 # Model/voice files are downloaded once by scripts/setup.sh into ~/.cache/clipper-tts.
 kokoro-onnx==0.6.1
 piper-tts==1.8.0
+# misaki: the G2P Kokoro was trained with (better word stress than raw espeak-ng). Installed without its [en] extra,
+# which would pull spacy-curated-transformers and torch; spaCy's small English model comes from its GitHub release.
+misaki==0.7.4
+spacy==3.8.17
+num2words==0.5.6
+regex
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
