@@ -49,8 +49,11 @@ said", "analysts expect"). No motives or guilt; prefer "alleges", "according to"
 publisher URL before citing.
 
 ## 3. Write the script (15 min)
-`work/explainers/<id>/script.json` per the contract. 5-8 beats, **~150-175 words, narration 62-75 s** (the narrator at speed 0.85 reads ~2.25-2.3 words/s: 158-173 words gave
-68.9-72.9 s on 2026-10-09; trim if the voice comes out over 75 s).
+`work/explainers/<id>/script.json` per the contract. 5-8 beats, **~150-180 words, narration 62-75 s** (narrator since 2026-10-26: Kokoro am_michael at speed 1.0 with
+phrase pauses, ~2.5 words/s: 168 words gave 69.3 s; seconds ~= words / 2.54 + 3.2; trim if over 75 s). Punctuation
+is pacing now: a period, question mark or colon starts a new phrase with a breath after it, and a 1-2 word sentence
+("Flat.") is read as a punchline with air around it. Use one where you want a beat of silence, not everywhere. Keep the beat-1 hook to one phrase (no "?" or colon
+mid-hook) so it is spoken in <= 3 s.
 
 | Beat | Job | Words | Visual |
 |---|---|---|---|

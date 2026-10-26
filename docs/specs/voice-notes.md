@@ -3,9 +3,31 @@
 Owner: voice engineer. Measured 2026-10-09 in this container (4 cores, no GPU, Python 3.13). Code:
 `engine/clipper/voice.py`, `engine/clipper/tts_backends.py`, tests `engine/tests/test_voice.py`.
 
-## Decision
-**Default narrator: Kokoro-82M v1.0 (kokoro-onnx 0.6.1, fp32 export), voice `af_heart`, speed 0.85.**
-**Fallback: Piper `en_US-ljspeech-medium`** (`"voice": "piper:en_US-ljspeech-medium"`).
+## Decision (updated 2026-10-26, owner pick)
+**Default narrator: Kokoro-82M v1.0 (kokoro-onnx 0.6.1, fp32 export), voice `am_michael`, speed 1.0, misaki G2P,
+phrase-level pacing and a voice polish.** Charlie compared four takes of the same line on 2026-10-26 (current
+af_heart@0.85; af_heart retuned; an af_bella/af_heart blend retuned; am_michael retuned) and picked the male voice.
+**Fallback: Piper `en_US-ljspeech-medium`** (`"voice": "piper:en_US-ljspeech-medium"`). A script can still ask for
+the old narrator with `"voice": "kokoro:af_heart@0.85"`.
+
+### Why the old read sounded synthetic, and what changed
+| Cause | Change |
+|---|---|
+| Speed 0.85 stretches every phoneme evenly (Kokoro is trained at 1.0): a slow, even drawl | speed 1.0; scripts keep their length through natural pauses instead |
+| kokoro-onnx phonemizes with raw espeak-ng; Kokoro was trained on misaki phonemes, so stress was sometimes off | misaki 0.7.4 (Apache-2.0) G2P, espeak-ng only for words not in its dictionary; falls back to the old path if misaki is missing |
+| One synth per beat and identical 0.25 s gaps: no breathing rhythm | each beat is split into phrases (sentence ends, colons, semicolons); pause after a phrase by how it ends (`PAUSE_AFTER`: . ! 0.36 s, ? 0.30 s, ; 0.24 s, : 0.20 s), 0.40 s between beats |
+| Flat pace | a short full sentence ("Flat.") is a punchline: rate 0.93 with 0.12 s extra air before and after; sentences of 12+ words read at 1.03 |
+| Raw TTS timbre | `POLISH` before loudnorm: high-pass 75 Hz, -2.5 dB at 250 Hz, +2.5 dB at 3.2 kHz, 2.5:1 compression |
+
+Measured 2026-10-26 on a 7-beat, 168-word test script: **69.3 s**, 2.54 words/s of speech (pauses inside beats
+included), synth 40 s (1.7x realtime on 4 cores). Rule of thumb: seconds ~= words / 2.54 + 3.2, so **150-180 words
+give ~62-74 s**. One script only; re-measure on the first nights.
+Licences: misaki Apache-2.0, spaCy and en_core_web_sm MIT, num2words LGPL (imported, not modified). am_michael is one
+of the Kokoro-82M voice packs (Apache-2.0, graded C+ by its authors; provenance undocumented like the other packs).
+
+`--align tts` (2026-10-26): when the whisper model can't be downloaded, word timings come from the TTS phrase spans
+(each phrase's tokens spread over its exact span by spoken length, then `snap_to_speech`); `wer` is null and a
+warning says to check caption sync. Default stays whisper.
 
 Why: both are equally intelligible to whisper, but Kokoro is the more natural voice (StyleTTS2-based; graded A for
 af_heart by its authors), its licence is the cleanest (Apache-2.0 weights), and it fits the research playbook
@@ -75,12 +97,12 @@ own tokens; the lexicon only changes what the TTS is given.
 
 ## How `voice` works
 `cd engine && python -m clipper voice --script <script.json> [--force] [--no-length-check]`
-1. Each beat is synthesized separately (cached by voice + text in `work/explainers/.tts-cache/`, so editing one beat
-   only re-voices that beat), edge silence trimmed, then joined: 0.15 s lead-in, 0.25 s between beats, 0.6 s tail.
-   Sentence pauses inside a beat come from the TTS.
+1. Each beat is split into phrases and each phrase synthesized separately (cached by voice + G2P + rate + text in
+   `work/explainers/.tts-cache/`, so editing one beat only re-voices that beat), edge silence trimmed, then joined
+   with phrase pauses (see Decision): 0.15 s lead-in, 0.40 s between beats, 0.6 s tail.
 2. Length guard 58-80 s, before the slow steps. Outside it the command prints the duration and how many words to
    add/cut at the measured words/s (and how many to land at 62 s / 75 s), writes nothing, and exits 3.
-3. Two-pass loudnorm to -14 LUFS / -1 dBTP via `audio.extract_normalized` -> `voice.wav` (48 kHz stereo s16).
+3. Voice polish (`POLISH`), then two-pass loudnorm to -14 LUFS / -1 dBTP via `audio.extract_normalized` -> `voice.wav` (48 kHz stereo s16).
 4. whisper small.en (beam 5, no VAD) transcribes voice.wav for timings only. Script tokens are matched to whisper's
    words character by character on their spoken form, so "40%" is timed over "forty percent", "2,000,000" over
    "2 million", and "OpenAI" over "Open AI". The whole narration is matched at once, then each word is clamped into

@@ -18,7 +18,7 @@ Evidence is thin. I found vendor blogs, not platform data, and no verified reten
 
 - **Hook in 1-2 s.** Several sources say the first ~3 s decide whether the test audience carries a video forward (https://clippie.ai/blog/make-ai-shorts-go-viral-2026, https://shortgenius.com/blog/short-form-video-trends) [U, vendor claims]. Lead with the outcome or the number, not "Today we're talking about".
 - **Re-hook** with a visual switch or open question every ~15 s. Without a face, retention comes from pacing and cuts [I]. Our contract's 5-8 beats at 8-12 s each fits this.
-- **Words.** The contract says 150-185 words for 60-75 s, about 2.5 words/s. Generic guidance is 130-150 wpm [U]. Our figure needs TTS at speed ~1.0-1.1. Trim before speeding up.
+- **Words.** The contract says 150-185 words for 60-75 s, about 2.5 words/s. Generic guidance is 130-150 wpm [U]. Our figure needs TTS at speed ~1.0-1.1. Trim before speeding up. (2026-10-26: the narrator runs at 1.0 with phrase pauses, ~2.5 words/s overall; 150-180 words = 62-74 s. See docs/specs/voice-notes.md.)
 - **Captions** word-by-word, readable with sound off. Every beat needs a visual that changes (stat, bars, timeline).
 - **Visuals that hold attention:** one big number, two-bar comparisons, a 3-4 item timeline, a verbatim quote card. One idea per beat; no walls of text.
 - **Loop:** make the last sentence echo the hook so autoplay restarts cleanly.

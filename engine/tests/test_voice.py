@@ -187,9 +187,26 @@ class LengthGuard(unittest.TestCase):
         self.assertIn("CUT at least 11 words", msg)
 
 
+class Phrasing(unittest.TestCase):
+    def test_split_on_sentence_ends_not_abbreviations(self):
+        self.assertEqual(V.phrases("The U.S. said no. Flat. His verdict: zero, so far? Yes"),
+                         ["The U.S. said no.", "Flat.", "His verdict:", "zero, so far?", "Yes"])
+        self.assertEqual(V.phrases("GPT-4.5 vs. Gemini 2.5 ships."), ["GPT-4.5 vs. Gemini 2.5 ships."])
+
+    def test_plan_slows_punchlines_and_adds_air(self):
+        plan = V.phrase_plan("On the other side, the remaining 493 companies. Flat. His verdict: zero payoff outside tech.")
+        self.assertEqual([p for p, _r, _a in plan], ["On the other side, the remaining 493 companies.", "Flat.",
+                                                      "His verdict:", "zero payoff outside tech."])
+        self.assertEqual(plan[1][1], V.PUNCH_RATE)
+        self.assertAlmostEqual(plan[0][2], V.PAUSE_AFTER["."] + V.PUNCH_AIR)
+        self.assertAlmostEqual(plan[1][2], V.PAUSE_AFTER["."] + V.PUNCH_AIR)
+        self.assertAlmostEqual(plan[2][2], V.PAUSE_AFTER[":"])
+        self.assertEqual(plan[-1][2], 0.0)
+
+
 class Specs(unittest.TestCase):
     def test_parse(self):
-        self.assertEqual(tts.parse_spec("default"), tts.VoiceSpec("kokoro", "af_heart", tts.DEFAULT_SPEED["kokoro"]))
+        self.assertEqual(tts.parse_spec("default"), tts.VoiceSpec("kokoro", "am_michael", tts.DEFAULT_SPEED["kokoro"]))
         self.assertEqual(tts.parse_spec(None).engine, "kokoro")
         vs = tts.parse_spec("piper:en_US-ljspeech-medium@1.1")
         self.assertEqual((vs.engine, vs.voice, vs.speed), ("piper", "en_US-ljspeech-medium", 1.1))
@@ -213,7 +230,7 @@ class FakeBackend:
     def __init__(self, spec):
         self.spec = spec
 
-    def synth(self, text):
+    def synth(self, text, rate=1.0):
         sr, out = self.sample_rate, []
         t = np.arange(int(0.3 * sr)) / sr
         for _ in text.split():
@@ -286,6 +303,23 @@ class Pipeline(unittest.TestCase):
         # second run is served from cache
         with mock.patch.object(tts, "load", side_effect=AssertionError("should be cached")):
             self.assertEqual(V.voice(Paths(tmp), tmp / "script.json")["scriptHash"], res["scriptHash"])
+
+    def test_tts_alignment_without_whisper(self):
+        tmp = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, tmp, True)
+        say = [" ".join(f"w{b}x{i}" for i in range(13)) + ". Flat. " + " ".join(f"v{b}y{i}" for i in range(13)) + "."
+               for b in range(6)]
+        write_json(tmp / "script.json", {"id": "t-tts", "beats": [{"say": s, "visual": {}} for s in say]})
+        with mock.patch.object(tts, "load", lambda spec: FakeBackend(spec)), \
+                mock.patch("clipper.transcribe.whisper_segments", side_effect=AssertionError("no whisper")):
+            res = V.voice(Paths(tmp), tmp / "script.json", align="tts")
+        self.assertIsNone(res["wer"])
+        self.assertEqual([w["w"] for w in res["words"]], [w for s in say for w in s.split()])
+        for b, k in zip(res["beats"], range(0, 6 * 27, 27)):
+            self.assertAlmostEqual(res["words"][k]["s"], b["speech"][0], delta=0.05)
+            self.assertLessEqual(res["words"][k + 26]["e"], b["speech"][1] + 0.01)
+        for a, b in zip(res["words"], res["words"][1:]):
+            self.assertLessEqual(a["e"], b["s"])
 
     def test_duration_guard_fails_before_writing(self):
         tmp = Path(tempfile.mkdtemp())
