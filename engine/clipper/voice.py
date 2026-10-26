@@ -2,10 +2,13 @@
 
   python -m clipper voice --script work/explainers/<id>/script.json [--force] [--no-length-check]
 
-1. Each beat's `say` is split into phrases (sentences, and clauses ending in a colon or semicolon). Every phrase is
-   synthesized on its own (TTS input passes through the pronunciation LEXICON) at a phrase-level pace, trimmed of edge
-   silence and joined with pauses that depend on how the phrase ends (PAUSE_AFTER), the way a narrator breathes;
-   beats are joined with BEAT_GAP, so every beat's start/end sample is known exactly.
+1. Each beat's `say` is synthesized in one pass (so intonation flows across its sentences; TTS input passes through
+   the pronunciation LEXICON and the cadence markup below), trimmed of edge silence, and then the pause at every
+   sentence end / colon / semicolon / dash is found in the audio and lengthened to PAUSE_AFTER (more air around a
+   one- or two-word punchline). Beats are joined with BEAT_GAP, so every beat's start/end sample is known exactly.
+   Cadence markup in `say` (never shown in captions): `*word*` stresses a word the TTS would read weakly (misaki
+   stress), `|` is a deliberate breath (the beat is split there, BREATH s pause), and a beat's `"pace"` (0.85-1.15)
+   scales its speaking rate.
 2. Narration must be 58-80 s (contract). Outside that it stops before the slow steps and says how many words to
    cut/add at the measured pace (LengthError, CLI exit 3).
 3. Voice polish (POLISH: rumble/box cut, presence lift, gentle compression), then two-pass loudnorm to -14 LUFS /
@@ -35,15 +38,17 @@ import numpy as np
 from . import audio
 from .common import Paths, log, r2, read_json, write_json
 
-VERSION = 3  # bump when synthesis/assembly changes so cached voice.json is rebuilt
+VERSION = 4  # bump when synthesis/assembly changes so cached voice.json is rebuilt
 MIN_S, MAX_S = 58.0, 80.0
 TARGET_LO, TARGET_HI = 62.0, 75.0  # what the cut/add advice aims for (playbook: >= 62 s for creator programs)
 LEAD, BEAT_GAP, TAIL = 0.15, 0.4, 0.6  # seconds of silence: before beat 1, between beats, after the last beat
-# Pause after a phrase inside a beat, by its last character (the TTS's own sentence pauses are trimmed away).
-PAUSE_AFTER = {".": 0.36, "!": 0.36, "?": 0.3, ":": 0.2, ";": 0.24}
-PUNCH_WORDS = 2  # a phrase this short ("Flat.") is a punchline: read a touch slower with extra air around it
-PUNCH_RATE, PUNCH_AIR = 0.93, 0.12
-LONG_WORDS, LONG_RATE = 12, 1.03  # long set-up sentences move a little faster
+# Minimum pause after a phrase inside a beat, by how it ends. The TTS makes its own (often shorter) pauses there;
+# they are found in the audio and lengthened to at least this.
+PAUSE_AFTER = {".": 0.42, "!": 0.42, "?": 0.4, ":": 0.26, ";": 0.3, "—": 0.22, "–": 0.22}
+PUNCH_WORDS = 2  # a sentence this short ("Flat.") is a punchline: extra air before and after it
+PUNCH_AIR = 0.15
+BREATH = 0.32  # `|` in a beat: a deliberate pause the writer asked for
+PACE_RANGE = (0.85, 1.15)
 # Broadcast-style voice polish before loudnorm: cut rumble and boxiness, lift presence, gentle compression.
 POLISH = ("highpass=f=75,equalizer=f=250:t=q:w=1.2:g=-2.5,equalizer=f=3200:t=q:w=1.0:g=2.5,"
           "acompressor=threshold=-20dB:ratio=2.5:attack=8:release=140:makeup=2")
@@ -168,7 +173,7 @@ def spoken_key(token: str) -> str:
 def caption_tokens(say: str) -> list[str]:
     """Whitespace tokens of a beat; punctuation-only tokens (an em dash) are glued to the previous token."""
     out: list[str] = []
-    for tok in say.split():
+    for tok in clean_say(say).split():
         if not spoken_key(tok) and out:
             out[-1] += " " + tok
         elif out and not spoken_key(out[-1]):
@@ -179,38 +184,116 @@ def caption_tokens(say: str) -> list[str]:
 
 
 _ABBREV = re.compile(r"(?:\b(?:[A-Za-z]\.){1,3}|\b(?:Mr|Mrs|Ms|Dr|St|Jr|Sr|Inc|Co|Corp|Ltd|vs|etc|No)\.)$")
+_EMPH = re.compile(r"\*([^*\s]+)\*")
+_CLOSERS = "\"')”’»)]*"
+
+
+def clean_say(say: str) -> str:
+    """Narration text without cadence markup: what captions, the delivery note and WER see."""
+    return " ".join(_EMPH.sub(r"\1", say).replace("|", " ").split())
+
+
+def tts_markup(text: str) -> str:
+    """Cadence markup -> misaki input: *word* -> [word](+2) (stress it). `|` is handled by the caller."""
+    return _EMPH.sub(lambda m: f"[{m.group(1).rstrip('.,!?;:')}](+2){m.group(1)[len(m.group(1).rstrip('.,!?;:')):]}", text)
+
+
+def _end(tok: str) -> str:
+    t = tok.rstrip(_CLOSERS)
+    return t[-1:] if t else ""
+
+
+def boundaries(text: str) -> list[tuple[int, float]]:
+    """[(index of the token a pause follows, minimum pause s)] inside one clean phrase run (not after its last
+    token): sentence ends, colons, semicolons and dashes, not abbreviations (U.S., Dr., vs.). A one- or two-word
+    sentence ("Flat.") gets PUNCH_AIR more on both sides."""
+    toks = text.split()
+    out: list[tuple[int, float]] = []
+    for k, w in enumerate(toks[:-1]):
+        e = _end(w)
+        if e in PAUSE_AFTER and not (e == "." and _ABBREV.search(w.rstrip(_CLOSERS))) and spoken_key(toks[k + 1]) \
+                or w in ("—", "–"):
+            out.append((k, PAUSE_AFTER.get(e, PAUSE_AFTER["—"])))
+    # punchlines: sentences of <= PUNCH_WORDS words between two sentence ends
+    ends = [-1] + [k for k, _p in out if _end(toks[k]) in ".!?"] + [len(toks) - 1]
+    extra = {}
+    for a, b in zip(ends, ends[1:]):
+        if 0 < b - a <= PUNCH_WORDS and _end(toks[b]) in ".!?":
+            if a >= 0:
+                extra[a] = PUNCH_AIR
+            if b < len(toks) - 1:
+                extra[b] = PUNCH_AIR
+    return [(k, p + extra.get(k, 0.0)) for k, p in out]
 
 
 def phrases(say: str) -> list[str]:
-    """Split a beat into spoken phrases: after . ! ? : ; followed by a space (not after U.S., Dr., vs., e.g.)."""
-    words = say.split()
-    out, cur = [], []
-    for k, w in enumerate(words):
-        cur.append(w)
-        end = w.rstrip("\"')”’»)]")
-        if k < len(words) - 1 and end and end[-1] in PAUSE_AFTER and not _ABBREV.search(end) \
-                and spoken_key(words[k + 1]):
-            out.append(" ".join(cur))
-            cur = []
-    if cur:
-        out.append(" ".join(cur))
-    return out
+    """A clean beat split at its pause points (used for word timing without whisper)."""
+    toks = clean_say(say).split()
+    cuts = [k for k, _p in boundaries(" ".join(toks))]
+    out, a = [], 0
+    for k in cuts:
+        out.append(" ".join(toks[a:k + 1]))
+        a = k + 1
+    return out + ([" ".join(toks[a:])] if a < len(toks) else [])
 
 
-def phrase_plan(say: str) -> list[tuple[str, float, float]]:
-    """[(phrase, rate, pause after)] for one beat. The last phrase's pause is the beat gap (set by the caller)."""
-    ps = phrases(say)
-    n = [len(caption_tokens(p)) for p in ps]
-    ends = [p.rstrip("\"')”’»)]")[-1:] for p in ps]
-    punch = [n[k] <= PUNCH_WORDS and ends[k] in ".!?" for k in range(len(ps))]  # a short full sentence
-    plan = []
-    for k, p in enumerate(ps):
-        rate = PUNCH_RATE if punch[k] else LONG_RATE if n[k] >= LONG_WORDS else 1.0
-        pause = PAUSE_AFTER.get(ends[k], 0.12)
-        if punch[k] or (k + 1 < len(ps) and punch[k + 1]):
-            pause += PUNCH_AIR  # air before and after a punchline
-        plan.append((p, rate, pause if k < len(ps) - 1 else 0.0))
-    return plan
+def quiet_runs(x: np.ndarray, sr: int, floor_db: float = -38.0, min_len: float = 0.05) -> list[tuple[float, float]]:
+    """Internal silent runs (s, e) in seconds (not touching either edge)."""
+    rms = audio.rms_frames(x, sr, 0.01)
+    if len(rms) == 0:
+        return []
+    db = 20 * np.log10(rms + 1e-9)
+    q = db < db.max() + floor_db
+    runs, k = [], 0
+    while k < len(q):
+        if q[k]:
+            j = k
+            while j < len(q) and q[j]:
+                j += 1
+            if k > 0 and j < len(q) and (j - k) * 0.01 >= min_len:
+                runs.append((k * 0.01, j * 0.01))
+            k = j
+        else:
+            k += 1
+    return runs
+
+
+def stretch_pauses(x: np.ndarray, sr: int, text: str) -> tuple[np.ndarray, list[float | None]]:
+    """Lengthen the TTS's own pauses at `text`'s boundaries to their minimum. Each boundary is matched, in order, to
+    the longest silent run near where it should fall (by spoken length); unmatched ones are left alone (None).
+    Returns the new audio and, per boundary, the cut time (middle of its pause) in the new audio."""
+    bnds = boundaries(text)
+    if not bnds or len(x) == 0:
+        return x, [None] * len(bnds)
+    toks = text.split()
+    weights = np.array([len(spoken_key(t)) + 1 for t in toks], dtype=float)
+    cum = np.cumsum(weights) / weights.sum()
+    dur = len(x) / sr
+    runs = quiet_runs(x, sr)
+    window = max(0.6, 0.15 * dur)
+    picked, last = [], -1.0
+    for k, _p in bnds:
+        t_exp = cum[k] * dur
+        cands = [r for r in runs if r[0] > last and abs((r[0] + r[1]) / 2 - t_exp) <= window]
+        if not cands:
+            picked.append(None)
+            continue
+        r = max(cands, key=lambda r: (round(r[1] - r[0], 2), -abs((r[0] + r[1]) / 2 - t_exp)))
+        picked.append(r)
+        last = r[1]
+    parts, pos, cuts, added = [], 0, [], 0.0
+    for (_k, want), r in zip(bnds, picked):
+        if r is None:
+            cuts.append(None)
+            continue
+        mid = int(round((r[0] + r[1]) / 2 * sr))
+        extra = max(0.0, want - (r[1] - r[0]))
+        parts += [x[pos:mid], np.zeros(int(round(extra * sr)), dtype=x.dtype)]
+        cuts.append(mid / sr + added + extra / 2)
+        added += extra
+        pos = mid
+    parts.append(x[pos:])
+    return np.concatenate(parts), cuts
 
 
 # ---------- alignment ----------
@@ -463,6 +546,7 @@ def synth_phrase(backend, text: str, cache_dir: Path, rate: float = 1.0) -> tupl
 
 def script_hash(script: dict, spec_label: str, align: str = "whisper") -> str:
     payload = json.dumps({"v": VERSION, "voice": spec_label, "align": align, "say": [b["say"] for b in script["beats"]],
+                          "pace": [b.get("pace") for b in script["beats"]],
                           "lexicon": script.get("lexicon"),
                           "global": [(p, r if isinstance(r, str) else "fn") for p, r in LEXICON]}, sort_keys=True)
     return hashlib.sha1(payload.encode()).hexdigest()[:16]
@@ -491,17 +575,30 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
     t_start = time.time()
     backend = tts.load(spec)
     beat_tokens = [caption_tokens(b["say"]) for b in script["beats"]]
-    pieces, warnings, phrase_spans = [], [], []  # phrase_spans: (beat, phrase text, s, e) relative to the beat
+    pieces, warnings, phrase_spans = [], [], []  # phrase_spans: (beat, clean phrase text, s, e) within the beat
     sr = backend.sample_rate
     cache = paths.work / "explainers" / ".tts-cache"
     for i, b in enumerate(script["beats"]):
+        pace = float(b.get("pace") or 1.0)
+        if not PACE_RANGE[0] <= pace <= PACE_RANGE[1]:
+            raise SystemExit(f"beat {i + 1}: pace {pace} outside {PACE_RANGE[0]}-{PACE_RANGE[1]}")
         parts, pos = [], 0
-        for text, rate, pause in phrase_plan(b["say"]):
-            x, sr = synth_phrase(backend, tts_text(text, script.get("lexicon")), cache, rate)
-            phrase_spans.append((i, text, pos, pos + len(x)))
-            parts += [x, np.zeros(int(round(pause * sr)), dtype=np.float32)]
-            pos += len(x) + len(parts[-1])
-        x = np.concatenate(parts[:-1])  # the last phrase's pause is 0 (the beat gap follows)
+        segs = [seg for seg in b["say"].split("|") if clean_say(seg)]
+        for j, seg in enumerate(segs):
+            x, sr = synth_phrase(backend, tts_text(tts_markup(" ".join(seg.split())), script.get("lexicon")),
+                                 cache, pace)
+            text = clean_say(seg)
+            x, cuts = stretch_pauses(x, sr, text)
+            toks, a0, t0 = text.split(), 0, 0.0
+            for (k, _p), c in zip(boundaries(text), cuts):
+                if c is not None:
+                    phrase_spans.append((i, " ".join(toks[a0:k + 1]), pos + int(t0 * sr), pos + int(c * sr)))
+                    a0, t0 = k + 1, c
+            phrase_spans.append((i, " ".join(toks[a0:]), pos + int(t0 * sr), pos + len(x)))
+            gap = np.zeros(int(round(BREATH * sr)) if j < len(segs) - 1 else 0, dtype=np.float32)
+            parts += [x, gap]
+            pos += len(x) + len(gap)
+        x = np.concatenate(parts)
         pieces.append(x)
         d = len(x) / sr
         n = len(beat_tokens[i])
@@ -571,7 +668,7 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
         wwords = [w for s in segs for w in s["words"]]
         whisper_s = time.time() - t_w
         hyp = [w for s in segs for w in spoken_words(s["text"])]
-        ref = [w for b in script["beats"] for w in spoken_words(b["say"])]
+        ref = [w for b in script["beats"] for w in spoken_words(clean_say(b["say"]))]
         wer = word_error_rate(ref, hyp)
         if wer > 0.08:
             warnings.append(f"whisper WER {wer:.1%}: narration may be garbled; check pronunciation/lexicon")

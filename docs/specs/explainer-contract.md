@@ -55,7 +55,10 @@ out/YYYY-MM-DD/<id>.drive.json       {title, text}: the Google Doc filed in Char
 }
 ```
 - 5-8 beats, ~150-180 words total (Kokoro am_michael at speed 1.0 with phrase pauses, measured 2026-10-26: 168 words
-  gave 69.3 s; seconds ~= words / 2.54 + 3.2, so this gives ~62-74 s). The 62-75 s duration rule is unchanged. Beat 1 is the hook, spoken in <= 3 s.
+  gave 69-71 s; seconds ~= words / 2.45 + 3.2, so this gives ~62-76 s).
+- Cadence (optional, see the skill's "Write for the voice"): a beat may set `"pace"` (0.85-1.15, default 1.0), and
+  `say` may use `*word*` (stress a weakly read word) and `|` (a deliberate breath). Markup never reaches captions,
+  the delivery note or the Drive card. The 62-75 s duration rule is unchanged. Beat 1 is the hook, spoken in <= 3 s.
 - `post` is the paste-ready post kit (`explainer` writes it into deliveries/<date>.md): `cover` (<= 7 words, the
   cover/title text), `tiktok` (description body), `instagram` (Reels caption body), `youtubeTitle` (Shorts title, <= 70 chars; the
   Shorts description reuses the `tiktok` body, or `youtube` if set), `pinnedComment` (posted from the

@@ -17,6 +17,7 @@ from pathlib import Path
 from . import audio, ledger
 from .common import FPS, Paths, log, read_json, today_et, write_json
 from .make import STYLES, render_clip, theme_seed
+from .voice import clean_say
 
 REPEAT_DAYS = 7  # no-repeat window for stories (skill section 1); a script with "followUp": true may revisit one
 MIN_NARRATION = 58.0  # contract floor; the skill asks for >= 62 s so TikTok's one-minute rule is met
@@ -66,7 +67,7 @@ def drive_card(script: dict, clip: dict, date: str) -> tuple[str, str]:
              "TikTok description:", post_kit(script)["tiktok"], "", "Pinned comment:", post_kit(script)["pinned"], "",
              "Sources:"]
     lines += [f"- {s.get('publisher', '')}: {s.get('title', '')} {s.get('url', '')}".rstrip() for s in script["sources"]]
-    lines += ["", "Narration:"] + [b["say"] for b in script["beats"]]
+    lines += ["", "Narration:"] + [clean_say(b["say"]) for b in script["beats"]]
     lines += ["", "(end)"]  # a visible tail: a cut-off upload is easy to spot
     return drive_safe(title), drive_safe("\n".join(lines) + "\n", ascii_only=True)
 

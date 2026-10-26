@@ -50,10 +50,28 @@ publisher URL before citing.
 
 ## 3. Write the script (15 min)
 `work/explainers/<id>/script.json` per the contract. 5-8 beats, **~150-180 words, narration 62-75 s** (narrator since 2026-10-26: Kokoro am_michael at speed 1.0 with
-phrase pauses, ~2.5 words/s: 168 words gave 69.3 s; seconds ~= words / 2.54 + 3.2; trim if over 75 s). Punctuation
-is pacing now: a period, question mark or colon starts a new phrase with a breath after it, and a 1-2 word sentence
-("Flat.") is read as a punchline with air around it. Use one where you want a beat of silence, not everywhere. Keep the beat-1 hook to one phrase (no "?" or colon
-mid-hook) so it is spoken in <= 3 s.
+phrase pauses, ~2.4-2.5 words/s: 168 words gave 69-71 s; seconds ~= words / 2.45 + 3.2; trim if over 75 s).
+
+**Write for the voice (cadence; owner ask 2026-10-26).** The narrator reads each beat in one breath-group and
+lengthens the pauses your punctuation asks for, so the script *is* the cadence. Read every beat aloud before voicing.
+- Talk, don't recite: contractions (it's, isn't, they're), plain verbs, the way you'd tell a friend. Lead-ins people
+  actually say are fine once or twice a script ("So", "Now", "Here's the thing").
+- Vary sentence length: mix 2-6 word sentences with 12-20 word ones; never three sentences of the same length or
+  shape in a row. A sentence over ~22 words, or with more than one comma-clause, gets split.
+- End on the point: English stresses the last important word, so put the number or key word last ("For the other
+  493? Flat." not "Flat is how the other 493 did"). Attribution goes at the start or end, short ("he says"), never
+  stacked mid-sentence with dates and titles.
+- Punctuation is timing: period = full stop and breath (~0.4 s); question mark = a lift and ~0.4 s; colon = set-up
+  then reveal (~0.26 s); comma = a small catch; a 1-2 word sentence ("Flat.") is a punchline and gets extra air
+  before and after (use once or twice per script). Don't add periods mid-thought just to slow it down.
+- No list rhythm: at most one list per script, of 2-3 items, said as "X, Y, and Z". No headline fragments or
+  "Number one... number two" read as a sentence.
+- Numbers as people say them in speech; captions still show the digits.
+- Markup the engine honours (stripped from captions and post copy): `*word*` stresses a small word the voice
+  reads weakly (not, isn't, only, still, was) for contrast, at most 2-3 per script; `|` is a deliberate breath
+  (~0.3 s) before a reveal, at most 1-2 per script; a beat's `"pace"` (0.85-1.15, default 1.0) speeds or slows the
+  whole beat: ~1.03 for the hook, ~0.96 for the quote, caveat and payoff.
+- Beat 1 hook: one breath, <= 9 words, no stop or question inside it, so it lands in about 3 s.
 
 | Beat | Job | Words | Visual |
 |---|---|---|---|

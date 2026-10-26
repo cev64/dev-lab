@@ -187,21 +187,37 @@ class LengthGuard(unittest.TestCase):
         self.assertIn("CUT at least 11 words", msg)
 
 
-class Phrasing(unittest.TestCase):
-    def test_split_on_sentence_ends_not_abbreviations(self):
-        self.assertEqual(V.phrases("The U.S. said no. Flat. His verdict: zero, so far? Yes"),
-                         ["The U.S. said no.", "Flat.", "His verdict:", "zero, so far?", "Yes"])
-        self.assertEqual(V.phrases("GPT-4.5 vs. Gemini 2.5 ships."), ["GPT-4.5 vs. Gemini 2.5 ships."])
+class Cadence(unittest.TestCase):
+    def test_markup_is_stripped_for_captions(self):
+        say = "It's *not* the giants. | So far? *Zero*, he says."
+        self.assertEqual(V.clean_say(say), "It's not the giants. So far? Zero, he says.")
+        self.assertEqual(V.caption_tokens(say), ["It's", "not", "the", "giants.", "So", "far?", "Zero,", "he", "says."])
+        self.assertEqual(V.tts_markup("It's *not* the giants. *Zero*, he says."),
+                         "It's [not](+2) the giants. [Zero](+2), he says.")
 
-    def test_plan_slows_punchlines_and_adds_air(self):
-        plan = V.phrase_plan("On the other side, the remaining 493 companies. Flat. His verdict: zero payoff outside tech.")
-        self.assertEqual([p for p, _r, _a in plan], ["On the other side, the remaining 493 companies.", "Flat.",
-                                                      "His verdict:", "zero payoff outside tech."])
-        self.assertEqual(plan[1][1], V.PUNCH_RATE)
-        self.assertAlmostEqual(plan[0][2], V.PAUSE_AFTER["."] + V.PUNCH_AIR)
-        self.assertAlmostEqual(plan[1][2], V.PAUSE_AFTER["."] + V.PUNCH_AIR)
-        self.assertAlmostEqual(plan[2][2], V.PAUSE_AFTER[":"])
-        self.assertEqual(plan[-1][2], 0.0)
+    def test_boundaries_skip_abbreviations_and_pad_punchlines(self):
+        text = "The U.S. split the other 493 companies. Flat. His verdict: zero payoff outside tech."
+        b = dict(V.boundaries(text))
+        toks = text.split()
+        self.assertEqual(sorted(b), [toks.index("companies."), toks.index("Flat."), toks.index("verdict:")])
+        self.assertAlmostEqual(b[toks.index("companies.")], V.PAUSE_AFTER["."] + V.PUNCH_AIR)
+        self.assertAlmostEqual(b[toks.index("Flat.")], V.PAUSE_AFTER["."] + V.PUNCH_AIR)
+        self.assertAlmostEqual(b[toks.index("verdict:")], V.PAUSE_AFTER[":"])
+        self.assertEqual(V.phrases(text), ["The U.S. split the other 493 companies.", "Flat.", "His verdict:",
+                                           "zero payoff outside tech."])
+
+    def test_stretch_lengthens_the_pause_at_the_sentence_end(self):
+        sr = 24000
+        tone = lambda s: 0.4 * np.sin(2 * np.pi * 180 * np.arange(int(s * sr)) / sr)  # noqa: E731
+        gap = lambda s: np.zeros(int(s * sr))  # noqa: E731
+        # "aaa bbb. ccc ddd": a short comma-like gap after aaa, a 0.15 s sentence gap after bbb.
+        x = np.concatenate([tone(0.5), gap(0.08), tone(0.5), gap(0.15), tone(0.5), gap(0.08), tone(0.5)]).astype(np.float32)
+        text = "aaa bbb. ccc ddd"  # two-word sentences, so the pause gets punchline air too
+        want = dict(V.boundaries(text))[1]
+        y, cuts = V.stretch_pauses(x, sr, text)
+        self.assertAlmostEqual(len(y) / sr - len(x) / sr, want - 0.15, delta=0.02)
+        self.assertAlmostEqual(cuts[0], 1.08 + want / 2, delta=0.03)
+        self.assertGreaterEqual(V.longest_pause(y, sr), want - 0.02)
 
 
 class Specs(unittest.TestCase):

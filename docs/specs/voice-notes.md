@@ -15,11 +15,20 @@ the old narrator with `"voice": "kokoro:af_heart@0.85"`.
 |---|---|
 | Speed 0.85 stretches every phoneme evenly (Kokoro is trained at 1.0): a slow, even drawl | speed 1.0; scripts keep their length through natural pauses instead |
 | kokoro-onnx phonemizes with raw espeak-ng; Kokoro was trained on misaki phonemes, so stress was sometimes off | misaki 0.7.4 (Apache-2.0) G2P, espeak-ng only for words not in its dictionary; falls back to the old path if misaki is missing |
-| One synth per beat and identical 0.25 s gaps: no breathing rhythm | each beat is split into phrases (sentence ends, colons, semicolons); pause after a phrase by how it ends (`PAUSE_AFTER`: . ! 0.36 s, ? 0.30 s, ; 0.24 s, : 0.20 s), 0.40 s between beats |
-| Flat pace | a short full sentence ("Flat.") is a punchline: rate 0.93 with 0.12 s extra air before and after; sentences of 12+ words read at 1.03 |
+| Identical 0.25 s gaps: no breathing rhythm | each beat is still voiced in one pass (sentence-by-sentence synthesis was tried first and read like a list: every sentence got its own falling "full stop" intonation), then the TTS's own pause at each sentence end / colon / semicolon / dash is found in the audio and lengthened to `PAUSE_AFTER` (. ! 0.42 s, ? 0.40 s, ; 0.30 s, : 0.26 s, dash 0.22 s); 0.40 s between beats |
+| Flat pace | a 1-2 word sentence ("Flat.") gets 0.15 s extra air before and after; writers set per-beat `pace` (0.85-1.15) and can mark `*word*` (misaki +2 stress) and `|` (a 0.32 s breath, beat split there) |
 | Raw TTS timbre | `POLISH` before loudnorm: high-pass 75 Hz, -2.5 dB at 250 Hz, +2.5 dB at 3.2 kHz, 2.5:1 compression |
 
-Measured 2026-10-26 on a 7-beat, 168-word test script: **69.3 s**, 2.54 words/s of speech (pauses inside beats
+Cadence pass (2026-10-26, after Charlie said the first retune still sounded a bit unnatural): whole-beat synthesis
+plus pause stretching, the markup above, and script-writing rules for spoken cadence in the ai-explainers skill. The
+rewritten 168-word Apollo test script voiced at **70.8 s** with pauses of 0.16-0.61 s (varied, not uniform), synth
+22 s (3.3x realtime). Kokoro has no pitch or emphasis controls beyond speed and phonemes: misaki's `(+2)` stress only
+promotes a weakly stressed word to primary stress (it can't stress a word harder than primary), so emphasis is mainly
+a writing job (end-focus, short sentences). Pause matching: each boundary is matched in order to the longest silent run
+(>= 50 ms, 38 dB under the peak) near where it should fall by spoken length; an unmatched boundary is left as the TTS
+made it.
+
+First retune, measured 2026-10-26 on a 7-beat, 168-word test script: **69.3 s**, 2.54 words/s of speech (pauses inside beats
 included), synth 40 s (1.7x realtime on 4 cores). Rule of thumb: seconds ~= words / 2.54 + 3.2, so **150-180 words
 give ~62-74 s**. One script only; re-measure on the first nights.
 Licences: misaki Apache-2.0, spaCy and en_core_web_sm MIT, num2words LGPL (imported, not modified). am_michael is one
@@ -97,9 +106,9 @@ own tokens; the lexicon only changes what the TTS is given.
 
 ## How `voice` works
 `cd engine && python -m clipper voice --script <script.json> [--force] [--no-length-check]`
-1. Each beat is split into phrases and each phrase synthesized separately (cached by voice + G2P + rate + text in
-   `work/explainers/.tts-cache/`, so editing one beat only re-voices that beat), edge silence trimmed, then joined
-   with phrase pauses (see Decision): 0.15 s lead-in, 0.40 s between beats, 0.6 s tail.
+1. Each beat (each `|`-separated part of it) is synthesized in one pass (cached by voice + G2P + pace + text in
+   `work/explainers/.tts-cache/`, so editing one beat only re-voices that beat), edge silence trimmed, its sentence
+   pauses lengthened (see Decision), then joined: 0.15 s lead-in, 0.40 s between beats, 0.6 s tail.
 2. Length guard 58-80 s, before the slow steps. Outside it the command prints the duration and how many words to
    add/cut at the measured words/s (and how many to land at 62 s / 75 s), writes nothing, and exits 3.
 3. Voice polish (`POLISH`), then two-pass loudnorm to -14 LUFS / -1 dBTP via `audio.extract_normalized` -> `voice.wav` (48 kHz stereo s16).
