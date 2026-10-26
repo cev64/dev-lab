@@ -35,6 +35,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Timings: setup ~3 min, news 6 s, producers 13-16 min in parallel + one 7-min lead-requested re-render.
   Problems: publish-videos.sh pushed videos/2026-10-26 but the prune step again got HTTP 403 deleting old videos/*
   branches (10-09..10-11 remain past the 14-day cutoff); the script exits non-zero on that.
+  Improve: PR #29 merged: 6 of tonight's scenes promoted (library 152 -> 158: payoff-gap (6 modes), clubhouse (5 modes),
+  film-set, promise-calendar, minute-reels, screening-room); defaults made generic; 84/84 frames + 3 covers byte-identical
+  from library copies; default stills reviewed. Nits: clubhouse quote panel only visible 50-70% with defaults.
 - 2026-10-25 (nightly run, Sunday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   No 2026-10-24 entry, ledger rows or videos branch: the Saturday run appears not to have run (nothing to recover).
   1. "OpenAI now trains AI offline." (FOLLOW-UP to 10-09 Anthropic evals offline and 10-18 wallet-raid: Oct 23 OpenAI
