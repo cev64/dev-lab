@@ -882,6 +882,50 @@
         "https://www.tokenpost.com/news/technology/40272"
       ],
       "video": "out/2026-10-25/2026-10-25-explainer-ballot-bots.mp4"
+    },
+    {
+      "id": "2026-10-26-explainer-ai-payoff",
+      "date": "2026-10-26",
+      "hook": "AI's payoff outside tech: zero?",
+      "topic": "AI & MONEY",
+      "title": "AI's payoff outside tech: zero, says an Apollo economist",
+      "followUp": false,
+      "sources": [
+        "https://www.apollo.com/wealth/insights-news/insights/daily-spark/no-signs-of-ai-payoff-outside-the-tech-sector",
+        "https://techcrunch.com/2026/10/25/ai-delivers-zero-financial-payoff-to-most-companies-according-to-apollo-economist/",
+        "https://ppc.land/apollo-finds-zero-ai-payoff-outside-tech-as-s-p-493-margins-stay-near-10/"
+      ],
+      "video": "out/2026-10-26/2026-10-26-explainer-ai-payoff.mp4"
+    },
+    {
+      "id": "2026-10-26-explainer-ai-odyssey",
+      "date": "2026-10-26",
+      "hook": "Promised an AI movie. Got 7 minutes",
+      "topic": "AI & MOVIES",
+      "title": "Grok's AI Odyssey: a movie was promised, 7 minutes arrived",
+      "followUp": false,
+      "sources": [
+        "https://techcrunch.com/2026/10/25/grok-releases-the-first-seven-minutes-of-its-ai-generated-odyssey/",
+        "https://www.yahoo.com/entertainment/movies/articles/elon-musk-grok-releases-first-172245908.html",
+        "https://www.ynetnews.com/culture/article/sj6cny0ezl",
+        "https://wtop.com/entertainment/2026/07/a-look-inside-christopher-nolans-the-odyssey-by-the-numbers/"
+      ],
+      "video": "out/2026-10-26/2026-10-26-explainer-ai-odyssey.mp4"
+    },
+    {
+      "id": "2026-10-26-explainer-oss-ban",
+      "date": "2026-10-26",
+      "hook": "Reddit's open source forum banned AI",
+      "topic": "AI CULTURE",
+      "title": "Reddit's r/opensource bans AI projects",
+      "followUp": false,
+      "sources": [
+        "https://www.theverge.com/ai-artificial-intelligence/1018217/reddit-opensource-ai-ban",
+        "https://gizmodo.com/tokens-are-cheap-open-source-subreddit-bans-ai-2000830386",
+        "https://kotaku.com/reddits-largest-open-source-community-dumbfounded-by-ai-ban-i-guess-linux-is-no-longer-allowed-here-2000749384",
+        "https://www.helpnetsecurity.com/2026/10/26/reddit-r-opensource-ai-ban/"
+      ],
+      "video": "out/2026-10-26/2026-10-26-explainer-oss-ban.mp4"
     }
   ]
 }

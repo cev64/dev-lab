@@ -2,6 +2,39 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-26 (nightly run, Monday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "AI's payoff outside tech: zero." (Apollo chief economist Torsten Slok's Oct 24 Daily Spark note: for the S&P 493
+     (S&P 500 minus 7 tech giants) revenue per worker and margins flat while rising for the 7; no sign of AI boosting
+     productivity; "zero financial payoff to corporate America outside of tech"; firms starting to view AI spend as a
+     cost; "great calculator ... intelligence is mostly judgment"; caveat: one economist's chart note, gains could be
+     inside single firms or come later; Apollo, TechCrunch, PPC Land). Rubric ~76 (fresh 19, stakes 17, surprise 13,
+     visual 7, verif 15, controversy 5). 72.8 s, -14.3 LUFS, style horizon, 100% scenes (new 6-mode module ai-payoff).
+     No investment advice. Cut: chart-read margin figures (~30% vs 9-10%, eyeballed by PPC), Ramp 99.5% stat (single).
+  2. "Reddit's open source forum just banned AI." (r/opensource mods' Oct 24 rules: projects that use/are made by/are for
+     AI not welcome, "incongruent" quote; 1+ year old, multiple contributors, speak English, no translated posts;
+     "tokens are cheap"; top comment "I guess Linux is no longer allowed here?"; 9-year-old zero-AI solo project no
+     longer qualifies; rival r/TrueOpenSource; room for selective enforcement; The Verge (RSS summary), Gizmodo, Kotaku,
+     Help Net Security; Reddit itself blocked from here). Rubric ~74 (20/12/13/9/15/5). 70.8 s, -14.2 LUFS, style
+     neural, 100% scenes (new 5-mode module clubhouse). No usernames or Reddit UI. Lead fix: beat 6 "no objective way to
+     implement the policy" was Help Net Security only -> replaced with the two-source "room for selective enforcement"
+     line and re-rendered (73.8 -> 70.8 s). Cut: member count, "slop flooding" motive, single-outlet mod quotes.
+  3. "Promised an AI movie. Got seven minutes." (Grok Imagine posted ~7-min Episode 1 of an AI-made Odyssey on Oct 23,
+     with Wonder Studios and director Dev Walker; Musk's July post promising a full-length, historically accurate movie
+     before year end; Nolan's Odyssey (July) 2 h 52 min, six countries; TechCrunch's reviewer: some moments could pass
+     for real, but airless, stilted, no momentum, no ancient Greek; TechCrunch, Variety (Yahoo), Ynetnews, AP/WTOP).
+     Rubric ~78 (19/12/15/10/15/7). 71.6 s, -14.1 LUFS, style flow, 100% scenes (4 new modules odyssey-set/-promise/
+     -reels/-screening). Casting culture-war angle deliberately left out; Musk/Nolan text only, never drawn.
+  Lead review: all claims traced to claim tables; stills reviewed (clean). Nit: the promise beat opens ~1-2 s with only
+  month chips before the post card arrives.
+  Skipped: SpaceX $40B GPU debt / neocloud credit (Musk post only, finance inside baseball), Jane Street data centers
+  (Bloomberg only), Amazon Bee Frontier (one review), Toyota 400K robots (Sept news, FT feature, nothing new),
+  Pennsylvania AI-ad labels (signing not confirmed by a fetchable second source; Verge unfetchable), Infosys (stock),
+  Hill staffers on AI leaders (Axios only).
+  Drive: connector available; folder checked (no 2026-10-26 titles); 3 Google Docs filed (pure ASCII); oss-ban doc read
+  back complete with "(end)".
+  Timings: setup ~3 min, news 6 s, producers 13-16 min in parallel + one 7-min lead-requested re-render.
+  Problems: publish-videos.sh pushed videos/2026-10-26 but the prune step again got HTTP 403 deleting old videos/*
+  branches (10-09..10-11 remain past the 14-day cutoff); the script exits non-zero on that.
 - 2026-10-25 (nightly run, Sunday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   No 2026-10-24 entry, ledger rows or videos branch: the Saturday run appears not to have run (nothing to recover).
   1. "OpenAI now trains AI offline." (FOLLOW-UP to 10-09 Anthropic evals offline and 10-18 wallet-raid: Oct 23 OpenAI
