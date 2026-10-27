@@ -112,6 +112,7 @@
       // eased between keys. Call first in draw(), inside ctx.save()/restore().
       camera(ctx, t, keys, w = 855, h = 480, ax = w / 2, ay = h / 2) {
         if (!keys || !keys.length) return { zoom: 1, x: ax, y: ay };
+        keys = keys.slice().sort((p, q) => p.t - q.t); // cues can arrive out of order (e.g. a cold-open beat)
         let a = keys[0], b = keys[keys.length - 1];
         for (let i = 0; i < keys.length - 1; i++) if (t >= keys[i].t && t <= keys[i + 1].t) { a = keys[i]; b = keys[i + 1]; break; }
         const k = t <= keys[0].t ? 0 : t >= keys[keys.length - 1].t ? 1 : easeInOutCubic((t - a.t) / Math.max(1e-6, b.t - a.t));

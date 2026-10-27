@@ -569,6 +569,12 @@
   const STAGE = { x0: 60, x1: 915, y0: 400, y1: 1050 };   // full-frame action area: below the dock, above captions
   const SAFE_BOX = { x0: 60, x1: 915, y0: 150, y1: 1540 };
   const TX = 0.35;                                         // crossfade between scenes / to and from cards
+  // Camera on full scenes (2026-10-27, owner ask "bigger picture"): every full scene is drawn zoomed in around
+  // PIVOT so the action fills more of the phone screen, with a slow push-in over the scene. Scenes still author
+  // to STAGE; at ZOOM0..ZOOM1 the stage maps to about y 388-1130 (just above the lowered captions) and x 0-980.
+  // clip.camera === false turns it off.
+  const ZOOM0 = 1.10, ZOOM1 = 1.15, PIVOT = { x: 487.5, y: 500 };
+  const LOOP_X = 0.4;                                      // last seconds blend back into the opening frame (loop)
   const SCENE_FONTS = {
     display: { family: 'Montserrat', weight: 900 }, bold: { family: 'Montserrat', weight: 800 },
     condensed: { family: 'Anton', weight: 400 }, ui: { family: 'Inter', weight: 700 }, body: { family: 'Inter', weight: 500 },
@@ -689,7 +695,7 @@
   // ------------------------------------------------------------------ timeline: full scenes + card beats
   function setupTimeline(S, ctx) {
     const clip = S.clip, LAY = S.LAYOUT, D = clip.duration;
-    const hookEnd = S.hook ? LAY.hookSec + LAY.hookMorph * 0.7 : 0;
+    const hookEnd = S.hook && S.hookMode !== 'dock' ? LAY.hookSec + LAY.hookMorph * 0.7 : 0;
     const isFull = (v) => v && v.type === 'scene' && (v.layout || 'full') !== 'band';
     const src = (Array.isArray(clip.beats) ? clip.beats : [])
       .filter((b) => b && b.visual && isFinite(+b.t0) && isFinite(+b.t1) && +b.t1 > +b.t0)
@@ -826,11 +832,22 @@
       for (const f of fulls) if (t >= f.t1 && t < f.t1 + TX) return { cur: null, out: f, k: 1 - smooth((t - f.t1) / TX) };
       return { cur: null, k: 0 };
     };
-    const blitScene = (ctx2, f, t, a) => {
+    const camOn = S.clip.camera !== false;
+    const zoomAt = (f, age) => (camOn ? ZOOM0 + (ZOOM1 - ZOOM0) * K.easeInOutCubic(clamp(age / Math.max(1, f.t1 - f.t0))) : 1);
+    const blitScene = (ctx2, f, t, a, ageOverride) => {
       if (a <= 0.003) return;
-      runScene(S, f.L, t - f.t0, t);
-      ctx2.globalAlpha = a; ctx2.drawImage(f.L.cv, 0, 0); ctx2.globalAlpha = 1;
+      const age = ageOverride != null ? ageOverride : t - f.t0;
+      runScene(S, f.L, age, ageOverride != null ? f.t0 + age : t);
+      const z = zoomAt(f, age);
+      ctx2.globalAlpha = a;
+      if (z === 1) ctx2.drawImage(f.L.cv, 0, 0);
+      else ctx2.drawImage(f.L.cv, PIVOT.x * (1 - z), PIVOT.y * (1 - z), f.L.w * z, f.L.h * z);
+      ctx2.globalAlpha = 1;
     };
+    // loop: when the video opens on a full scene, its last LOOP_X s dissolve into that opening frame, so the
+    // autoplay restart is seamless (the script's last line runs into the hook; clip.loop === false turns it off)
+    const first = fulls[0] && fulls[0].t0 <= 0.01 ? fulls[0] : null;
+    const loopK = (t) => (first && S.clip.loop !== false ? smooth((t - (S.clip.duration - LOOP_X)) / LOOP_X) : 0);
     S.layers.skipBackground = (t) => { const m = sceneMix(t); return !!m.cur && (m.k >= 1 || !!m.prev); };
     S.layers.mid = (ctx2, S2, t, cover) => {
       const m = sceneMix(t);
@@ -838,6 +855,7 @@
         if (m.k < 1 && m.prev) blitScene(ctx2, m.prev, t, 1);
         else if (m.k < 1) ctx2.drawImage(dimmer, 0, 0); // fading in over the card-mode background
         blitScene(ctx2, m.cur, t, m.k);
+        if (!cover && m.cur !== first) blitScene(ctx2, first, t, loopK(t), 0);
         ctx2.globalAlpha = m.prev ? 1 : m.k; ctx2.drawImage(scrim, 0, 0); ctx2.globalAlpha = 1;
         if (m.cur.chip && !cover) { ctx2.save(); ctx2.globalAlpha = m.k; drawLabel(ctx2, S2, m.cur); ctx2.restore(); }
         return;
@@ -861,6 +879,8 @@
         if (b.chip) { ctx2.save(); ctx2.globalAlpha = an.alpha; drawLabel(ctx2, S2, b); ctx2.restore(); }
       }
       if (m.out) { blitScene(ctx2, m.out, t, m.k); ctx2.globalAlpha = m.k; ctx2.drawImage(scrim, 0, 0); ctx2.globalAlpha = 1; }
+      const lk = cover ? 0 : loopK(t);
+      if (lk > 0.003) { blitScene(ctx2, first, t, lk, 0); ctx2.globalAlpha = lk; ctx2.drawImage(scrim, 0, 0); ctx2.globalAlpha = 1; }
     };
   }
 

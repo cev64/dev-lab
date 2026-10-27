@@ -25,6 +25,8 @@ Charlie posts three a day (morning, midday, evening), so each night delivers **3
    PR (they are code), so the library grows every night.
 
 ## 1. Pick the story (10 min)
+First read `ops/PERFORMANCE.md`: once Charlie has logged numbers, prefer the kinds of story, hooks and formats with
+the best average watch time and shares, and note in the delivery what you changed because of them.
 ```
 cd engine && python -m clipper news --days 3 && cd ..     # -> work/news.json, top 15 printed
 ```
@@ -73,15 +75,33 @@ lengthens the pauses your punctuation asks for, so the script *is* the cadence. 
   whole beat: ~1.03 for the hook, ~0.96 for the quote, caveat and payoff.
 - Beat 1 hook: one breath, <= 9 words, no stop or question inside it, so it lands in about 3 s.
 
+**Format v2 (owner decision 2026-10-27; videos stay >= 62 s; audio stays voice only: Charlie adds a trending
+TikTok sound when he posts, so no music or sound effects).** Three things every explainer now does:
+1. **Cold open.** Beat 1 is a full-frame `scene` that shows the story's most dramatic moment already in motion at
+   frame 0 (the robot sliding the file into the mail slot and the BLOCKED stamp landing; the S-1 hitting the desk;
+   the proof checker's green tick). No establishing shot, no title card: there is no big hook card any more (only
+   the small header, which pops in at t = 0; the cover image still shows the big hook). The hook line says the
+   stakes in viewer terms, and the rest of the video goes back and explains ("Here's what happened."). Usually the
+   same scene module as the climax beat later, with its cues set so the action peaks inside the first ~2.5 s.
+   `explainer` refuses a script whose beat 1 is not a full scene.
+2. **Token's take.** The robot mascot is called **Token**. The last beat is always `scenes/token-take.js`: the
+   narrator says "Token's take:" and one short opinion line (<= 14 words) that is clearly a take, not a fact: no new
+   claims, no advice (financial, medical, legal), no accusations; e.g. "Token's take: a sandbox is only as good as
+   the person who checks it." Then the comment question (shown on the card with two chips).
+3. **Loop.** The video's last frames dissolve back into the cold open, so write the last words to run into the
+   hook: the final sentence is the question, then a 2-5 word lead-in that the hook completes when the video
+   restarts ("...Would you run a model you didn't build? Because this week," -> "An AI model tried to phone home").
+   Read last line + hook aloud as one sentence; it must make sense.
+
 | Beat | Job | Words | Visual |
 |---|---|---|---|
-| 1 | Hook, spoken in <= 3 s | 6-9 | title / keyword |
-| 2 | What happened: who, what, when, per whom | 28-32 | title / list |
-| 3 | The number | 22-26 | stat |
-| 4 | Context or comparison | 28-32 | compare / timeline |
-| 5 | Why a normal person cares | 28-32 | list / keyword |
-| 6 | The caveat: unknown or disputed, hedged | 18-22 | quote / list |
-| 7 | Payoff that echoes the hook + one question | 14-18 | keyword |
+| 1 | Cold open: hook spoken in <= 3 s over the story's peak moment | 6-9 | scene (the action) |
+| 2 | What happened: who, what, when, per whom | 28-32 | scene |
+| 3 | The number | 22-26 | stat or scene |
+| 4 | Context or comparison | 28-32 | scene / compare / timeline |
+| 5 | Why a normal person cares | 28-32 | scene |
+| 6 | The caveat: unknown or disputed, hedged | 18-22 | scene / quote |
+| 7 | Token's take + the question + the loop lead-in | 22-30 | scene: token-take.js |
 
 Write for the ear: short sentences, concrete nouns, no jargon without a gloss, numbers said the way people say them
 ("two million", not "2,000,000"; the card shows the digits). Hook formulas that fit: number shock, reversal ("said it
@@ -91,7 +111,8 @@ would never... this week it did"), your-job stake, counter-intuitive, two-sided.
 and objects acting out the story in a setting (a person on a sofa typing at a chatbot, the AI ending the chat, a
 company's rulebook being rewritten, a robot at a desk doing someone's job, money flowing between buildings). At least
 70% of the runtime is full-frame `scene` beats; animated data cards (stat, compare, timeline...) are support, max 1-2
-beats, used only when a number or sequence is the point. Write the scenes for THIS story: use the kit's characters,
+beats, used only when a number or sequence is the point. Write the scenes for THIS story (the template zooms every full scene in ~1.10-1.15x around the stage, with a slow
+push-in, so keep action and text inside `info.stage` and it will fill the phone screen): use the kit's characters,
 objects and `world` settings, sync key actions to the narration with `info.wordAt(t)`, and let one scene run across
 several beats when the story continues in the same place (`span`). Reuse/adapt modules in
 engine/render/templates/ai-explainer/scenes/ when they fit; save good new ones there for future nights. Plan it like a
@@ -130,7 +151,8 @@ If `voice` says the narration is too short or long, edit the words (not the TTS 
 Dump stills mid-beat for every beat (`node engine/render/render.mjs --clip <clip.json> --out /tmp/qa.mp4
 --frames-only ...`) and look at them: every card legible and inside x 60-915, y 150-1540; captions match the script;
 "AI narrator" credit visible; every beat animated (no static card held for > 4 s without motion); cartoon
-characters clearly stylised and never resembling a real person. ffprobe: 1080x1920, 30 fps, 62-80 s. Loudness about -14 LUFS. Re-read the claim table one
+characters clearly stylised and never resembling a real person; frame 0 already shows the action (cold open);
+the last second dissolves back to the opening; Token's take card is legible. ffprobe: 1080x1920, 30 fps, 62-80 s. Loudness about -14 LUFS. Re-read the claim table one
 last time against the final script.
 
 ## 6. Deliver
