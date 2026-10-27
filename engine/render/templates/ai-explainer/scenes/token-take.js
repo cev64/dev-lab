@@ -49,13 +49,13 @@ export default function draw(ctx, t, info) {
     ctx.fillText(`${name.toUpperCase()}'S TAKE`, X0 + PAD + 24, Y0 + PAD + 20);
     ctx.letterSpacing = '0px';
     // body: types in, whole words
-    const shown = K.typewriter(take, t, 26, tTake + 0.35).length;
+    const shown = K.typewriter(take, t, 34, tTake + 0.3).length;
     ctx.font = H.font('display', bodySize); ctx.fillStyle = '#141829'; ctx.textBaseline = 'alphabetic';
     let used = 0;
     lines.forEach((ln, i) => {
       const n = clamp(shown - used, 0, ln.length); used += ln.length + 1;
       let txt = ln.slice(0, n); const sp = txt.lastIndexOf(' ');
-      if (n < ln.length && sp > 0) txt = txt.slice(0, sp);
+      if (n < ln.length) txt = sp > 0 ? txt.slice(0, sp) : ''; // whole words only
       if (txt) ctx.fillText(txt, X0 + PAD, Y0 + PAD + 34 + 22 + bodySize * 0.95 + i * bodySize * 1.18);
     });
     ctx.restore();
