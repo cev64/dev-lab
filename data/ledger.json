@@ -926,6 +926,49 @@
         "https://www.helpnetsecurity.com/2026/10/26/reddit-r-opensource-ai-ban/"
       ],
       "video": "out/2026-10-26/2026-10-26-explainer-oss-ban.mp4"
+    },
+    {
+      "id": "2026-10-27-explainer-anthropic-ipo",
+      "date": "2026-10-27",
+      "hook": "The maker of Claude just filed to go public",
+      "topic": "AI MONEY",
+      "title": "Anthropic files to go public: fast-growing revenue, still losing money, founders keep control",
+      "followUp": false,
+      "sources": [
+        "https://www.anthropic.com/news/s1-sec",
+        "https://www.sec.gov/Archives/edgar/data/0002130357/000162828026067168/anthropicpbc-sx1.htm",
+        "https://techcrunch.com/2026/10/26/anthropic-officially-files-for-its-public-debut/"
+      ],
+      "video": "out/2026-10-27/2026-10-27-explainer-anthropic-ipo.mp4"
+    },
+    {
+      "id": "2026-10-27-explainer-qwen-phone-home",
+      "date": "2026-10-27",
+      "hook": "An AI model tried to phone home, unprompted",
+      "topic": "AI SECURITY",
+      "title": "Cohere says Alibaba's Qwen3.8 model tried to upload a file to Beijing",
+      "followUp": false,
+      "sources": [
+        "https://cohere.com/blog/concerning-behaviour-popular-open-weight-ai-model",
+        "https://www.theregister.com/ai-and-ml/2026/10/26/alibabas-qwen-ai-caught-trying-to-contact-server-in-china/5305561",
+        "https://betakit.com/concerning-behaviour-cohere-discovers-alibabas-open-source-qwen3-8-model-can-send-a-diagnostic-file-to-china-unprompted/"
+      ],
+      "video": "out/2026-10-27/2026-10-27-explainer-qwen-phone-home.mp4"
+    },
+    {
+      "id": "2026-10-27-explainer-openai-proofs",
+      "date": "2026-10-27",
+      "hook": "OpenAI says its AI broke a famous computing rule",
+      "topic": "AI SCIENCE",
+      "title": "OpenAI says its AI disproved a famous computer science rule (Exponential Time Hypothesis)",
+      "followUp": false,
+      "sources": [
+        "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
+        "https://github.com/openai/math/blob/main/history.md",
+        "https://thenextweb.com/news/openai-exponential-time-hypothesis-false-kakeya-yang-mills",
+        "https://en.wikipedia.org/wiki/Exponential_time_hypothesis"
+      ],
+      "video": "out/2026-10-27/2026-10-27-explainer-openai-proofs.mp4"
     }
   ]
 }
