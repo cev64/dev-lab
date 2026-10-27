@@ -598,6 +598,12 @@
   function drawHook(ctx, S, t) {
     const T0 = LAYOUT.hookSec, M = LAYOUT.hookMorph;
     if (!S.hook) { blit(ctx, S.dockSprite, 1, 1, 0); return; }
+    if (S.hookMode === 'dock') {
+      // cold open (ai-explainer): no big card over the action; the header pops in at t = 0 and stays
+      const sp = Math.min(1.08, spring(t, 15, 17));
+      blit(ctx, S.dockSprite, clamp(t / 0.12), 0.9 + 0.1 * sp, (1 - Math.min(1, sp)) * -14);
+      return;
+    }
     if (t < T0) { blit(ctx, S.cardSprite, 1, 1, 0); return; }
     const p = (t - T0) / M;
     if (p < 1) {
@@ -808,9 +814,10 @@
   // opts (all optional; ai-shorts passes none): { setup(S, ctx) -> called after the core layouts are built,
   // may set S.layers = { mid(ctx, S, t, cover), creditGlyph(ctx, S, x, y, size, color, t),
   // skipBackground(t, cover) -> true when mid paints the whole frame } and S.info;
-  // sample: preview fixture path }
+  // sample: preview fixture path; layout: LAYOUT overrides; hookMode: 'card' (default) | 'dock' }
   async function boot(opts = {}) {
     try {
+      if (opts.layout) Object.assign(LAYOUT, opts.layout); // per-template layout overrides (e.g. ai-explainer captions)
       let clip = window.__CLIP__;
       const preview = !clip;
       if (!clip) clip = await (await fetch(opts.sample || '../../sample/clip.json')).json(); // open index.html?preview in a browser
@@ -836,6 +843,7 @@
       const typeKey = style.caption || 'montserrat';
       const S = {
         W, H, SAFE, LAYOUT, clip, seed, pal, style: style.name,
+        hookMode: clip.hookMode || opts.hookMode || 'card', // 'card': big hook card for ~3 s, then docks; 'dock': header only (cold open)
         rng: mulberry32(seed ^ hashStr(style.name)),
         A: makeAudio(clip.envelope, clip.fps, clip.duration),
         type: {

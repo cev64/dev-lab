@@ -19,6 +19,10 @@ from .common import FPS, Paths, log, read_json, today_et, write_json
 from .make import STYLES, render_clip, theme_seed
 from .voice import clean_say
 
+FORMAT = "v2"  # explainer format version, logged in the ledger + delivery note so ops/PERFORMANCE.md can compare
+# v1: hook card over the opening. v2 (2026-10-27): cold open on the action, zoomed-in scenes, Token's take sign-off,
+# loop ending. Audio stays voice only (owner: he adds a trending TikTok sound under it when posting).
+TAKE_SCENE = "token-take.js"
 REPEAT_DAYS = 7  # no-repeat window for stories (skill section 1); a script with "followUp": true may revisit one
 MIN_NARRATION = 58.0  # contract floor; the skill asks for >= 62 s so TikTok's one-minute rule is met
 
@@ -37,6 +41,13 @@ def load_script(path: Path) -> dict:
     for i, b in enumerate(script["beats"]):
         if not b.get("say") or not (b.get("visual") or {}).get("type"):
             raise ValueError(f"beat {i} needs 'say' and 'visual.type'")
+    v0 = script["beats"][0]["visual"]
+    if v0.get("type") != "scene" or v0.get("layout") == "band":
+        raise ValueError("beat 1 must be a full-frame scene: the cold open shows the story's most dramatic moment "
+                         "in motion (skill section 3, 'Cold open')")
+    if not str(script["beats"][-1]["visual"].get("module", "")).endswith(TAKE_SCENE):
+        log(f"explainer: WARNING the last beat is not Token's take (scenes/{TAKE_SCENE}); the skill's v2 format "
+            "ends every explainer with it")
     return script
 
 
@@ -151,6 +162,7 @@ def build_clip(script: dict, voice: dict, vdir: Path, date: str, broll_dir: Path
     clip = {
         "id": script["id"],
         "template": "ai-explainer",
+        "format": FORMAT,
         "fps": FPS,
         "duration": round(duration, 2),
         "audio": str(wav.resolve()),
@@ -164,6 +176,9 @@ def build_clip(script: dict, voice: dict, vdir: Path, date: str, broll_dir: Path
         "beats": beats,
         "source": {"kind": "explainer", "date": date, "sources": script["sources"]},
     }
+    for k in ("loop", "camera"):  # both on by default (template); a script may set false
+        if script.get(k) is False:
+            clip[k] = False
     if background:
         clip["background"] = background
     return clip
@@ -218,7 +233,8 @@ def delivery_block(script: dict, clip: dict, video_rel: str | None, stock_credit
         "",
         f"**Hook:** {script['hook']}  ",
         f"**Video:** `{video_rel}` ({clip['duration']:.1f} s)  " if video_rel else "**Video:** not rendered  ",
-        f"**Cover text:** {kit['cover']}",
+        f"**Cover text:** {kit['cover']}  ",
+        f"**Format:** {FORMAT} (log it in ops/PERFORMANCE.md with the numbers)",
         "",
         "Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info;"
         " YouTube: Altered or synthetic content = Yes). After posting: post the pinned comment"
@@ -306,6 +322,7 @@ def explainer(paths: Paths, script_path: Path, date: str | None = None, render: 
         if not any(e["id"] == eid for e in exp):
             exp.append({"id": eid, "date": date, "hook": script["hook"], "topic": script.get("topic", ""),
                         "title": script["post"].get("title", ""), "followUp": bool(script.get("followUp")),
+                        "format": FORMAT,
                         "sources": [s.get("url", "") for s in script["sources"]], "video": video_rel})
             ledger.save(paths.ledger, data)
     return {"id": eid, "video": video_rel, "duration": clip["duration"]}

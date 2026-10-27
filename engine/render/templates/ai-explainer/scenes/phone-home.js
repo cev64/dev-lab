@@ -20,12 +20,16 @@
 //          params: rateHead, rate, rateTo, rateSub, why, intent, company, reply; cues: rateCue, whyCue, intentCue, replyCue
 //   payoff (1 beat) a shutter + padlock close the slot (advice pill), then a question card with two chips.
 //          params: advice, question, a, b; cues: cutCue, qCue
+// Any cue may also be a number (seconds into the scene, negative = before it starts): a cold open can run slip with
+// e.g. ignoreCue -5, checkCue -4, uploadCue -0.6, serverCue 0, placeCue 1, catchCue 1.9, stampCue 2.4, thoughtCue 99.
 export default function draw(ctx, t, info) {
   const H = info.helpers, K = H.kit, P = info.params || {};
   const { clamp, lerp, easeOutCubic, easeInOutCubic } = H;
   const D = info.duration, ACC = info.accent, N = K.NEUTRAL;
   const mode = P.mode || 'lab';
-  const at = (w, d) => { const v = w ? info.timeOf(w) : null; return v == null ? d : v; };
+  // a cue is a narrated word, or a number = seconds into the scene (may be negative: "already happened"; used for
+  // a 3 s cold open that starts mid-action)
+  const at = (w, d) => { if (typeof w === 'number') return w; const v = w ? info.timeOf(w) : null; return v == null ? d : v; };
   const B1 = info.beats && info.beats[1] ? info.beats[1].t0 : D * 0.5;
 
   const feet = 1010, gx0 = 110, gx1 = 590, gy0 = 600;
@@ -265,7 +269,7 @@ export default function draw(ctx, t, info) {
     checks.forEach((c, i) => pill(c, 240, 700 + i * 62, tChk + 0.35 + i * 0.45, tUp + 0.2, { size: 24 }));
     // labels
     pill(P.box || 'TEST SANDBOX', 250, 655, 0, tChk - 0.1, { size: 22 });
-    UI(() => pill(P.server || 'A remote server', 487, 500, tSrv, tThink - 0.3, { size: 32 }));
+    UI(() => pill(P.server || 'A remote server', 487, 500, tSrv, Math.min(tThink, tCatch) - 0.3, { size: 32 })); // gone before "No way out" takes its place
     if (t >= tPlace) K.drawLabel(ctx, GL.x, GL.y - 120 * GL.s * 1.0 - 8, K.popIn(t, tPlace, 0.4), { text: P.place || 'Far away', size: 26, accent: !caught });
     // thought bubble: what its reasoning said
     if (t >= tThink - 0.1 && t < tCatch + 0.2) {

@@ -122,7 +122,9 @@ or top level: `"scenes": [{ "module": "...", "t0": 14.0, "t1": 26.0, "params": {
   855x480 canvas inside the beat card (like the other card types).
 - `span: n` on a beat makes one continuous scene over that beat and the next n-1 (their visuals are ignored).
 - Full scenes crossfade (350 ms) with the previous scene or card mode, and a scrim is added over the dock and
-  caption band. The hook card covers y ~330-790 for the first ~3 s, so start the first scene with an establishing shot.
+  caption band. Explainers have no big hook card (format v2): beat 1 is a cold open, so the first scene must show
+  its action from frame 0. The template draws every full scene zoomed 1.10 -> 1.15x around (487, 500) (`clip.camera`
+  false = off) and dissolves the last 0.4 s back into the opening scene (`clip.loop` false = off).
 - **Stage** (full layout): paint the whole frame (use a `world`), but keep the action and any text inside
   x 60-915, y 400-1050 (`info.stage`): the docked header sits at y 206-~420, captions at 1050-1350, credit/progress
   to 1540. Characters' feet around y 1000-1040.
@@ -435,10 +437,15 @@ Companies going public / AI math proofs / AI models phoning home (defaults are g
 - `two-slopes.js` (growth rates as two hills at dusk: a hiker struggles up an exponential cliff, the robot walks up a gentler hill; "still climbs... just not exponentially" tags and a "Not X" chip) params: claim, steep, gentle, still, notExp, notChip, gentleCue, notCue
 - `paper-tower.js` (night library: three paper stacks on one foundation block labelled `base`, count pill + field tags; the block cracks, stacks wobble, pages flutter, a researcher looks up, closing pill) params: base, count, fields [3], change, countCue, crackCue
 - `proof-review.js` (2-beat span, dusk review room: a proof on an easel with a machine CHECKED stamp, "expert review under way" pill, three generic cartoon experts sweep magnifying glasses, "not an endorsement" pill; beat 2: a trophy floats between robot and experts, "no credit wanted" pill, question card) params: doc, stamp, lean, review, panel, notEndorse, credit, question, panelCue, notCue, creditCue, qCue
-- `phone-home.js` (a night test lab: the robot in a glass sandbox with a mail slot, an inspector with a clipboard outside, a globe with a destination pin; modes lab (2-beat span: the envelope sneaks to the slot then REWIND; tester pill, model tag, LOCKED SANDBOX + padlock, task card), slip (2-beat span: task card falls, the robot scans the machine (check chips), slides a TEST FILE envelope into the slot as an arc draws to the globe (server + place pills); its reasoning bubble; siren, a net catches it, the arc snaps, BLOCKED stamp), caveat (rate panel "1 in N", why / deliberate pills, company card with reply), payoff (shutter + padlock close the slot with an advice pill, question card with two chips)) params: mode, tester, model, box, taskHead, task, rewind, checks, envelope, server, place, thoughtTag, thought, wayOut, stamp, rateHead, rate, rateTo, rateSub, why, intent, company, reply, advice, question, a, b; cues per mode: testerCue, modelCue, boxCue, taskCue / ignoreCue, checkCue, uploadCue, serverCue, placeCue, thoughtCue, catchCue, stampCue / rateCue, whyCue, intentCue, replyCue / cutCue, qCue
+- `phone-home.js` (a night test lab: the robot in a glass sandbox with a mail slot, an inspector with a clipboard outside, a globe with a destination pin; modes lab (2-beat span: the envelope sneaks to the slot then REWIND; tester pill, model tag, LOCKED SANDBOX + padlock, task card), slip (2-beat span: task card falls, the robot scans the machine (check chips), slides a TEST FILE envelope into the slot as an arc draws to the globe (server + place pills); its reasoning bubble; siren, a net catches it, the arc snaps, BLOCKED stamp), caveat (rate panel "1 in N", why / deliberate pills, company card with reply), payoff (shutter + padlock close the slot with an advice pill, question card with two chips)) params: mode, tester, model, box, taskHead, task, rewind, checks, envelope, server, place, thoughtTag, thought, wayOut, stamp, rateHead, rate, rateTo, rateSub, why, intent, company, reply, advice, question, a, b; cues per mode: testerCue, modelCue, boxCue, taskCue / ignoreCue, checkCue, uploadCue, serverCue, placeCue, thoughtCue, catchCue, stampCue / rateCue, whyCue, intentCue, replyCue / cutCue, qCue. A cue may also be a number of seconds (negative = already happened before the scene starts), so a ~3 s cold-open slip beat can open mid-upload: ignoreCue -6, checkCue -5, uploadCue -0.5, serverCue 0.1, placeCue 1.2
 - `home-model.js` (why self-hosting an open model is meant to be private: a company building with a cut-away server-rack inset under a dashed dome that bounces data packets back; then a person at a laptop whose envelope flies out of the window to a globe pin, unnoticed) params: own, idea, what, envelope, place, noticed, ownCue, ideaCue, switchCue, switchLead (seconds before switchCue), sendCue, landCue, noticeCue
 
 Scenes with 3+ beats (`span`) use the beat boundaries as their phases; otherwise fractions of the duration.
+
+Sign-off (every explainer's last beat since 2026-10-27):
+- `token-take.js` (the mascot robot, Token, in its night studio with a name tag; a "TOKEN'S TAKE" card types the
+  verdict while it talks, then gives way to a question card with two answer chips; ends settled for the loop)
+  params: name ("Token"), take, question, a, b, takeCue, qCue
 
 ## Adding a style
 1. Create `templates/ai-shorts/styles/<name>.js`:

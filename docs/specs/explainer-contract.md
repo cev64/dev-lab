@@ -54,6 +54,10 @@ out/YYYY-MM-DD/<id>.drive.json       {title, text}: the Google Doc filed in Char
   }
 }
 ```
+- Format v2 (2026-10-27): beat 1 is a full-frame scene (cold open; `explainer` refuses anything else); the last beat
+  is `scenes/token-take.js` (Token's take + question); the last line runs into the hook (loop). Optional script keys:
+  `"loop"` / `"camera"` (default true; false turns the loop dissolve / the scene zoom off). Audio is the narration
+  only (Charlie adds a trending TikTok sound when posting).
 - 5-8 beats, ~150-180 words total (Kokoro am_michael at speed 1.0 with phrase pauses, measured 2026-10-26: 168 words
   gave 69-71 s; seconds ~= words / 2.45 + 3.2, so this gives ~62-76 s).
 - Cadence (optional, see the skill's "Write for the voice"): a beat may set `"pace"` (0.85-1.15, default 1.0), and
@@ -82,6 +86,9 @@ Same as the clip contract (`audio`, `duration`, `words`, `envelope`, `hook`, `to
 - `credit` is empty: owner decision, nothing at the bottom of explainers (no credit line, no progress bar). The
   "AI narrator" disclosure lives in the post caption and the platform's AI-generated label.
 - Disclosure: "AI narrator" in the post caption + Charlie switches on the platform's AI-generated label when posting.
-- Layout: hook card -> docked header (same as clips); scenes are full-frame with the action in the stage area
+- Layout (v2): no big hook card in the video (the header pops in at t = 0; the cover still uses the big card);
+  captions centred at y 1265; full scenes are drawn zoomed 1.10 -> 1.15x around (487, 500), so the stage
+  (x 60-915, y 400-1050) fills about x 0-980, y 388-1130; the last 0.4 s dissolve into the opening scene.
+- Layout (v1, still the clips' layout): hook card -> docked header (same as clips); scenes are full-frame with the action in the stage area
   (x 60-915, y 400-1050); data cards sit in the middle band (y ~ 520-1000); captions y 1050-1350; nothing below the
   captions. Safe box x 60-915, y 150-1540.

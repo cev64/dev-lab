@@ -16,6 +16,9 @@
 <script src="../ai-shorts/styles/orb.js"></script>
 <script src="kit.js"></script>
 <script src="beats.js"></script>
-<script>CLIPKIT.boot({ setup: EXPLAINER.setup, sample: '../../sample/explainer-clip.json' });</script>
+<!-- Explainers open cold on the action: no big hook card over the stage (hookMode 'dock'; the cover still shows
+     the card), and the captions sit a little lower to leave room for the bigger, zoomed-in scene. -->
+<script>CLIPKIT.boot({ setup: EXPLAINER.setup, sample: '../../sample/explainer-clip.json',
+  hookMode: 'dock', layout: { captionY: 1265 } });</script>
 </body>
 </html>
