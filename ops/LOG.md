@@ -36,6 +36,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Timings: setup ~5 min (fresh venv), news 6 s, producers 13-14 min in parallel; no lead re-renders.
   Problems: publish-videos.sh pushed videos/2026-10-27 but the prune step again got HTTP 403 deleting old videos/*
   branches. Verge, CNET, Reuters, BBC, WIRED, openai.com unfetchable here; sources limited to reachable outlets.
+  Improve: PR #31 merged: 11 of tonight's scenes promoted (library 158 -> 169: ipo-filing, loss-meter, founder-keys,
+  risk-bell, proof-chalkboard, switch-explosion, two-slopes, paper-tower, proof-review, phone-home (4 modes), home-model);
+  defaults made generic; 66/66 frames + covers byte-identical from library copies; default stills reviewed.
 - 2026-10-26 (nightly run, Monday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "AI's payoff outside tech: zero." (Apollo chief economist Torsten Slok's Oct 24 Daily Spark note: for the S&P 493
      (S&P 500 minus 7 tech giants) revenue per worker and margins flat while rising for the 7; no sign of AI boosting
