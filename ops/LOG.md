@@ -13,8 +13,8 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
      day without routine human supervision; contracts/property/sue; any lawful purpose except banking; 30-month sandbox;
      ~2/3 of Fortune 500 incorporated in Delaware; adequately capitalized single owner generally not liable, fraud
      exception; Rep. Comer's Oct 26 letter: "reckless harmful actions" (verbatim, House Oversight release + Ars); still a
-     draft; sources: draft bill PDF, Fortune op-ed, Ars, House Oversight, Bloomberg Law, Route Fifty, PYMNTS). Rubric ~76
-     (18/15/14/8/18/3... controversy policy-level 8 -> ~78). 71.1 s, -14.7 LUFS, style flow, 100% scenes (new 6-mode module
+     draft; sources: draft bill PDF, Fortune op-ed, Ars, House Oversight, Bloomberg Law, Route Fifty, PYMNTS). Rubric ~78
+     (18/15/14/8/18/5). 71.1 s, -14.7 LUFS, style flow, 100% scenes (new 6-mode module
      ai-company). Comer never drawn; no legal advice.
   3. "Give AI your bank login, it's on you." (Bank of America email: don't share login "including an AI-enabled tool or
      agent..."; "you're responsible for activity resulting from that access"; Axios Oct 22: outside agents in customer
