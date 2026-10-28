@@ -2,6 +2,41 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-28 (nightly run, Wednesday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "You type a sentence, then walk around inside it." (Google DeepMind Genie 4 world model: builds the world frame by
+     frame as you walk; edit mid-walk (rain, add a person); natural-moving people that talk back; first Genie with native
+     audio; Gemini checks each frame; pitched to filmmakers, game makers, robot training; holds ~2 min then drifts;
+     trusted testers now, Google AI Ultra "soon"; sources: DeepMind blog, The Verge, Ars Technica). Rubric ~72 (fresh 20,
+     stakes 9, surprise 12, visual 10, verif 18, controversy 3). 66.8 s, -14.6 LUFS, style orb, 100% scenes (new 6-mode
+     module genie-world). Cut single-source: $100/mo Ultra price, Genie 3 one-minute comparison.
+  2. "An AI could soon run an entire company." (Delaware Secretary of State's draft "AI company": AI agent manages day to
+     day without routine human supervision; contracts/property/sue; any lawful purpose except banking; 30-month sandbox;
+     ~2/3 of Fortune 500 incorporated in Delaware; adequately capitalized single owner generally not liable, fraud
+     exception; Rep. Comer's Oct 26 letter: "reckless harmful actions" (verbatim, House Oversight release + Ars); still a
+     draft; sources: draft bill PDF, Fortune op-ed, Ars, House Oversight, Bloomberg Law, Route Fifty, PYMNTS). Rubric ~76
+     (18/15/14/8/18/3... controversy policy-level 8 -> ~78). 71.1 s, -14.7 LUFS, style flow, 100% scenes (new 6-mode module
+     ai-company). Comer never drawn; no legal advice.
+  3. "Give AI your bank login, it's on you." (Bank of America email: don't share login "including an AI-enabled tool or
+     agent..."; "you're responsible for activity resulting from that access"; Axios Oct 22: outside agents in customer
+     accounts at big US banks; Citi blocks agents beyond some read-only access; JPMorgan + BofA restricting; no confirmed
+     losses, unnamed sources, Morgan Stanley hasn't seen rogue agents; sources: TechCrunch, Seoul Economic Daily, Axios
+     (via Decrypt/Crypto Briefing; axios.com 403), Banking Dive, IBTimes UK). Rubric ~80 (20/18/12/8/15/7). 68.2 s,
+     -14.6 LUFS, style horizon, 100% scenes (new 4-mode module login-handover + library bank-vault, fine-print).
+     Lead fix: cut "The bank confirmed the email is real" (TechCrunch only) and its on-screen pill; re-voiced and
+     re-rendered (71.0 -> 68.2 s). No bank logos; no financial advice.
+  Lead review: all claims traced to claim tables; stills reviewed (clean, inside safe area, frame 0 in action, loop
+  dissolve present). Nits: Delaware "US House" pill (letter was from the Oversight chair); token-take card sits near the
+  left edge of the safe area (library module, every video).
+  Picks note: skipped parents' lawsuit vs OpenAI over seizure medication (TechCrunch only, allegations + medical, child
+  death), Anthropic S-1 risk factors/TAM (covered yesterday), AMD $1B into Meta (finance inside baseball), Fujifilm tape
+  (sources-say rumour), OpenAI buying Google chips (The Information via Reuters, single report), Apple iWork assistant
+  (rollout unclear, pulled update), UK judge on AI courts (WIRED only).
+  Drive: connector available; folder checked (no 2026-10-28 titles); 3 Google Docs filed; Genie doc read back complete
+  with "(end)".
+  Timings: setup ~5 min, news 5 s, producers 12-16 min in parallel; one lead-requested re-render (bank, ~3 min).
+  Problems: publish-videos.sh first run hit push-negotiation errors; second run pushed videos/2026-10-28; prune of old
+  videos/* branches still HTTP 403. Producers shared one scratchpad qa/ folder at first (now per-explainer folders;
+  brief should say so). Axios, Verge (WebFetch), Ars (WebFetch; curl works) unfetchable here.
 - 2026-10-27 (nightly run, Tuesday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "OpenAI says its AI broke a famous computing rule." (OpenAI Oct 26: internal model disproved the Exponential Time
      Hypothesis (3-SAT in subexponential time, not P=NP); found Oct 16, checked in Lean Oct 17; papers + Lean on GitHub

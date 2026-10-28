@@ -969,6 +969,59 @@
         "https://en.wikipedia.org/wiki/Exponential_time_hypothesis"
       ],
       "video": "out/2026-10-27/2026-10-27-explainer-openai-proofs.mp4"
+    },
+    {
+      "id": "2026-10-28-explainer-bank-agents",
+      "date": "2026-10-28",
+      "hook": "Give AI your bank login, it's on you",
+      "topic": "AI AGENTS",
+      "title": "Bank of America: don't give your banking password to an AI agent, or you're responsible",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://techcrunch.com/2026/10/27/bank-of-america-kindly-asks-that-you-dont-share-your-banking-password-with-your-ai-assistant/",
+        "https://en.sedaily.com/international/2026/10/28/us-banks-warn-customers-against-sharing-passwords-with-ai",
+        "https://www.axios.com/2026/10/22/ai-agents-banks-unauthorized-accounts-access",
+        "https://decrypt.co/381602/banks-rogue-ai-agents-inside-customer-accounts",
+        "https://www.bankingdive.com/news/citi-takes-cautious-approach-ai-agent-access/833849/",
+        "https://www.ibtimes.co.uk/us-banks-restrict-third-party-ai-agents-1827385"
+      ],
+      "video": "out/2026-10-28/2026-10-28-explainer-bank-agents.mp4"
+    },
+    {
+      "id": "2026-10-28-explainer-ai-run-company",
+      "date": "2026-10-28",
+      "hook": "An AI could soon run an entire company",
+      "topic": "AI COMPANIES",
+      "title": "Delaware's draft plan would let an AI agent run a company",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://arstechnica.com/tech-policy/2026/10/no-human-at-the-helm-delaware-plan-would-let-ai-agents-run-entire-businesses/",
+        "https://oversight.house.gov/release/comer-investigates-potential-for-harm-lack-of-transparency-in-delaware-initiative-to-create-new-artificial-intelligence-companies/",
+        "https://fortune.com/2026/07/14/exclusive-delaware-ai-agents-legal-entity-proposal-llc-pbc/",
+        "https://cdn.arstechnica.net/wp-content/uploads/2026/10/HB-re-Artificial-Intelligence-Regulatory-Sandbox-Company-1.pdf",
+        "https://news.bloomberglaw.com/esg/ai-run-companies-are-coming-delaware-wants-to-get-ahead-of-them",
+        "https://www.route-fifty.com/artificial-intelligence/2026/09/delawares-proposed-ai-company-bill-needs-clearer-accountability-frameworks-experts-say/416210/",
+        "https://www.pymnts.com/news/artificial-intelligence/2026/delaware-ai-company-plan-draws-questions-over-who-is-accountable/",
+        "https://www.pymnts.com/news/artificial-intelligence/2026/rogue-agent-incidents-add-new-wrinkle-delaware-plan-ai-run-companies/"
+      ],
+      "video": "out/2026-10-28/2026-10-28-explainer-ai-run-company.mp4"
+    },
+    {
+      "id": "2026-10-28-explainer-genie-worlds",
+      "date": "2026-10-28",
+      "hook": "You type a sentence, then walk around inside it",
+      "topic": "WORLD MODELS",
+      "title": "Google DeepMind's Genie 4 builds a world you can walk around in, from a sentence",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation",
+        "https://www.theverge.com/tech/1019076/google-genie-4-ai-model",
+        "https://arstechnica.com/google/2026/10/deepminds-genie-4-world-model-adds-audio-and-more-realistic-people-to-simulations/"
+      ],
+      "video": "out/2026-10-28/2026-10-28-explainer-genie-worlds.mp4"
     }
   ]
 }
