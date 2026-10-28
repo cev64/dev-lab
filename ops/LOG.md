@@ -37,6 +37,8 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Problems: publish-videos.sh first run hit push-negotiation errors; second run pushed videos/2026-10-28; prune of old
   videos/* branches still HTTP 403. Producers shared one scratchpad qa/ folder at first (now per-explainer folders;
   brief should say so). Axios, Verge (WebFetch), Ars (WebFetch; curl works) unfetchable here.
+  Improve: PR #33 merged: 3 scenes promoted (library 170 -> 173: genie-world (6 modes), ai-company (6 modes, story text
+  and cues now params), login-handover (4 modes)); 67/67 stills + covers byte-identical from library copies; defaults reviewed.
 - 2026-10-27 (nightly run, Tuesday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "OpenAI says its AI broke a famous computing rule." (OpenAI Oct 26: internal model disproved the Exponential Time
      Hypothesis (3-SAT in subexponential time, not P=NP); found Oct 16, checked in Lean Oct 17; papers + Lean on GitHub
