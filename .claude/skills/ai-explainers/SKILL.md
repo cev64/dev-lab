@@ -126,6 +126,9 @@ stylised cartoon characters only — never a real or recognisable person, never 
 
 **Post kit** (`post` in script.json; the `explainer` command turns it into paste-ready blocks in the delivery note):
 - `cover`: <= 7 words for the cover/title text, usually the hook.
+- Thumbnail (script `thumbnail.highlight`, optional): the render writes `<id>.thumbnail.png`, the big title card as a
+  picture for the post's cover (v2 videos open on the action, so no frame of the video works as a cover). Set
+  `highlight` to the 1-3 hook words that carry the punch ("inside it", "it's on you"); they show in the accent.
 - `tiktok`: line 1 is the hook as a searchable sentence with the names people type into TikTok search (company,
   product, topic) + one emoji; then 1-2 sentences of what happened; last line one easy question + 👇.
 - `instagram`: same facts, a little fuller (2-3 sentences); then `💬` + the question and `📤` + a share/tag prompt
@@ -156,7 +159,7 @@ the last second dissolves back to the opening; Token's take card is legible. ffp
 last time against the final script.
 
 ## 6. Deliver
-SendUserFile with the 3 MP4s + `deliveries/<date>.md` (the explainer command writes each block: cover text, TikTok
+SendUserFile with the 3 MP4s, their 3 `.thumbnail.png` + `deliveries/<date>.md` (the explainer command writes each block: cover text, thumbnail, TikTok
 description, Instagram caption, YouTube Shorts title + description, pinned comment, sources). To fix post copy after rendering, edit `post` and re-run
 `explainer --no-render --date <date>` (rewrites that block only). Order them for posting: the strongest hook goes to the evening slot (~6-9pm ET), the next to
 midday (~12pm), the third to the morning (~8am); write that order at the top of the delivery note. Then

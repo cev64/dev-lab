@@ -176,6 +176,8 @@ def build_clip(script: dict, voice: dict, vdir: Path, date: str, broll_dir: Path
         "beats": beats,
         "source": {"kind": "explainer", "date": date, "sources": script["sources"]},
     }
+    if script.get("thumbnail"):  # {"highlight": "<words of the hook>"}: the phrase the thumbnail card colours
+        clip["thumbnail"] = script["thumbnail"]
     for k in ("loop", "camera"):  # both on by default (template); a script may set false
         if script.get(k) is False:
             clip[k] = False
@@ -234,6 +236,7 @@ def delivery_block(script: dict, clip: dict, video_rel: str | None, stock_credit
         f"**Hook:** {script['hook']}  ",
         f"**Video:** `{video_rel}` ({clip['duration']:.1f} s)  " if video_rel else "**Video:** not rendered  ",
         f"**Cover text:** {kit['cover']}  ",
+        f"**Thumbnail:** `{video_rel[:-4]}.thumbnail.png` (upload it as the cover when posting)  " if video_rel else "**Thumbnail:** not rendered  ",
         f"**Format:** {FORMAT} (log it in ops/PERFORMANCE.md with the numbers)",
         "",
         "Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info;"

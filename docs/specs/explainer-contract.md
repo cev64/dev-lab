@@ -9,7 +9,7 @@ person's voice, face or likeness. Eligible for platform originality programs (un
 work/explainers/<id>/script.json     written by the agent (below)
 work/explainers/<id>/voice.wav       TTS narration, loudness-normalised (-14 LUFS, -1 dBTP)
 work/explainers/<id>/clip.json       renderer input (clip contract + beats with times)
-out/YYYY-MM-DD/<id>.mp4              final video (+ .cover.png)
+out/YYYY-MM-DD/<id>.mp4              final video (+ .cover.png and .thumbnail.png)
 out/YYYY-MM-DD/<id>.drive.json       {title, text}: the Google Doc filed in Charlie's Drive folder (config/drive.json)
 ```
 
@@ -69,6 +69,9 @@ out/YYYY-MM-DD/<id>.drive.json       {title, text}: the Google Doc filed in Char
   channel account and pinned), `sources` (publisher names), `hashtags` (3-4 topical). The command appends the follow
   line, "Sources: ... AI narrator." and the hashtags (#thedailytoken first, 5 max) to both bodies. An old-style
   `caption` still works as a fallback.
+- `thumbnail` (optional): `{"highlight": "inside it"}`, words of the hook that the thumbnail's title card colours in
+  the accent. Without it the thumbnail uses the hook's own highlight (`emphasis`/`topic`/a number), else the card's
+  last line.
 - `followUp`: true only when retelling a story we covered in the last 7 days because of a genuinely new development.
   Without it, `explainer` refuses a script that shares a source URL with a recent ledger entry.
 - Every factual claim must be supported by `sources` (>= 2 independent sources for the main claim). Quotes verbatim.
@@ -86,6 +89,9 @@ Same as the clip contract (`audio`, `duration`, `words`, `envelope`, `hook`, `to
 - `credit` is empty: owner decision, nothing at the bottom of explainers (no credit line, no progress bar). The
   "AI narrator" disclosure lives in the post caption and the platform's AI-generated label.
 - Disclosure: "AI narrator" in the post caption + Charlie switches on the platform's AI-generated label when posting.
+- Thumbnail (2026-10-28): `<id>.thumbnail.png` is the v1 opening frame as a picture: the big hook card, solid
+  (nothing behind it shows through), in its v1 place (centre y 560, inside TikTok's 3:4 profile-grid crop), over the
+  cover's scene frame, with a highlighted phrase. Charlie uploads it as the cover, since v2 opens cold on the action.
 - Layout (v2): no big hook card in the video (the header pops in at t = 0; the cover still uses the big card);
   captions centred at y 1265; full scenes are drawn zoomed 1.10 -> 1.15x around (487, 500), so the stage
   (x 60-915, y 400-1050) fills about x 0-980, y 388-1130; the last 0.4 s dissolve into the opening scene.

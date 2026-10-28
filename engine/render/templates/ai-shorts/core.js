@@ -8,6 +8,7 @@
  *   window.__READY === true    fonts loaded + layouts built; window.__ERROR set on failure
  *   window.renderFrame(t)      paint frame at time t
  *   window.renderCover()       paint the cover (hook card, no captions)
+ *   window.renderThumbnail()   paint the thumbnail (solid hook card with a highlighted phrase, no captions)
  *   window.__INFO              { style, palette, groups, ... } for logs
  */
 (function () {
@@ -491,13 +492,16 @@
     }
     return { toks, disp, dispD, hl, card, dock };
   }
-  function glassPanel(ctx, b, r, pal, strength) {
+  // solid: near-opaque fill with a drop shadow (thumbnail), so nothing behind the panel reads through its text
+  function glassPanel(ctx, b, r, pal, strength, solid = false) {
     ctx.save();
     roundRect(ctx, b.x, b.y, b.w, b.h, r);
     const g = ctx.createLinearGradient(0, b.y, 0, b.y + b.h);
-    g.addColorStop(0, `rgba(14,16,28,${0.78 * strength})`);
-    g.addColorStop(1, `rgba(8,9,16,${0.62 * strength})`);
-    ctx.fillStyle = g; ctx.fill();
+    g.addColorStop(0, `rgba(14,16,28,${(solid ? 0.985 : 0.78) * strength})`);
+    g.addColorStop(1, `rgba(8,9,16,${(solid ? 0.975 : 0.62) * strength})`);
+    ctx.fillStyle = g;
+    if (solid) { ctx.save(); ctx.shadowColor = 'rgba(0,0,0,0.55)'; ctx.shadowBlur = 40; ctx.shadowOffsetY = 16; ctx.fill(); ctx.restore(); }
+    else ctx.fill();
     ctx.lineWidth = 2; ctx.strokeStyle = `rgba(255,255,255,${0.16 * strength})`; ctx.stroke();
     // accent hairline along the top edge
     ctx.clip();
@@ -522,7 +526,7 @@
     ctx.fillText(c.text, x + c.padX, y + c.h / 2 + c.cap / 2);
     ctx.restore();
   }
-  function drawHookLines(ctx, S, L, x0, top, centered, alpha) {
+  function drawHookLines(ctx, S, L, x0, top, centered, alpha, hl = S.hook.hl) {
     const HT = L === S.hook.card ? S.type.hook : S.type.dock;
     ctx.font = font(HT, L.size);
     ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
@@ -531,7 +535,7 @@
       let x = centered ? CX - lw / 2 : x0;
       const base = top + L.cap + k * L.lineH;
       for (const i of li) {
-        const on = S.hook.hl.has(i);
+        const on = hl.has(i);
         const sq = L.sq ? L.sq[i] : 1;
         ctx.save();
         ctx.globalAlpha = alpha;
@@ -544,16 +548,30 @@
       }
     });
   }
-  function drawCard(ctx, S, alpha, scale, dx, dy) {
+  function drawCard(ctx, S, alpha, scale, dx, dy, thumb = null) {
     const L = S.hook.card, b = L.box;
     ctx.save();
     const cx = b.x + b.w / 2, cy = b.y + b.h / 2;
     ctx.translate(cx + dx, cy + dy); ctx.scale(scale, scale); ctx.translate(-cx, -cy);
     ctx.globalAlpha = alpha;
-    glassPanel(ctx, b, 40, S.pal, 1);
+    glassPanel(ctx, b, 40, S.pal, 1, !!thumb);
     if (S.chip) drawChip(ctx, S, CX - S.chip.w / 2, b.y + 46, alpha);
-    drawHookLines(ctx, S, L, 0, L.textTop, true, alpha);
+    drawHookLines(ctx, S, L, 0, L.textTop, true, alpha, thumb ? thumb.hl : S.hook.hl);
     ctx.restore();
+  }
+  // Thumbnail (owner ask 2026-10-28): the v1 opening title card as a standalone picture for the platforms' cover
+  // pickers, now that explainers open cold on the action. Same card in the same place, solid, and always with a
+  // highlighted phrase: clip.thumbnail.highlight, else the hook's own highlight, else the card's last line.
+  function thumbHighlight(S) {
+    const h = S.hook, th = S.clip.thumbnail || {};
+    if (th.highlight) {
+      const want = String(th.highlight).split(/\s+/).map(cleanTok).filter(Boolean), clean = h.toks.map(cleanTok);
+      for (let i = 0; i + want.length <= clean.length && want.length; i++) {
+        if (want.every((w, j) => clean[i + j] === w)) return new Set(want.map((_, j) => i + j));
+      }
+    }
+    if (h.hl.size) return h.hl;
+    return new Set(h.card.lines[h.card.lines.length - 1]);
   }
   function drawDock(ctx, S, alpha, dy) {
     const L = S.hook ? S.hook.dock : null;
@@ -579,6 +597,7 @@
     };
     if (S.hook) {
       S.cardSprite = mk(S.hook.card.box, (x) => drawCard(x, S, 1, 1, 0, 0));
+      S.thumbSprite = mk(S.hook.card.box, (x) => drawCard(x, S, 1, 1, 0, 0, { hl: thumbHighlight(S) }));
       S.dockSprite = mk(S.hook.dock.box, (x) => drawDock(x, S, 1, 0));
     } else if (S.chip) {
       S.dockSprite = mk({ x: SAFE.x0, y: LAYOUT.dockY, w: S.chip.w, h: S.chip.h }, (x) => drawDock(x, S, 1, 0));
@@ -883,7 +902,7 @@
 
       let prof = null;
       const mark = (name) => { if (!prof) return; ctx.getImageData(0, 0, 1, 1); bgCtx.getImageData(0, 0, 1, 1); const n = performance.now(); prof[name] = +(n - prof._t).toFixed(2); prof._t = n; };
-      const paint = (t, cover) => {
+      const paint = (t, cover, thumb = false) => {
         if (S.layers.skipBackground && S.layers.skipBackground(t, cover)) {
           // a template layer (e.g. a full-frame scene) covers the whole frame: skip the generative style
           ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
@@ -911,7 +930,8 @@
         mark('overlay');
         if (S.layers.mid) { ctx.save(); S.layers.mid(ctx, S, t, cover); ctx.restore(); mark('mid'); }
         if (cover) {
-          if (S.hook) blit(ctx, S.cardSprite, 1, 1.04, 40); else blit(ctx, S.dockSprite, 1, 1, 0);
+          if (thumb && S.thumbSprite) blit(ctx, S.thumbSprite, 1, 1, 0);
+          else if (S.hook) blit(ctx, S.cardSprite, 1, 1.04, 40); else blit(ctx, S.dockSprite, 1, 1, 0);
         } else {
           if (LAYOUT.showProgress) { drawProgress(ctx, S, t); mark('progress'); } // owner: no progress bar (2026-10-09)
           drawHook(ctx, S, t);
@@ -938,12 +958,13 @@
       };
       window.renderFrame = (t) => { paint(Math.max(0, t), false); present(); };
       window.renderCover = () => { paint(coverTime(), true); present(); };
-      // render.mjs path: paint + encode in-page, return base64 (t < 0 means "cover")
+      window.renderThumbnail = () => { paint(coverTime(), true, true); present(); };
+      // render.mjs path: paint + encode in-page, return base64 (t < 0 means "cover"; t = -2 the thumbnail)
       // With postUrl the encoded bytes are POSTed (binary) to render.mjs's local server instead of
       // being returned as base64 over CDP, which is much cheaper for 1080x1920 frames.
       window.grabFrame = async (t, type = 'jpeg', quality = 0.92, postUrl = null) => {
         if (S.bgVideo) await S.bgVideo.load(t < 0 ? coverTime() : Math.max(0, t));
-        if (t < 0) paint(coverTime(), true); else paint(t, false);
+        if (t < 0) paint(coverTime(), true, t <= -2); else paint(t, false);
         if (!postUrl) return encode(type, quality);
         const blob = await canvas.convertToBlob({ type: type === 'png' ? 'image/png' : 'image/jpeg', quality });
         const r = await fetch(postUrl, { method: 'POST', body: blob });
