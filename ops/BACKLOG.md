@@ -12,6 +12,8 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
       and let `--no-render` add the ledger entry when the MP4 exists.
 - [ ] Library defaults: make self-graded (me=Meta), muse-paywall (Muse/Wonder), fund-link (kospi*/sp* names), and (2026-10-14)
       ai-traces/charged-caveat (OpenAI), cheap-board (Bloomberg), scam-guard intro (DeepMind/GovTech) generic; pass old values explicitly in old clips.
+- [ ] Library company-reply.js: text defaults still name OpenAI / "industry-leading age-specific protections"; make generic
+      and pass old values in old clips (2026-10-29).
 - [ ] Timeline card: label text ~22 px, below the 24 px legibility floor (2026-10-13); raise it.
 - [x] (in the 2026-10-15 briefs) Producer brief: each producer uses its own scratchpad subfolder for QA stills (2026-10-13 collision).
 - [x] (PR 2026-10-15: drive_safe() in explainer.py writes 4-byte emoji as [name]) Drive docs: emoji arrive garbled (2026-10-12: text/html with &#x..; entities ALSO garbles; writing emoji as

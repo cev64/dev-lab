@@ -37,6 +37,10 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Timings: setup ~2 min, news 5 s, producers 13-17 min in parallel; xAI revision ~8 min.
   Problems: publish-videos.sh printed HTTP 403 push errors twice (prune step), but videos/2026-10-29 is on the remote
   with all 3 MP4s + covers (verified with ls-tree). Techmeme 403s here; Mississippi Today behind Cloudflare.
+  Improve: PR #35 merged: 8 scenes promoted (library 173 -> 181: locked-model (6 modes), buyout-street (5 modes),
+  buyout-map, lecture-hall, report-drop, major-doors, code-desk, why-unknown) + company-reply featX param (old default);
+  defaults generic; 75/75 frames + covers byte-identical from library copies; default stills reviewed. Left:
+  company-reply still has OpenAI-era text defaults (backlog).
 - 2026-10-28 (nightly run, Wednesday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "You type a sentence, then walk around inside it." (Google DeepMind Genie 4 world model: builds the world frame by
      frame as you walk; edit mid-walk (rain, add a person); natural-moving people that talk back; first Genie with native
