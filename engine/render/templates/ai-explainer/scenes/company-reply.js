@@ -4,7 +4,8 @@
 // "These are allegations" / "Not proven in court".
 // Fits: a company's response to a lawsuit / regulator, followed by an "allegations, not findings" caveat.
 // params: company ("OpenAI"), by ("OpenAI spokesperson"), quote ("industry-leading age-specific protections"),
-//         feats [{text, cue}] (max 2), banner1 ("These are allegations"), banner2 ("Not proven in court"),
+//         feats [{text, cue}] (max 2), featX ([255, 720]: the pills' centre x; [310, 680] keeps them clear of a zoomed
+//         camera's edges), banner1 ("These are allegations"), banner2 ("Not proven in court"),
 //         quoteCue ("industry"), shieldCue ("protections"), cautionCue ("allegations"), provenCue ("proven")
 export default function draw(ctx, t, info) {
   const H = info.helpers, K = H.kit, P = info.params || {}, D = info.duration, ACC = info.accent;
@@ -36,7 +37,7 @@ export default function draw(ctx, t, info) {
     K.drawShield(ctx, 487, 990 + rise, 1.25 * Math.min(1.05, sk), { check: clamp((t - tSh - 0.35) / 0.4) });
   }
   // feature pills
-  const fx = [255, 720];
+  const fx = Array.isArray(P.featX) && P.featX.length >= 2 ? P.featX : [255, 720];
   feats.forEach((f, i) => {
     const k = K.popIn(t, tF[i], 0.4);
     if (k > 0) K.drawLabel(ctx, fx[i], 705 + K.bob(t, 4, 1.5, i), Math.min(1.05, k), { text: f.text, size: 30, dot: true });
