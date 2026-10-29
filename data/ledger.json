@@ -1022,6 +1022,53 @@
         "https://arstechnica.com/google/2026/10/deepminds-genie-4-world-model-adds-audio-and-more-realistic-people-to-simulations/"
       ],
       "video": "out/2026-10-28/2026-10-28-explainer-genie-worlds.mp4"
+    },
+    {
+      "id": "2026-10-29-explainer-gemini-carbon",
+      "date": "2026-10-29",
+      "hook": "Google built its best AI, then locked it away",
+      "topic": "AI SAFETY",
+      "title": "Google's Gemini 4 Carbon: its strongest AI, locked away for cyber defenders only",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+        "https://arstechnica.com/ai/2026/10/google-announces-gemini-4-carbon-its-latest-frontier-ai-model-that-you-cant-use/",
+        "https://www.theverge.com/tech/1021339/google-gemini-4-carbon-cybersecurity-frontier"
+      ],
+      "video": "out/2026-10-29/2026-10-29-explainer-gemini-carbon.mp4"
+    },
+    {
+      "id": "2026-10-29-explainer-xai-noise",
+      "date": "2026-10-29",
+      "hook": "xAI will buy your home, if you don't sue",
+      "topic": "DATA CENTERS",
+      "title": "xAI offers to buy Mississippi homes if owners drop a noise lawsuit",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.theguardian.com/us-news/2026/oct/28/datacenter-noise-lawsuit-elon-musk-mississippi",
+        "https://www.mississippifreepress.org/xai-moves-to-buy-out-southaven-residents-who-agree-not-to-sue-it-over-power-plant-noise-letter-shows/",
+        "https://www.theverge.com/ai-artificial-intelligence/1020596/xai-mississippi-neighborhood-data-center-lawsuit"
+      ],
+      "video": "out/2026-10-29/2026-10-29-explainer-xai-noise.mp4"
+    },
+    {
+      "id": "2026-10-29-explainer-cs-exodus",
+      "date": "2026-10-29",
+      "hook": "Students are walking out of computer science",
+      "topic": "AI & JOBS",
+      "title": "US computer science enrollment fell 12.4% this fall, early Clearinghouse data shows",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://nscresearchcenter.org/enrollment-insights/",
+        "https://www.business-standard.com/amp/world-news/student-enrolment-in-us-computer-science-programs-falls-as-ai-takes-jobs-126102900433_1.html",
+        "https://www.yahoo.com/news/us/articles/undergraduate-enrollment-inched-fall-while-050000884.html",
+        "https://www.ccdaily.com/2026/10/an-early-look-at-fall-enrollments/",
+        "https://www.yahoo.com/news/us/articles/national-college-enrollment-holds-steady-051500769.html"
+      ],
+      "video": "out/2026-10-29/2026-10-29-explainer-cs-exodus.mp4"
     }
   ]
 }

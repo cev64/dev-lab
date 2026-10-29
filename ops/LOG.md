@@ -2,6 +2,41 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-29 (nightly run, Thursday, fired ~07:00 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Students are walking out of computer science." (National Student Clearinghouse preliminary fall 2026 data, released
+     Thu Oct 29: CS undergrad enrollment at 4-year colleges -12.4%, grad -10.4% vs fall 2025; biggest losses of any subject;
+     second drop in a row; grad CS -27.1% over two years; health +6.2%, engineering +6.1%; early count from 46% of
+     colleges, final numbers in January; AI link attributed to Bloomberg, "counts students, not reasons" caveat; sources:
+     NSC, Bloomberg (via Business Standard), Higher Ed Dive (via Yahoo), Community College Daily, Forbes (via Yahoo)).
+     Rubric ~79 (fresh 20, stakes 18, surprise 13, visual 8, verif 17, controversy 3). 69.0 s, -14.6 LUFS, style flow,
+     100% scenes (5 new: cs-hall, report-drop, major-doors, code-desk, why-unknown). No career advice.
+  2. "Google built its best AI, then locked it away." (Gemini 4 Carbon, Oct 28: "strongest model"; only a subset of cyber
+     defenders get it; "significant leap" in vulnerability detection; 88.2% on SEC-bench Pro (Google's figure); deliberate
+     rollout + US voluntary pre-release testing; more partners via the Fairwind Program, then developers/businesses/consumers
+     "as soon as possible", no date; Ars: gap with rivals "just a few points"; sources: Google DeepMind, Ars Technica, The
+     Verge). Rubric ~80 (20/12/14/9/19/6). 69.5 s, -14.5 LUFS, style neural, 100% scenes (new 6-mode module
+     locked-model). $2/1M token price left out (inside baseball).
+  3. "xAI will buy your home, if you don't sue." (Southaven, Mississippi: xAI subsidiary MZX offers to buy homes in
+     exchange for a release of all claims in the June noise lawsuit (three plaintiffs; "near-constant noise, vibrations";
+     complaint quote "high-pitched squealing", "continuous engine roaring"); $20B investment; 69 gas turbines; residents say
+     noise began Aug 2025; letter: no damages, no own claims; MZX denies all allegations, case pending; xAI didn't respond;
+     sources: The Guardian, Mississippi Free Press, SuperTalk Mississippi, The Verge (not independent of MFP)). Rubric
+     ~82 (18/16/15/9/15/9). 73.2 s, -14.5 LUFS, style horizon, 100% scenes (new buyout-street (5 modes), buyout-map
+     (unused), reply-caveat = company-reply with pill x fix). No real people drawn; no plaintiff named.
+     Lead fix (rule 2b): first cut used Guardian-only facts (418-home target, five homes bought, "door to door", a
+     plaintiff's quote, xAI's good-neighbor line); all cut or replaced with two-sourced facts, re-voiced, re-rendered
+     (70.4 -> 73.2 s).
+  Lead review: all claims traced to claim tables; stills reviewed (clean). Nits: library token-take card sits near the
+  left safe edge (again); xAI "noise began Aug 2025" pill overlaps the data-center roofs; CS hall students small.
+  Picks note: skipped Chrome AI Autofill reading Gmail (second Google story), DeepSeek/Moonshot distilling GPT-6 Astra
+  (The Information via Reuters, single report), Chinese model cyberattack tests (Reuters only), Anthropic letter to the
+  California governor (Anthropic covered 10-27), parents' lawsuit vs OpenAI (still TechCrunch-only, allegations + medical),
+  Microsoft $10B OpenAI revenue (finance inside baseball), Tencent CEO profile.
+  Drive: connector available; folder checked (no 2026-10-29 titles); 3 Google Docs filed; xAI doc read back complete
+  with "(end)".
+  Timings: setup ~2 min, news 5 s, producers 13-17 min in parallel; xAI revision ~8 min.
+  Problems: publish-videos.sh printed HTTP 403 push errors twice (prune step), but videos/2026-10-29 is on the remote
+  with all 3 MP4s + covers (verified with ls-tree). Techmeme 403s here; Mississippi Today behind Cloudflare.
 - 2026-10-28 (nightly run, Wednesday, fired ~06:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "You type a sentence, then walk around inside it." (Google DeepMind Genie 4 world model: builds the world frame by
      frame as you walk; edit mid-walk (rain, add a person); natural-moving people that talk back; first Genie with native
