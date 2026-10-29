@@ -16,9 +16,11 @@ Needs `ffmpeg`/`ffprobe` on PATH (libx264 + aac). Chromium is the Playwright hea
 node render.mjs --clip <clip.json> --out <file.mp4> [--workers 3] [--style auto|neural|flow|horizon|orb]
                 [--frames-only 0,45,600 | 0.5s,20s] [--template ai-shorts] [--crf 23] [--maxrate 1.7M] [--quiet]
 ```
-- Writes `<file>.mp4` and `<file>.cover.png` (the hook card over a lit-up background frame, no captions).
+- Writes `<file>.mp4`, `<file>.cover.png` (the hook card over a lit-up background frame, no captions) and
+  `<file>.thumbnail.png` (the same frame with the card solid, in its opening place, and a highlighted phrase from
+  `clip.thumbnail.highlight`, else the hook's highlight, else the card's last line: the post's cover picture).
 - `--frames-only` writes PNG stills `<file>.f000045.png` (frame numbers, or seconds with an `s` suffix) plus
-  the cover, and skips the video. Use it to review a style or a layout change.
+  the cover and thumbnail, and skips the video. Use it to review a style or a layout change.
 - `--style` overrides `theme.style` (for testing). Exit code 3 means the page logged console errors.
 - Template: `--template`, else clip.json `"template"`, else `theme.template`, else `ai-shorts`. Podcast clips use
   `ai-shorts`; original narrated explainers set `"template": "ai-explainer"` (see below).

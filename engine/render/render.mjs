@@ -13,7 +13,8 @@
 // chunks across N browsers; each page encodes its frame to JPEG in-page and POSTs it to a local server,
 // which pipes it into that chunk's libx264 encoder. Chunks are concatenated without re-encoding and muxed
 // with the clip audio (limited to < -1 dBTP, AAC 192k, 48 kHz, +faststart). A cover PNG
-// (<out minus .mp4>.cover.png) is written alongside.
+// (<out minus .mp4>.cover.png) and a thumbnail PNG (<out minus .mp4>.thumbnail.png: the solid title card, for the
+// platforms' cover pickers) are written alongside.
 import { chromium } from 'playwright-core';
 import { spawn, spawnSync } from 'node:child_process';
 import { existsSync, readdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync, mkdirSync, statSync } from 'node:fs';
@@ -221,6 +222,7 @@ async function startWorker(clip, templateUrl, id) {
     id, info, errors,
     frame: (t, format) => grab(t, format),
     cover: () => grab(-1, 'png'),
+    thumbnail: () => grab(-2, 'png'),
     close: () => browser.close(),
   };
 }
@@ -289,8 +291,10 @@ async function main() {
         }
       }));
       writeFileSync(`${base}.cover.png`, await workers[0].cover());
+      writeFileSync(`${base}.thumbnail.png`, await workers[0].thumbnail());
       written.sort().forEach((f) => console.log(f));
       console.log(`${base}.cover.png`);
+      console.log(`${base}.thumbnail.png`);
     } else {
       const tmp = mkdtempSync(join(tmpdir(), 'clip-render-'));
       try {
@@ -315,6 +319,7 @@ async function main() {
         const renderSec = (Date.now() - tr) / 1000;
         log(`frames done: ${total} in ${renderSec.toFixed(1)} s (${(total / renderSec).toFixed(1)} fps)`);
         writeFileSync(`${base}.cover.png`, await workers[0].cover());
+        writeFileSync(`${base}.thumbnail.png`, await workers[0].thumbnail());
         const list = join(tmp, 'list.txt');
         writeFileSync(list, chunks.map((c) => `file '${c.file}'`).join('\n') + '\n');
         const outDur = (total / fps).toFixed(3);
@@ -331,6 +336,7 @@ async function main() {
       const mb = (statSync(out).size / 1048576).toFixed(1);
       console.log(out);
       console.log(`${base}.cover.png`);
+      console.log(`${base}.thumbnail.png`);
       log(`wrote ${out} (${mb} MB) in ${((Date.now() - t0) / 1000).toFixed(1)} s total`);
     }
     const errs = workers.flatMap((w) => w.errors);
