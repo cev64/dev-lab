@@ -41,6 +41,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Problems: publish-videos.sh again printed HTTP 403 push errors (prune), but videos/2026-10-30 is on the remote with all
   3 MP4s + covers + thumbnails (ls-tree). Search index lagged on day-old stories (standard search missed ADT/Style Sketch;
   extended found them).
+  Improve: PR #36 merged: 9 scenes promoted (library 181 -> 190: agent-swarm (6 modes), closet-build (+ drawGarment),
+  launch-pins, mirror-tryon, trip-pack, price-house, deal-handshake, holding-tower, control-room); story defaults
+  generic; 51/51 frames byte-identical from library copies.
 - 2026-10-29 (nightly run, Thursday, fired ~07:00 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Students are walking out of computer science." (National Student Clearinghouse preliminary fall 2026 data, released
      Thu Oct 29: CS undergrad enrollment at 4-year colleges -12.4%, grad -10.4% vs fall 2025; biggest losses of any subject;
