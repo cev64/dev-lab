@@ -1069,6 +1069,57 @@
         "https://www.yahoo.com/news/us/articles/national-college-enrollment-holds-steady-051500769.html"
       ],
       "video": "out/2026-10-29/2026-10-29-explainer-cs-exodus.mp4"
+    },
+    {
+      "id": "2026-10-30-explainer-style-sketch",
+      "date": "2026-10-30",
+      "hook": "Your old Instagram posts just became your closet",
+      "topic": "META",
+      "title": "Meta's Style Sketch turns your Instagram photos into a closet",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://techcrunch.com/2026/10/29/meta-quietly-launches-an-ai-fashion-app-called-style-sketch/",
+        "https://apps.apple.com/sg/app/style-sketch-outfit-planner/id6794461626",
+        "https://play.google.com/store/apps/details?id=com.facebook.stylesketch",
+        "https://superpowerdaily.com/posts/meta-launches-an-ai-outfit-planner-that-builds-a-wardrobe-from-instagram-photos"
+      ],
+      "video": "out/2026-10-30/2026-10-30-explainer-style-sketch.mp4"
+    },
+    {
+      "id": "2026-10-30-explainer-ai-hack-swarm",
+      "date": "2026-10-30",
+      "hook": "AI agents went after 200-plus targets in 11 days",
+      "topic": "AI SECURITY",
+      "title": "AI agents went after 200+ targets in 11 days",
+      "followUp": true,
+      "format": "v2",
+      "sources": [
+        "https://www.crowdstrike.com/en-us/blog/vapor-panda-uses-artex-to-scale-global-campaign/",
+        "https://www.nbcnews.com/tech/security/china-linked-hackers-used-ai-target-200-organizations-crowdstrike-says-rcna606343",
+        "https://securitybrief.news/story/crowdstrike-uncovers-china-linked-ai-cyber-campaign",
+        "https://www.hngn.com/articles/273633/20261029/china-linked-hackers-used-deepseek-ai-against-200-organizations.htm",
+        "https://www.unite.ai/china-nexus-vapor-panda-breached-nine-of-200-plus-targets-with-ai-agents/"
+      ],
+      "video": "out/2026-10-30/2026-10-30-explainer-ai-hack-swarm.mp4"
+    },
+    {
+      "id": "2026-10-30-explainer-adt-thrive",
+      "date": "2026-10-30",
+      "hook": "An OpenAI-backed firm is buying the alarm company ADT",
+      "topic": "DEALS",
+      "title": "OpenAI-backed Thrive Holdings is buying ADT",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/0001703056/000119312526437123/d572133dex991.htm",
+        "https://techcrunch.com/2026/10/29/openai-backed-thrive-holdings-acquires-adt/",
+        "https://finance.yahoo.com/markets/stocks/articles/adt-soars-34-15-3-144925840.html",
+        "https://seekingalpha.com/news/4660253-adt-to-be-acquired-by-thrive-holdings-in-153b-deal",
+        "https://news.bgov.com/artificial-intelligence/openai-takes-stake-in-thrive-holdings-adding-to-circular-deals",
+        "https://techcrunch.com/2025/12/01/openais-investment-into-thrive-holdings-is-its-latest-circular-deal/"
+      ],
+      "video": "out/2026-10-30/2026-10-30-explainer-adt-thrive.mp4"
     }
   ]
 }

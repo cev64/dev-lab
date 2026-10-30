@@ -2,6 +2,45 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-30 (nightly run, Friday, fired ~06:58 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "An OpenAI-backed firm is buying the alarm company ADT." (Thrive Holdings agreed Oct 29 to buy ADT: $10.00/share cash,
+     ~$7.6B equity, $15.3B enterprise value, 45.6% premium to Oct 27 close; goes private; Thrive Holdings formed by Thrive
+     Capital, 75+ businesses, OpenAI holds a stake and embeds teams; go-shop to Nov 28; shareholder + US antitrust approval;
+     close expected Q1 2027; AI products not announced; sources: ADT press release (SEC 8-K ex.99.1), TechCrunch, Yahoo
+     Finance, Seeking Alpha, Bloomberg Government, TechCrunch 2025). Rubric ~74 (fresh 20, stakes 15, surprise 12, visual
+     8, verif 17, controversy 2). 72.3 s, -14.7 LUFS, style horizon, 100% scenes (new: price-house, deal-handshake,
+     holding-tower, control-room + library fine-print). Lead call: kept the Thrive line "Protecting customers' homes also
+     means protecting their data." (verbatim, attributed, first-hand in the company's own release on SEC + ADT newsroom; no
+     outlet repeats it). Cut: customer count (unsourced), "ADT soars 34%" (single source, stock), Apollo financing.
+  2. "Your old Instagram posts just became your closet." (Meta's Style Sketch, quiet launch, iOS + Android, only Indonesia,
+     Singapore, Thailand: builds a virtual closet from your Instagram photos or snaps, outfits from what you own, try-on
+     on a model matched to body shape/skin tone ("the app says"), day-by-day trip planner around the forecast; both store
+     privacy labels list photos; Meta didn't respond to TechCrunch (brief said "declined", producer corrected); no word
+     on wider launch; sources: TechCrunch, App Store + Google Play listings/privacy labels (Meta Platforms, Inc.),
+     Superpower Daily). Rubric ~71 (20/12/11/10/14/4). 66.8 s, -14.7 LUFS, style flow, 100% scenes (new: closet-build,
+     launch-pins, mirror-tryon, trip-pack). Cut: third-party-advertising row (labels conflict), "race and ethnicity"
+     (one label), download count.
+  3. "AI agents went after 200-plus targets in 11 days." FOLLOW-UP to the 2026-10-09 ARTEX story (CrowdStrike, Oct 29: a
+     China-linked group it calls VAPOR PANDA ran ARTEX mostly on DeepSeek + an unidentified second model; from Oct 17,
+     200+ organizations in at least 14 countries in 11 days; operator instructions in Chinese, stepping in only at
+     decision points; governments, pharma, chip, telecom targeted; post-exploitation confirmed at nine; CrowdStrike expects
+     more; sources: CrowdStrike blog, NBC News, SecurityBrief, HNGN, Unite.AI). Rubric ~82 (20/15/15/9/16/7). 72.5 s,
+     -14.6 LUFS, style neural, 100% scenes (new 6-mode agent-swarm). Kept non-technical (no techniques). Cut: China/DeepSeek
+     responses (HNGN only), "~18 a day" (outlet arithmetic), link to the Korea bank attacks (not claimed).
+  Lead review: all claims traced to claim tables; contact sheets reviewed (clean, frame 0 in action, loop dissolve,
+  nothing at the bottom). Nits: token-take question card sits near the left edge (library, every video, again);
+  "CrowdStrike's assessment" pill near the left edge; Style Sketch hook ~3.3 s; ADT script 160 words (first draft
+  voiced 74.8 s).
+  Picks note: skipped Microsoft 60,000 buyouts (Oct 26, >72 h, jobs story ran yesterday), Mistral Large 4 open weights
+  (inside baseball), Anthropic S-1 TSMC risk (Anthropic covered 10-27), Pentagon network personal agent (WIRED sources
+  only), religious exemption from AI at work (one person's case, TechCrunch), OpenAI Model Spec update (inside
+  baseball), DeepSeek black-market chips (sources-say), NYT Cooking AI (lighter, Meta product picked instead).
+  Drive: connector available; folder checked (only the 2026-10-09 ARTEX title related -> follow-up); 3 Google Docs filed;
+  hack doc read back complete with "(end)".
+  Timings: setup ~3 min, news 9 s, producers 15-16 min in parallel; no lead re-renders.
+  Problems: publish-videos.sh again printed HTTP 403 push errors (prune), but videos/2026-10-30 is on the remote with all
+  3 MP4s + covers + thumbnails (ls-tree). Search index lagged on day-old stories (standard search missed ADT/Style Sketch;
+  extended found them).
 - 2026-10-29 (nightly run, Thursday, fired ~07:00 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Students are walking out of computer science." (National Student Clearinghouse preliminary fall 2026 data, released
      Thu Oct 29: CS undergrad enrollment at 4-year colleges -12.4%, grad -10.4% vs fall 2025; biggest losses of any subject;
