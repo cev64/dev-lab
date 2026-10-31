@@ -41,6 +41,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Problems: publish-videos.sh again printed HTTP 403 push errors (prune step), but videos/2026-10-31 is on the remote with
   all 3 MP4s + covers + thumbnails (ls-tree). My setup wait loop used pgrep -f on a pattern in its own command line and
   hung (lesson: wait on a PID, not a pattern).
+  Improve: PR #37 merged: 9 scenes promoted (library 190 -> 199: tampered-update (5 modes), access-caveat, order-flood,
+  earnings-call, doorstep-check, beta-lunch, teen-guard, chat-pause, age-gate); story defaults generic; 45/45 frames
+  byte-identical from library copies; 73 engine unit tests OK.
 - 2026-10-30 (nightly run, Friday, fired ~06:58 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "An OpenAI-backed firm is buying the alarm company ADT." (Thrive Holdings agreed Oct 29 to buy ADT: $10.00/share cash,
      ~$7.6B equity, $15.3B enterprise value, 45.6% premium to Oct 27 close; goes private; Thrive Holdings formed by Thrive
