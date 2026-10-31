@@ -1120,6 +1120,57 @@
         "https://techcrunch.com/2025/12/01/openais-investment-into-thrive-holdings-is-its-latest-circular-deal/"
       ],
       "video": "out/2026-10-30/2026-10-30-explainer-adt-thrive.mp4"
+    },
+    {
+      "id": "2026-10-31-explainer-doordash-agents",
+      "date": "2026-10-31",
+      "hook": "Almost nobody is ordering dinner through AI agents",
+      "topic": "AGENTS",
+      "title": "DoorDash: AI agents brought only several hundred orders",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.fool.com/earnings/call-transcripts/2026/10/29/doordash-dash-q3-2026-earnings-call-transcript/",
+        "https://www.sec.gov/Archives/edgar/data/0001792789/000179278926000062/proddashex991-pressrelease.htm",
+        "https://techcrunch.com/2026/10/30/doordash-said-its-only-received-several-hundred-orders-from-ai-agents/",
+        "https://arstechnica.com/ai/2026/10/doordash-says-outside-ai-agents-have-only-led-to-hundreds-of-orders-so-far/",
+        "https://about.doordash.com/en-us/news/doordash-ordering-connector"
+      ],
+      "video": "out/2026-10-31/2026-10-31-explainer-doordash-agents.mp4"
+    },
+    {
+      "id": "2026-10-31-explainer-chatgpt-teens",
+      "date": "2026-10-31",
+      "hook": "ChatGPT is getting stricter with teens about weapons",
+      "topic": "AI SAFETY",
+      "title": "ChatGPT is getting stricter with teens about weapons",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.reuters.com/business/media-telecom/openai-limit-weapons-information-teens-chatgpt-violence-prevention-push-2026-10-30/",
+        "https://openai.com/index/community-safety-report-and-new-protections-for-teens/",
+        "https://www.tradingview.com/news/seekingalpha:09bd3b094094b:0-openai-adds-restrictions-on-weapons-related-chatgpt-responses-for-teens/",
+        "https://econotimes.com/OpenAI-Tightens-ChatGPT-Weapons-Rules-for-Teens-and-Adds-Violence-Safeguards-1767235",
+        "https://www.unite.ai/openai-announces-community-safety-report-and-new-teen-weapons-limits/"
+      ],
+      "video": "out/2026-10-31/2026-10-31-explainer-chatgpt-teens.mp4"
+    },
+    {
+      "id": "2026-10-31-explainer-claude-code-backdoor",
+      "date": "2026-10-31",
+      "hook": "Up to 5,000 coders downloaded a rigged AI tool",
+      "topic": "SECURITY",
+      "title": "A rigged Claude Code copy hit Cursor's add-on store",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://cursor.com/blog/claude-code-extension-security-notice",
+        "https://www.theregister.com/cyber-crime/2026/10/30/anthropic-that-claude-code-extension-compromise-couldnt-be-us/5306682",
+        "https://arstechnica.com/security/2026/10/anthropic-vs-code-extension-on-cursor-backdoored-for-nearly-12-hours/",
+        "https://www.bankinfosecurity.com/cursor-confirms-anthropic-claude-code-extension-compromised-a-33263",
+        "https://thehackernews.com/2026/10/official-claude-code-vs-code-extension.html"
+      ],
+      "video": "out/2026-10-31/2026-10-31-explainer-claude-code-backdoor.mp4"
     }
   ]
 }

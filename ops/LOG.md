@@ -2,6 +2,45 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-10-31 (nightly run, Saturday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Up to 5,000 coders downloaded a rigged AI tool." (Oct 29: a tampered copy of Anthropic's Claude Code extension sat in
+     Cursor's VS Code extension marketplace ~2:27am-1:35pm PT ("about eleven hours"; Ars headline says "nearly 12", Cursor's
+     own timeline + Register + BankInfoSecurity say ~11); Cursor: "at most 5,000 users"; collected host/user info and tried
+     to open a back door, its own bugs made that step fail on most machines; Cursor pulled it, shut the marketplace,
+     "uninstalling may not be sufficient", contacting affected users; how access was gained not explained by either
+     company; Anthropic: didn't build or publish it, not a compromise of its systems; sources: Cursor security notice, The
+     Register, Ars Technica, BankInfoSecurity, The Hacker News). Rubric ~76 (fresh 20, stakes 13, surprise 13, visual 9,
+     verif 18, controversy 3). 70.2 s, -14.6 LUFS, style neural, 100% scenes (new: tampered-update (5 modes),
+     access-caveat = improved breach-caveat). Kept non-technical (no IOCs, SSH keys, version numbers, remediation).
+  2. "Almost nobody is ordering dinner through AI agents." (DoorDash Q3 call Oct 29: CEO Tony Xu "maybe several hundred
+     orders in total from some of these third-party agents"; 993 million orders in Q3 (8-K); for food people mostly come
+     straight to the app; DoorDash building its own AI helpers; "ordering isn't the hard part"; agent connector launched
+     Sep 30 as limited beta, mostly corporate lunches; sources: Motley Fool transcript, DoorDash 8-K ex.99.1, TechCrunch,
+     Ars Technica, DoorDash newsroom). Rubric ~77 (20/15/15/9/16/2). 69.8 s, -14.5 LUFS, style horizon, 100% scenes
+     (new: order-flood, earnings-call (text-only speaker tiles), straight-to-app, doorstep-check, beta-lunch). Cut:
+     Ask DoorDash stats and Pizza Hut 1994 line (single source).
+  3. "ChatGPT is getting stricter with teens about weapons." (OpenAI, Fri Oct 30: practical info on weapons and security
+     systems that could be misused restricted for users it estimates are under 18, even with no sign of violent intent;
+     de-escalation, support and trusted-adult help still allowed; for all users ChatGPT can end chats fixated on violence,
+     may pause accounts after several, plans to notify parents of a paused teen account; age prediction from usage signals;
+     rolling out in the next few weeks; sources: Reuters, OpenAI, Seeking Alpha, EconoTimes, Unite.AI). Rubric ~78
+     (20/18/10/8/17/5). 72.3 s, -14.6 LUFS, style orb, 100% scenes (new: teen-guard, chat-pause, age-gate). Family-safe:
+     no incidents, victims or weapon detail. Cut: Common Sense Media finding (OpenAI disputes; needs rebuttal), 200+ law
+     enforcement referrals (off-angle).
+  Lead review: all claims traced to claim tables; contact sheets reviewed (clean, frame 0 in action, loop dissolve,
+  nothing at the bottom). Nits: library token-take card still sits near the left safe edge (x ~30 after zoom, every
+  video); teens claim table leans on smaller outlets (EconoTimes, Unite.AI) next to Reuters because openai.com 403s fetch
+  tools; OpenAI wording taken from search extracts.
+  Picks note: skipped OpenAI funding round cuts (sources-say, finance), AI scraping opt-out standard (lower stakes; OpenAI
+  already in the teens story), Altman DRAM remarks (one person's opinion), Dartmouth provost (real named person, job loss),
+  Google satellite AI server (good visual, kept as a candidate; Google covered twice this week), Anthropic junk-rating
+  (FT via TechCrunch, IPO covered 10-27), Nvidia/Nscale cosigner (single outlet).
+  Drive: connector available; folder checked (no 2026-10-31 titles); 3 Google Docs filed; DoorDash doc read back complete
+  with "(end)".
+  Timings: setup ~4 min, news 8 s, producers 15-20 min in parallel; no lead re-renders.
+  Problems: publish-videos.sh again printed HTTP 403 push errors (prune step), but videos/2026-10-31 is on the remote with
+  all 3 MP4s + covers + thumbnails (ls-tree). My setup wait loop used pgrep -f on a pattern in its own command line and
+  hung (lesson: wait on a PID, not a pattern).
 - 2026-10-30 (nightly run, Friday, fired ~06:58 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "An OpenAI-backed firm is buying the alarm company ADT." (Thrive Holdings agreed Oct 29 to buy ADT: $10.00/share cash,
      ~$7.6B equity, $15.3B enterprise value, 45.6% premium to Oct 27 close; goes private; Thrive Holdings formed by Thrive
