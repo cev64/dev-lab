@@ -42,6 +42,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Timings: setup ~5 min, news 4 s, producers 11-15 min in parallel; no lead re-renders.
   Problems: publish-videos.sh again printed HTTP 403 push errors, but videos/2026-11-01 is on the remote with all 9 files
   (ls-tree). WebFetch blocked for theverge/arstechnica/techmeme/WaPo; producers used WebSearch extracts + reprints.
+  Improve: PR #38 merged: 7 scenes promoted (library 199 -> 206: orbit-sat (first space scene, 6 modes), jet-pivot
+  (from boom-pivot, 6 modes), voter-chat, guide-test, guide-tally, test-snapshot, vote-tuesday); story defaults generic;
+  96/96 stills byte-identical from library copies; 73 engine unit tests OK.
 - 2026-10-31 (nightly run, Saturday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Up to 5,000 coders downloaded a rigged AI tool." (Oct 29: a tampered copy of Anthropic's Claude Code extension sat in
      Cursor's VS Code extension marketplace ~2:27am-1:35pm PT ("about eleven hours"; Ars headline says "nearly 12", Cursor's
