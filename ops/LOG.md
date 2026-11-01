@@ -2,6 +2,46 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-01 (nightly run, Sunday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "A supersonic jet maker now builds AI power plants." (Boom Supersonic unveiled a Colorado factory Oct 22 for its
+     42 MW "Superpower" gas turbines for AI data centers; Boom says same tech as its jet engine and turbine money funds
+     the Overture jet; launch customer Crusoe backed out of its 29-turbine, $1.25B order in September (TechCrunch);
+     United (15 Overtures if requirements met) CEO Scott Kirby on a podcast Oct 28: "It's not going to happen in '29.
+     It's going to take longer." (text-only quote card, no likeness); caveat: milestone not specified, Boom didn't
+     respond to Forbes, official target still 2029; sources: Forbes, Ars Technica (via Slashdot), EconoTimes,
+     TechCrunch x2, ColoradoBiz, Boom releases). Rubric ~75 (fresh 17, stakes 12, surprise 14, visual 9, verif 17,
+     controversy 6). 73.3 s, -14.6 LUFS, style horizon, 100% scenes (new: boom-pivot.js, 6 modes). Hook ~3.4 s.
+  2. "Chatbot voter guides kept getting districts wrong." (The Washington Post's tests: six chatbots built midterm
+     voter guides for an address in every US county, 3,000+ analysed; 48% didn't name the district, 22% of those that
+     did were wrong; errors traced to little-known, largely AI-built voter sites, one mapping some ZIP codes to wrong
+     districts, cited by Copilot in 75% of tests; OpenAI and Amazon appeared to change answers after being contacted;
+     civic line: check your state or county's official election site; election Tue Nov 3; sources: WaPo (x2, paywalled,
+     via extracts), AI Weekly, FourWeekMBA, Campaign Trend, AFP via Yahoo). Rubric ~80 (18/20/13/8/13/8). 67.4 s,
+     -14.6 LUFS, style flow, 100% scenes (new: voter-chat, guide-test, guide-tally, test-snapshot, vote-tuesday). Names
+     no site, candidate or person. Cut: "three obscure sites" (Techmeme headline only), ChatGPT 22% citation rate
+     (confusable with the other 22%), Alexa pause (length).
+  3. "An AI server in space just wrote a poem." (Google, Fri Oct 30: Project Suncatcher prototype satellite (launched
+     Oct 1, SpaceX rideshare, built with Planet) ran Gemma 4 on a data-center-class TPU in orbit, answered its first
+     prompt with a haiku downlinked over Svalbard, Norway, "Hello World" milestone; Google Research: a solar panel in
+     the right orbit can be up to 8x more productive; heat/cooling the hard part; next: twin linked satellites in 2027;
+     sources: Google blog, Google Research, Unite.AI, ETV Bharat). Rubric ~73 (18/10/13/10/18/4). 68.8 s, -14.5 LUFS,
+     style neural, 100% scenes (new: orbit-sat.js, 6 modes; first space scene). Producer corrected the brief: Google
+     claims the first response from a data-center-class TPU in orbit, not the first AI in space; script says so. Cut:
+     "four TPUs" and "15 minutes per run" (conflicting/single source).
+  Lead review: all claims traced to claim tables; contact sheets + final-MP4 frames reviewed (frame 0 in action, loop
+  dissolve, nothing at the bottom). Nits: voter-guides chat window and 75% card sit near the left edge (x ~15) in beat
+  4; voter-guide second sources all report The Post's tests (one primary investigation, attributed on every line);
+  Boom Ars/Forbes read through Slashdot/Yahoo reprints (both blocked to fetch); captions spell some numbers out.
+  Picks note: skipped xAI/NAACP pollution suit (xAI covered 10-29), ChatGPT share-link bug bounty (OpenAI covered 10-31,
+  security covered 10-31), AI agent mouse-brain injection (WIRED only, couldn't verify), Pope Leo AI disarmament (one
+  person's speech), AI detectors changing human writing (Bloomberg only), Meta humanoid w/ Fourier (sources-say),
+  Volta autodoxer malware (security again), scraping opt-out standard (lower stakes).
+  Sunday Skeptic review: skipped, ops/PERFORMANCE.md still has no rows (nothing to learn from); rubric unchanged.
+  Drive: connector available; folder checked (no 2026-11-01 titles); 3 Google Docs filed; haiku doc read back complete
+  with "(end)".
+  Timings: setup ~5 min, news 4 s, producers 11-15 min in parallel; no lead re-renders.
+  Problems: publish-videos.sh again printed HTTP 403 push errors, but videos/2026-11-01 is on the remote with all 9 files
+  (ls-tree). WebFetch blocked for theverge/arstechnica/techmeme/WaPo; producers used WebSearch extracts + reprints.
 - 2026-10-31 (nightly run, Saturday, fired ~06:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Up to 5,000 coders downloaded a rigged AI tool." (Oct 29: a tampered copy of Anthropic's Claude Code extension sat in
      Cursor's VS Code extension marketplace ~2:27am-1:35pm PT ("about eleven hours"; Ars headline says "nearly 12", Cursor's

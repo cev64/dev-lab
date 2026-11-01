@@ -1171,6 +1171,60 @@
         "https://thehackernews.com/2026/10/official-claude-code-vs-code-extension.html"
       ],
       "video": "out/2026-10-31/2026-10-31-explainer-claude-code-backdoor.mp4"
+    },
+    {
+      "id": "2026-11-01-explainer-space-haiku",
+      "date": "2026-11-01",
+      "hook": "An AI server in space just wrote a poem",
+      "topic": "SPACE AI",
+      "title": "Google's satellite AI wrote a haiku from orbit",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://blog.google/innovation-and-ai/models-and-research/google-research/project-suncatcher-satellite-response/",
+        "https://research.google/blog/exploring-a-space-based-scalable-ai-infrastructure-system-design/",
+        "https://www.unite.ai/project-suncatchers-orbiting-tpu-delivers-its-first-ai-generated-haiku/",
+        "https://www.etvbharat.com/en/technology/google-project-suncatcher-tpu-space-data-centre-gemma-ai-haiku-enn26103104286"
+      ],
+      "video": "out/2026-11-01/2026-11-01-explainer-space-haiku.mp4"
+    },
+    {
+      "id": "2026-11-01-explainer-chatbot-voter-guides",
+      "date": "2026-11-01",
+      "hook": "Chatbot voter guides kept getting districts wrong",
+      "topic": "ELECTIONS",
+      "title": "Chatbot voter guides got districts wrong in Washington Post tests",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.washingtonpost.com/technology/2026/10/24/we-asked-six-chatbots-make-voter-guides-they-made-serious-errors/",
+        "https://www.washingtonpost.com/technology/2026/10/30/how-an-obscure-website-became-force-americas-election-information-machine",
+        "https://aiweekly.co/alerts/copilot-cited-ai-built-ballot-brief-in-75-of-election-tests",
+        "https://fourweekmba.com/ai-chatgpt-and-rivals-voter-guides-named-right-district-41/",
+        "https://campaigntrend.com/chatbots-flunk-the-ballot-test/",
+        "https://www.yahoo.com/news/politics/articles/spewing-us-election-falsehoods-ai-020256942.html"
+      ],
+      "video": "out/2026-11-01/2026-11-01-explainer-chatbot-voter-guides.mp4"
+    },
+    {
+      "id": "2026-11-01-explainer-boom-pivot",
+      "date": "2026-11-01",
+      "hook": "A supersonic jet maker now builds AI power plants",
+      "topic": "AI POWER",
+      "title": "Boom Supersonic now builds power plants for AI, and its jet looks further away",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.forbes.com/sites/tedreed/2026/10/28/united-airlines-ceo-says-boom-supersonic-jet-wont-be-ready-this-decade/",
+        "https://hardware.slashdot.org/story/26/10/30/2355244/supersonic-airliner-in-doubt-as-company-shifts-to-powering-ai-data-centers",
+        "https://econotimes.com/United-CEO-Says-Boom-Supersonic-s-Overture-Will-Miss-Its-2029-Target-1767396",
+        "https://techcrunch.com/2026/09/25/crusoe-abandons-1-25b-plan-to-use-boom-turbines-at-ai-data-centers/",
+        "https://techcrunch.com/2025/12/09/boom-supersonic-raises-300m-to-build-natural-gas-turbines-for-crusoe-data-centers/",
+        "https://finance.yahoo.com/news/boom-supersonic-power-ai-data-120000276.html",
+        "https://coloradobiz.com/boom-supersonic-150-million-turbine-factory-centennial/",
+        "https://boomsupersonic.com/press-release/united-airlines-agreement"
+      ],
+      "video": "out/2026-11-01/2026-11-01-explainer-boom-pivot.mp4"
     }
   ]
 }
