@@ -2,6 +2,41 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-02 (nightly run, Monday, fired ~08:02 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "The same iPhone gets a different AI brain." (Apple's China newsroom post: first Apple Intelligence features reach
+     iPhones in mainland China with iOS 27.3 in December, developer testing from Nov 4; for certain requests Siri, Writing
+     Tools and Visual Intelligence can tap Alibaba's Qwen (sign in with a Qwen account or Sign in with Apple, Apple only);
+     CAC approval in July; new "Siri AI" from WWDC not included; iPhone only, other platforms after approvals; sources:
+     Apple newsroom (zh), 9to5Mac, The Next Web, TechCrunch, Engadget, Apple 2024 post, Tom's Guide). Rubric ~72 (fresh 17,
+     stakes 12, surprise 12, visual 9, verif 18, controversy 4). 68.3 s, -14.6 LUFS, style neural, 100% scenes (new:
+     brain-swap.js, 6 modes). 149 words (175 ran 80 s). Cut: device list (outlets conflict), "swaps ChatGPT", Baidu role.
+  2. "OpenAI's boss says your computer's memory mostly sits idle." (Sam Altman on the Cheeky Pint podcast (~Oct 29): "quite
+     terrible" for the world's limited DRAM to sit in everyone's computer, "used 5% of the time" (his estimate); wants
+     maximum utilisation in the cloud; memory scarce as makers prioritise AI data centers, PC/phone prices up; critics:
+     OpenAI's products run in data centers by subscription, local AI more private; quote as text only, no likeness;
+     sources: PC Gamer, Notebookcheck, Tom's Guide, Insider Gaming, Analytics India Mag). Rubric ~74 (16/16/13/8/15/6).
+     70.6 s, -14.6 LUFS, style orb, 100% scenes (new: dram-idle.js, 5 modes; reused demand-queue). Cut: viral misquote
+     "terrible allocation of scarce resources", Yonhap Korea export record (single outlet, "record" unclear), "Stripe's".
+  3. "New York just banned chatbots faking friendship with kids." (Gov. Hochul signed S.9051B/A.10379C Wed Oct 28: chatbots
+     can't present as a real person or claim feelings, claim a romantic bond with a child, urge secrets from parents,
+     promote self-harm (about a dozen categories); AG can seek up to $25,000 per violation; covers anyone not confirmed an
+     adult, age checks with a non-ID option; "in the coming months" (effective date conflicts: Jan 1 vs Jun 1 2027 per
+     Senate sponsor's Oct 30 release, so no date stated); Steyer quote and Tech:NYC warning as the two sides; sources:
+     Governor release, NY Senate, AP, TNW, IAPP, AFP). Rubric ~76 (fresh 10, stakes 20, surprise 12, visual 9, verif 19,
+     controversy 6). 68.0 s, -14.6 LUFS, style flow, 100% scenes (new: kid-chat-rules, homework-lock; reused rule-stamp,
+     age-gate). Assumption: signed ~5 days ago (> 72 h gate); taken anyway because the weekend's fresh candidates were
+     funding rounds or repeats and the age-check angle is still the live development; flagged here.
+  Lead review: claims traced to claim tables; final-MP4 contact sheets reviewed (frame 0 in action, loop dissolve, safe
+  area, nothing at the bottom). Nits: Apple sign-in detail single-source (Apple, attributed); NY "~12" rests on IAPP/AP.
+  Picks note: skipped Anthropic "cruelty" usage policy (announced Oct 8, too old), Microsoft/AFT school standard (Sept
+  news, Nov 1 date unconfirmed in primary), Chainalysis agentic breach (security covered 10-30/10-31), xAI NAACP suit
+  (xAI covered 10-29), Korea chip exports (overlaps DRAM story), funding rounds (Broccoli, Casap, Hex, Humain), OpenAI
+  shared usage limits (OpenAI already picked), iQIYI AI film studio (couldn't verify).
+  Drive: connector available; no 2026-11-02 titles existed; 3 Google Docs filed.
+  Timings: fetch of all refs hung (>2 min, killed; fetched main only), setup ~4 min, news 5 s, producers 10-13 min in
+  parallel; no lead re-renders.
+  Problems: publish-videos.sh printed HTTP 403 push errors again, but videos/2026-11-02 is on the remote with all 9 files
+  (ls-tree). Producers shared scratchpad qa/ folders (harmless). Improve step skipped tonight.
 - 2026-11-01 (nightly run, Sunday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "A supersonic jet maker now builds AI power plants." (Boom Supersonic unveiled a Colorado factory Oct 22 for its
      42 MW "Superpower" gas turbines for AI data centers; Boom says same tech as its jet engine and turbine money funds

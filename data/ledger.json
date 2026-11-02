@@ -1225,6 +1225,60 @@
         "https://boomsupersonic.com/press-release/united-airlines-agreement"
       ],
       "video": "out/2026-11-01/2026-11-01-explainer-boom-pivot.mp4"
+    },
+    {
+      "id": "2026-11-02-explainer-ny-kids-chatbots",
+      "date": "2026-11-02",
+      "hook": "New York just banned chatbots faking friendship with kids",
+      "topic": "KIDS & AI",
+      "title": "New York's new law for AI chatbots and kids",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.governor.ny.gov/news/governor-hochul-signs-nation-leading-legislation-protect-kids-ai-chatbots-and-ensure-baby",
+        "https://www.nysenate.gov/newsroom/press-releases/2026/kristen-gonzalez/senator-kristen-gonzalez-bans-unsafe-chatbot-feature",
+        "https://www.insurancejournal.com/news/east/2026/10/30/890880.htm",
+        "https://thenextweb.com/news/new-york-ai-chatbots-children-law-hochul-baby-monitors",
+        "https://iapp.org/news/a/new-york-s-governor-signs-youth-ai-chatbot-safety-bill",
+        "https://tribune.com.pk/story/2637627/new-york-bans-ai-chatbots-from-posing-as-companions-to-children"
+      ],
+      "video": "out/2026-11-02/2026-11-02-explainer-ny-kids-chatbots.mp4"
+    },
+    {
+      "id": "2026-11-02-explainer-apple-china-qwen",
+      "date": "2026-11-02",
+      "hook": "The same iPhone gets a different AI brain.",
+      "topic": "APPLE AI",
+      "title": "Apple Intelligence is coming to China, with Alibaba's Qwen inside",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.apple.com.cn/newsroom/2026/10/apple-intelligence-features-are-coming-to-users-in-china/",
+        "https://9to5mac.com/2026/10/30/apple-confirms-ios-27-3-beta-is-coming-next-week-with-apple-intelligence-in-china/",
+        "https://thenextweb.com/news/apple-intelligence-china-ios-27-3-alibaba-qwen",
+        "https://techcrunch.com/2026/07/16/apple-intelligence-approved-for-launch-in-china-with-alibabas-qwen-ai",
+        "https://engadget.com/2215606/apple-intelligence-finally-gets-regulatory-approval-in-china",
+        "https://www.apple.com/newsroom/2024/12/apple-intelligence-now-features-image-playground-genmoji-and-more/",
+        "https://www.tomsguide.com/phones/iphones/beyond-chatgpt-ios-27-extensions-will-reportedly-allow-siri-to-use-google-gemini-and-claude"
+      ],
+      "video": "out/2026-11-02/2026-11-02-explainer-apple-china-qwen.mp4"
+    },
+    {
+      "id": "2026-11-02-explainer-altman-dram",
+      "date": "2026-11-02",
+      "hook": "OpenAI's boss says your computer's memory mostly sits idle",
+      "topic": "CHIPS",
+      "title": "Sam Altman says your PC's memory mostly sits idle",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.pcgamer.com/software/ai/sam-altman-argues-that-its-bad-you-want-dram-in-your-computer-and-not-a-data-center-actually/",
+        "https://www.notebookcheck.net/Quite-terrible-Sam-Altman-says-PCs-waste-the-world-s-limited-DRAM-supply.1438393.0.html",
+        "https://www.tomsguide.com/ai/sam-altman-says-your-laptop-ram-is-a-terrible-allocation-of-scarce-resources-why-i-think-the-ai-bubble-is-about-to-prove-him-wrong",
+        "https://insider-gaming.com/sam-altman-pc-ram-allocation-cloud-ai/",
+        "https://analyticsindiamag.com/deep-tech/your-next-laptop-will-be-costlier-thanks-to-ai-data-centres"
+      ],
+      "video": "out/2026-11-02/2026-11-02-explainer-altman-dram.mp4"
     }
   ]
 }
