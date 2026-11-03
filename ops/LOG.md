@@ -2,6 +2,39 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-03 (nightly run, Tuesday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "When the grid maxes out, OpenAI's AI backs off" (OpenAI Grid Protectors Program, launched Mon Nov 2: future
+     campuses cut demand when the grid is strained; pilot = planned Effingham County, Ga. campus, Georgia Power can cut up
+     to 1,000 MW (~700,000 homes' demand, per OpenAI); per-utility terms (how much/fast/long), some sites on-site
+     generators or batteries; OpenAI says it pays full cost of lines and service; power phased in from 2028; OpenAI admits
+     flexibility can't replace new plants; sources: OpenAI (search extracts; 403 to fetch), The Next Web, CBS News
+     Atlanta, Grist, The Verge (lead, unread)). Rubric ~76 (fresh 19, stakes 16, surprise 12, visual 10, verif 15,
+     controversy 4). 70.7 s, -14.7 LUFS, style horizon, 100% scenes (new: grid-protect.js, 6 modes).
+     Cut: ~$15/month savings (projection, several deals), 25-year term (TNW only), 3.2 GW / $20B (length).
+  2. "Claude's maker says self-building AI may be close" (Anthropic S-1/A, filed Nov 2: "may imminently meet" its RSP
+     definition of dramatically accelerated AI progress (2 years of progress in 1); based on estimates for future models,
+     no current model designated over it; "a considerable safety risk"; considering RSP updates to keep humans in
+     control; skeptics: S-1 is also marketing; sources: SEC filing, Anthropic RSP v3.4, TechCrunch, Gizmodo). Rubric
+     ~80 (20/16/15/8/17/4). 70.8 s, -14.6 LUFS, style neural, 100% scenes (new: self-build.js, 6 modes). New
+     development on the 10-27 IPO story (different filing and claim), not flagged followUp. "Very close" (TechCrunch
+     headline) not used; filing's wording only. Cut: 250x internal-use growth (filing only).
+  3. "His AI helpers cost up to $200K a year." (Garry Tan on Walter Isaacson's The Builders: "about maybe $100,000 to
+     $200,000 a year on tokens", "a crazy privilege", everyone in 2-3 years (his prediction); agent read his email and
+     Dropbox; sources: episode transcript (iHeart), TechCrunch; token definition from Anthropic/Google docs). Rubric ~74
+     (19/13/16/8/14/4). 67.1 s, -14.7 LUFS, style orb, 100% scenes (new: token-meter, podcast-studio (speakers
+     off-screen, names as text), token-chop). Real people text only. Cut: "cyber psychosis"/"barely sleeps" (from a
+     March SXSW talk, TechCrunch only).
+  Lead review: claims traced to claim tables; final-MP4 contact sheets reviewed (frame 0 in action, loop dissolve, safe
+  area, nothing at the bottom). Nits: RSI beat 2 pills reach x~915; Tan beat 3 a token tile briefly crosses a pill;
+  token-bill hook ~3.9 s; Grid's OpenAI primary read via search extracts only (403).
+  Picks note: skipped Nvidia 51%-non-Chinese cloud rule (FT sources only), Anthropic Claude Code game-clone prompt
+  (Anthropic already picked), Huawei HBM (The Information sources), ChatGPT Chat/Work tab merge and OpenAI bug bounty
+  (OpenAI already picked), funding rounds (Trajectory, Larridin), Grok Bot limits, Google Dreambeans India (kept for a
+  slow night).
+  Drive: connector available; no 2026-11-03 titles existed; 3 Google Docs filed.
+  Timings: full fetch hung again (~2 min, killed; fetched main only), setup 7 min, news 5 s, producers 15-16.5 min in
+  parallel; no lead re-renders.
+  Problems: publish-videos.sh printed HTTP 403 push errors again, but videos/2026-11-03 holds all 9 files (ls-tree).
 - 2026-11-02 (nightly run, Monday, fired ~08:02 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "The same iPhone gets a different AI brain." (Apple's China newsroom post: first Apple Intelligence features reach
      iPhones in mainland China with iOS 27.3 in December, developer testing from Nov 4; for certain requests Siri, Writing

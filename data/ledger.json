@@ -1279,6 +1279,56 @@
         "https://analyticsindiamag.com/deep-tech/your-next-laptop-will-be-costlier-thanks-to-ai-data-centres"
       ],
       "video": "out/2026-11-02/2026-11-02-explainer-altman-dram.mp4"
+    },
+    {
+      "id": "2026-11-03-explainer-anthropic-rsi",
+      "date": "2026-11-03",
+      "hook": "Claude's maker says self-building AI may be close",
+      "topic": "AI SAFETY",
+      "title": "Anthropic's IPO filing says it may soon hit its own threshold for AI that speeds up building AI",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/anthropicpbc-sx1ax1.htm",
+        "https://www-cdn.anthropic.com/files/4zrzovbb/website/0bacdc8440ea96e62a8766d99ebe1d4eea6d5f3a.pdf",
+        "https://techcrunch.com/2026/11/02/anthropic-warns-that-its-very-close-to-rsi-capability-aka-self-building-ai/",
+        "https://gizmodo.com/anthropic-claims-to-be-closing-in-on-recursive-self-improvement-2000834175"
+      ],
+      "video": "out/2026-11-03/2026-11-03-explainer-anthropic-rsi.mp4"
+    },
+    {
+      "id": "2026-11-03-explainer-token-bill",
+      "date": "2026-11-03",
+      "hook": "His AI helpers cost up to $200K a year.",
+      "topic": "AI AGENTS",
+      "title": "Y Combinator's Garry Tan spends up to $200K a year on AI tokens",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.iheart.com/podcast/1119-the-builders-347224769/episode/garry-tan-decides-who-gets-to-build-the-future-349084203/",
+        "https://techcrunch.com/2026/11/02/y-combinators-garry-tan-uses-ai-agents-so-much-he-spends-up-to-200k-a-year-on-tokens/",
+        "https://platform.claude.com/docs/en/about-claude/glossary",
+        "https://aistudio.google.com/docs/tokens",
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      "video": "out/2026-11-03/2026-11-03-explainer-token-bill.mp4"
+    },
+    {
+      "id": "2026-11-03-explainer-grid-protectors",
+      "date": "2026-11-03",
+      "hook": "When the grid maxes out, OpenAI's AI backs off",
+      "topic": "POWER",
+      "title": "OpenAI's Grid Protectors: AI data centers that back off when the grid is strained",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://openai.com/index/grid-protectors-program/",
+        "https://www.theverge.com/ai-artificial-intelligence/1024604/openai-data-center-grid-protection-program",
+        "https://thenextweb.com/news/openai-grid-protectors-program-demand-response-georgia",
+        "https://www.cbsnews.com/atlanta/news/georgia-power-gets-clearance-to-serve-openais-massive-ai-data-center-in-effingham-county/",
+        "https://grist.org/accountability/data-centers-are-straining-the-grid-can-they-be-forced-to-pay-for-it/"
+      ],
+      "video": "out/2026-11-03/2026-11-03-explainer-grid-protectors.mp4"
     }
   ]
 }
