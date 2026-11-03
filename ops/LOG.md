@@ -35,6 +35,10 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Timings: full fetch hung again (~2 min, killed; fetched main only), setup 7 min, news 5 s, producers 15-16.5 min in
   parallel; no lead re-renders.
   Problems: publish-videos.sh printed HTTP 403 push errors again, but videos/2026-11-03 holds all 9 files (ls-tree).
+  Improve: PR #39 merged: 5 scenes promoted to the shared library (206 -> 211): self-build, grid-protect, token-meter,
+  podcast-studio (speakers off-screen, names as text), token-chop; company/person defaults made generic; verified with
+  stills of every mode on generic defaults. Not done: byte-identical re-render check (token-meter digits now derived
+  from params).
 - 2026-11-02 (nightly run, Monday, fired ~08:02 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "The same iPhone gets a different AI brain." (Apple's China newsroom post: first Apple Intelligence features reach
      iPhones in mainland China with iOS 27.3 in December, developer testing from Nov 4; for certain requests Siri, Writing
