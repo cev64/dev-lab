@@ -2,6 +2,46 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-04 (nightly run, Wednesday, fired ~07:45 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Siri can now learn to use any app." (Apple Developer news, Tue Nov 3: a Developer Preview in the iOS/iPadOS/macOS/
+     visionOS 27.3 betas lets any developer integrate their app with Siri AI via App Intents, with custom actions beyond the
+     old set categories and "skills" that chain several actions; Apple's examples: checking a delivery, booking a
+     reservation, placing an order; first integrations reach customers "in a few months", App Store submissions in the
+     spring; needs an Apple Intelligence device; off in the EU on iPhone; terms still to come; sources: Apple Developer,
+     Cult of Mac, Digital Trends (Verge listed, unread: 403)). Rubric ~76 (fresh 18, stakes 15, surprise 9, visual 9,
+     verif 18, controversy 7). 66.2 s, -14.6 LUFS, style neural, 100% scenes (new: siri-apps.js, 6 modes, brandless app
+     tiles). Hook is true for developers; beat 5 says users wait months. Cut: usage limits, under-13, language list.
+  2. "Game mods now have to admit using AI." (Nexus Mods news post 15654, Tue Nov 3: AI disclosure mandatory on new
+     uploads; AI-assisted mods must explain how AI was used; three labels date from the summer (PC Gamer, Jul 31); 60-day
+     grace for older mods to Jan 2 2027, then enforcement, removal after ignored notices; AI mods not banned ("a ban will
+     not eliminate AI ... will prevent people from mentioning its use"); players get settings to see less or no AI;
+     sources: Nexus Mods (search extracts; 403 to fetch), Inven Global, TechRaptor, Neowin, PC Gamer). Rubric ~74
+     (18/12/9/9/14/12). 69.5 s, -14.5 LUFS, style horizon, 100% scenes (new: upload-gate (3 modes), label-bins,
+     grace-shelf, player-filter). Lead fix: beat 6 said "Nexus admits spotting AI isn't an exact science" (sourced only to
+     gaming.net, an AI-written site, and a forum); replaced with "Authors label themselves. So it all runs on honesty, and
+     some AI mods could still slip through." and re-voiced/re-rendered. Cut: 2.13% donation points, 20,000 quarantined.
+  3. "Google told schools no AI means no Search." (Google Keyword post, Tue Nov 3: Gemini, Gemini Notebook, Gemini in
+     Classroom and Search start off for K-12 student accounts until admins turn them on; Google told the NYT schools that
+     ban the AI won't get Search ("Search and AI are deeply integrated", per CNBC/9to5Google); pushback from a senator, a
+     teachers' union and NYC's mayor (unnamed in video); later that day each can be switched on by itself; Search still has
+     AI built in like AI summaries (NBC); Guided Learning pilot in select U.S. schools later this month; sources: Google,
+     NBC, CNBC, CBS, 9to5Google). Rubric ~82 (18/18/12/8/16/10). 69.1 s, -14.5 LUFS, style flow, 100% scenes (new:
+     school-search.js, 6 modes: admin console with chained toggles). Told as a clarification, not "backed down".
+     Lead fix: TikTok line 1 aligned to the claim table ("ban its AI", not "turn off Gemini"). Cut: early-2027 AI Overviews
+     option (9to5Google only).
+  Lead review: claims traced to claim tables; stills and final-MP4 frames reviewed (frame 0 in action, loop dissolve,
+  nothing at the bottom). Nits: school-search admin console and Siri catch-beat phone reach x ~10-20 after zoom; library
+  token-take card still near the left edge; school-search drive.json kept the old TikTok line (--no-render doesn't rewrite
+  it), Drive doc filed with the corrected line.
+  Picks note: skipped ChatGPT "20% of Google's search volume" (OpenAI's own figure, Verge only, overlaps the Google
+  schools story), Anthropic FlashProve model identity (Anthropic covered 11-03), Apple 18+ dating/AI companions (Apple
+  already picked; kids angle in tonight's Google story), Nvidia China 6M chip orders and Oracle/Tencent (sources-say),
+  Democratic wins vs data centers (Bloomberg only, partisan), EU court adviser on Google copyright (Google already
+  picked), Baidu robotaxi sim, pharma skeptics (WSJ only), Chinese embodied-AI funding.
+  Drive: connector available; no 2026-11-04 titles existed; 3 Google Docs filed.
+  Timings: fetch ~2.5 min, setup ~6 min, news 6 s, producers 13-18 min in parallel; one lead re-render (mods, ~2 min).
+  Problems: publish-videos.sh printed HTTP 403 push errors again, but videos/2026-11-04 holds all 10 files (ls-tree).
+  WebFetch 403 on theverge, nexusmods.com, arstechnica. Improve step skipped tonight (time).
 - 2026-11-03 (nightly run, Tuesday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "When the grid maxes out, OpenAI's AI backs off" (OpenAI Grid Protectors Program, launched Mon Nov 2: future
      campuses cut demand when the grid is strained; pilot = planned Effingham County, Ga. campus, Georgia Power can cut up

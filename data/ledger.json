@@ -1329,6 +1329,57 @@
         "https://grist.org/accountability/data-centers-are-straining-the-grid-can-they-be-forced-to-pay-for-it/"
       ],
       "video": "out/2026-11-03/2026-11-03-explainer-grid-protectors.mp4"
+    },
+    {
+      "id": "2026-11-04-explainer-siri-apps",
+      "date": "2026-11-04",
+      "hook": "Siri can now learn to use any app.",
+      "topic": "APPLE AI",
+      "title": "Apple opens Siri AI to any app developer in the iOS 27.3 betas",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://developer.apple.com/news/?id=gdk2umrf",
+        "https://www.cultofmac.com/news/ios-27-3-beta-siri-ai-audio-intelligence",
+        "https://www.digitaltrends.com/computing/apple-opens-siri-ai-to-all-developers-allowing-more-advanced-third-party-app-controls/",
+        "https://www.theverge.com/tech/1025694/apple-siri-ai-third-party-apps"
+      ],
+      "video": "out/2026-11-04/2026-11-04-explainer-siri-apps.mp4"
+    },
+    {
+      "id": "2026-11-04-explainer-school-search",
+      "date": "2026-11-04",
+      "hook": "Google told schools no AI means no Search",
+      "topic": "AI IN SCHOOLS",
+      "title": "Google told schools that turning off its AI meant losing Google Search, then said schools can switch Search on by itself",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://blog.google/products-and-platforms/products/education/ai-learning-era-updates-2026/",
+        "https://www.nbcnews.com/tech/tech-news/google-shut-search-schools-opt-ai-rcna607280",
+        "https://www.cnbc.com/2026/11/03/google-responds-to-outrage-over-removing-search-in-schools-that-ban-ai.html",
+        "https://www.cbsnews.com/news/google-search-access-schools-ai-tools/",
+        "https://9to5google.com/2026/11/03/google-search-ai-guided-learning-changes/"
+      ],
+      "video": "out/2026-11-04/2026-11-04-explainer-school-search.mp4"
+    },
+    {
+      "id": "2026-11-04-explainer-mod-ai-labels",
+      "date": "2026-11-04",
+      "hook": "Game mods now have to admit using AI",
+      "topic": "GAMING",
+      "title": "Nexus Mods makes AI disclosure mandatory for new mod uploads",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.nexusmods.com/news/15654",
+        "https://www.theverge.com/games/1026085/nexus-mods-ai-disclosures",
+        "https://techraptor.net/gaming/news/nexus-mods-adds-mandatory-ai-disclosure-as-backlash-grows",
+        "https://www.invenglobal.com/articles/28119/nexus-mods-strengthens-ai-disclosure-requirements",
+        "https://www.neowin.net/news/nexus-mods-makes-ai-disclosures-mandatory-adds-user-filter-controls/",
+        "https://www.pcgamer.com/gaming-industry/nexus-mods-finally-tightens-the-screws-on-ai-though-its-still-playing-softball-with-the-tide-of-slop/"
+      ],
+      "video": "out/2026-11-04/2026-11-04-explainer-mod-ai-labels.mp4"
     }
   ]
 }
