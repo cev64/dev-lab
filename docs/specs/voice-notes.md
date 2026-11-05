@@ -3,12 +3,13 @@
 Owner: voice engineer. Measured 2026-10-09 in this container (4 cores, no GPU, Python 3.13). Code:
 `engine/clipper/voice.py`, `engine/clipper/tts_backends.py`, tests `engine/tests/test_voice.py`.
 
-## Decision (updated 2026-10-26, owner pick)
-**Default narrator: Kokoro-82M v1.0 (kokoro-onnx 0.6.1, fp32 export), voice `am_michael`, speed 1.0, misaki G2P,
-phrase-level pacing and a voice polish.** Charlie compared four takes of the same line on 2026-10-26 (current
+## Decision (updated 2026-11-05, Charlie pick via Tank)
+**Default narrator: Kokoro-82M v1.0 (kokoro-onnx 0.6.1, fp32 export), voice `am_adam`, speed 1.0, misaki G2P,
+phrase-level pacing and a voice polish.** Charlie picked Adam (`kokoro:am_adam`) on 2026-11-05 via Tank.
+Charlie compared four takes of the same line on 2026-10-26 (current
 af_heart@0.85; af_heart retuned; an af_bella/af_heart blend retuned; am_michael retuned) and picked the male voice.
 **Fallback: Piper `en_US-ljspeech-medium`** (`"voice": "piper:en_US-ljspeech-medium"`). A script can still ask for
-the old narrator with `"voice": "kokoro:af_heart@0.85"`.
+the old narrator with `"voice": "kokoro:af_heart@0.85"`, or for that 2026-10-26 pick with `"voice": "kokoro:am_michael"`.
 
 ### Why the old read sounded synthetic, and what changed
 | Cause | Change |
@@ -33,6 +34,7 @@ included), synth 40 s (1.7x realtime on 4 cores). Rule of thumb: seconds ~= word
 give ~62-74 s**. One script only; re-measure on the first nights.
 Licences: misaki Apache-2.0, spaCy and en_core_web_sm MIT, num2words LGPL (imported, not modified). am_michael is one
 of the Kokoro-82M voice packs (Apache-2.0, graded C+ by its authors; provenance undocumented like the other packs).
+am_adam (default since 2026-11-05) ships in that same voices pack under the same Apache-2.0 weights.
 
 `--align tts` (2026-10-26): when the whisper model can't be downloaded, word timings come from the TTS phrase spans
 (each phrase's tokens spread over its exact span by spoken length, then `snap_to_speech`); `wer` is null and a

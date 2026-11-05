@@ -51,8 +51,8 @@ said", "analysts expect"). No motives or guilt; prefer "alleges", "according to"
 publisher URL before citing.
 
 ## 3. Write the script (15 min)
-`work/explainers/<id>/script.json` per the contract. 5-8 beats, **~150-180 words, narration 62-75 s** (narrator since 2026-10-26: Kokoro am_michael at speed 1.0 with
-phrase pauses, ~2.4-2.5 words/s: 168 words gave 69-71 s; seconds ~= words / 2.45 + 3.2; trim if over 75 s).
+`work/explainers/<id>/script.json` per the contract. 5-8 beats, **~150-180 words, narration 62-75 s** (narrator since 2026-11-05: Kokoro am_adam at speed 1.0 with
+phrase pauses; pacing measured 2026-10-26 on am_michael, ~2.4-2.5 words/s: 168 words gave 69-71 s; seconds ~= words / 2.45 + 3.2; trim if over 75 s).
 
 **Write for the voice (cadence; owner ask 2026-10-26).** The narrator reads each beat in one breath-group and
 lengthens the pauses your punctuation asks for, so the script *is* the cadence. Read every beat aloud before voicing.
