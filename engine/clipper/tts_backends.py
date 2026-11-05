@@ -2,7 +2,7 @@
 
 Voice spec (script.json "voice"):
   "default"                      -> DEFAULT_SPEC
-  "kokoro:<voice>"               Kokoro-82M v1.0 (kokoro-onnx), e.g. kokoro:am_michael, kokoro:af_heart
+  "kokoro:<voice>"               Kokoro-82M v1.0 (kokoro-onnx), e.g. kokoro:am_adam, kokoro:af_heart
   "piper:<voice>"                Piper, e.g. piper:en_US-ljspeech-medium
 An optional "@<speed>" suffix overrides the backend's default speed, e.g. "kokoro:af_heart@0.9".
 
@@ -26,7 +26,7 @@ from pathlib import Path
 import numpy as np
 
 CACHE = Path(os.environ.get("CLIPPER_TTS_CACHE", "~/.cache/clipper-tts")).expanduser()
-DEFAULT_SPEC = "kokoro:am_michael"  # owner pick 2026-10-26 (sample 4: male voice, retuned)
+DEFAULT_SPEC = "kokoro:am_adam"  # Charlie pick 2026-11-05 via Tank (Adam / am_adam)
 FALLBACK_SPEC = "piper:en_US-ljspeech-medium"
 
 # Default speed per engine. Kokoro is most natural at its trained speed 1.0; slowing it (0.85 until 2026-10-26)
@@ -190,7 +190,7 @@ class KokoroBackend(Backend):
         self.spec = vs
         self.engine = Kokoro(str(model), str(voices))
         if vs.voice not in self.engine.voices:
-            raise SystemExit(f"kokoro voice {vs.voice!r} not found; try am_michael, af_heart, af_bella, bf_emma")
+            raise SystemExit(f"kokoro voice {vs.voice!r} not found; try am_adam, am_michael, af_heart, af_bella, bf_emma")
         self.sample_rate = 24000
         self.g2p = misaki_g2p()
         self.g2p_name = "misaki" if self.g2p is not None else "espeak"

@@ -222,7 +222,7 @@ class Cadence(unittest.TestCase):
 
 class Specs(unittest.TestCase):
     def test_parse(self):
-        self.assertEqual(tts.parse_spec("default"), tts.VoiceSpec("kokoro", "am_michael", tts.DEFAULT_SPEED["kokoro"]))
+        self.assertEqual(tts.parse_spec("default"), tts.VoiceSpec("kokoro", "am_adam", tts.DEFAULT_SPEED["kokoro"]))
         self.assertEqual(tts.parse_spec(None).engine, "kokoro")
         vs = tts.parse_spec("piper:en_US-ljspeech-medium@1.1")
         self.assertEqual((vs.engine, vs.voice, vs.speed), ("piper", "en_US-ljspeech-medium", 1.1))
