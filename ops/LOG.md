@@ -2,6 +2,40 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-05 (nightly run, Thursday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "ChatGPT can now turn your dog into a GIF" (OpenAI ChatGPT Images 2.6, Wed Nov 4: prompt or photo -> animated GIF,
+     speed and single-frame edits, share on repeat; saved reference images of you/pets/characters; OpenAI: >4B images a
+     week, up from 3B in September; all tiers per OpenAI, but Decrypt's testers didn't have GIFs yet; announcement
+     doesn't say how it handles GIFs of real people; sources: OpenAI community post + X, Decrypt, XDA, TNW, Trending
+     Topics, Storyboard18, AlphaSignal). Rubric ~71 (fresh 20, stakes 12, surprise 7, visual 10, verif 17, controversy 5).
+     66.9 s, -14.7 LUFS, style neural, 100% scenes (new: gif-maker.js, 6 modes, reusable dog/frame-strip/speed-dial).
+     Cut: "50% faster" (sources tie it to 2.5 / benchmark says ~32%), Flare/Sunburst names.
+  2. "An AI found 948 ways to hijack Linux." (OpenAI "A thousand fewer paths to root", Nov 4: unreleased cyber model, one
+     run, 2,308 leads -> 948 distinct local privilege-escalation flaws each with working exploit + proposed patch,
+     $1,213,430 in API credits; July run found 166; 61 patched upstream so far (61 patched + 43 staged = OpenAI's
+     ">100 patched or staged"); all OpenAI's own figures; sources: OpenAI (403 to fetch), Interesting Engineering,
+     Cryptika, Startup Fortune, RuntimeWire, GBHackers, AOSP). Rubric ~79 (19/14/14/8/16/8). 73.6 s, -14.7 LUFS, style
+     horizon, ~90% scenes (new: root-tower.js 3 modes, bug-funnel.js; kernel-ground.js = foundation-flaw copy with
+     machine signs). Producer stopped mid-way (its response was cut off by a safety classifier while writing
+     bug-funnel.js); lead wrote bug-funnel.js and kernel-ground.js, moved root-tower pills/robot inside the zoomed
+     safe area, rendered and QA'd.
+  3. "AI agents booked just four Uber rides all week" (Uber Q3 call, Wed Nov 4: Halloween week ~320M trips and orders,
+     ~500 Eats orders and "a grand total of four" rides from third-party AI agents; app already fast (ride booking ~50 s,
+     reorder ~90 s median); "very, very early", expects a net positive, "every single AI system company is talking to
+     us"; DoorDash several hundred agent orders (Oct 29) as context; sources: Motley Fool + Investing.com transcripts,
+     TechCrunch, FourWeekMBA (Verge listed, unread)). Rubric ~80 (19/12/15/9/17/8). 69.8 s, -14.6 LUFS, style orb, 100%
+     scenes (new: ride-tally.js, thumb-race.js, middleman-fear.js). It's a week, not the quarter (some outlets got it
+     wrong). No executives named.
+  Lead review: claims traced to claim tables; stills reviewed for all three plus final-MP4 frames for Linux.
+  Picks note: two OpenAI stories tonight (different kinds: consumer feature vs security run) because no other-company
+  story cleared the gates: UK entry-level AI job ads (Bloomberg only), China blocks SoftBank/ABB robotics (FT
+  sources-say), Meta drops fruit codenames (BI source), Apple cuts internal AI budgets (reportedly), Anthropic FlashProve
+  (no second source found), AI PACs midterms (conflicting tallies, partisan), Nothing AI device (teaser), Microsoft/
+  Nscale (FT). Also skipped Data centers lost the midterms (ALREADY COVERED).
+  Drive: connector available; no 2026-11-05 titles existed; 3 Google Docs filed.
+  Timings: setup ~6 min, news 6 s, producers 11-16 min in parallel, lead finish of Linux ~10 min.
+  Problems: publish-videos.sh printed HTTP 403 push errors again, but videos/2026-11-05 holds all 10 files (ls-tree).
+  WebFetch 403 on openai.com, theverge.com; X returns 402. Improve step skipped (time).
 - 2026-11-04 (nightly run, Wednesday, fired ~07:45 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Siri can now learn to use any app." (Apple Developer news, Tue Nov 3: a Developer Preview in the iOS/iPadOS/macOS/
      visionOS 27.3 betas lets any developer integrate their app with Siri AI via App Intents, with custom actions beyond the

@@ -1380,6 +1380,63 @@
         "https://www.pcgamer.com/gaming-industry/nexus-mods-finally-tightens-the-screws-on-ai-though-its-still-playing-softball-with-the-tide-of-slop/"
       ],
       "video": "out/2026-11-04/2026-11-04-explainer-mod-ai-labels.mp4"
+    },
+    {
+      "id": "2026-11-05-explainer-uber-agents",
+      "date": "2026-11-05",
+      "hook": "AI agents booked just four Uber rides all week",
+      "topic": "AGENTS",
+      "title": "Uber: AI agents booked just four rides in Halloween week",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.fool.com/earnings/call-transcripts/2026/11/04/uber-uber-q3-2026-earnings-call-transcript/",
+        "https://www.investing.com/news/transcripts/earnings-call-transcript-uber-tops-q3-2026-estimates-as-growth-stays-strong-93CH-4999599",
+        "https://techcrunch.com/2026/11/04/almost-no-one-uses-ai-agents-to-book-their-uber-company-says/",
+        "https://www.theverge.com/transportation/1026306/uber-ai-agents-q3-earnings-disintermediation",
+        "https://fourweekmba.com/ai-amazon-doordash-ceos-say-few-shoppers-buy-through-ai-agents/"
+      ],
+      "video": "out/2026-11-05/2026-11-05-explainer-uber-agents.mp4"
+    },
+    {
+      "id": "2026-11-05-explainer-chatgpt-gifs",
+      "date": "2026-11-05",
+      "hook": "ChatGPT can now turn your dog into a GIF",
+      "topic": "CHATGPT",
+      "title": "ChatGPT Images 2.6 turns a prompt or a photo into an animated GIF",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://community.openai.com/t/images-upgraded-introducing-chatgpt-images-2-6/1412901",
+        "https://x.com/OpenAI/status/2118124953832935810",
+        "https://decrypt.co/382574/chatgpt-gif-maker-openai-unannounced-images-2-6-model",
+        "https://www.xda-developers.com/chatgpt-is-getting-gif-generation-tools-to-make-creating-animated-images-a-lot-easier/",
+        "https://thenextweb.com/news/chatgpt-animated-gifs-images-2-6-openai",
+        "https://www.trendingtopics.eu/chatgpt-images-2-6-gifs-en/",
+        "https://www.storyboard18.com/digital/openai-introduces-images-2-6-adds-gif-generation-and-frame-level-editing-to-chatgpt-ws-l-114095.htm",
+        "https://alphasignal.ai/news/openai-s-images-2-6-generates-4b-weekly-images-32-faster-with-native-gifs"
+      ],
+      "video": "out/2026-11-05/2026-11-05-explainer-chatgpt-gifs.mp4"
+    },
+    {
+      "id": "2026-11-05-explainer-linux-948",
+      "date": "2026-11-05",
+      "hook": "An AI found 948 ways to hijack Linux.",
+      "topic": "SECURITY",
+      "title": "OpenAI's unreleased cyber model found 948 Linux root flaws",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://openai.com/index/a-thousand-fewer-paths-to-root/",
+        "https://interestingengineering.com/ai-robotics/openai-agents-linux-kernel-vulnerabilities-exploits",
+        "https://www.cryptika.com/openai-cyber-model-uncovers-948-linux-kernel-privilege-escalation-vulnerabilities/",
+        "https://startupfortune.com/openais-ai-pipeline-turned-2308-linux-kernel-bugs-into-948-root-exploits/",
+        "https://runtimewire.com/article/openai-agents-948-linux-kernel-flaws",
+        "https://gbhackers.com/openais-new-cyber-ai-model-finds-948-linux-privilege-escalation-vulnerabilities/",
+        "https://source.android.com/docs/core/architecture/kernel",
+        "https://www.linuxfoundation.org/press/press-release/global-enterprises-increase-linux-adoption-in-critical-growth-areas-including-cloud-computing"
+      ],
+      "video": "out/2026-11-05/2026-11-05-explainer-linux-948.mp4"
     }
   ]
 }
