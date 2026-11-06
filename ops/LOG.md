@@ -2,6 +2,44 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-06 (nightly run, Friday, fired ~07:45 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Airbnb's AI agent wants to plan your whole trip" (Airbnb Q3 2026 shareholder letter, SEC 8-K Ex. 99.1, Nov 5:
+     building its own AI agent to plan and book trips, rolling out to guests in H1 2027; composes the screen from
+     "hundreds of travel-specific interface elements" instead of a chat window; 80% of travelers enjoy researching trips
+     (Skift/McKinsey, per letter); in-trip help: changes, refunds, 24-hour safety support; cost/countries not said;
+     sources: Airbnb letter, TechCrunch, The Verge). Rubric ~73 (fresh 19, stakes 14, surprise 8, visual 9, verif 18,
+     controversy 5). 64.2 s, -14.9 LUFS, style horizon, 100% scenes (new: trip-agent.js, 5 modes). Cut: 40% support
+     stat (single source), "Muse and Instinct" agent names, CEO quotes; no executives named or drawn.
+  2. "Meta Muse just let you video call an AI." (Meta Newsroom, Thu Nov 5: Muse voice + expressive avatars rolling out
+     now in the US on mobile, web, Mac; first shown at Connect in Sept; ~870 ms response (Meta's research figure);
+     invisible watermark; default cartoon "Jolly", can be a person/animal/character; voice swap; coming to AI glasses
+     and Muse Charm; 18+; hears but can't see you; cost and audio retention not stated; sources: Meta newsroom + research
+     blog, TechCrunch, Runtime Wire, the420.in). Rubric ~75 (19/13/12/10/16/5). 65.0 s, -14.9 LUFS, style orb, 100%
+     scenes (new: muse-call.js, 5 modes, generic cartoon avatar). Note: Jolly / can't-see-you rest on TechCrunch (+the420),
+     not in Meta's newsroom post; kept as independent reporting.
+  3. "Claude can now read your bank account." (Anthropic "Introducing Personal Finance in Claude", Nov 5: beta on
+     Pro/Max/Ultra in the US; links bank and card accounts via Plaid, you sign in yourself, Claude doesn't see the
+     password; balances, credit limits, up to two years of transactions; read-only, can't move money; spending chart and
+     bills calendar; finance-hub chats not used for training, no ads, unlink anytime; can make mistakes, not investment
+     advice; sources: Anthropic post + help page, Plaid, Reuters (via GBAF), 9to5Mac, Interesting Engineering, Verge
+     summary). Rubric ~82 (19/18/12/9/18/6). 65.3 s, -15.0 LUFS, style neural, 100% scenes (new: bank-peek.js, 6 modes).
+     Cut: duplicate-charge flagging (single outlet), outside-hub privacy settings (Anthropic only).
+  Lead review: claims traced to claim tables; final-MP4 contact sheets reviewed for all three (frame 0 in action, loop
+  dissolve, nothing at the bottom); ffprobe 1080x1920 30 fps. Ordering: strongest hook (bank) in the evening.
+  Performance-driven changes (Tik's read 11-05): personal-stakes stories, product name in first on-screen text/line 1/
+  cover; skipped CEO/money/policy stories.
+  Picks note: skipped GPT-6 Cyber (OpenAI security story ran last night), Perplexity Teammates (first-party/Verge only,
+  workplace inside-baseball), OpenAI data-center NDAs (OpenAI third night running; backup pick), Anthropic IPO timing
+  (Reuters exclusive, sources-say), Palo Alto/Clutch (talks), ChatGPT murder-plot lawsuit (allegations against a private
+  person), Asian stocks/data centers (markets), Gemini Omni 1.2 Flash (Techmeme only), Brockman IPO 2027 (CEO/money).
+  Drive: connector available; no 2026-11-06 titles existed; 3 Google Docs filed (create_file returned fileSize 1, as
+  converted docs report before indexing).
+  Timings: setup ~6 min, news 7 s, producers 14-16 min in parallel, lead review/delivery ~10 min.
+  Problems: publish-videos.sh printed HTTP 403 push errors again, but videos/2026-11-06 holds all 10 files (ls-tree).
+  Producers shared one scratchpad and one overwrote another's helper script (mkclip.py); harmless tonight, but give
+  each producer its own scratch subfolder. Producer flagged token-take.js question card at x~20 after zoom (left of
+  the x>=60 safe area; X0 82 -> ~115) and that am_adam reads ~3.2 words/s so 150-180 words gives ~55 s (scripts needed
+  ~188-198 words); both added to BACKLOG. Improve step skipped (time).
 - 2026-11-05 (nightly run, Thursday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "ChatGPT can now turn your dog into a GIF" (OpenAI ChatGPT Images 2.6, Wed Nov 4: prompt or photo -> animated GIF,
      speed and single-frame edits, share on repeat; saved reference images of you/pets/characters; OpenAI: >4B images a

@@ -1437,6 +1437,57 @@
         "https://www.linuxfoundation.org/press/press-release/global-enterprises-increase-linux-adoption-in-critical-growth-areas-including-cloud-computing"
       ],
       "video": "out/2026-11-05/2026-11-05-explainer-linux-948.mp4"
+    },
+    {
+      "id": "2026-11-06-explainer-airbnb-agent",
+      "date": "2026-11-06",
+      "hook": "Airbnb's AI agent wants to plan your whole trip",
+      "topic": "AGENTS",
+      "title": "Airbnb is building its own AI travel agent, rolling out in the first half of 2027",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/1559720/000119312526449727/d437988dex991.htm",
+        "https://techcrunch.com/2026/11/05/airbnb-says-its-launching-an-ai-travel-agent-in-the-first-half-of-2027/",
+        "https://www.theverge.com/tech/1028412/airbnb-ai-travel-agent-q3-2026-earnings"
+      ],
+      "video": "out/2026-11-06/2026-11-06-explainer-airbnb-agent.mp4"
+    },
+    {
+      "id": "2026-11-06-explainer-claude-bank",
+      "date": "2026-11-06",
+      "hook": "Claude can now read your bank account",
+      "topic": "PERSONAL FINANCE",
+      "title": "Anthropic's Claude Personal Finance links to your bank accounts through Plaid (read-only beta)",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://claude.com/resources/articles/introducing-personal-finance-in-claude",
+        "https://support.claude.com/en/articles/18185620-use-personal-finance-in-claude",
+        "https://plaid.com/blog/plaid-anthropic-financial-insights-in-claude/",
+        "https://www.globalbankingandfinance.com/anthropic-rolls-out-personal-finance-feature-claude/",
+        "https://9to5mac.com/2026/11/05/anthropic-upgrades-claude-with-new-personal-finance-feature/",
+        "https://interestingengineering.com/ai-robotics/claude-personal-finance-bank-accounts-spending-analysis",
+        "https://www.theverge.com/ai-artificial-intelligence/1027652/anthropic-claude-plaid-personal-finance"
+      ],
+      "video": "out/2026-11-06/2026-11-06-explainer-claude-bank.mp4"
+    },
+    {
+      "id": "2026-11-06-explainer-muse-video",
+      "date": "2026-11-06",
+      "hook": "Meta Muse just let you video call an AI",
+      "topic": "META MUSE",
+      "title": "Meta Muse now lets you video call an AI avatar",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://about.fb.com/news/2026/11/introducing-muse-ai-voice-expressive-avatars/",
+        "https://techcrunch.com/2026/11/05/meta-says-us-users-can-now-video-chat-with-their-muse-ai-avatar/",
+        "https://research.meta.ai/blog/bringing-your-muse-to-life",
+        "https://runtimewire.com/article/meta-muse-realtime-avatar",
+        "https://the420.in/meta-muse-voice-ai-animated-avatar-video-chat/"
+      ],
+      "video": "out/2026-11-06/2026-11-06-explainer-muse-video.mp4"
     }
   ]
 }
