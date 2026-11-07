@@ -2,6 +2,42 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-07 (nightly run, Saturday, fired ~07:45 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "AI just turned over 7,000 pages of math into code." (Axiom says its AI agents formalized the Stacks Project, the
+     open-source algebraic-geometry library begun in 2005, in Lean: ~16 million lines (Axiom's figure), checked line by
+     line; agents worked in parallel and picked their own tasks; context: OpenAI released hundreds of AI-written math
+     manuscripts last month; caveat: AI-written part not yet human-reviewed (Axiom's site), no outside check found;
+     sources: Axiom blog + project site, TechCrunch, explainx.ai, Let's Data Science). Rubric ~70 (fresh 18, stakes 9,
+     surprise 14, visual 9, verif 14, controversy 6). 71.9 s, -14.8 LUFS, style orb, 100% scenes (new: stacks-code.js
+     3 modes, agent-graph.js, proof-flood.js, review-wait.js). Cut: $1.6B valuation (Axios correction to $1.45B),
+     exact page count (Axiom ~7,500 vs TechCrunch ~7,654 -> "over 7,000"), 719 (some say 722 -> "hundreds").
+  2. "Companies use way more AI, and pay barely more" (Ramp AI Index: token spend +42% in July, +1.5% across Aug-Sep
+     while volumes rose; tokens cheaper; OpenAI halved prices on two models in Sept; Anthropic's filing: ~$600M less
+     revenue growth from price cuts; median firm $15.70 vs top 1% $9,568 per employee/month (Sept); Ramp economist:
+     price cuts + budgets, not weak demand, "hypergrowth may be over" (his view); caveat: Ramp customers only, mostly
+     tech, +8.9% Sep 23-Oct 23; sources: Ramp (2 pages), TechCrunch, Unite.AI, Fortune, The Next Web). Rubric ~72
+     (19/13/13/8/15/4). 72.7 s, -14.9 LUFS, style neural, 100% scenes (new: use-vs-pay.js, spend-chart.js,
+     price-war.js, per-worker.js). No IPO/valuation angle, no executives drawn.
+  3. "Over 800 AI hacking tools left their doors open" (FOLLOW-UP to ARTEX 10-09 and 10-30; Censys blog Nov 5: ~815
+     ARTEX deployments reachable online; TechCrunch: no password needed; some exposed attack tools like implants; not
+     all malicious, many authorized testers; unclear why online; linked attacks used weak passwords / no MFA;
+     Microsoft quote; CrowdStrike linked it to South Korean finance attacks; sources: Censys, TechCrunch,
+     ShiftDelete.Net). Rubric ~78 (19/14/14/9/15/7). 69.4 s, -14.9 LUFS, style flow, 100% scenes.
+  Lead review: claims traced to claim tables; final-MP4 contact sheets for all three; ffprobe 1080x1920 30 fps.
+  Picks note: skipped Jensen Huang spy report (allegations against named people), OpenAI $1.25T round (sources-say,
+  CEO/money), Meta Muse Active Memory/spaces (Meta ran last night), Crusoe/Google Wyoming (sale vs exit unclear),
+  WIRED Chinese models hacking (second security story), AI dating dealbreaker (not fresh; surveys from June-July),
+  Google schools AI search (school-search ran 11-04), GTA VI AI clones (speculation), BioBasicsBench (benchmark).
+  Drive: connector available; no 2026-11-07 titles existed (only the two earlier ARTEX docs -> follow-up); 3 Google
+  Docs filed.
+  Timings: setup ~3 min, news 5 s, producers 10-15 min in parallel, lead ARTEX scenes + render ~20 min.
+  Problems: the ARTEX producer was stopped by a safety classifier while writing its first scene (as on 11-05 with a
+  security story); it left the script + voice. The lead built the video from library scenes (server-door x3 with new
+  params, open-toolbox, two-sides, token-take) plus a new weak-login.js; local fixes: server-door shows integer "800+"
+  scores and hides "/ 10" when of="" (was "800.0 / 10"), its side pills moved in from x~0 to inside the safe area;
+  two-sides pills moved in (left pill was at x~15). All three producers independently moved token-take's card right
+  (library card sits at x~20 after zoom). publish-videos.sh printed HTTP 403 again; videos/2026-11-07 holds all 9
+  new files (ls-tree).
 - 2026-11-06 (nightly run, Friday, fired ~07:45 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Airbnb's AI agent wants to plan your whole trip" (Airbnb Q3 2026 shareholder letter, SEC 8-K Ex. 99.1, Nov 5:
      building its own AI agent to plan and book trips, rolling out to guests in H1 2027; composes the screen from

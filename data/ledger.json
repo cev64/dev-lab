@@ -1488,6 +1488,56 @@
         "https://the420.in/meta-muse-voice-ai-animated-avatar-video-chat/"
       ],
       "video": "out/2026-11-06/2026-11-06-explainer-muse-video.mp4"
+    },
+    {
+      "id": "2026-11-07-explainer-ai-spend-stall",
+      "date": "2026-11-07",
+      "hook": "Companies use way more AI, and pay barely more",
+      "topic": "AI MONEY",
+      "title": "Companies use way more AI, and pay barely more",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://ramp.com/data/ai-index",
+        "https://ramp.com/data/ai-index-oct-2026",
+        "https://techcrunch.com/2026/11/06/ramp-data-shows-ai-spending-stalling-just-as-anthropic-nears-its-ipo/",
+        "https://www.unite.ai/ramp-data-shows-business-ai-token-use-outpacing-spending-growth/",
+        "https://fortune.com/2026/11/02/anthropics-growth-slowed-and-costs-jumped-in-the-third-quarter-updated-ipo-filing-shows/",
+        "https://thenextweb.com/news/openai-gpt-6-sol-luna-api-price-cut"
+      ],
+      "video": "out/2026-11-07/2026-11-07-explainer-ai-spend-stall.mp4"
+    },
+    {
+      "id": "2026-11-07-explainer-math-checked",
+      "date": "2026-11-07",
+      "hook": "AI just turned over 7,000 pages of math into code",
+      "topic": "AI MATH",
+      "title": "AI turned 7,000+ pages of math into 16 million lines of code",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://axiommath.ai/research/the-stacks-project-formalized/",
+        "https://stacks.axiommath.ai/",
+        "https://techcrunch.com/2026/11/05/axiom-math-wants-to-keep-ai-slop-out-of-mathematics/",
+        "https://explainx.ai/blog/axiom-stacks-project-lean-16m-lines-ai-agents-algebraic-geometry-apache-2026",
+        "https://letsdatascience.com/news/openai-releases-astra-mathematics-research-manuscripts-bcf4055b"
+      ],
+      "video": "out/2026-11-07/2026-11-07-explainer-math-checked.mp4"
+    },
+    {
+      "id": "2026-11-07-explainer-artex-exposed",
+      "date": "2026-11-07",
+      "hook": "Over 800 AI hacking tools left their doors open",
+      "topic": "ARTEX",
+      "title": "800+ ARTEX AI hacking tools found online with no password",
+      "followUp": true,
+      "format": "v2",
+      "sources": [
+        "https://censys.com/blog/artex-agentic-asbestos/",
+        "https://techcrunch.com/2026/11/06/hundreds-of-artex-ai-hacking-tools-found-publicly-exposed-to-the-web/",
+        "https://shiftdelete.net/en/artex-ai-exposed"
+      ],
+      "video": "out/2026-11-07/2026-11-07-explainer-artex-exposed.mp4"
     }
   ]
 }
