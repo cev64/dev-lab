@@ -27,7 +27,7 @@ export default function draw(ctx, t, info) {
   if (tagPop > 0) K.drawLabel(ctx, RX, RY - 225 * RS - 26, tagPop, { text: name.toUpperCase(), size: 28, accent: true });
 
   // the take card (left), with a tail pointing at Token
-  const X0 = 82, X1 = 612, CW = X1 - X0, PAD = 30;
+  const X0 = 130, X1 = 640, CW = X1 - X0, PAD = 30;
   const out = clamp((t - tQ) / 0.3);                 // take card leaves as the question arrives
   const pop = K.popIn(t, tTake, 0.45);
   if (pop > 0 && out < 1) {

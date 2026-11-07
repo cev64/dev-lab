@@ -3,7 +3,7 @@
 // figure (generic, no face) walks up; the keypad asks for a password but the door swings open anyway; a code chip
 // flies in and the server flashes red; then a magnifier peeks into the window and memory cards float out to the
 // figure. Metaphor only (no real exploit steps).
-// params: score ("9.0"), of ("/ 10"), scoreLabel ("Severity score"), server ("Website server"), ask ("PASSWORD?"),
+// params: score ("9.0"; integer like "800+" shows without decimals, keeps the "+"), of ("/ 10"; "" hides it), scoreLabel ("Severity score"), server ("Website server"), ask ("PASSWORD?"),
 //         nopass ("No password needed"), run ("Runs its own code"), peek ("Reads memory"),
 //         cues (narration words, "word#n" = (n+1)th time): scoreCue, strangerCue, passCue, runCue, peekCue
 // Fits: unauthenticated remote access / server takeover / data-leak stories.
@@ -101,8 +101,8 @@ export default function draw(ctx, t, info) {
     ctx.save(); ctx.translate(487, 535); ctx.scale(0.92 * Math.min(1.04, sk), 0.92 * Math.min(1.04, sk));
     roundRect(ctx, -330, -120, 660, 210, 26); ctx.fillStyle = 'rgba(10,12,24,0.88)'; ctx.fill(); ctx.lineWidth = 3; ctx.strokeStyle = rgba(RED, 0.7); ctx.stroke();
     ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'right';
-    ctx.font = H.font('display', 120); ctx.fillStyle = RED; ctx.fillText(shown.toFixed(1), 60, 20);
-    ctx.textAlign = 'left'; ctx.font = H.font('display', 58); ctx.fillStyle = '#ffffff'; ctx.fillText(P.of || '/ 10', 80, 18);
+    ctx.font = H.font('display', 120); ctx.fillStyle = RED; { const raw = String(P.score || '9.0'), dec = raw.includes('.') ? 1 : 0, suf = /\+$/.test(raw) ? '+' : '', noOf = P.of === ''; if (noOf) ctx.textAlign = 'center'; ctx.fillText(shown.toFixed(dec) + (shown >= sc ? suf : ''), noOf ? 0 : 60, 20); }
+    ctx.textAlign = 'left'; ctx.font = H.font('display', 58); ctx.fillStyle = '#ffffff'; if (P.of !== '') ctx.fillText(P.of || '/ 10', 80, 18);
     ctx.font = H.font('ui', 26); ctx.fillStyle = rgba('#ffffff', 0.75); ctx.textAlign = 'center'; ctx.fillText((P.scoreLabel || 'Severity score').toUpperCase(), 0, -78);
     roundRect(ctx, -280, 42, 560, 22, 11); ctx.fillStyle = '#2a2f52'; ctx.fill();
     const g = ctx.createLinearGradient(-280, 0, 280, 0); g.addColorStop(0, '#f2c86b'); g.addColorStop(1, RED);
@@ -115,7 +115,7 @@ export default function draw(ctx, t, info) {
     { t: tR + 0.4, text: P.run || 'Runs its own code', accent: false },
     { t: tK + 0.2, text: P.peek || 'Reads memory', accent: false },
   ];
-  pills.forEach((p, i) => { const k = K.popIn(t, p.t, 0.45); if (k > 0) K.drawLabel(ctx, 258, 726 + i * 66, Math.min(1.05, k), { text: p.text, size: 30, dot: true }); });
+  pills.forEach((p, i) => { const k = K.popIn(t, p.t, 0.45); if (k > 0) K.drawLabel(ctx, 340, 726 + i * 66, Math.min(1.05, k), { text: p.text, size: 30, dot: true }); });
   ctx.restore();
 }
 

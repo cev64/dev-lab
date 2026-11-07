@@ -48,8 +48,8 @@ export default function draw(ctx, t, info) {
   fly(tR + 0.4, rx, fy - 380, 1);
 
   // pills
-  const lp = K.popIn(t, tL, 0.4); if (lp > 0) K.drawLabel(ctx, 230, 620, lp, { text: P.left || 'Defenders', size: 30, dot: true });
-  const rp = K.popIn(t, tR + 0.4, 0.4); if (rp > 0) K.drawLabel(ctx, 745, 620, rp, { text: P.right || 'Attackers', size: 30, dot: true });
+  const lp = K.popIn(t, tL, 0.4); if (lp > 0) K.drawLabel(ctx, 300, 620, lp, { text: P.left || 'Defenders', size: 30, dot: true });
+  const rp = K.popIn(t, tR + 0.4, 0.4); if (rp > 0) K.drawLabel(ctx, 700, 620, rp, { text: P.right || 'Attackers', size: 30, dot: true });
   // question
   const notes = (P.notes || []).slice(0, 2);
   const tN = notes.map((n, i) => at(n.cue, D * (0.8 + 0.1 * i)) - 0.2);
