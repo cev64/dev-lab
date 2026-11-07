@@ -38,6 +38,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   two-sides pills moved in (left pill was at x~15). All three producers independently moved token-take's card right
   (library card sits at x~20 after zoom). publish-videos.sh printed HTTP 403 again; videos/2026-11-07 holds all 9
   new files (ls-tree).
+  Improve: PR #42 merged: library safe-area fixes (token-take card X0 82->130, two-sides and server-door pills moved
+  in, server-door integer scores / hideable "/ 10") + new weak-login.js; verified in the ARTEX render. Tonight's
+  Ramp/Axiom scenes not promoted (time); backlogged.
 - 2026-11-06 (nightly run, Friday, fired ~07:45 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Airbnb's AI agent wants to plan your whole trip" (Airbnb Q3 2026 shareholder letter, SEC 8-K Ex. 99.1, Nov 5:
      building its own AI agent to plan and book trips, rolling out to guests in H1 2027; composes the screen from
