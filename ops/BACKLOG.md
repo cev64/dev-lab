@@ -4,8 +4,11 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
-- [ ] (2026-11-06) Library token-take.js: question card left edge sits at x~20 after the template zoom (text ~56), outside
-      the x>=60 safe area on every video; move X0 82 -> ~115 and check stills.
+- [x] (PR 2026-11-07: X0 82 -> 130, X1 612 -> 640; checked in the ARTEX render) Library token-take.js: question card left
+      edge sits at x~20 after the template zoom (text ~56), outside the x>=60 safe area on every video.
+- [ ] (2026-11-07) Promote tonight's scenes (work/ is lost with the container: re-create from the videos if needed):
+      use-vs-pay, spend-chart, price-war (Ramp), stacks-code, agent-graph, proof-flood, review-wait (Axiom). weak-login,
+      and server-door/two-sides safe-area fixes went in on 2026-11-07.
 - [ ] (2026-11-06) Skill word budget: am_adam (default since 11-05) reads ~3.2 words/s, so the skill's 150-180 words give
       ~55 s; producers needed 188-198 words for 64-65 s. Re-measure and update SKILL.md section 3 + the voice budget hint.
 - [ ] (2026-11-06) Promote tonight's scenes to the library: trip-agent.js (AI agent/assistant builds UI), muse-call.js
