@@ -1,0 +1,225 @@
+# Deliveries 2026-11-08
+
+**Posting order:** morning (~8am ET) `2026-11-08-explainer-metr-doubling` "Outside testers say Anthropic's AI improves twice as fast" /
+midday (~12pm) `2026-11-08-explainer-rsa-cracks` "Google's AI found cracks in an old internet lock" /
+evening (~6-9pm, strongest hook) `2026-11-08-explainer-empty-office` "The US cleared Nvidia's chips for an empty office"
+Switch ON the platform's AI-generated content label on every post (synthetic narrator). Performance notes: Sunday review
+(PR #43) raised the weight on human stakes; the evening slot gets the strange, physical story (empty office), which is
+the shape that has held viewers best (yandex-datacenters, office-bug). "X says" hooks hold worst, so METR goes to morning.
+METR: a follow-up to 11-03 (Anthropic's own filing); new is the outside 11-week check; METR's estimate, hedged. RSA:
+DeepMind's announcement was an X essay we could not open directly; numbers are confirmed by 2+ outlets quoting it and
+worded as DeepMind's estimates; modern 2048-bit keys unaffected. Nvidia: all New Matrix facts attributed to The New York
+Times (first-hand visit); no wrongdoing alleged, no chip delivery shown (the cold open was redrawn so no crate arrives).
+
+## Explainer: Google DeepMind's AI agents found 2 weaknesses in old 1024-bit RSA
+
+**Hook:** Google's AI found cracks in an old internet lock  
+**Video:** `out/2026-11-08/2026-11-08-explainer-rsa-cracks.mp4` (65.0 s)  
+**Cover text:** Google's AI cracked an old internet lock  
+**Thumbnail:** `out/2026-11-08/2026-11-08-explainer-rsa-cracks.thumbnail.png` (upload it as the cover when posting)  
+**Format:** v2 (log it in ops/PERFORMANCE.md with the numbers)
+
+Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info; YouTube: Altered or synthetic content = Yes). After posting: post the pinned comment from the channel account and pin it; reply to comments in the first hour.
+
+TikTok description (paste as is):
+
+```
+Google DeepMind's AI agents found two weaknesses in old 1024-bit RSA encryption 🔐
+Under human supervision, the agents found a way to fake signatures and a cheaper way to break many old keys at once. DeepMind says modern 2048-bit keys remain secure.
+Would you let AI test your locks? 👇
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Google DeepMind, Crypto Briefing, OfficeChai, FourWeekMBA. AI narrator.
+
+#thedailytoken #ai #cybersecurity #encryption #technews
+```
+
+Instagram Reels caption (paste as is):
+
+```
+Google DeepMind's AI agents found two weak spots in old 1024-bit RSA, the math lock behind encrypted messages and digital signatures 🔐
+Working under human supervision, the agents found a signature weakness (about 1,600x better than the previous best method in one setting, a theoretical estimate) and a batch method that makes each extra old key about 30x cheaper to factor. It was tested in a sandbox on an already-solved key, not live systems, and DeepMind says modern 2048-bit keys remain secure.
+💬 Would you let AI test your locks?
+📤 Send this to the friend who still runs that ancient server.
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Google DeepMind, Crypto Briefing, OfficeChai, FourWeekMBA. AI narrator.
+
+#thedailytoken #ai #cybersecurity #encryption #technews
+```
+
+YouTube Shorts title:
+
+```
+Google DeepMind's AI found 2 weaknesses in old 1024-bit RSA
+```
+
+YouTube Shorts description:
+
+```
+Google DeepMind's AI agents found two weaknesses in old 1024-bit RSA encryption 🔐
+Under human supervision, the agents found a way to fake signatures and a cheaper way to break many old keys at once. DeepMind says modern 2048-bit keys remain secure.
+Would you let AI test your locks? 👇
+
+Subscribe to @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Google DeepMind, Crypto Briefing, OfficeChai, FourWeekMBA. AI narrator.
+
+#thedailytoken #ai #cybersecurity #encryption #technews
+```
+
+Pinned comment (all three platforms):
+
+```
+Let AI stress-test encryption? 🔐 = yes, test it all, 🙅 = too risky
+```
+
+Sources:
+- Google DeepMind (Pushmeet Kohli essay on X): AI agents find two weaknesses in legacy 1024-bit RSA (Nov 6, 2026) https://x.com/pushmeet/status/2118752095859794390
+- Crypto Briefing: Google DeepMind AI finds weaknesses in legacy 1024-bit RSA https://cryptobriefing.com/google-deepmind-ai-rsa-1024-bit-weaknesses/
+- OfficeChai: Google DeepMind Says It Has Used AI Agents to Break Legacy RSA-1024 Encryption Faster Than Anyone Thought Possible https://officechai.com/ai/google-deepmind-says-it-has-used-ai-agents-to-break-legacy-rsa-1024-encryption-faster-than-anyone-thought-possible/
+- FourWeekMBA: DeepMind AI Agents Find 2 Weaknesses in Legacy 1024-Bit RSA https://fourweekmba.com/ai-deepmind-ai-agents-find-2-weaknesses-in-legacy-1024-bit-rsa/
+
+- Explainer id: `2026-11-08-explainer-rsa-cracks`
+
+## Explainer: METR checked Anthropic from the inside: AI progress roughly twice as fast, likely driven by AI
+
+**Hook:** Outside testers say Anthropic's AI improves twice as fast  
+**Video:** `out/2026-11-08/2026-11-08-explainer-metr-doubling.mp4` (70.2 s)  
+**Cover text:** Anthropic's AI: improving twice as fast?  
+**Thumbnail:** `out/2026-11-08/2026-11-08-explainer-metr-doubling.thumbnail.png` (upload it as the cover when posting)  
+**Format:** v2 (log it in ops/PERFORMANCE.md with the numbers)
+
+Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info; YouTube: Altered or synthetic content = Yes). After posting: post the pinned comment from the channel account and pin it; reply to comments in the first hour.
+
+TikTok description (paste as is):
+
+```
+Anthropic's AI is improving about twice as fast, outside testers METR say 🤖
+After 11 weeks of rare access inside Anthropic, METR estimates test scores have climbed about 1.9x faster since October 2025, and guesses maybe 80% of that speed-up comes from Anthropic using AI for its own research. METR says it isn't confident, and Anthropic blacked out most of the key evidence.
+Would you trust a report you can't fully read? 👇
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: METR, Associated Press, Reuters, AlphaSignal, TechCrunch. AI narrator.
+
+#thedailytoken #ai #anthropic #claude #technews
+```
+
+Instagram Reels caption (paste as is):
+
+```
+Outside testers say Anthropic's AI is improving about twice as fast 🤖
+Days after Anthropic's own filing said self-building AI may be close, the independent nonprofit METR published what it found in 11 weeks inside Anthropic, with rare access to internal data. Its estimate: test scores have climbed about 1.9x faster since October 2025, roughly two years of progress in one, and maybe 80% of that speed-up comes from AI helping with the research. METR says it isn't confident, Anthropic's staff didn't all agree, and Anthropic redacted most of the key evidence, saying it's confidential.
+💬 Would you trust a report you can't fully read?
+📤 Send this to the friend who says AI is slowing down.
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: METR, Associated Press, Reuters, AlphaSignal, TechCrunch. AI narrator.
+
+#thedailytoken #ai #anthropic #claude #technews
+```
+
+YouTube Shorts title:
+
+```
+METR checked Anthropic from the inside: AI progress ~2x faster
+```
+
+YouTube Shorts description:
+
+```
+Anthropic's AI is improving about twice as fast, outside testers METR say 🤖
+After 11 weeks of rare access inside Anthropic, METR estimates test scores have climbed about 1.9x faster since October 2025, and guesses maybe 80% of that speed-up comes from Anthropic using AI for its own research. METR says it isn't confident, and Anthropic blacked out most of the key evidence.
+Would you trust a report you can't fully read? 👇
+
+Subscribe to @thedaily_token for AI news, animated. 3 stories a day.
+Sources: METR, Associated Press, Reuters, AlphaSignal, TechCrunch. AI narrator.
+
+#thedailytoken #ai #anthropic #claude #technews
+```
+
+Pinned comment (all three platforms):
+
+```
+Redacted report: 👍 = I trust it, 🔍 = show me more
+```
+
+Sources:
+- METR: Independent assessment of AI R&D acceleration at Anthropic (Nov 5, 2026) https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment
+- Associated Press (via Anchorage Daily News): Anthropic is rapidly accelerating AI development amid slowdown calls, outside research group says https://www.adn.com/nation-world/2026/11/05/anthropic-is-rapidly-accelerating-ai-development-amid-slowdown-calls-outside-research-group-says/
+- Reuters (via Devdiscourse): Anthropic's models improving nearly twice as fast with help from AI, study finds https://www.devdiscourse.com/article/international/4002278-anthropics-models-improving-nearly-twice-as-fast-with-help-from-ai-study-finds
+- AlphaSignal: METR Finds Anthropic's AI-Assisted R&D Moving Twice as Fast https://alphasignal.ai/news/metr-finds-anthropic-s-ai-assisted-r-d-moving-twice-as-fast
+- TechCrunch: Anthropic warns that it's very close to RSI capability, aka self-building AI https://techcrunch.com/2026/11/02/anthropic-warns-that-its-very-close-to-rsi-capability-aka-self-building-ai/
+
+- Explainer id: `2026-11-08-explainer-metr-doubling`
+
+## Explainer: Nvidia chips cleared for a firm with an empty office
+
+**Hook:** The US cleared Nvidia's chips for an empty office  
+**Video:** `out/2026-11-08/2026-11-08-explainer-empty-office.mp4` (64.5 s)  
+**Cover text:** Nvidia chips cleared for an empty office  
+**Thumbnail:** `out/2026-11-08/2026-11-08-explainer-empty-office.thumbnail.png` (upload it as the cover when posting)  
+**Format:** v2 (log it in ops/PERFORMANCE.md with the numbers)
+
+Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info; YouTube: Altered or synthetic content = Yes). After posting: post the pinned comment from the channel account and pin it; reply to comments in the first hour.
+
+TikTok description (paste as is):
+
+```
+Nvidia's H200 AI chips: the US approved a Beijing firm whose listed office is empty 🏚️
+According to The New York Times, New Matrix was approved to build H200 chips into servers, but its address is a hollow gray shell with wires dangling where the lights should be. The reporting doesn't show any chips reached it.
+Who should check where the chips go? 👇
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: The New York Times, The Verge, Reuters. AI narrator.
+
+#thedailytoken #ai #nvidia #chips #technews
+```
+
+Instagram Reels caption (paste as is):
+
+```
+Nvidia's H200 AI chips were cleared for a company whose office is empty 🏚️
+The New York Times says the US Commerce Department approved New Matrix, a 17-month-old Beijing company, to build Nvidia's H200 chips into servers. Reporters found its listed address was a hollow gray shell, and the company wasn't in the building's directory. The Times says its owners have ties to a firm on a US blacklist since 2024, and that another approved company's office was deserted too. An empty office isn't proof of wrongdoing, and the reporting doesn't show any chips reached New Matrix.
+💬 Who should check where the chips go: the government or the chipmaker?
+📤 Send this to the friend who thinks export rules are airtight.
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: The New York Times, The Verge, Reuters. AI narrator.
+
+#thedailytoken #ai #nvidia #chips #technews
+```
+
+YouTube Shorts title:
+
+```
+Nvidia H200 chips cleared for a Beijing firm with an empty office
+```
+
+YouTube Shorts description:
+
+```
+Nvidia's H200 AI chips: the US approved a Beijing firm whose listed office is empty 🏚️
+According to The New York Times, New Matrix was approved to build H200 chips into servers, but its address is a hollow gray shell with wires dangling where the lights should be. The reporting doesn't show any chips reached it.
+Who should check where the chips go? 👇
+
+Subscribe to @thedaily_token for AI news, animated. 3 stories a day.
+Sources: The New York Times, The Verge, Reuters. AI narrator.
+
+#thedailytoken #ai #nvidia #chips #technews
+```
+
+Pinned comment (all three platforms):
+
+```
+Who should check where AI chips go? 🏛️ = the government, 🏭 = the chipmaker
+```
+
+Sources:
+- The New York Times: Nvidia chips and Chinese firms (investigation, Nov 7, 2026) https://www.nytimes.com/2026/11/07/business/economy/nvidia-chips-chinese-firms.html
+- The Verge: The US let Nvidia sell chips to an empty office in China https://www.theverge.com/ai-artificial-intelligence/1029483/nvidia-ai-chips-china-blacklist-government
+- Crypto Briefing: Nvidia H200 assembler New Matrix lists an empty Beijing address https://cryptobriefing.com/new-matrix-nvidia-h200-empty-beijing-address/
+- Broad Daylight News: The Approved List for Nvidia's China Chips Includes an Empty Building https://broaddaylightnews.substack.com/p/the-approved-list-for-nvidias-china
+- Reuters (via Khaleej Times): US clears Nvidia's H200 chip sales to 10 China firms https://www.khaleejtimes.com/business/tech/us-clears-nvidias-h200-chip-sales-to-10-china-firms
+
+- Explainer id: `2026-11-08-explainer-empty-office`
+
