@@ -4,6 +4,11 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
+- [ ] (2026-11-08) `clipper explainer --no-render` bugs: (a) re-running it clobbers a hand-written header at the top of
+      deliveries/<date>.md (replaced it with a duplicate of the block); (b) it does not rewrite out/<date>/<id>.drive.json,
+      so post-copy fixes miss the Drive doc. Also: producers must not invent source URLs they could not open (NYT).
+- [ ] (2026-11-08) Promote tonight's scenes: inside-check.js (METR: redact, share, outpace), old-lock.js (RSA: hook,
+      keys, seal, sandbox), empty-office.js, license-desk.js, paper-trail.js, chip-checkpoint.js (Nvidia).
 - [x] (PR 2026-11-07: X0 82 -> 130, X1 612 -> 640; checked in the ARTEX render) Library token-take.js: question card left
       edge sits at x~20 after the template zoom (text ~56), outside the x>=60 safe area on every video.
 - [ ] (2026-11-07) Promote tonight's scenes (work/ is lost with the container: re-create from the videos if needed):

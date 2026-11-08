@@ -1538,6 +1538,55 @@
         "https://shiftdelete.net/en/artex-ai-exposed"
       ],
       "video": "out/2026-11-07/2026-11-07-explainer-artex-exposed.mp4"
+    },
+    {
+      "id": "2026-11-08-explainer-rsa-cracks",
+      "date": "2026-11-08",
+      "hook": "Google's AI found cracks in an old internet lock",
+      "topic": "GOOGLE DEEPMIND",
+      "title": "Google DeepMind's AI agents found 2 weaknesses in old 1024-bit RSA",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://x.com/pushmeet/status/2118752095859794390",
+        "https://cryptobriefing.com/google-deepmind-ai-rsa-1024-bit-weaknesses/",
+        "https://officechai.com/ai/google-deepmind-says-it-has-used-ai-agents-to-break-legacy-rsa-1024-encryption-faster-than-anyone-thought-possible/",
+        "https://fourweekmba.com/ai-deepmind-ai-agents-find-2-weaknesses-in-legacy-1024-bit-rsa/"
+      ],
+      "video": "out/2026-11-08/2026-11-08-explainer-rsa-cracks.mp4"
+    },
+    {
+      "id": "2026-11-08-explainer-metr-doubling",
+      "date": "2026-11-08",
+      "hook": "Outside testers say Anthropic's AI improves twice as fast",
+      "topic": "ANTHROPIC",
+      "title": "METR checked Anthropic from the inside: AI progress roughly twice as fast, likely driven by AI",
+      "followUp": true,
+      "format": "v2",
+      "sources": [
+        "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment",
+        "https://www.adn.com/nation-world/2026/11/05/anthropic-is-rapidly-accelerating-ai-development-amid-slowdown-calls-outside-research-group-says/",
+        "https://www.devdiscourse.com/article/international/4002278-anthropics-models-improving-nearly-twice-as-fast-with-help-from-ai-study-finds",
+        "https://alphasignal.ai/news/metr-finds-anthropic-s-ai-assisted-r-d-moving-twice-as-fast",
+        "https://techcrunch.com/2026/11/02/anthropic-warns-that-its-very-close-to-rsi-capability-aka-self-building-ai/"
+      ],
+      "video": "out/2026-11-08/2026-11-08-explainer-metr-doubling.mp4"
+    },
+    {
+      "id": "2026-11-08-explainer-empty-office",
+      "date": "2026-11-08",
+      "hook": "The US cleared Nvidia's chips for an empty office",
+      "topic": "CHIPS",
+      "title": "Nvidia chips cleared for a firm with an empty office",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.theverge.com/ai-artificial-intelligence/1029483/nvidia-ai-chips-china-blacklist-government",
+        "https://cryptobriefing.com/new-matrix-nvidia-h200-empty-beijing-address/",
+        "https://broaddaylightnews.substack.com/p/the-approved-list-for-nvidias-china",
+        "https://www.khaleejtimes.com/business/tech/us-clears-nvidias-h200-chip-sales-to-10-china-firms"
+      ],
+      "video": "out/2026-11-08/2026-11-08-explainer-empty-office.mp4"
     }
   ]
 }

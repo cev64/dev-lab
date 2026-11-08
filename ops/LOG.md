@@ -2,6 +2,46 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-08 (nightly run, Sunday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Outside testers say Anthropic's AI improves twice as fast" (FOLLOW-UP to anthropic-rsi 11-03; METR's independent
+     assessment, Nov 5: 11 weeks inside Anthropic (Aug 12-Oct 29), rare access to internal data; test scores rising
+     ~1.9x the pre-Oct-2025 rate, ~2 years of progress in 1; METR's best guess: AI used in R&D drives maybe ~80% of the
+     speed-up; AI mostly assists, not autonomous; caveats: METR not confident, no staff consensus, may overestimate,
+     Anthropic redacted most key evidence (confidential); sources: METR, AP via ADN, Reuters via Devdiscourse,
+     AlphaSignal, TechCrunch). Rubric ~80 (fresh 18, stakes 14, surprise 13, visual 8, verif 18, controversy 9). 70.2 s,
+     -14.9 LUFS, style neural, 100% scenes (new: inside-check.js, 5 modes). Lead fix: "the Claude maker" removed from post
+     copy (not in claim table).
+  2. "Google's AI found cracks in an old internet lock" (Google DeepMind, Nov 6: AI agents under human supervision found
+     two weaknesses in legacy 1024-bit RSA: signature forgery, ~1,600x better than the previous best in one setting
+     (DeepMind's theoretical estimate); batch factoring, each extra key ~30x cheaper on average; sandboxed, on an
+     already-solved key; modern 2048-bit+ unaffected; sources: DeepMind's X essay (x.com 402, not opened), Crypto
+     Briefing, OfficeChai, FourWeekMBA (quotes the essay verbatim); 4+ more outlets seen by the lead agree). Rubric ~77
+     (19/15/14/8/15/6). 65.0 s, -14.8 LUFS, style flow, 100% scenes (new: old-lock.js, 7 modes).
+  3. "The US cleared Nvidia's chips for an empty office" (NYT investigation Nov 7, read via The Verge, Crypto Briefing,
+     Broad Daylight: Commerce approved New Matrix (Beijing, 17 months old) to build H200s into servers; listed office a
+     hollow gray shell, not in the building directory; Times: owners tied to a firm on a US blacklist since 2024; a
+     second approved firm's office deserted (Sept); ~10 Chinese firms cleared for H200 (Reuters, May); no chip delivery
+     shown, empty office not proof of wrongdoing). Rubric ~82 (19/12/15/10/16/10). 64.5 s, -14.7 LUFS, style horizon,
+     100% scenes (new: empty-office.js, license-desk.js, paper-trail.js, chip-checkpoint.js). Judgement call: the
+     empty-office facts are one outlet's first-hand reporting (NYT, paywalled), attributed throughout; Maginfra's licence
+     is independently in Reuters (July). Lead fixes: the cold open showed a courier wheeling in an "H200" crate (implies
+     delivery, unsupported) -> redrawn as a visitor with a flashlight, re-rendered; the producer's NYT URL was never
+     opened (likely guessed) -> replaced with the Verge write-up in sources/ledger/Drive.
+  Lead review: claims traced to claim tables; contact sheets of all three final MP4s; ffprobe 1080x1920 30 fps.
+  Picks note: skipped AI-safety super PAC $63M (figures conflict across sources; politics), ETH-disproof reaction (no
+  verified new development; math ran last night), GenRobot $100M (Nov 2, stale), NYT Cooking AI (Oct 25 launch; review
+  only), environmental groups use AI (Reuters only), OpenAI $1.25T (money), Jensen Huang spy report (allegations).
+  Drive: connector available; no 2026-11-08 titles existed; 3 Google Docs filed.
+  Sunday review: Skeptic (opus) on 32 TikTok rows: human-stakes stories (AI acting on its own, jobs, physical drama;
+  n=8) median avg watch 16.9 s vs 10.9 s (n=24), full % 8.3 vs 3.3 (categories tagged post hoc, moderate confidence);
+  rubric total barely predicts watch (rho 0.30), controversy 0.08, stakes 0.02. PR #43 merged: stakes 20->25 with a
+  sharper definition, controversy 15->10; hook lesson: open on an actor doing something, not "X says". Re-check at n>=60.
+  Timings: setup ~3 min, news 3 s, picks ~8 min, producers 13-16 min in parallel, lead review + Nvidia fix ~15 min.
+  Problems: `explainer --no-render` re-run clobbered the hand-written posting-order header in deliveries/<date>.md (it
+  replaced the top of the file with a duplicate block); rebuilt by hand (backlogged). `--no-render` also does not
+  rewrite out/<date>/<id>.drive.json (fixed by hand twice). publish-videos.sh printed HTTP 403 again, but
+  videos/2026-11-08 holds all 9 files (ls-tree). The Verge, Fast Company, x.com, nytimes.com unreachable from here.
+  Improve: rubric PR only (Sunday). Tonight's scenes not promoted (time); backlogged.
 - 2026-11-07 (nightly run, Saturday, fired ~07:45 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "AI just turned over 7,000 pages of math into code." (Axiom says its AI agents formalized the Stacks Project, the
      open-source algebraic-geometry library begun in 2005, in Lean: ~16 million lines (Axiom's figure), checked line by
