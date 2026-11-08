@@ -58,11 +58,13 @@ Score each candidate 0-5 per criterion, multiply by weight/5, sum to 100.
 | Criterion | Weight | 5 means |
 |---|---|---|
 | Freshness | 20 | published < 24 h (3 = 48 h, 1 = 72 h, 0 = older with no new angle) |
-| Mass-audience stakes | 20 | affects ordinary people's money, jobs, privacy, daily tools |
+| Mass-audience stakes | 25 | a normal person would retell it tonight: their job or career, an AI doing something on its own nobody asked for, or a physical, dramatic event; a company, CEO or policy statement scores at most 3 unless the hook shows what changes for a person |
 | Surprise / number | 15 | a striking, exact figure or a reversal |
 | Visual potential | 10 | has numbers/steps/timeline our templates can draw |
 | Verifiability (>= 2 sources) | 20 | primary source plus >= 1 independent outlet agree |
-| Controversy without defamation | 15 | real debate on policy/tech, no accusation of a person |
+| Controversy without defamation | 10 | real debate on policy/tech, no accusation of a person |
+
+Weights changed 2026-11-08 (Sunday Skeptic review, n=32 TikTok rows): stakes 20->25, controversy 15->10. Human-stakes stories (AI acting on its own, jobs, physical drama; n=8) had median avg watch 16.9 s vs 10.9 s for the rest (n=24), full % 8.3 vs 3.3; controversy sub-scores predicted nothing (rho 0.08). Categories were tagged after the fact, so re-check at n >= 60. Hook lesson (directional, n=4 vs 20): open on an actor doing a concrete thing, not on someone saying something ("X says..." hooks median 9.1 s vs 13.9 s).
 
 **Gates (any fail = reject):** (1) fewer than 2 independent sources for the main claim; (2) older than 72 h with no new development; (3) core claim is a rumour or "sources say" from one outlet; (4) it accuses a named person or company of wrongdoing not established by a court, regulator or the company's own admission; (5) it can only be told as stock, medical, legal or tax advice; (6) already in the ledger "explainers" or covered in the last 7 days; (7) needs a real person's voice or likeness. **Ship score >= 70.** Below that, skip the night and log why (Quality over quantity).
 
