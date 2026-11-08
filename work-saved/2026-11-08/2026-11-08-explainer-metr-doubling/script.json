@@ -1,0 +1,208 @@
+{
+  "id": "2026-11-08-explainer-metr-doubling",
+  "hook": "Outside testers say Anthropic's AI improves twice as fast",
+  "topic": "ANTHROPIC",
+  "style": "neural",
+  "followUp": true,
+  "emphasis": [
+    "twice",
+    "1.9x",
+    "80%"
+  ],
+  "thumbnail": {
+    "highlight": "twice as fast"
+  },
+  "beats": [
+    {
+      "say": "Outside testers say Anthropic's AI improves twice as fast.",
+      "pace": 1.03,
+      "visual": {
+        "type": "scene",
+        "module": "scenes/inside-check.js",
+        "params": {
+          "mode": "cold",
+          "company": "ANTHROPIC",
+          "gauge": "Pace of progress",
+          "big": "2x"
+        }
+      }
+    },
+    {
+      "say": "Here's what's new. Days ago, Anthropic itself said self-building AI may be close. Now METR, an independent nonprofit, has checked from the inside: eleven weeks, with rare access to internal data.",
+      "visual": {
+        "type": "scene",
+        "module": "scenes/inside-check.js",
+        "params": {
+          "mode": "arrive",
+          "company": "ANTHROPIC",
+          "doc": "FILING",
+          "days": "Days ago: Anthropic's filing",
+          "claim": "Self-building AI may be close",
+          "daysCue": "days",
+          "claimCue": "selfbuilding",
+          "metrCue": "metr",
+          "group": "METR: independent nonprofit",
+          "groupCue": "independent",
+          "weeks": "11 weeks inside",
+          "dates": "Aug 12 - Oct 29",
+          "weeksCue": "eleven",
+          "items": [
+            "Internal data",
+            "Staff interviews"
+          ],
+          "itemCue": "rare"
+        }
+      }
+    },
+    {
+      "say": "Their finding: since October twenty twenty-five, Anthropic's AI test scores have climbed about one point nine times faster. That's roughly two years of progress | in one.",
+      "visual": {
+        "type": "scene",
+        "module": "scenes/self-build.js",
+        "params": {
+          "mode": "double",
+          "policy": "METR: Anthropic's test scores",
+          "policyCue": "finding",
+          "goCue": "since",
+          "endCue": "two",
+          "aiCue": "nine",
+          "ai": "1.9x the old rate",
+          "ask": "How much faster?",
+          "year": "One year:",
+          "slow": "Old pace",
+          "fast": "Now",
+          "slowEnd": "1 year",
+          "fastEnd": "~2 years",
+          "stamp": "~2 years of progress in 1"
+        }
+      }
+    },
+    {
+      "say": "So what's driving it? METR's best guess: AI itself. Anthropic uses AI heavily for research, and METR puts maybe eighty percent of the speed-up on that.",
+      "visual": {
+        "type": "scene",
+        "module": "scenes/inside-check.js",
+        "params": {
+          "mode": "share",
+          "ask": "What's behind the speed-up?",
+          "guess": "METR's best guess",
+          "guessCue": "best",
+          "aiCue": "ai",
+          "useCue": "uses",
+          "pctCue": "eighty",
+          "share": 80,
+          "shareLabel": "AI used in research",
+          "restLabel": "everything else",
+          "aiTag": "AI itself"
+        }
+      }
+    },
+    {
+      "say": "Why care? If AI speeds up building AI, new models could arrive faster than the rules for them. For now, METR says AI mostly assists. It's not running the research alone.",
+      "visual": {
+        "type": "scene",
+        "module": "scenes/inside-check.js",
+        "params": {
+          "mode": "outpace",
+          "newCue": "new",
+          "rulesCue": "rules",
+          "nowCue": "now",
+          "assistCue": "assists",
+          "aloneCue": "alone",
+          "faster": "If AI builds AI faster...",
+          "rules": "Could models outrun the rules?",
+          "assist": "For now: AI mostly assists",
+          "alone": "Running the research alone",
+          "no": "NOT YET",
+          "book": "RULES"
+        }
+      }
+    },
+    {
+      "say": "The catch? METR says it *isn't* confident. Anthropic's staff didn't all agree, and METR may be overestimating. Plus, Anthropic blacked out most of the key evidence, saying it's confidential.",
+      "pace": 0.96,
+      "visual": {
+        "type": "scene",
+        "module": "scenes/inside-check.js",
+        "params": {
+          "mode": "redact",
+          "report": "METR REPORT",
+          "reportSub": "~100 pages",
+          "chips": [
+            "Not confident",
+            "Staff didn't all agree",
+            "May overestimate"
+          ],
+          "chipCues": [
+            "confident",
+            "agree",
+            "overestimating"
+          ],
+          "redactCue": "blacked",
+          "stampCue": "key",
+          "whyCue": "confidential",
+          "why": "Anthropic: it's confidential",
+          "stamp": "REDACTED"
+        }
+      }
+    },
+    {
+      "say": "Token's take: inviting outside testers in is big. So are the black bars. Would you trust a report you can't fully read? Because this week,",
+      "pace": 0.96,
+      "visual": {
+        "type": "scene",
+        "module": "scenes/token-take.js",
+        "params": {
+          "take": "Inviting outside testers in is big. So are the black bars.",
+          "question": "Would you trust a report you can't fully read?",
+          "a": "Yes, I trust it",
+          "b": "Show me more",
+          "takeCue": "inviting",
+          "qCue": "would"
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "publisher": "METR",
+      "title": "Independent assessment of AI R&D acceleration at Anthropic (Nov 5, 2026)",
+      "url": "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment"
+    },
+    {
+      "publisher": "Associated Press (via Anchorage Daily News)",
+      "title": "Anthropic is rapidly accelerating AI development amid slowdown calls, outside research group says",
+      "url": "https://www.adn.com/nation-world/2026/11/05/anthropic-is-rapidly-accelerating-ai-development-amid-slowdown-calls-outside-research-group-says/"
+    },
+    {
+      "publisher": "Reuters (via Devdiscourse)",
+      "title": "Anthropic's models improving nearly twice as fast with help from AI, study finds",
+      "url": "https://www.devdiscourse.com/article/international/4002278-anthropics-models-improving-nearly-twice-as-fast-with-help-from-ai-study-finds"
+    },
+    {
+      "publisher": "AlphaSignal",
+      "title": "METR Finds Anthropic's AI-Assisted R&D Moving Twice as Fast",
+      "url": "https://alphasignal.ai/news/metr-finds-anthropic-s-ai-assisted-r-d-moving-twice-as-fast"
+    },
+    {
+      "publisher": "TechCrunch",
+      "title": "Anthropic warns that it's very close to RSI capability, aka self-building AI",
+      "url": "https://techcrunch.com/2026/11/02/anthropic-warns-that-its-very-close-to-rsi-capability-aka-self-building-ai/"
+    }
+  ],
+  "post": {
+    "title": "METR checked Anthropic from the inside: AI progress roughly twice as fast, likely driven by AI",
+    "cover": "Anthropic's AI: improving twice as fast?",
+    "tiktok": "Anthropic's AI is improving about twice as fast, outside testers METR say 🤖\nAfter 11 weeks of rare access inside Anthropic, METR estimates test scores have climbed about 1.9x faster since October 2025, and guesses maybe 80% of that speed-up comes from Anthropic using AI for its own research. METR says it isn't confident, and Anthropic blacked out most of the key evidence.\nWould you trust a report you can't fully read? 👇",
+    "instagram": "Outside testers say Anthropic's AI is improving about twice as fast 🤖\nDays after Anthropic's own filing said self-building AI may be close, the independent nonprofit METR published what it found in 11 weeks inside Anthropic, with rare access to internal data. Its estimate: test scores have climbed about 1.9x faster since October 2025, roughly two years of progress in one, and maybe 80% of that speed-up comes from AI helping with the research. METR says it isn't confident, Anthropic's staff didn't all agree, and Anthropic redacted most of the key evidence, saying it's confidential.\n💬 Would you trust a report you can't fully read?\n📤 Send this to the friend who says AI is slowing down.",
+    "youtubeTitle": "METR checked Anthropic from the inside: AI progress ~2x faster",
+    "pinnedComment": "Redacted report: 👍 = I trust it, 🔍 = show me more",
+    "sources": "METR, Associated Press, Reuters, AlphaSignal, TechCrunch",
+    "hashtags": [
+      "#ai",
+      "#anthropic",
+      "#claude",
+      "#technews"
+    ]
+  }
+}

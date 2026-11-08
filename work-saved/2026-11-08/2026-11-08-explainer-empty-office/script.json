@@ -1,0 +1,131 @@
+{
+  "id": "2026-11-08-explainer-empty-office",
+  "hook": "The US cleared Nvidia's chips for an empty office",
+  "topic": "CHIPS",
+  "style": "horizon",
+  "emphasis": [
+    "Nvidia",
+    "empty office",
+    "H200"
+  ],
+  "thumbnail": {
+    "highlight": "empty office"
+  },
+  "voice": "default",
+  "followUp": false,
+  "beats": [
+    {
+      "say": "The US cleared Nvidia's chips for an empty office.",
+      "pace": 1.03,
+      "visual": {
+        "type": "scene",
+        "module": "scenes/empty-office.js",
+        "params": {
+          "mode": "hook"
+        }
+      }
+    },
+    {
+      "say": "Here's what happened. According to The New York Times, the US Commerce Department approved a Beijing company called New Matrix to build Nvidia's H200 AI chips into servers.",
+      "visual": {
+        "type": "scene",
+        "module": "scenes/license-desk.js",
+        "params": {}
+      }
+    },
+    {
+      "say": "Reporters went to its listed address. They found a hollow gray shell, | wires dangling where the lights should be. It wasn't even listed in the building's directory.",
+      "visual": {
+        "type": "scene",
+        "module": "scenes/empty-office.js",
+        "params": {
+          "mode": "visit"
+        }
+      }
+    },
+    {
+      "say": "It's seventeen months old. The Times says its owners have ties to an investment firm on a US blacklist since 2024. And another approved company the Times checked in September? Its office was deserted too.",
+      "visual": {
+        "type": "scene",
+        "module": "scenes/paper-trail.js",
+        "params": {}
+      }
+    },
+    {
+      "say": "Why care? The H200 is one of Nvidia's most advanced AI chips. About ten Chinese firms have been cleared to buy it. Each license is supposed to check the buyer, and what it's for.",
+      "visual": {
+        "type": "scene",
+        "module": "scenes/chip-checkpoint.js",
+        "params": {}
+      }
+    },
+    {
+      "say": "Now, to be clear: an empty office *isn't* proof of wrongdoing. And the reporting doesn't show that any chips ever reached New Matrix.",
+      "pace": 0.96,
+      "visual": {
+        "type": "scene",
+        "module": "scenes/empty-office.js",
+        "params": {
+          "mode": "caveat"
+        }
+      }
+    },
+    {
+      "say": "Token's take: a license is only as good as whoever knocks on the door. Who should check where the chips go? Because it turns out,",
+      "pace": 0.96,
+      "visual": {
+        "type": "scene",
+        "module": "/home/user/dev-lab/engine/render/templates/ai-explainer/scenes/token-take.js",
+        "params": {
+          "take": "A license is only as good as whoever knocks on the door.",
+          "question": "Who should check where the chips go?",
+          "a": "Government",
+          "b": "Chipmaker",
+          "qCue": "Who"
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "publisher": "The New York Times",
+      "title": "Investigation of New Matrix and Maginfra (Nov 7, 2026; paywalled, cited via The Verge)",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1029483/nvidia-ai-chips-china-blacklist-government"
+    },
+    {
+      "publisher": "The Verge",
+      "title": "The US let Nvidia sell chips to an empty office in China",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1029483/nvidia-ai-chips-china-blacklist-government"
+    },
+    {
+      "publisher": "Crypto Briefing",
+      "title": "Nvidia H200 assembler New Matrix lists an empty Beijing address",
+      "url": "https://cryptobriefing.com/new-matrix-nvidia-h200-empty-beijing-address/"
+    },
+    {
+      "publisher": "Broad Daylight News",
+      "title": "The Approved List for Nvidia's China Chips Includes an Empty Building",
+      "url": "https://broaddaylightnews.substack.com/p/the-approved-list-for-nvidias-china"
+    },
+    {
+      "publisher": "Reuters (via Khaleej Times)",
+      "title": "US clears Nvidia's H200 chip sales to 10 China firms",
+      "url": "https://www.khaleejtimes.com/business/tech/us-clears-nvidias-h200-chip-sales-to-10-china-firms"
+    }
+  ],
+  "post": {
+    "title": "Nvidia chips cleared for a firm with an empty office",
+    "cover": "Nvidia chips cleared for an empty office",
+    "tiktok": "Nvidia's H200 AI chips: the US approved a Beijing firm whose listed office is empty 🏚️\nAccording to The New York Times, New Matrix was approved to build H200 chips into servers, but its address is a hollow gray shell with wires dangling where the lights should be. The reporting doesn't show any chips reached it.\nWho should check where the chips go? 👇",
+    "instagram": "Nvidia's H200 AI chips were cleared for a company whose office is empty 🏚️\nThe New York Times says the US Commerce Department approved New Matrix, a 17-month-old Beijing company, to build Nvidia's H200 chips into servers. Reporters found its listed address was a hollow gray shell, and the company wasn't in the building's directory. The Times says its owners have ties to a firm on a US blacklist since 2024, and that another approved company's office was deserted too. An empty office isn't proof of wrongdoing, and the reporting doesn't show any chips reached New Matrix.\n💬 Who should check where the chips go: the government or the chipmaker?\n📤 Send this to the friend who thinks export rules are airtight.",
+    "youtubeTitle": "Nvidia H200 chips cleared for a Beijing firm with an empty office",
+    "pinnedComment": "Who should check where AI chips go? 🏛️ = the government, 🏭 = the chipmaker",
+    "sources": "The New York Times, The Verge, Reuters",
+    "hashtags": [
+      "#ai",
+      "#nvidia",
+      "#chips",
+      "#technews"
+    ]
+  }
+}
