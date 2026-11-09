@@ -19,7 +19,7 @@ export default function draw(ctx, t, info) {
   K.world.room(ctx, { t, time: 'night', lamp: true, window: true, picture: false, plant: true });
 
   // Token: big, on the right, talking while the take is read, happy once the question is up
-  const RX = 735, RY = 1032, RS = 1.75;
+  const RX = 722, RY = 1032, RS = 1.75;
   const talking = t < tQ ? info.env : 0;
   K.drawRobot(ctx, RX, RY, RS, { t, state: t >= tQ ? 'happy' : 'idle', talk: talking, seed: 7 });
   // name tag above the head
@@ -27,13 +27,13 @@ export default function draw(ctx, t, info) {
   if (tagPop > 0) K.drawLabel(ctx, RX, RY - 225 * RS - 26, tagPop, { text: name.toUpperCase(), size: 28, accent: true });
 
   // the take card (left), with a tail pointing at Token
-  const X0 = 130, X1 = 640, CW = X1 - X0, PAD = 30;
+  const X0 = 160, X1 = 650, CW = X1 - X0, PAD = 30; // 2026-11-09: moved right, x 130 fell outside the safe area after the zoom
   const out = clamp((t - tQ) / 0.3);                 // take card leaves as the question arrives
   const pop = K.popIn(t, tTake, 0.45);
   if (pop > 0 && out < 1) {
     const bodySize = 40, lines = H.wrap(ctx, take, 'display', bodySize, CW - 2 * PAD);
     const cardH = PAD + 34 + 22 + lines.length * bodySize * 1.18 + PAD;
-    const Y0 = 452;
+    const Y0 = 472;
     ctx.save();
     ctx.globalAlpha = 1 - out;
     ctx.translate((X0 + X1) / 2, Y0 + cardH / 2 - out * 60);
@@ -66,7 +66,7 @@ export default function draw(ctx, t, info) {
     const qp = K.popIn(t, tQ + 0.15, 0.45);
     const qSize = 38, lines = H.wrap(ctx, String(P.question), 'display', qSize, CW - 2 * PAD);
     const chipsH = 64, cardH = PAD + lines.length * qSize * 1.18 + 26 + chipsH + PAD;
-    const Y0 = 440;
+    const Y0 = 468;
     ctx.save();
     ctx.translate((X0 + X1) / 2, Y0 + cardH / 2);
     const s = Math.min(1.04, 0.7 + 0.3 * qp); ctx.scale(s, s); ctx.globalAlpha = clamp(qp * 2);
