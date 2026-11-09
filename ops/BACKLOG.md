@@ -4,7 +4,7 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
-- [ ] (2026-11-09) Library token-take.js still too far left: all 3 producers again moved it in local copies
+- [x] (PR 2026-11-09: X0 160, X1 650, RX 722, cards ~20-28 px lower; still checked) Library token-take.js still too far left: all 3 producers again moved it in local copies
       (take card X0 130 -> 150-172; Token RX 735 -> 712-722; jet-power also moved both cards down ~30 px off the header).
       Port those numbers to the library and verify with a still.
 - [ ] (2026-11-09) Loudness lands at -15.0/-15.1 LUFS on every render (target ~-14); check the voice normalisation step.
