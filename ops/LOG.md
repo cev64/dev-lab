@@ -35,7 +35,8 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Problems: publish-videos.sh printed HTTP 403 again; videos/2026-11-09 holds all 9 files (ls-tree). All three producers
   again had to move token-take's card right in a local copy (library fix still pending). Producers shared scratchpad
   folder names once (no harm). Loudness lands ~-15 LUFS, not -14 (backlogged: check voice normalisation target).
-  Improve: none tonight; scenes not promoted (backlogged).
+  Improve: PR #44 merged: library token-take.js card moved right/down into the safe area (ported from the 3 producers' local
+  copies; verified with stills). Scenes not promoted (backlogged).
 - 2026-11-08 (nightly run, Sunday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Outside testers say Anthropic's AI improves twice as fast" (FOLLOW-UP to anthropic-rsi 11-03; METR's independent
      assessment, Nov 5: 11 weeks inside Anthropic (Aug 12-Oct 29), rare access to internal data; test scores rising
