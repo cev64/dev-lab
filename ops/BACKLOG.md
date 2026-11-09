@@ -4,6 +4,12 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
+- [ ] (2026-11-09) Library token-take.js still too far left: all 3 producers again moved it in local copies
+      (take card X0 130 -> 150-172; Token RX 735 -> 712-722; jet-power also moved both cards down ~30 px off the header).
+      Port those numbers to the library and verify with a still.
+- [ ] (2026-11-09) Loudness lands at -15.0/-15.1 LUFS on every render (target ~-14); check the voice normalisation step.
+- [ ] (2026-11-09) Promote: jet-power.js (trailer engine, airliner, generator, house, calendar), jobs-chart.js,
+      two-counts.js (balance scale), home-arrival.js (sheeted robot), astro-shelf.js.
 - [ ] (2026-11-08) `clipper explainer --no-render` bugs: (a) re-running it clobbers a hand-written header at the top of
       deliveries/<date>.md (replaced it with a duplicate of the block); (b) it does not rewrite out/<date>/<id>.drive.json,
       so post-copy fixes miss the Drive doc. Also: producers must not invent source URLs they could not open (NYT).

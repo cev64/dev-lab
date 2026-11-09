@@ -2,6 +2,40 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-09 (nightly run, Monday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Amazon is hiring to put a robot in homes" (CNBC Nov 8 dug through Amazon job listings; listing posted Nov 4 opens
+     "Robots are about to step out of the movies and into our homes."; team is Fauna Robotics, NY startup bought in March,
+     Sprout humanoid 3.5 ft; Astro 2021 ~$1,450, invite-only; Astro for Business 2023, gone within a year; no product
+     announced; sources: amazon.jobs listings, CNBC, The Next Web, About Amazon, Engadget, TechCrunch). Rubric ~73
+     (fresh 18, stakes 17, surprise 10, visual 10, verif 14, controversy 4). 62.9 s, -15.1 LUFS, style orb, 100% scenes
+     (new: home-arrival.js, listing-movie.js, fauna-sprout.js, astro-shelf.js, listing-roles.js). Left out:
+     "new-to-world"/"alongside family members" (that listing removed; CNBC only) and "few thousand homes" (CNBC only).
+  2. "AI data centers are running on retired jet engines" (retired airliner engines rebuilt to burn gas, ~48 MW each
+     (ProEnergy rating); Crusoe ordered 13, 650 MW (Reuters); xAI installed 8 in Mississippi; N. Virginia 100 MW grid
+     hookup ~7 years (IEA via TechCrunch; Bloomberg 2024); new turbines yearslong waitlists; analyst: running in 24
+     months; NYT: less efficient, more polluting; Enverus analyst to Reuters: "probably only partially"; sources: Reuters
+     (syndicated), NYT (via GV Wire), TechCrunch, IEEE Spectrum, Interesting Engineering, Data Center Knowledge). Rubric
+     ~80 (18/20/14/10/13/5). 64.8 s, -15.0 LUFS, style horizon, 100% scenes (new: jet-power.js, 6 modes). Left out:
+     Anthropic $3.4B generator deal (all copies trace to one FT report).
+  3. "Office jobs AI was supposed to kill just grew" (BLS October report, Nov 6: professional and business services
+     +70,000, biggest one-month gain since July 2022 (verified on the BLS series; WSJ headline); consulting +17,300, legal
+     +2,400, accounting +2,300; total +165,000, unemployment 4.1%; report never mentions AI; preliminary; ADP private
+     count -27,000 for the sector; sources: BLS release + table B-1 + series, WSJ via Techmeme, Marketplace, HR Dive,
+     FourWeekMBA, Fox Business, SIA). Rubric ~79 (18/23/12/7/16/3). 64.9 s, -15.0 LUFS, style neural, 100% scenes (new:
+     office-hiring.js, jobs-chart.js, desk-fear.js, why-report.js, two-counts.js). The 70K covers office support too,
+     and the video says so (WSJ framing implied lawyers/consultants).
+  Lead review: claims traced to claim tables; contact sheets of all three final MP4s; ffprobe 1080x1920 30 fps. Accepted:
+  office-hiring's "NOW HIRING" pill sits at x~26 in the cold open (legible, left side); loudness ~1 dB under target on all
+  three (-15.0/-15.1).
+  Picks note: skipped Jensen Huang affair/spy stories (personal allegations about a named person), Tencent scientist bio
+  quote ("X says"), Trump guardrails quote, CAISSI reporting (sources-say, policy), Apple agentic Siri (Bloomberg-only
+  rumour; Siri ran 11-04), Googlebook RAM update (backup; weaker stakes), Anthropic generator deal (FT-only).
+  Drive: connector available; no 2026-11-09 titles existed; 3 Google Docs filed.
+  Timings: setup ~3 min, news 5 s, picks ~6 min, producers 14-18 min in parallel, lead review + delivery ~10 min.
+  Problems: publish-videos.sh printed HTTP 403 again; videos/2026-11-09 holds all 9 files (ls-tree). All three producers
+  again had to move token-take's card right in a local copy (library fix still pending). Producers shared scratchpad
+  folder names once (no harm). Loudness lands ~-15 LUFS, not -14 (backlogged: check voice normalisation target).
+  Improve: none tonight; scenes not promoted (backlogged).
 - 2026-11-08 (nightly run, Sunday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Outside testers say Anthropic's AI improves twice as fast" (FOLLOW-UP to anthropic-rsi 11-03; METR's independent
      assessment, Nov 5: 11 weeks inside Anthropic (Aug 12-Oct 29), rare access to internal data; test scores rising

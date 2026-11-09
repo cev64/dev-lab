@@ -1587,6 +1587,65 @@
         "https://www.khaleejtimes.com/business/tech/us-clears-nvidias-h200-chip-sales-to-10-china-firms"
       ],
       "video": "out/2026-11-08/2026-11-08-explainer-empty-office.mp4"
+    },
+    {
+      "id": "2026-11-09-explainer-home-robot",
+      "date": "2026-11-09",
+      "hook": "Amazon is hiring to put a robot in homes",
+      "topic": "ROBOTS",
+      "title": "Amazon is hiring to build a new home robot after Astro",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.cnbc.com/2026/11/08/amazon-home-robot-fauna-sprout.html",
+        "https://www.amazon.jobs/en/jobs/10597214/applied-scientist-fauna-robotics",
+        "https://www.amazon.jobs/en/jobs/10457186/principal-ux-designer-fauna",
+        "https://thenextweb.com/news/amazon-acquires-fauna-robotics-and-its-approachable-humanoid-sprout",
+        "https://www.aboutamazon.com/news/devices/meet-astro-a-home-robot-unlike-any-other",
+        "https://www.engadget.com/amazon-pulls-the-plug-on-the-business-version-of-its-astro-robot-193907015.html",
+        "https://techcrunch.com/2024/07/03/amazon-discontinues-astro-for-business-security-robot",
+        "https://www.unite.ai/amazon-builds-home-robotics-team-for-new-to-world-robot/"
+      ],
+      "video": "out/2026-11-09/2026-11-09-explainer-home-robot.mp4"
+    },
+    {
+      "id": "2026-11-09-explainer-office-hiring",
+      "date": "2026-11-09",
+      "hook": "Office jobs AI was supposed to kill just grew",
+      "topic": "JOBS",
+      "title": "US professional and business services added 70,000 jobs in October",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.bls.gov/news.release/empsit.nr0.htm",
+        "https://www.bls.gov/news.release/empsit.t17.htm",
+        "https://data.bls.gov/timeseries/CES6000000001?output_view=net_1mth&from_year=2021&to_year=2026",
+        "https://www.techmeme.com/261108/p15#a261108p15",
+        "https://www.marketplace.org/story/2026/11/06/latest-jobs-report-shows-a-whitecollar-hiring-turnaround",
+        "https://www.hrdive.com/news/employment-growth-hits-unexpected-high-october-2026/874020/",
+        "https://fourweekmba.com/ai-payrolls-rose-165000-information-jobs-fell-4-2-in-a-year/",
+        "https://www.foxbusiness.com/economy/private-sector-added-86000-jobs-october-above-expectations-adp-says",
+        "https://www.staffingindustry.com/news/global-daily-news/private-sector-jobs-up-by-86000-workers-see-big-earnings-boost"
+      ],
+      "video": "out/2026-11-09/2026-11-09-explainer-office-hiring.mp4"
+    },
+    {
+      "id": "2026-11-09-explainer-jet-power",
+      "date": "2026-11-09",
+      "hook": "AI data centers are running on retired jet engines",
+      "topic": "AI POWER",
+      "title": "AI data centers are turning retired jet engines into power plants",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.globalbankingandfinance.com/analysis-ai-power-rush-sends-data-centres-hunting-used/",
+        "https://gvwire.com/2026/11/03/old-polluting-jet-engines-are-being-scavenged-to-power-data-centers/",
+        "https://techcrunch.com/2026/11/03/data-centers-are-turning-to-old-jet-engines-as-the-wait-for-power-grows/",
+        "https://spectrum.ieee.org/ai-data-centers",
+        "https://interestingengineering.com/energy/plane-engine-gas-turbine-energy",
+        "https://datacenterknowledge.com/energy-power-supply/data-centers-face-seven-year-wait-for-power-hookups-in-virginia"
+      ],
+      "video": "out/2026-11-09/2026-11-09-explainer-jet-power.mp4"
     }
   ]
 }
