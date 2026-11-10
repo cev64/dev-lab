@@ -1646,6 +1646,58 @@
         "https://datacenterknowledge.com/energy-power-supply/data-centers-face-seven-year-wait-for-power-hookups-in-virginia"
       ],
       "video": "out/2026-11-09/2026-11-09-explainer-jet-power.mp4"
+    },
+    {
+      "id": "2026-11-10-explainer-au-ai-law",
+      "date": "2026-11-10",
+      "hook": "Australia's building a watchdog with teeth for rogue AI",
+      "topic": "AI LAW",
+      "title": "Australia plans an AI safety regulator after the OpenAI Medicare breach",
+      "followUp": true,
+      "format": "v2",
+      "sources": [
+        "https://www.pm.gov.au/media/new-australian-ai-safety-and-security-protections",
+        "https://www.pm.gov.au/media/strengthening-australia-against-ai-driven-cyber-incidents",
+        "https://www.abc.net.au/news/2026-11-10/openai-medicare-hack-government-loophole/107368330",
+        "https://www.bbc.co.uk/news/articles/cmp3g37l566po",
+        "https://theprint.in/world/australia-tightens-ai-oversight-rules-to-consider-criminal-law-reform-after-openai-breach/3094824/",
+        "https://www.sbs.com.au/news/article/ai-safeguards-open-ai-medicare-breach-albanese/2pbsdc5nr"
+      ],
+      "video": "out/2026-11-10/2026-11-10-explainer-au-ai-law.mp4"
+    },
+    {
+      "id": "2026-11-10-explainer-insta-effects",
+      "date": "2026-11-10",
+      "hook": "Instagram just started turning typed sentences into filters",
+      "topic": "AI FILTERS",
+      "title": "Instagram's Effect Builder turns typed prompts into Story filters",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://edits.instagram.com/blog/introducing-effect-builder/",
+        "https://www.digitaltoday.co.kr/en/view/123387/instagram-unveils-effect-builder-to-create-custom-story-filters-from-text-and-photos",
+        "https://www.techbuzz.ai/articles/instagram-launches-ai-filter-builder-for-custom-stories-effects",
+        "https://www.unite.ai/instagram-launches-effect-builder-to-make-ai-effects-for-stories/"
+      ],
+      "video": "out/2026-11-10/2026-11-10-explainer-insta-effects.mp4"
+    },
+    {
+      "id": "2026-11-10-explainer-apple-ai-packs",
+      "date": "2026-11-10",
+      "hook": "Apple now sells fifty-dollar refills for its AI",
+      "topic": "APPLE AI",
+      "title": "Apple now sells $50 refills for its AI",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://support.apple.com/en-us/127888",
+        "https://www.apple.com/legal/internet-services/intelligence-usage-pack/en/",
+        "https://www.apple.com/apple-creator-studio/",
+        "https://9to5mac.com/2026/11/09/apple-launches-50-intelligence-usage-packs-for-select-ai-features/",
+        "https://www.notebookcheck.net/Apple-Creator-Studio-Additional-AI-usage-costs-50.1446190.0.html",
+        "https://www.iclarified.com/103377/apple-starts-selling-extra-ai-usage-for-creator-studio"
+      ],
+      "video": "out/2026-11-10/2026-11-10-explainer-apple-ai-packs.mp4"
     }
   ]
 }
