@@ -4,10 +4,18 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
+- [ ] (2026-11-10) Library rulebook-list.js: topic pills run past x 915 after the template zoom (AU producer used a
+      local narrow copy). Add a list-x/width param and verify with a still.
+- [ ] (2026-11-10) Promote tonight's scenes: watchdog-gate.js (AU: robot leaves building, watchdog arrives, law-wall gap
+      being filled; modes hook/recap/loophole), usage-studio.js (Apple: AI usage fuel gauge, paid top-up pack, menu,
+      roll-over strip; modes hook/story/pack/topup), meter-crowd.js (crowd with gauges + country chips), effect-builder.js
+      (Instagram: prompt -> filter, comic-ink portrait helper, review conveyor, Try-it share; 6 modes).
+- [ ] (2026-11-10) engine/tests: test_fixes, test_news, test_repeats fail when run directly (ModuleNotFoundError:
+      clipper); give them the _path.py import the passing tests use, so the suite is a usable pre-push check.
 - [x] (PR 2026-11-09: X0 160, X1 650, RX 722, cards ~20-28 px lower; still checked) Library token-take.js still too far left: all 3 producers again moved it in local copies
       (take card X0 130 -> 150-172; Token RX 735 -> 712-722; jet-power also moved both cards down ~30 px off the header).
       Port those numbers to the library and verify with a still.
-- [ ] (2026-11-09) Loudness lands at -15.0/-15.1 LUFS on every render (target ~-14); check the voice normalisation step.
+- [x] (PR #45 2026-11-10: loudnorm's dynamic fallback lands ~0.8 dB low; voice now trims with one capped linear gain -> -14.0) Loudness lands at -15.0/-15.1 LUFS on every render (target ~-14); check the voice normalisation step.
 - [ ] (2026-11-09) Promote: jet-power.js (trailer engine, airliner, generator, house, calendar), jobs-chart.js,
       two-counts.js (balance scale), home-arrival.js (sheeted robot), astro-shelf.js.
 - [ ] (2026-11-08) `clipper explainer --no-render` bugs: (a) re-running it clobbers a hand-written header at the top of

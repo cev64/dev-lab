@@ -2,6 +2,44 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-10 (nightly run, Tuesday, fired ~07:50 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Instagram just started turning typed sentences into filters" (Instagram's Edits team launched Effect Builder Nov 9:
+     free web tool, describe a look, preview on your own photos, optional style reference image, no design/coding skills;
+     US only, 18+, no date for other countries; every effect gets a safety review, then it appears in the Stories effects
+     browser with the maker's handle; anyone can tap "Try it"; Meta hasn't said whether there's a visible AI label;
+     sources: Instagram Edits blog, DigitalToday, The Tech Buzz, Unite.AI). Rubric ~72 (19/15/7/10/17/4). 65.4 s,
+     style orb, 100% scenes (new: effect-builder.js, 6 modes). The Verge's hands-on was unreachable and is not cited;
+     DigitalToday/Tech Buzz partly lean on it, so the primary post + DigitalToday is the independent pair.
+  2. "Australia's building a watchdog with teeth for rogue AI" (FOLLOW-UP to the October OpenAI-agent Medicare breach
+     video; new Nov 10: PM released the rapid review, 18 recommendations, all accepted; proposed AI safety regulator with
+     significant penalties, rapid incident reporting, independent model testing; ABC: OpenAI appears to have broken no
+     law, so a "failure to prevent" offence is being considered; bill planned for next year; an independent senator calls
+     it weak (not named); OpenAI's side included (unintentional, no evidence patient records accessed); sources: two PM
+     media releases, ABC, BBC, Reuters via ThePrint, SBS). Rubric ~80 (20/15/11/8/20/6). 65.4 s, style horizon, 100%
+     scenes (new: watchdog-gate.js; local narrow copy of rulebook-list). Bloomberg/Techmeme 403, not cited.
+  3. "Apple now sells fifty-dollar refills for its AI" (one-time $49.99 Intelligence Usage Pack after the monthly AI cap
+     in Creator Studio, starting in Logic Pro's Buy More Usage; on top of $12.99/month; kicks in only after the cap, rolls
+     over, expires 12 months after purchase; no Family Sharing; 8 countries; Apple doesn't promise how much a pack buys;
+     sales final; sources: Apple Support 127888, Apple usage-pack terms, Apple Creator Studio page, 9to5Mac, The Verge,
+     Notebookcheck, iClarified). Rubric ~76 (18/15/11/9/16/7). 66.3 s, style flow, 100% scenes (new: usage-studio.js,
+     meter-crowd.js). Lead check: Apple's pages list no price; the $49.99 came from 9to5Mac (seen in the app), and other
+     outlets credit 9to5Mac, so the lead added The Verge (its own headline "$50", read from The Verge's RSS feed; the
+     article page is unreachable from here) as the second source in the script, ledger, post copy and Drive doc. Lead fix:
+     "Creator Studio" pill (x~20) and the "50+ images" card (x~980) were outside the safe area after the zoom -> moved
+     in, re-rendered (45 s), checked with stills.
+  Lead review: claims traced to claim tables; contact sheets of all three final MP4s; ffprobe 1080x1920 30 fps.
+  All three MP4s were trimmed by audio-only gain to -14.05 LUFS (renders came out at -14.9/-14.9/-15.1).
+  Picks note: skipped the Anthropic Fable/Mythos 5.2 release (a version bump, inside baseball), the Jensen Huang affair/spy
+  stories (personal allegations), Moonshot B300 rental (possible breach; allegation), the Anthropic $3.4B turbines (jet
+  power ran last night; earlier coverage FT-only), the Anthropic IPO email (inside baseball), DeepMind's Signal proof
+  (DeepMind RSA ran 11-08), Impossible Metals (Reuters only, company claim), and Disney+Adobe (backup).
+  Drive: connector available; no 2026-11-10 titles existed; 3 Google Docs filed.
+  Timings: setup ~1 min, news 4 s, picks ~6 min, producers 10-13 min in parallel, lead review + Apple fix ~15 min.
+  Problems: publish-videos.sh printed HTTP 403 again; videos/2026-11-10 holds all 9 files (ls-remote matches).
+  `explainer --no-render` again didn't update the ledger sources or drive.json; the lead fixed both by hand.
+  Engine tests: test_fixes, test_news and test_repeats can't import clipper when run directly (backlogged).
+  Improve: PR #45 merged. voice.py now trims narration onto -14 LUFS after loudnorm (its dynamic fallback ran ~0.8 dB
+  low); checked on tonight's AU narration: -14.84 -> -14.00. Scenes not promoted (backlogged).
 - 2026-11-09 (nightly run, Monday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Amazon is hiring to put a robot in homes" (CNBC Nov 8 dug through Amazon job listings; listing posted Nov 4 opens
      "Robots are about to step out of the movies and into our homes."; team is Fauna Robotics, NY startup bought in March,
