@@ -639,7 +639,8 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
     norm = audio.extract_normalized(polished, wav_path, 0.0, duration)
     raw.unlink(missing_ok=True)
     polished.unlink(missing_ok=True)
-    loud = audio.measure_loudness(wav_path)
+    trim = audio.trim_to_target(wav_path)
+    loud = trim["after"]
     if abs(loud["lufs"] + 14) > 1.0 or loud["truePeak"] > -0.5:
         warnings.append(f"loudness {loud['lufs']:.1f} LUFS / {loud['truePeak']:.1f} dBTP (target -14 / -1)")
     final = audio.decode(wav_path)
@@ -698,6 +699,7 @@ def voice(paths: Paths, script_path: Path, force: bool = False, check_length: bo
         "lufs": loud["lufs"],
         "truePeak": loud["truePeak"],
         "loudnorm": norm["pass2"].get("normalization_type"),
+        "loudnessTrimDb": trim["gain"],
         "interpolated": [words[i]["w"] for i in unaligned],
         "transcript": " ".join(s["text"] for s in segs),
         "warnings": warnings,

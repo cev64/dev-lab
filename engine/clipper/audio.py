@@ -113,6 +113,23 @@ def extract_normalized(src: Path, dst: Path, start: float, end: float, lufs: flo
     return {"pass1": m, "pass2": _last_json(p2.stderr)}
 
 
+def trim_to_target(path: Path, lufs: float = -14.0, tp: float = -1.0, tolerance: float = 0.2) -> dict:
+    """Nudge a normalised file onto the loudness target with one linear gain, never pushing the true peak above `tp`.
+
+    loudnorm falls back to its dynamic mode on narration (long gated pauses), which lands ~0.5-1 dB under target.
+    Returns {before, gain, after}; the file is rewritten in place only when the gain is non-trivial.
+    """
+    before = measure_loudness(path)
+    gain = min(lufs - before["lufs"], tp - before["truePeak"])
+    if abs(gain) < tolerance:
+        return {"before": before, "gain": 0.0, "after": before}
+    tmp = path.with_name(path.stem + ".trim" + path.suffix)
+    subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(path), "-af", f"volume={gain:.2f}dB",
+                    "-c:a", "pcm_s16le", str(tmp)], check=True)
+    tmp.replace(path)
+    return {"before": before, "gain": round(gain, 2), "after": measure_loudness(path)}
+
+
 def _last_json(stderr: str) -> dict:
     blocks = re.findall(r"\{[^{}]*\}", stderr)
     if not blocks:
