@@ -86,3 +86,7 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 - [x] Original-content track: fully animated narrated explainers (shipped 2026-10-09).
 - [ ] Use publisher transcripts when feeds provide them (faster, more accurate), else whisper.
 - [ ] Weekly performance review automation from ops/PERFORMANCE.md.
+- (2026-11-11) Kokoro lexicon: "Claroc" (reads ~"Cleroc") and "SpaceXSI" (reads "SpaceX S I"); add pronunciations.
+- (2026-11-11) Promote scenes: work/explainers/2026-11-11-explainer-claude-meetings/scenes/meeting-live.js,
+  2026-11-11-explainer-ring-drone/scenes/{drone-home,rover-patrol}.js, grok-links.js (publish + wall modes).
+- (2026-11-11) Producer prompts: give each producer its own scratch folder (they share the session scratchpad).

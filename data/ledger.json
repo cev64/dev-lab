@@ -1731,6 +1731,21 @@
         "https://gizmodo.com/amazons-new-ring-security-cameras-can-fly-around-your-house-or-roam-around-your-business-2000837764"
       ],
       "video": "out/2026-11-11/2026-11-11-explainer-ring-drone.mp4"
+    },
+    {
+      "id": "2026-11-11-explainer-grok-links",
+      "date": "2026-11-11",
+      "hook": "Strangers could open over 35,000 Grok Build apps",
+      "topic": "GROK BUILD",
+      "title": "Grok Build apps were open to anyone, Claroc says",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://blog.claroc.io/ghostshares-grok-build-apps/",
+        "https://arstechnica.com/security/2026/11/grok-build-coding-agent-leaks-oodles-of-confidential-info-some-belonging-to-spacexsi/",
+        "https://thedeepdive.ca/security-firm-says-grok-build-apps-exposed-medical-exams-sales-plans-and-staff-data/"
+      ],
+      "video": "out/2026-11-11/2026-11-11-explainer-grok-links.mp4"
     }
   ]
 }

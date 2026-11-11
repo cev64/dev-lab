@@ -2,6 +2,42 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-11 (nightly run, Wednesday, fired ~07:35 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "An AI just joined your meeting and started working" (Anthropic's Claude Meetings, announced Nov 10: added to a call as
+     a visible participant, drafts the plan, maps a timeline on a whiteboard, answers in the chat, pulls figures from
+     connected apps; notes/action items waiting in Claude afterwards; beta for Team/Enterprise, Google Meet only, more
+     platforms planned; posts a notice in the chat; sources: Anthropic/Claude blog, TechCrunch, Reuters via Deccan
+     Chronicle, The Verge, Gulf News). Rubric ~72 (19/17/8/9/13/6). 65.3 s, -14.0 LUFS, style flow, 100% scenes (new:
+     meeting-live.js, 5 modes). Anthropic's own post says "coming soon"; beta/plan/Meet details come from the outlets, so
+     the video says "beta", never "available now". Job impact worded as an open question only. Script 197 words (Kokoro
+     read it fast; 58 s at 176 words).
+  2. "Amazon's new security camera flies through your house" (Ring Drone Cam $249.99, unveiled Nov 10, AI Pilot maps rooms,
+     routes on schedule/on demand, flies to preset spots on alarm, ships US Jan 27 2027 but not FCC-authorised yet so
+     can't be sold; Ring Rover Cam $999.99 wheeled business patrol robot, ships Dec 16; privacy default, camera off in dock,
+     LED when recording; past criticism mostly over police partnerships; first shown 2020, held back; sources: About
+     Amazon, CNBC, Gizmodo). Rubric ~78 (19/18/11/10/16/4). 66.8 s, -14.0 LUFS, style horizon, 100% scenes (new:
+     drone-home.js, rover-patrol.js). Dropped: between-floors (CNBC only), Rover-on-Astro (avoids retelling 11-09).
+     Axios/NewsNation 403.
+  3. "Strangers could open over 35,000 Grok Build apps" (security firm Claroc, Nov 10: tested 43,551 Grok app addresses,
+     35,578 opened with no sign-in, most games/calculators, est. 650-800 with private data (worker medical exams, an ICU
+     patient's labs, staff rosters); 24 by SpaceXSI/X staff, taken down after Ars asked; app address is its own hostname,
+     findable through passive DNS; Claroc's paid account preselected "Anyone with the link"; creators still had to
+     publish; SpaceXSI: apps private until the creator shares; sources: Claroc blog, Ars Technica (read with curl; WebFetch
+     blocked), The Deep Dive). Rubric ~81 (20/20/14/8/15/4). 71.3 s, -14.0 LUFS, style neural, 100% scenes (new:
+     grok-links.js, local dns-lookup.js from dns-phonebook.js). Affected companies left unnamed (Claroc names none).
+     Narrator says "Claroc" ~"Cleroc" and "SpaceXSI" as "SpaceX S I" (backlogged: lexicon).
+  Lead review: claim tables against scripts; contact sheets of all three; ffprobe 1080x1920 30 fps. Lead fix (post copy
+  only): Grok TikTok text said the 650-800 private-data estimate "included" the 24 staff apps, which the sources don't
+  establish -> "24 open apps were built by SpaceXSI and X staff". Fixed in the script, the delivery note and Drive doc
+  (Charlie got the delivery file before the fix; the notification flags it).
+  Picks note: dropped eBay blocking AI agents (Verge only, one reader's report, "appears"), Gemini 4 Carbon (covered
+  10-29; same model, wider rollout), Gemini Robotics 2.5 (couldn't confirm a second source), NY AI safety law (ALREADY
+  COVERED), Nvidia spy/Jensen Huang stories (allegations about named people), Anthropic IPO/TSMC money (inside baseball).
+  Drive: connector available; no 2026-11-11 titles existed; 3 Google Docs filed.
+  Timings: setup ~2 min, news 5 s, picks + source checks ~10 min, producers 13-16 min in parallel, review + delivery ~10 min.
+  Problems: publish-videos.sh printed HTTP 403 again; videos/2026-11-11 holds all 9 files (ls-tree). Producers shared the
+  session scratchpad and one overwrote another's helper script (no harm; give each its own folder next time).
+  Improve: skipped tonight; new scenes (meeting-live, drone-home, rover-patrol, grok-links publish/wall modes) backlogged.
 - 2026-11-10 (nightly run, Tuesday, fired ~07:50 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Instagram just started turning typed sentences into filters" (Instagram's Edits team launched Effect Builder Nov 9:
      free web tool, describe a look, preview on your own photos, optional style reference image, no design/coding skills;
