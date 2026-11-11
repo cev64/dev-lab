@@ -1699,6 +1699,38 @@
         "https://www.iclarified.com/103377/apple-starts-selling-extra-ai-usage-for-creator-studio"
       ],
       "video": "out/2026-11-10/2026-11-10-explainer-apple-ai-packs.mp4"
+    },
+    {
+      "id": "2026-11-11-explainer-claude-meetings",
+      "date": "2026-11-11",
+      "hook": "An AI just joined your meeting and started working",
+      "topic": "CLAUDE MEETINGS",
+      "title": "Claude Meetings: an AI that joins your call and does the follow-up",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://claude.com/resources/articles/more-ways-to-work-with-claude-sheets-whiteboards-and-interactive-connectors",
+        "https://techcrunch.com/2026/11/10/anthropic-launches-claude-meetings-to-turn-workplace-discussions-into-plans-and-tasks/",
+        "https://www.deccanchronicle.com/technology/anthropic-brings-claude-to-google-meet-to-tackle-tasks-live-2003431",
+        "https://www.theverge.com/ai-artificial-intelligence/1030709/anthropic-has-its-own-ai-powered-office-suite-now",
+        "https://gulfnews.com/technology/companies/claude-can-now-join-work-meetings-and-complete-tasks-as-you-talk-1.500743080"
+      ],
+      "video": "out/2026-11-11/2026-11-11-explainer-claude-meetings.mp4"
+    },
+    {
+      "id": "2026-11-11-explainer-ring-drone",
+      "date": "2026-11-11",
+      "hook": "Amazon's new security camera flies through your house",
+      "topic": "HOME AI",
+      "title": "Amazon's new Ring Drone Cam flies through your house",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.aboutamazon.com/news/devices/ring-drone-cam-rover-cam-security-robot",
+        "https://www.cnbc.com/2026/11/10/amazons-ring-unveils-flying-drone-robot-to-patrol-homes-businesses.html",
+        "https://gizmodo.com/amazons-new-ring-security-cameras-can-fly-around-your-house-or-roam-around-your-business-2000837764"
+      ],
+      "video": "out/2026-11-11/2026-11-11-explainer-ring-drone.mp4"
     }
   ]
 }
