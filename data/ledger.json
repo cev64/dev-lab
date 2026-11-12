@@ -1746,6 +1746,40 @@
         "https://thedeepdive.ca/security-firm-says-grok-build-apps-exposed-medical-exams-sales-plans-and-staff-data/"
       ],
       "video": "out/2026-11-11/2026-11-11-explainer-grok-links.mp4"
+    },
+    {
+      "id": "2026-11-12-explainer-latham-ai-awards",
+      "date": "2026-11-12",
+      "hook": "A law firm's offering lawyers cash for AI ideas",
+      "topic": "AI AT WORK",
+      "title": "Latham & Watkins sets aside $1M to reward associates' AI ideas",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.legalcheek.com/2026/11/latham-unveils-1-million-bonus-port-to-reward-lawyers-driving-ai-innovation/",
+        "https://www.nonbillable.co.uk/news/latham-1m-associate-ai-awards",
+        "https://www.legalbusiness.co.uk/law-firms/latham-launches-1m-ai-awards-programme-for-associates/",
+        "https://www.lw.com/en/news/2024/10/latham-watkins-hosts-first-of-its-kind-ai-academy"
+      ],
+      "video": "out/2026-11-12/2026-11-12-explainer-latham-ai-awards.mp4"
+    },
+    {
+      "id": "2026-11-12-explainer-big-walk-ai",
+      "date": "2026-11-12",
+      "hook": "A chatbot patched ten lines, and indie gaming erupted",
+      "topic": "AI IN GAMES",
+      "title": "Big Walk's 0.1% AI code and the indie backlash",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://bigwalk.game/faq/#ai",
+        "https://arstechnica.com/gaming/2026/11/big-walk-used-ai-to-fix-a-bug-now-the-indie-gaming-world-is-having-a-reckoning/",
+        "https://gameinformer.com/2026/11/10/house-house-discloses-ai-use-for-under-01-of-big-walks-code-following-igf-voting",
+        "https://www.dexerto.com/gaming/big-walk-review-bombed-after-house-house-admits-ai-touched-well-under-0-1-of-code-3427480/",
+        "https://aftermath.site/igf-awards-2027-ai-statement-judges/",
+        "https://kotaku.com/big-walk-ai-disclosure-igf-awards-vg-chat-2000755514"
+      ],
+      "video": "out/2026-11-12/2026-11-12-explainer-big-walk-ai.mp4"
     }
   ]
 }
