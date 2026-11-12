@@ -2,6 +2,44 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-12 (nightly run, Thursday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "A law firm's offering lawyers cash for AI ideas" (Latham & Watkins, announced Nov 10: Associate AI Impact Award, $1M
+     total pool for 2027 for associates whose AI work helps clients or the firm (tools, workflows, teaching colleagues);
+     all associates firmwide, tiered by impact, entries close late spring 2027, firmwide nomination/review, no date for
+     first winners; builds on its AI Academy (2024); Shoosmiths' GBP 1M Copilot-prompts pot last year as comparison;
+     sources: Legal Cheek, Non-Billable, Legal Business, Latham AI Academy page). Rubric ~72 (18/16/10/8/16/4). 64.9 s,
+     -14.0 LUFS, style flow, 100% scenes (new: latham-awards.js, 5 modes). Reuters 401, not cited; Ropes & Gray
+     400 hours dropped (no fetchable source). Lead spot-checked Non-Billable phrases and the award name.
+  2. "A chatbot patched ten lines, and indie gaming erupted" (House House's Big Walk FAQ: LLMs used sparingly late in
+     development; well under 0.1% of code; the key fix ~10 lines inside URP after a Unity engineer said it wasn't
+     possible; disclosed in its IGF submission; 19 IGF jurors pledged not to vote for any game using generative AI in
+     any capacity, code included; hundreds of negative Steam reviews in days, still Very Positive overall; pledge names no
+     game; sources: House House FAQ, Ars Technica, Game Informer, Dexerto, Aftermath, Kotaku). Rubric ~80
+     (18/16/14/9/17/6). 65.6 s, -14.0 LUFS, style orb, 100% scenes (new: code-wall.js, studio-bug.js, jury-pledge.js,
+     review-wall.js). No game art or goose drawn. Disqualification angle left out (no official IGF confirmation).
+     Lead fix: the FAQ's 0.1% covers all LLM-related code, the 10 lines are one fix; beat 3 said "About ten lines" as if
+     total -> "The key fix? About ten lines", plus TikTok/Instagram copy; re-voiced and re-rendered (43 s).
+  3. "United can cancel flights your AI agent books" (United, Wed Nov 11: restricting unauthorized personal AI agents on
+     its site, app and via travel agencies; agents can show flights but not buy; Contract of Carriage Rule 5.H: cancels
+     reservations made, modified or serviced by AI agents without notice, even if the passenger supervises/approves;
+     reasons: credentials, unintended purchases, a person must confirm at check-in that bags hold no explosives; first US
+     airline to say so; Kirby "another middleman" via WSJ, attributed; may revisit; sources: The Verge, Skift, Engadget,
+     Simple Flying, PPC Land, Thrifty Traveler). Rubric ~82 (19/20/12/10/16/5). 66.0 s, -14.0 LUFS, style horizon, 100%
+     scenes (new: airline-counter.js, kiosk-attest.js, fine-print-cancel.js, blocked-street.js, middleman.js). Reuters
+     401, not cited. Lead verified the Rule 5.H text on PPC Land. Dropped: "few people try it" (WSJ only).
+  Lead review: claim tables against scripts; contact sheets of all three; ffprobe 1080x1920 30 fps, 64.9/65.6/66.0 s.
+  Picks note: skipped Chinese firms renting Nvidia compute overseas (sources-say; Nvidia spy story ran 11-08), NY AI safety
+  law (ALREADY COVERED), TSMC $1B in Anthropic/OpenAI (money, inside baseball), Jensen Huang board/affair stories (personal
+  allegations), Grok sexualized-photo victims (legal allegations, minors), Radical Numerics pathogen model (company claim,
+  one outlet), Adobe MAX sneaks and ChatGPT Business Agents (backups; weaker stakes), Agile Robots/Fractile rounds (money).
+  Drive: connector available; no 2026-11-12 titles existed; 3 Google Docs filed.
+  Timings: setup ~3 min (git fetch took ~3 min first), news 5 s, picks + source checks ~10 min, producers 13-16 min in
+  parallel, review + Big Walk fix + delivery ~12 min.
+  Problems: publish-videos.sh printed HTTP 403 again; videos/2026-11-12 holds all 9 files with matching sizes (ls-tree).
+  Producers had their own scratch folders tonight (no clashes). Voice warned of a few clipped samples on all three
+  (peaks -2.6 to -3.2 dBTP; no audible issue).
+  Improve: skipped tonight; new scenes (airline-counter, kiosk-attest, fine-print-cancel, review-wall, jury-pledge,
+  code-wall, latham-awards pot/counts modes) backlogged for the library.
 - 2026-11-11 (nightly run, Wednesday, fired ~07:35 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "An AI just joined your meeting and started working" (Anthropic's Claude Meetings, announced Nov 10: added to a call as
      a visible participant, drafts the plan, maps a timeline on a whiteboard, answers in the chat, pulls figures from
