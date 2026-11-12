@@ -1,0 +1,219 @@
+# Deliveries 2026-11-12
+
+**Posting order (ET):** morning ~8am: Latham & Watkins AI awards · midday ~12pm: Big Walk's 0.1% AI code · evening ~6-9pm: United can cancel AI-agent bookings (strongest hook).
+Switch ON the AI-generated content label on every platform (synthetic narrator).
+
+## Explainer: Latham & Watkins sets aside $1M to reward associates' AI ideas
+
+**Hook:** A law firm's offering lawyers cash for AI ideas  
+**Video:** `out/2026-11-12/2026-11-12-explainer-latham-ai-awards.mp4` (64.9 s)  
+**Cover text:** A law firm's paying for AI ideas  
+**Thumbnail:** `out/2026-11-12/2026-11-12-explainer-latham-ai-awards.thumbnail.png` (upload it as the cover when posting)  
+**Format:** v2 (log it in ops/PERFORMANCE.md with the numbers)
+
+Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info; YouTube: Altered or synthetic content = Yes). After posting: post the pinned comment from the channel account and pin it; reply to comments in the first hour.
+
+TikTok description (paste as is):
+
+```
+Law firm Latham & Watkins is offering its lawyers cash for AI ideas 💼
+The firm set aside $1 million for 2027 to reward associates whose AI work helps clients or the firm: new tools, better workflows, or teaching colleagues. Every associate can enter, bigger impact means a bigger award, and entries close in late spring 2027.
+Should your boss pay for AI ideas? 👇
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Legal Cheek, Non-Billable, Legal Business, Latham & Watkins. AI narrator.
+
+#thedailytoken #ai #lawyers #futureofwork #technews
+```
+
+Instagram Reels caption (paste as is):
+
+```
+A law firm is offering its lawyers cash for AI ideas 💼
+Latham & Watkins set aside $1 million for 2027 for its Associate AI Impact Award. Associates in every office can enter with AI work that helps clients or the firm: building tools, improving workflows, or teaching colleagues the tech. Award sizes depend on impact, entries close in late spring 2027, and no date has been set for the first winners.
+💬 Should your boss pay for AI ideas?
+📤 Send this to the coworker who automates everything.
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Legal Cheek, Non-Billable, Legal Business, Latham & Watkins. AI narrator.
+
+#thedailytoken #ai #lawyers #futureofwork #technews
+```
+
+YouTube Shorts title:
+
+```
+Law firm Latham & Watkins puts $1M on its lawyers' AI ideas
+```
+
+YouTube Shorts description:
+
+```
+Law firm Latham & Watkins is offering its lawyers cash for AI ideas 💼
+The firm set aside $1 million for 2027 to reward associates whose AI work helps clients or the firm: new tools, better workflows, or teaching colleagues. Every associate can enter, bigger impact means a bigger award, and entries close in late spring 2027.
+Should your boss pay for AI ideas? 👇
+
+Subscribe to @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Legal Cheek, Non-Billable, Legal Business, Latham & Watkins. AI narrator.
+
+#thedailytoken #ai #lawyers #futureofwork #technews
+```
+
+Pinned comment (all three platforms):
+
+```
+💰 = pay for AI ideas, 💼 = it's just part of the job
+```
+
+Sources:
+- Legal Cheek: Latham unveils $1 million bonus pot to reward lawyers driving AI innovation https://www.legalcheek.com/2026/11/latham-unveils-1-million-bonus-port-to-reward-lawyers-driving-ai-innovation/
+- Non-Billable: Latham puts $1m behind its associates' best AI ideas https://www.nonbillable.co.uk/news/latham-1m-associate-ai-awards
+- Legal Business: Latham launches $1m AI awards programme for associates https://www.legalbusiness.co.uk/law-firms/latham-launches-1m-ai-awards-programme-for-associates/
+- Latham & Watkins: Latham & Watkins Hosts First-of-its-Kind AI Academy https://www.lw.com/en/news/2024/10/latham-watkins-hosts-first-of-its-kind-ai-academy
+
+- Explainer id: `2026-11-12-explainer-latham-ai-awards`
+
+## Explainer: Big Walk's 0.1% AI code and the indie backlash
+
+**Hook:** A chatbot patched ten lines, and indie gaming erupted  
+**Video:** `out/2026-11-12/2026-11-12-explainer-big-walk-ai.mp4` (65.6 s)  
+**Cover text:** A chatbot patched ten lines. Uproar.  
+**Thumbnail:** `out/2026-11-12/2026-11-12-explainer-big-walk-ai.thumbnail.png` (upload it as the cover when posting)  
+**Format:** v2 (log it in ops/PERFORMANCE.md with the numbers)
+
+Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info; YouTube: Altered or synthetic content = Yes). After posting: post the pinned comment from the channel account and pin it; reply to comments in the first hour.
+
+TikTok description (paste as is):
+
+```
+Big Walk, the new game from the Untitled Goose Game studio House House, used a chatbot for well under 0.1% of its code 🎮
+The studio says LLMs helped with late bugs; the key fix was about 10 lines it heavily rewrote. 19 Independent Games Festival jurors pledged not to vote for any game that uses generative AI, and Steam reviews dipped with hundreds of negatives in days.
+Where would you draw the line? 👇
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: House House, Ars Technica, Game Informer, Dexerto, Aftermath, Kotaku. AI narrator.
+
+#thedailytoken #ai #indiegames #gamedev #technews
+```
+
+Instagram Reels caption (paste as is):
+
+```
+A chatbot helped crack a stubborn bug in Big Walk, the new game from House House (Untitled Goose Game) 🎮
+The studio says well under 0.1% of the code had anything to do with AI, the key fix was about 10 lines it rewrote heavily, and no AI anywhere else. It disclosed this to the Independent Games Festival, where 19 jurors pledged not to vote for any game that uses generative AI in any capacity. Hundreds of negative Steam reviews followed, but the game is still rated Very Positive overall.
+💬 Zero AI, or is a bug fix fine?
+📤 Send this to the friend who's been begging you to play Big Walk.
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: House House, Ars Technica, Game Informer, Dexerto, Aftermath, Kotaku. AI narrator.
+
+#thedailytoken #ai #indiegames #gamedev #technews
+```
+
+YouTube Shorts title:
+
+```
+Big Walk used AI for under 0.1% of its code. Indie gaming erupted
+```
+
+YouTube Shorts description:
+
+```
+Big Walk, the new game from the Untitled Goose Game studio House House, used a chatbot for well under 0.1% of its code 🎮
+The studio says LLMs helped with late bugs; the key fix was about 10 lines it heavily rewrote. 19 Independent Games Festival jurors pledged not to vote for any game that uses generative AI, and Steam reviews dipped with hundreds of negatives in days.
+Where would you draw the line? 👇
+
+Subscribe to @thedaily_token for AI news, animated. 3 stories a day.
+Sources: House House, Ars Technica, Game Informer, Dexerto, Aftermath, Kotaku. AI narrator.
+
+#thedailytoken #ai #indiegames #gamedev #technews
+```
+
+Pinned comment (all three platforms):
+
+```
+🚫 = zero AI in games, ever  |  🛠️ = a bug fix is fine
+```
+
+Sources:
+- House House (Big Walk FAQ): Was AI used to make Big Walk? https://bigwalk.game/faq/#ai
+- Ars Technica: Big Walk used AI to fix a bug. Now the indie gaming world is having a reckoning. https://arstechnica.com/gaming/2026/11/big-walk-used-ai-to-fix-a-bug-now-the-indie-gaming-world-is-having-a-reckoning/
+- Game Informer: House House Discloses AI Use For 'Under 0.1%' Of Big Walk's Code Following IGF Voting Controversy https://gameinformer.com/2026/11/10/house-house-discloses-ai-use-for-under-01-of-big-walks-code-following-igf-voting
+- Dexerto: Big Walk review bombed after House House admits AI touched "well under 0.1%" of code https://www.dexerto.com/gaming/big-walk-review-bombed-after-house-house-admits-ai-touched-well-under-0-1-of-code-3427480/
+- Aftermath: Some IGF Jurors Are 'Declining To Vote For Any Game That Uses Generative AI In Any Capacity' https://aftermath.site/igf-awards-2027-ai-statement-judges/
+- Kotaku: A Big Talk Breaking Down Big Walk's AI Fallout https://kotaku.com/big-walk-ai-disclosure-igf-awards-vg-chat-2000755514
+
+- Explainer id: `2026-11-12-explainer-big-walk-ai`
+
+## Explainer: United can cancel flights your AI agent books
+
+**Hook:** United can cancel flights your AI agent books  
+**Video:** `out/2026-11-12/2026-11-12-explainer-united-agents.mp4` (66.0 s)  
+**Cover text:** United can cancel flights your AI books  
+**Thumbnail:** `out/2026-11-12/2026-11-12-explainer-united-agents.thumbnail.png` (upload it as the cover when posting)  
+**Format:** v2 (log it in ops/PERFORMANCE.md with the numbers)
+
+Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info; YouTube: Altered or synthetic content = Yes). After posting: post the pinned comment from the channel account and pin it; reply to comments in the first hour.
+
+TikTok description (paste as is):
+
+```
+United Airlines is blocking AI agents from booking your flights ✈️
+United says personal AI agents can still show you its flights, but can't buy them, on its own site or through travel agencies. Its contract of carriage now lets it cancel bookings made by AI agents, even if you approved every step.
+Would you let an AI book your flight? 👇
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: The Verge, Skift, Engadget, Simple Flying, PPC Land. AI narrator.
+
+#thedailytoken #ai #aiagents #unitedairlines #technews
+```
+
+Instagram Reels caption (paste as is):
+
+```
+United Airlines can now cancel flights your AI agent books ✈️
+United says personal AI agents can still show you its flights, but can't complete the purchase, on its own site or through travel agencies. Its contract of carriage now lists bookings made by AI agents among those it can cancel without notice, even if you approved them. United points to privacy, unintended purchases and federal rules: at check-in, a person has to confirm their bags hold no explosives.
+💬 Would you let a bot book your flight?
+📤 Send this to the friend who wants an AI travel agent.
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: The Verge, Skift, Engadget, Simple Flying, PPC Land. AI narrator.
+
+#thedailytoken #ai #aiagents #unitedairlines #technews
+```
+
+YouTube Shorts title:
+
+```
+United Airlines can now cancel flights your AI agent books
+```
+
+YouTube Shorts description:
+
+```
+United Airlines is blocking AI agents from booking your flights ✈️
+United says personal AI agents can still show you its flights, but can't buy them, on its own site or through travel agencies. Its contract of carriage now lets it cancel bookings made by AI agents, even if you approved every step.
+Would you let an AI book your flight? 👇
+
+Subscribe to @thedaily_token for AI news, animated. 3 stories a day.
+Sources: The Verge, Skift, Engadget, Simple Flying, PPC Land. AI narrator.
+
+#thedailytoken #ai #aiagents #unitedairlines #technews
+```
+
+Pinned comment (all three platforms):
+
+```
+🤖 = let my AI book it, 🙋 = I'll click buy myself
+```
+
+Sources:
+- The Verge: United won't let your AI agent book your flight https://www.theverge.com/ai-artificial-intelligence/1031623/united-unauthorized-ai-agents
+- Skift: United Airlines Moves to Block Personal AI Agents From Booking Flights https://skift.com/2026/11/11/united-airlines-moves-to-block-personal-ai-agents-from-booking-flights/
+- Engadget: United is restricting AI agents from booking flights https://www.engadget.com/2314121/united-is-restricting-ai-agents-from-booking-flights/
+- Simple Flying: United Airlines Officially Bans AI Agents From Booking Your Flights And Checking You In https://simpleflying.com/united-airlines-bans-ai-agents-booking-flights-check-in/
+- PPC Land: United bans AI agents from buying its tickets, seats and upgrades https://ppc.land/united-bans-ai-agents-from-buying-its-tickets-seats-and-upgrades/
+- Thrifty Traveler: United Blocks Personal AI Agents from Booking Flights, Will Other Airlines Follow? https://thriftytraveler.com/news/airlines/united-blocks-ai-agents-booking-flights/
+
+- Explainer id: `2026-11-12-explainer-united-agents`
+
