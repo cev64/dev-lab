@@ -230,6 +230,19 @@ Open source / security:
 - `two-sides.js` (defender and hooded attacker both take a chip from the toolbox; "OPEN OR CLOSED?"; optional `notes`: up to 2 follow-up pills, the first one's cue lifts and shrinks the question, the pills land under it; without notes the scene is unchanged) params: left, right, question, title, leftCue, fixCue, cue, qCue, notes [{text, cue, accent}]
 - `vault-heist.js` (2 beats: hooded figure + robot crack a vault; records fly out, figure counts up) params: source, agent, helper, target, when, inst, count, countLabel, agentCue, helperCue, cue, whenCue, instCue, countCue
 
+Travel / agents blocked (added 2026-11-12, from the United AI-agents explainer; airport scenes, airline = text pill, no livery):
+- `airline-counter.js` (modes hook|story: robot's boarding pass gets a CANCELLED stamp + "No AI agents" sign; channel chips lock, flight panel shows rows but BUY locks) params: mode, airline, agent, stamp, sign, date, chips, chipCues, show, buy, dateCue, agentCue, showCue, buyCue
+- `fine-print-cancel.js` (contract on an easel, magnifier, clause typed verbatim, pass stamped, "without notice" / "even if you approved it") params: doc, airline, clause, clauseHead, notice, approved, stamp, approvedChip, docCue, clauseCue, noticeCue, approvedCue
+- `kiosk-attest.js` (login key card leaks info + unintended receipts; then a check-in kiosk question only a person may answer, NOT A PERSON stamp) params: login, leak, oops, kiosk, question, rule, personOnly, stamp, loginCue, leakCue, oopsCue, splitCue, ruleCue, kioskCue, botCue
+- `blocked-street.js` (bank / shop / airline fronts lock on agent robots in turn; "first to say it" ribbon) params: shops [{name, sign, cue}], first, firstCue
+- `middleman.js` (traveller-to-counter direct line; a robot steps in and is crossed out; attributed paraphrase card, text only; "may revisit" hourglass) params: traveler, airline, who, source, said, tag, later, saidCue, sourceCue, tagCue, laterCue
+
+Games / backlash (added 2026-11-12, from the Big Walk explainer; abstract shapes, no real game art):
+- `code-wall.js` (modes hook|number: robot on a scissor lift patches one line of a giant code wall; % tag, lines pill; hook erupts thumbs-down; number pulls back and sweeps "no AI anywhere else") params: mode, pct, pctLabel, lines, linesSub, else, eruptCue, pctCue, linesCue, elseCue
+- `studio-bug.js` (small studio, playtest monitor slows, outside engineer says "not possible", chatbot robot pops out) params: studio, game, slow, engLabel, engSays, studioCue, gameCue, bugCue, sunCue, engCue, botCue
+- `jury-pledge.js` (jury table, disclosure envelope, signature counter, pledge sheet, ballots crossed, stamp) params: festival, count, countLabel, pledge, stamp, envelope, envTag, toldCue, countCue, pledgeCue, stampCue
+- `review-wall.js` (2-beat span: store review wall flooded with thumbs-down + counter + two-sided bubbles; then overall rating card + 2 caveat pills) params: storeLabel, count, countLabel, left, right, rating, ratingLabel, steam, names, pileCue, countCue, leftCue, rightCue, ratingCue, steamCue, namesCue
+
 Money / rules / places:
 - `money-flow.js` (coins arc between two labelled buildings, amount counts up) params: from, to, amount, caption, time
 - `data-flow.js` (people/devices stream packets into a data center) params: sources, label, time
