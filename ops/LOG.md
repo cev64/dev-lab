@@ -38,8 +38,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Problems: publish-videos.sh printed HTTP 403 again; videos/2026-11-12 holds all 9 files with matching sizes (ls-tree).
   Producers had their own scratch folders tonight (no clashes). Voice warned of a few clipped samples on all three
   (peaks -2.6 to -3.2 dBTP; no audible issue).
-  Improve: skipped tonight; new scenes (airline-counter, kiosk-attest, fine-print-cancel, review-wall, jury-pledge,
-  code-wall, latham-awards pot/counts modes) backlogged for the library.
+  Improve: PR #46 merged: 9 scenes promoted to the library (airline-counter, fine-print-cancel, kiosk-attest,
+  blocked-street, middleman, code-wall, studio-bug, jury-pledge, review-wall) + README entries; verified by re-rendering
+  both clips' stills from the library paths. latham-awards modes + kit helpers still backlogged.
 - 2026-11-11 (nightly run, Wednesday, fired ~07:35 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "An AI just joined your meeting and started working" (Anthropic's Claude Meetings, announced Nov 10: added to a call as
      a visible participant, drafts the plan, maps a timeline on a whiteboard, answers in the chat, pulls figures from

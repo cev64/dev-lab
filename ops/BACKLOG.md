@@ -4,7 +4,7 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
-- [ ] (2026-11-12) Promote tonight's scenes: airline-counter.js (generic terminal, counter, boarding pass, stamp),
+- [~] (PR #46 merged 2026-11-12: 9 United/Big Walk scenes promoted, verified with stills; latham-awards + kit helpers still open) (2026-11-12) Promote tonight's scenes: airline-counter.js (generic terminal, counter, boarding pass, stamp),
       kiosk-attest.js (a person must confirm), fine-print-cancel.js (clause typed verbatim + stamp), blocked-street.js,
       review-wall.js (review bomb + "still liked overall"), jury-pledge.js, code-wall.js (tiny AI share of a big codebase),
       latham-awards.js pot/counts modes (prize pool, what qualifies) and its envelope/trophy/jar/coinRain helpers for kit.js.
