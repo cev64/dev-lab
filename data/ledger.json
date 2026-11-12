@@ -1780,6 +1780,24 @@
         "https://kotaku.com/big-walk-ai-disclosure-igf-awards-vg-chat-2000755514"
       ],
       "video": "out/2026-11-12/2026-11-12-explainer-big-walk-ai.mp4"
+    },
+    {
+      "id": "2026-11-12-explainer-united-agents",
+      "date": "2026-11-12",
+      "hook": "United can cancel flights your AI agent books",
+      "topic": "AGENTS",
+      "title": "United can cancel flights your AI agent books",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.theverge.com/ai-artificial-intelligence/1031623/united-unauthorized-ai-agents",
+        "https://skift.com/2026/11/11/united-airlines-moves-to-block-personal-ai-agents-from-booking-flights/",
+        "https://www.engadget.com/2314121/united-is-restricting-ai-agents-from-booking-flights/",
+        "https://simpleflying.com/united-airlines-bans-ai-agents-booking-flights-check-in/",
+        "https://ppc.land/united-bans-ai-agents-from-buying-its-tickets-seats-and-upgrades/",
+        "https://thriftytraveler.com/news/airlines/united-blocks-ai-agents-booking-flights/"
+      ],
+      "video": "out/2026-11-12/2026-11-12-explainer-united-agents.mp4"
     }
   ]
 }
