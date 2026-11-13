@@ -4,6 +4,10 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
+- [ ] (2026-11-13) Promote tonight's scenes: radar-room.js (control room, AI advisor card to human; hook/chain/caveat),
+      sky-routes.js (map rollout to N sites, data streams into a robot, reroute savings), freeze-suit.js (lawsuit asks to
+      pause; hook/filed/argue/loop/ask/reply), fake-storefront.js (cardboard fake shop; hook/types), chatbot-test.js
+      (third-party chatbot test; test/bars/warn/caveat).
 - [~] (PR #46 merged 2026-11-12: 9 United/Big Walk scenes promoted, verified with stills; latham-awards + kit helpers still open) (2026-11-12) Promote tonight's scenes: airline-counter.js (generic terminal, counter, boarding pass, stamp),
       kiosk-attest.js (a person must confirm), fine-print-cancel.js (clause typed verbatim + stamp), blocked-street.js,
       review-wall.js (review bomb + "still liked overall"), jury-pledge.js, code-wall.js (tiny AI share of a big codebase),

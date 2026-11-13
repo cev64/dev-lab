@@ -1798,6 +1798,61 @@
         "https://thriftytraveler.com/news/airlines/united-blocks-ai-agents-booking-flights/"
       ],
       "video": "out/2026-11-12/2026-11-12-explainer-united-agents.mp4"
+    },
+    {
+      "id": "2026-11-13-explainer-fake-shops",
+      "date": "2026-11-13",
+      "hook": "Your chatbot just sent you to a fake store",
+      "topic": "AI SHOPPING",
+      "title": "AI chatbots sent shoppers to risky sites in a brand-protection firm's test",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://podqi.com/research/ai-search-brand-risk",
+        "https://www.theverge.com/ai-artificial-intelligence/1032020/gemini-chatgpt-perplexity-shopping-test-risky-fake-websites-citations",
+        "https://www.digitaltoday.co.kr/en/view/125301/ai-chatbots-shopping-mall-recommendations-risky-sites-hundreds-identified",
+        "https://www.gadgetreview.com/ai-chatbots-are-recommending-fake-shopping-websites-to-users-new-study-finds",
+        "https://www.infobae.com/tecno/2026/11/12/los-chatbots-de-ia-recomendaron-tiendas-falsas-en-hasta-15-de-las-respuestas-sobre-compras/",
+        "https://tecnoblog.net/noticias/chatgpt-e-gemini-indicam-lojas-falsas-para-compras-aponta-estudo/"
+      ],
+      "video": "out/2026-11-13/2026-11-13-explainer-fake-shops.mp4"
+    },
+    {
+      "id": "2026-11-13-explainer-ai-freeze-suit",
+      "date": "2026-11-13",
+      "hook": "Four groups just asked a judge to freeze AI",
+      "topic": "AI LAWSUIT",
+      "title": "Nonprofits sue OpenAI, Google, Meta, Anthropic and SpaceX's AI unit to freeze advanced AI",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.citizen.org/news/coalition-of-nonprofits-files-landmark-lawsuit-to-stop-development-of-advanced-ai-systems-at-anthropic-google-meta-openai-and-spacexsi-that-proliferate-bioweapons-and-cyberattacks/",
+        "https://cbsnews.com/news/advocacy-groups-sue-ai-companies",
+        "https://www.globalbankingandfinance.com/openai-google-anthropic-hit-lawsuit-seeking-halt-frontier-ai/",
+        "https://dailycaller.com/2026/11/12/alliance-for-secure-ai-anthropic-google-meta-open-ai-space",
+        "https://www.abajournal.com/news/article/florida-ag-asks-judge-to-bar-openai-from-developing-new-models-without-regulation"
+      ],
+      "video": "out/2026-11-13/2026-11-13-explainer-ai-freeze-suit.mp4"
+    },
+    {
+      "id": "2026-11-13-explainer-faa-smart",
+      "date": "2026-11-13",
+      "hook": "An AI now whispers routes to air traffic control",
+      "topic": "AIR TRAVEL",
+      "title": "The FAA takes its AI air traffic advisor, SMART, nationwide",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.faa.gov/newsroom/statements/general-statements",
+        "https://avweb.com/aviation-news/faa-expands-ai-assisted-traffic-management/",
+        "https://gizmodo.com/the-faa-is-rolling-out-its-ai-air-traffic-tool-nationwide-2000839347",
+        "https://www.flyingmag.com/faa-smart-ai-now-active-at-22-artccs-nationwide/",
+        "https://www.flyingmag.com/faa-smart-ai-rollout-natca-atc-union/",
+        "https://www.flyingmag.com/faa-urged-to-pause-ai-smart-atc-system/",
+        "https://www.opb.org/article/2026/10/01/ceo-explains-how-the-faas-new-ai-enhanced-software-tool-works/",
+        "https://www.thestar.com.my/tech/tech-news/2026/06/23/faa-taps-air-space-intelligence-for-ai-traffic-control-tool"
+      ],
+      "video": "out/2026-11-13/2026-11-13-explainer-faa-smart.mp4"
     }
   ]
 }

@@ -2,6 +2,45 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-13 (nightly run, Friday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "An AI now whispers routes to air traffic control" (FAA statement Nov 10: SMART, the AI traffic-management advisor,
+     goes to all 22 air route traffic control centers after the Sept rollout near Washington; built by Air Space
+     Intelligence under an $875M contract (broader contract, not SMART's price alone); ~200 data streams; advice only:
+     FAA specialists validate, local leaders decide, controllers keep separation; FAA's own figures since Sept 21: 180
+     flights rerouted, avg 10 min and ~80 gal fuel saved; NATCA not involved in "design, testing, or implementation";
+     25 lawmakers' Oct 9 letter asked for a pause; sources: FAA, AVweb, Gizmodo, FLYING x3, OPB/NPR, Reuters via The Star).
+     Rubric ~78 (19/18/12/10/17/2). 64.2 s, -14.0 LUFS, style horizon, 100% scenes
+     (new: radar-room.js, sky-routes.js). Dropped: NATCA "skeptics" quote (only a dead reprint), "airlines praised"
+     (Gizmodo only), 12-year term (AVweb only), GAO request (length). Ars Technica unfetchable.
+  2. "Four groups just asked a judge to freeze AI" (Nov 12: Public Citizen, Irreplaceable Education Fund, Heat Initiative,
+     Alliance for Secure AI sued Anthropic, Google, Meta, OpenAI and SpaceX's AI unit in SF Superior Court to freeze the
+     most advanced AI; California unfair-competition and public-nuisance theory; cite cyberattack risk, executives'
+     warnings, recursive self-improvement; Florida's Sept request against OpenAI still pending; no company comment at
+     report time; no ruling; sources: Public Citizen, CBS News, Reuters via Global Banking & Finance Review, Daily Caller,
+     ABA Journal). Rubric ~74 (20/15/12/9/14/4). 65.0 s, -14.0 LUFS, style orb, 100% scenes (new: freeze-suit.js, 6 modes).
+     All claims worded as the groups' arguments; no people named or drawn. Dropped: bioweapons (press release only), "ban"
+     on self-improvement (Daily Caller only), Meta "declined to comment" (Reuters only). Quartz 403.
+  3. "Your chatbot just sent you to a fake store" (Podqi brand-protection study, via a Verge exclusive Nov 12: ChatGPT,
+     Gemini, Perplexity asked where to buy 151 brands, 6,795 answers, Sept 2026; ~9% showed a risky site (fake stores,
+     counterfeits, re-registered old brand domains, dead sites); Perplexity 15%, ChatGPT 8%, Gemini 4%; 57% of those
+     recommended it as a place to buy; regional-website question riskiest at 16%; smaller brands worse; ChatGPT warned in
+     24% of its risky answers; Podqi's commercial stake stated; OpenAI and Perplexity responses; sources: Podqi research
+     page, Digital Today, Gadget Review, Infobae, Tecnoblog; Verge credited but unfetchable). Rubric ~82 (20/22/13/9/14/4).
+     69.9 s, -14.0 LUFS, style neural, 100% scenes (new: fake-storefront.js, chatbot-test.js). Brand names (Stussy) left out.
+  Lead review: claim tables against scripts and post copy; contact sheets of all three (checked the fake-shops bar count-up
+  settles on 15/8/4%); ffprobe 1080x1920 30 fps, 64.2/65.0/69.9 s. Evening slot = fake shops (consumer stakes, holiday season).
+  Picks note: skipped Jensen Huang's resignation/scandal cluster (personal allegations, spy claims "sources say"), Nscale
+  funding filing and Mirendil $1B (money, inside baseball), Gemini school-pilot backlash (teen suicide lawsuit, minors),
+  Maya-site AI claim debunk (names a researcher's mistake; backup), Meta Muse outbound calls (only TechCrunch via Techmeme
+  tonight; Muse covered 11-06), OpenAI Daybreak security tools and Gemini 4 Hydrogen (weaker stakes), patent suit.
+  Drive: connector available; no 2026-11-13 titles existed; 3 Google Docs filed.
+  Timings: setup ~5 min (git fetch ~3 min again), news 6 s, picks + source checks ~8 min, producers 12-16 min in parallel,
+  review + delivery ~10 min.
+  Problems: publish-videos.sh printed HTTP 403 again (prune step); videos/2026-11-13 holds all 9 files with matching sizes
+  (ls-tree). Voice warned of 7-13 clipped samples on two scripts (no audible issue). PIL in the system python is broken
+  (use ffmpeg xstack for contact sheets).
+  Improve: PR #47 merged: engine/tests test_fixes/test_news/test_repeats now import _path (73 tests OK; each file runs
+  directly). Tonight's 5 new scenes are backlogged for promotion.
 - 2026-11-12 (nightly run, Thursday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "A law firm's offering lawyers cash for AI ideas" (Latham & Watkins, announced Nov 10: Associate AI Impact Award, $1M
      total pool for 2027 for associates whose AI work helps clients or the firm (tools, workflows, teaching colleagues);
