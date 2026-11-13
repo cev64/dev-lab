@@ -1,5 +1,7 @@
 import unittest
 
+import _path  # noqa: F401
+
 from clipper.make import apply_fixes
 
 
