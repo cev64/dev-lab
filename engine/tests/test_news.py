@@ -1,5 +1,7 @@
 import unittest
 
+import _path  # noqa: F401
+
 from clipper.news import merge_stories, parse_news_feed, similar
 
 RSS = b"""<?xml version="1.0"?><rss version="2.0"><channel><title>T</title>

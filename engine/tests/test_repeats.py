@@ -1,5 +1,7 @@
 import unittest
 
+import _path  # noqa: F401
+
 from clipper.explainer import check_repeat, drive_card
 from clipper.news import mark_covered
 
