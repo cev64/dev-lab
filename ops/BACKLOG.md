@@ -14,7 +14,7 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
       being filled; modes hook/recap/loophole), usage-studio.js (Apple: AI usage fuel gauge, paid top-up pack, menu,
       roll-over strip; modes hook/story/pack/topup), meter-crowd.js (crowd with gauges + country chips), effect-builder.js
       (Instagram: prompt -> filter, comic-ink portrait helper, review conveyor, Try-it share; 6 modes).
-- [ ] (2026-11-10) engine/tests: test_fixes, test_news, test_repeats fail when run directly (ModuleNotFoundError:
+- [x] (PR #47 2026-11-13: _path import added; 73 tests OK, each file runs directly) (2026-11-10) engine/tests: test_fixes, test_news, test_repeats fail when run directly (ModuleNotFoundError:
       clipper); give them the _path.py import the passing tests use, so the suite is a usable pre-push check.
 - [x] (PR 2026-11-09: X0 160, X1 650, RX 722, cards ~20-28 px lower; still checked) Library token-take.js still too far left: all 3 producers again moved it in local copies
       (take card X0 130 -> 150-172; Token RX 735 -> 712-722; jet-power also moved both cards down ~30 px off the header).
