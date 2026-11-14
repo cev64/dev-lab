@@ -1853,6 +1853,51 @@
         "https://www.thestar.com.my/tech/tech-news/2026/06/23/faa-taps-air-space-intelligence-for-ai-traffic-control-tool"
       ],
       "video": "out/2026-11-13/2026-11-13-explainer-faa-smart.mp4"
+    },
+    {
+      "id": "2026-11-14-explainer-maya-rediscovery",
+      "date": "2026-11-14",
+      "hook": "AI agents found a Maya site, a year late",
+      "topic": "AGENTS",
+      "title": "AI agents 'found' a Maya site that was already published",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.theverge.com/ai-artificial-intelligence/1032125/ai-agents-maya-site-archeology-discovery",
+        "https://pietromiotti.com/latest/maya-site/",
+        "https://runtimewire.com/article/ai-agents-flag-possible-unmapped-maya-site-nasa-lidar",
+        "https://techradar.com/ai-platforms-assistants/google-researcher-discovers-unmapped-maya-site-in-mexico-using-48-ai-agents-project-takes-less-than-72-hours-after-agents-scour-nasa-lidar-data"
+      ],
+      "video": "out/2026-11-14/2026-11-14-explainer-maya-rediscovery.mp4"
+    },
+    {
+      "id": "2026-11-14-explainer-fed-ai-worry",
+      "date": "2026-11-14",
+      "hook": "Market insiders just named AI their number one worry",
+      "topic": "AI & MONEY",
+      "title": "AI is now the top worry in the Fed's financial-stability survey",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.federalreserve.gov/publications/files/financial-stability-report-20261113.pdf",
+        "https://1027wbow.com/2026/11/13/ai-rockets-to-top-of-worries-about-financial-system-in-latest-fed-survey/",
+        "https://www.federalreserve.gov/publications/2026-may-financial-stability-report-accessibility-tables.htm"
+      ],
+      "video": "out/2026-11-14/2026-11-14-explainer-fed-ai-worry.mp4"
+    },
+    {
+      "id": "2026-11-14-explainer-chatgpt-wallet",
+      "date": "2026-11-14",
+      "hook": "ChatGPT's AI can now spend your money",
+      "topic": "AGENTS",
+      "title": "ChatGPT Wallet lets AI agents spend your money",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.theverge.com/ai-artificial-intelligence/1033425/openai-chatgpt-wallet",
+        "https://techcrunch.com/2026/11/13/chatgpts-new-wallet-lets-ai-agents-shop-and-check-out-for-you/"
+      ],
+      "video": "out/2026-11-14/2026-11-14-explainer-chatgpt-wallet.mp4"
     }
   ]
 }

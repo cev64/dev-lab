@@ -2,6 +2,42 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-14 (nightly run, Saturday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. "Market insiders just named AI their number one worry" (Fed Financial Stability Report, Nov 13: in the fall survey of
+     salient risks (23 contacts at broker-dealers, banks, funds, advisory firms) AI was "the top-cited risk", 87% per
+     Reuters (matches the Fed's bar chart; the text gives no %), up from ~50% in spring 2026 and ~30% in fall 2025 (May
+     FSR tables); worries: stretched valuations if AI earnings disappoint, AI-enabled cyberattacks, complex AI financing;
+     Box 2.2: AI computing debt issuance >$680B by Oct 2026, ~5x the $130B of all 2023; spillover to business investment
+     and household consumption; survey = contacts' views, not the Fed's; sources: Fed PDF, Reuters (syndicated copy),
+     Fed May tables). Rubric ~75 (20/18/13/7/15/2). 64.9 s, -14.0 LUFS, style horizon, 100% scenes (new: worry-board.js,
+     hype-balloon.js, debt-datacenter.js). No financial advice; Fed chair not named or drawn. Dropped: $3T figure,
+     hedge-fund leverage, Huang news in the Reuters piece. Lead checked the PDF phrases (top-cited, $680B, disclaimer).
+  2. "AI agents found a Maya site, a year late" (a researcher's 48 AI agents combed ~1,200 km2 of public NASA lidar,
+     flagged a hilltop, INAH said no registered site there, idea to official reply in under 72 h; spread as a discovery;
+     archaeologists pointed out it was published in a 2025 journal paper (Estrada-Belli et al.); he updated the post to
+     "(Re)discovered"; co-author quote to The Verge; sources: The Verge, the researcher's blog, Runtime Wire, TechRadar).
+     Rubric ~73 (17/14/14/10/16/2). 65.8 s, -14.0 LUFS, style orb, 100% scenes (new: rediscovery.js, 5 modes; promoted,
+     PR #48). Researcher and employer not named in narration, captions or post copy (blog URL only in the sources list).
+  3. "ChatGPT's AI can now spend your money" (OpenAI launched ChatGPT Wallet Fri Nov 13: Dots agents check out for you;
+     US Pro subscribers 18+, eligible US-issued card, limited number at first; check-in before every checkout, review
+     items/total/card, Face ID or fingerprint, record kept; payment token so agent and store don't see the card; OpenAI
+     expects spending limits and pre-approval later; some stores block agents, Amazon among them; sources: The Verge,
+     TechCrunch; openai.com 403 to WebFetch and curl, Reuters not fetched). Rubric ~83 (20/22/13/9/15/4). 69.3 s, -14.0
+     LUFS, style flow, 100% scenes (new: agent-wallet.js, 6 modes; local agent-door.js fixes for left-edge clipping).
+     Dropped: card rewards/dispute protections (TC only), partner playbook, usage numbers.
+  Lead review: claim tables against scripts and post copy; contact sheets of all three; ffprobe 1080x1920 30 fps,
+  64.9/65.8/69.3 s. Evening slot = ChatGPT Wallet (everyday money stakes, strongest hook).
+  Picks note: skipped Amazon product-data plan (Reuters exclusive from a document, single outlet), Jensen Huang
+  departure/scandal cluster (personal allegations), WhiteMatter $20M and LangChain $3B (money, inside baseball), SBF's
+  Anthropic stake math (speculative valuation, convicted person), OpenAI board member "takeover" warning ("X says" hook),
+  Claude Duet hands-on (review, not news), Export-banned chips in Chinese models (Nvidia cluster), patent suit.
+  Drive: connector available; no 2026-11-14 titles existed; 3 Google Docs filed.
+  Timings: setup ~5 min (git pull hung on fetch; `git fetch origin main` + `merge --ff-only` worked), news 4 s,
+  picks + source checks ~10 min, producers 11-15 min in parallel, review + delivery ~12 min.
+  Problems: publish-videos.sh printed HTTP 403 again (prune step); videos/2026-11-14 holds all 9 files with matching sizes
+  (ls-tree). Wallet producer: am_adam reads ~3.1 words/s, so 170 words gave only 58.7 s; it needed 201 words for 69 s
+  (skill's 150-180 word guide is for the old pace; backlogged). Voice warned of 1-5 clipped samples (no audible issue).
+  Improve: PR #48 merged: rediscovery.js promoted to the scene library (stills from the library path checked).
 - 2026-11-13 (nightly run, Friday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "An AI now whispers routes to air traffic control" (FAA statement Nov 10: SMART, the AI traffic-management advisor,
      goes to all 22 air route traffic control centers after the Sept rollout near Washington; built by Air Space

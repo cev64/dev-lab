@@ -4,6 +4,13 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
+- [ ] (2026-11-14) Promote tonight's scenes: worry-board.js (ranked survey board, item rockets to #1; hook/survey/climb),
+      hype-balloon.js (AI-stocks balloon, pin that never pops, spillover to factory/house; worry/spill), debt-datacenter.js
+      (IOUs from lenders to a data center, $ count-up, year-vs-year bars), agent-wallet.js (agent checkout: hook/intro/gate/
+      approve/token/limits). Port the Wallet producer's agent-door.js fixes to the library (date pill x 300->340, person
+      x 115->215, robot start 260->320, doorman pill fades when `named` is set).
+- [ ] (2026-11-14) Skill section 3 word budget: am_adam at 1.0 reads ~3.1 words/s on some scripts (170 words -> 58.7 s);
+      measure on the last week's voice.json files and update the words/seconds formula and the 150-180 guide.
 - [ ] (2026-11-13) Promote tonight's scenes: radar-room.js (control room, AI advisor card to human; hook/chain/caveat),
       sky-routes.js (map rollout to N sites, data streams into a robot, reroute savings), freeze-suit.js (lawsuit asks to
       pause; hook/filed/argue/loop/ask/reply), fake-storefront.js (cardboard fake shop; hook/types), chatbot-test.js
