@@ -4,6 +4,12 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
+- [ ] (2026-11-15) Promote tonight's scenes: exam-hall.js (exam hall; hook/scores/method/proctor; remove no-op
+      ctx.save/restore lines in officer()), confession-desk.js (police desk self-report, pass under review; confess/caveat),
+      ipo-orderbook.js (order slips vs share supply; hook/pitch/book), ipo-allocation.js (who gets shares, retail slice,
+      price/trade dates; hands/retail/next). The two IPO modules share hall-drawing code: make it one helper.
+- [ ] (2026-11-15) Slow-news nights: the 3-day feed often has fewer than 3 stories that clear the gates. Add more
+      consumer feeds (e.g. AP technology, Yonhap/Korea Herald English, Guardian tech) to config/news_sources.json.
 - [ ] (2026-11-14) Promote tonight's scenes: worry-board.js (ranked survey board, item rockets to #1; hook/survey/climb),
       hype-balloon.js (AI-stocks balloon, pin that never pops, spillover to factory/house; worry/spill), debt-datacenter.js
       (IOUs from lenders to a data center, $ count-up, year-vs-year bars), agent-wallet.js (agent checkout: hook/intro/gate/

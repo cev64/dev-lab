@@ -2,6 +2,39 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-15 (nightly run, Sunday, fired ~07:55 UTC): delivered 2 explainers, not 3 (order: morning/evening, no midday).
+  1. (evening) "Korea's top tax exam scorer confessed to AI cheating" (63rd tax accountant exam top scorer handed Seoul
+     police a written confession Sunday Nov 15: tiny camera photographed questions, sent to AI, answers read on a phone,
+     in both rounds and on a CPA round-1 exam, by their own account; 397.5/400 (1 wrong of 160) in round 1, 663/800 in
+     round 2; months of suspicion; proctors saw nothing suspicious; police investigating; finance ministry committee to
+     review suspending the pass; days before the college entrance exam; sources: Reuters (via ThePrint), Korea Herald,
+     Kyunghyang, Herald Business, news33, Financial News). Rubric ~82 (20/22/14/9/15/2). 71.5 s, -14.0 LUFS, style neural,
+     100% scenes (new: exam-hall.js, confession-desk.js). Person never named (some outlets name them). Dropped: "failed
+     the CPA exam" (unsourced, possibly wrong), "first known case" (Korea Herald only).
+  2. (morning) "Claude's maker got six times more orders than shares" (FOLLOW-UP to 2026-10-27 anthropic-ipo: roadshow from
+     Nov 10, 825M shares at $70-78, Nasdaq ANT; Reuters' own reporting ~2x day one, ~6x by day three; Bloomberg ~6x
+     citing people familiar; existing backers prioritised; S-1/A: up to 20% to retail via brokers; price Nov 18, trading
+     Nov 19; up to $64.4B; SpaceX's June IPO raised more; sources: S-1/A, Bloomberg via Yahoo, Reuters via The Star and
+     Investing.com, CNBC, TechCrunch, investingLive). Rubric ~72 (19/14/14/8/16/1). 71.6 s, -14.0 LUFS, style orb, 100%
+     scenes (new: ipo-orderbook.js, ipo-allocation.js). No advice; no executive named or drawn. The lead's brief assumed
+     "largest IPO ever"; the producer found SpaceX's June IPO ($75B per Reuters) is bigger, so "record" was never said.
+     FT "may price above range" left out (single source).
+  Why only 2: the 3-day feed was mostly the Jensen Huang/Nvidia scandal cluster (personal allegations), funding rounds
+  (Nebuly, Nidus, LangChain, Databento, TSMC fund: inside baseball), export-banned chips in Chinese models (one
+  researcher's analysis implying unproven export violations), OpenAI board member "can't trust AI CEOs" ("X says"),
+  Claude Duet review, patent suit, Gemini school backlash (minors/suicide lawsuit). Web search for more turned up only
+  >72 h stories (CrowdStrike AI Kill Switch Nov 3, NY kids' chatbot law Oct 28, America.gov Sept) or ones repeating
+  recent topics (Google Wallet in Gemini ~ yesterday's ChatGPT Wallet); "OpenAI disbands robotics team" (Fortune) could
+  not be confirmed by a second source.
+  Lead review: claim tables against scripts and post copy; contact sheets of both; ffprobe 1080x1920 30 fps, 71.5/71.6 s.
+  Drive: connector available; no repeat titles (2026-11-03 IPO-filing doc confirms the follow-up); 2 docs filed (emoji
+  still garbled, Korean text fine).
+  Sunday Skeptic review: skipped. ops/PERFORMANCE.md has no rows since 2026-11-05, which the 2026-11-08 review already
+  used; nothing new to learn from.
+  Timings: git fetch ~3 min (pulls video branches), setup 71 s, news 4 s, picks + searches ~15 min, producers 16-17 min
+  in parallel, review + delivery ~10 min.
+  Problems: publish-videos.sh printed HTTP 403 again; videos/2026-11-15 holds all 6 files with matching sizes (ls-tree).
+  The IPO producer re-rendered once after its first mp4 (final file 11,190,983 bytes; that is the one sent and backed up).
 - 2026-11-14 (nightly run, Saturday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Market insiders just named AI their number one worry" (Fed Financial Stability Report, Nov 13: in the fall survey of
      salient risks (23 contacts at broker-dealers, banks, funds, advisory firms) AI was "the top-cited risk", 87% per
