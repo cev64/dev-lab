@@ -35,6 +35,8 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   in parallel, review + delivery ~10 min.
   Problems: publish-videos.sh printed HTTP 403 again; videos/2026-11-15 holds all 6 files with matching sizes (ls-tree).
   The IPO producer re-rendered once after its first mp4 (final file 11,190,983 bytes; that is the one sent and backed up).
+  Improve: PR #49 merged: exam-hall.js, confession-desk.js, ipo-orderbook.js, ipo-allocation.js promoted to the scene
+  library (stills rendered from the library path for both explainers checked).
 - 2026-11-14 (nightly run, Saturday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. "Market insiders just named AI their number one worry" (Fed Financial Stability Report, Nov 13: in the fall survey of
      salient risks (23 contacts at broker-dealers, banks, funds, advisory firms) AI was "the top-cited risk", 87% per

@@ -4,7 +4,7 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
-- [ ] (2026-11-15) Promote tonight's scenes: exam-hall.js (exam hall; hook/scores/method/proctor; remove no-op
+- [x] (PR #49 merged 2026-11-15) (2026-11-15) Promote tonight's scenes: exam-hall.js (exam hall; hook/scores/method/proctor; remove no-op
       ctx.save/restore lines in officer()), confession-desk.js (police desk self-report, pass under review; confess/caveat),
       ipo-orderbook.js (order slips vs share supply; hook/pitch/book), ipo-allocation.js (who gets shares, retail slice,
       price/trade dates; hands/retail/next). The two IPO modules share hall-drawing code: make it one helper.
