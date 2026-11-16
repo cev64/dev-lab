@@ -39,6 +39,8 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Problems: publish-videos.sh printed HTTP 403 again; videos/2026-11-16 holds all 9 files with matching sizes (ls-tree).
   Producers shared one scratchpad qa/ folder at first (one contact sheet picked up another's stills); next time give each
   producer its own qa folder in the brief. Voice warned of 3-90 clipped samples after normalisation (true peak ~-3 dBTP).
+  Improve: PR #50 merged: dc-march.js, health-qa.js, data-filter.js, secure-code.js promoted to the scene library
+  (stills rendered from the library path for all three explainers checked).
 - 2026-11-15 (nightly run, Sunday, fired ~07:55 UTC): delivered 2 explainers, not 3 (order: morning/evening, no midday).
   1. (evening) "Korea's top tax exam scorer confessed to AI cheating" (63rd tax accountant exam top scorer handed Seoul
      police a written confession Sunday Nov 15: tiny camera photographed questions, sent to AI, answers read on a phone,
