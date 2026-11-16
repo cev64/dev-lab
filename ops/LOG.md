@@ -2,6 +2,43 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-16 (nightly run, Monday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. (morning) "Alibaba's newest AI had its hacking lessons cut" (Qwen4-Max launched Sun Nov 15; Alibaba says it sorted
+     cyber training data by purpose: kept find/fix-holes data, removed data meant to strengthen attacks; security checks
+     alongside coding tests (code injection etc.); tightened safeguards for cybercrime and hazardous materials; own
+     experts found no significant high-risk abilities; avg cost per task down 60%+; all Alibaba's own testing, no outside
+     check seen; sources: Qwen blog + X post, Reuters via Yahoo, SCMP, Business Standard, MLQ.ai). Rubric ~72
+     (20/14/12/8/14/4). 71.4 s, -14.0 LUFS, style neural, 100% scenes (new: data-filter.js, secure-code.js,
+     safeguard-list.js variant). Lead review dropped "22% to 31.8% of code passing both checks": it rested on a search
+     extract of the JS-only Qwen blog plus MLQ.ai repeating it, and I couldn't confirm it; re-rendered. Also dropped:
+     "beats Fable 5.1 / Kimi K3.1 Pro" (Bloomberg unreachable, MLQ.ai says mixed), token-saving %, open-weight status, 2.4T/1M.
+  2. (midday) "Apple wants 200,000 people grading an AI's health answers" (Apple Health AI Usage Study with OpenEvidence,
+     Nov 15: US, 21+, up to 200,000 people; ask health questions, plain-English answers grounded in NEJM/JAMA/Nature with
+     citations; optional HealthKit data; rate answers + surveys; Apple: "may at times offer responses that are incomplete
+     or unclear", not meant to diagnose, study data won't train AI models; OpenAI Jan 2026: 230M+ people a week ask ChatGPT
+     health questions; sources: Apple Newsroom, TechCrunch, The Verge, Engadget, Fortune, Express Tribune). Rubric ~80
+     (20/20/12/8/17/3). 71.4 s, -14.0 LUFS, style flow, 100% scenes (new: health-qa.js). No medical advice; no executive
+     named or drawn. Producer caught two brief errors: device is iPhone 15 Pro+ (TechCrunch said 15; left out) and the
+     "300M health queries a week" figure was unverifiable (used OpenAI's own 230M). TC-only items (12+ months, 24 h deletion) dropped.
+  3. (evening) "Thousands marched against the buildings that run your AI" (Edinburgh march Sat Nov 14 from the top of the
+     Royal Mile to the Scottish Parliament; 80+ groups; 20+ (PA: 23) data-centre proposals; environment + electricity-supply
+     worries; pause + "national conversation" before approvals; part of a Europe-wide wave; Scottish Government: planning
+     guidance before year end, maximising public benefit, EIA now required for new data centres over 50 MW; sources: LBC,
+     PA via Rother Radio, ScottishNews.com; Scotsman/Edinburgh News 403). Rubric ~81 (20/20/10/10/16/5). 71.4 s, -14.0 LUFS,
+     style horizon, 100% scenes (new: dc-march.js, 6 modes). Nobody named; no crowd number ("about 6,000" was hearsay).
+     Lead fix: calendar prop "DEC 31" implied a deadline no source gives -> "BY YEAR END"; re-rendered.
+  Picks note: skipped Trump "national champions" (WSJ anonymous sources; every outlet repeats WSJ), Nvidia/Huang and chip
+  export cluster (personal allegations), funding rounds (Kindo, Zus, Sumary, Blue J, Mount Thor), Claude deleting a
+  professor's notes (Nov 5, >72 h), "San Francisco Declaration" (roundups only, not found in outlets), China AI-native
+  generation (feature, not news), OpenAI robotics team (still single-source).
+  Lead review: claim tables against scripts and post copy; contact sheets of all three plus fix stills; ffprobe 1080x1920
+  30 fps, 71.37 s each. Evening slot = Edinburgh march (physical event, everyday stakes).
+  Drive: connector available; no 2026-11-16 titles existed; 3 Google Docs filed.
+  Timings: git fetch hung again (killed; `git fetch origin main` + ff worked), setup ~2 min, news 4 s, picks + searches
+  ~12 min, producers 14-15 min in parallel, fixes ~5 min, review + delivery ~10 min.
+  Problems: publish-videos.sh printed HTTP 403 again; videos/2026-11-16 holds all 9 files with matching sizes (ls-tree).
+  Producers shared one scratchpad qa/ folder at first (one contact sheet picked up another's stills); next time give each
+  producer its own qa folder in the brief. Voice warned of 3-90 clipped samples after normalisation (true peak ~-3 dBTP).
 - 2026-11-15 (nightly run, Sunday, fired ~07:55 UTC): delivered 2 explainers, not 3 (order: morning/evening, no midday).
   1. (evening) "Korea's top tax exam scorer confessed to AI cheating" (63rd tax accountant exam top scorer handed Seoul
      police a written confession Sunday Nov 15: tiny camera photographed questions, sent to AI, answers read on a phone,
