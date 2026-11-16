@@ -1936,6 +1936,57 @@
         "https://www.thestar.com.my/tech/tech-news/2026/06/12/musk039s-spacex-raises-75-billion-in-largest-ipo-ever"
       ],
       "video": "out/2026-11-15/2026-11-15-explainer-anthropic-ipo-demand.mp4"
+    },
+    {
+      "id": "2026-11-16-explainer-data-centre-march",
+      "date": "2026-11-16",
+      "hook": "Thousands marched against the buildings that run your AI",
+      "topic": "AI & POWER",
+      "title": "Thousands march in Edinburgh against AI data centres in Scotland",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.lbc.co.uk/article/thousands-march-through-edinburgh-in-protest-against-ai-centres-5HjdmN5_2/",
+        "https://www.rotherradio.co.uk/thousands-march-against-ai-data-centres-in-call-for-national-conversation/",
+        "https://www.scottishnews.com/articles/thousands-march-through-edinburgh-demanding-halt-to-scotlands-ai-data-centre-plans"
+      ],
+      "video": "out/2026-11-16/2026-11-16-explainer-data-centre-march.mp4"
+    },
+    {
+      "id": "2026-11-16-explainer-apple-health-ai",
+      "date": "2026-11-16",
+      "hook": "Apple wants 200,000 people grading an AI's health answers",
+      "topic": "HEALTH AI",
+      "title": "Apple wants 200,000 people to grade an AI's health answers",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.apple.com/newsroom/2026/11/apple-launches-research-study-to-explore-the-use-of-ai-for-health/",
+        "https://techcrunch.com/2026/11/15/apple-launches-new-app-to-study-how-people-use-ai-for-health/",
+        "https://www.theverge.com/tech/1033355/apples-new-study-looks-to-improve-the-effectiveness-of-ai-health-tools",
+        "https://www.engadget.com/2317303/apple-new-research-app-designed-to-make-ai-health-tools-user-friendly/",
+        "https://fortune.com/2026/01/07/openai-launches-chatgpt-health-in-a-push-to-become-a-hub-for-personal-health-data/",
+        "https://tribune.com.pk/story/2586155/openai-launches-chatgpt-health-as-users-ask-millions-of-medical-questions-weekly"
+      ],
+      "video": "out/2026-11-16/2026-11-16-explainer-apple-health-ai.mp4"
+    },
+    {
+      "id": "2026-11-16-explainer-qwen-no-hacking",
+      "date": "2026-11-16",
+      "hook": "Alibaba's newest AI had its hacking lessons cut",
+      "topic": "AI SAFETY",
+      "title": "Alibaba says it filtered hacking skills out of its new Qwen4-Max AI",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://qwen.ai/blog?id=qwen4-max",
+        "https://x.com/Alibaba_Qwen/status/2122148127520289151",
+        "https://www.yahoo.com/news/articles/alibaba-unveils-flagship-ai-model-042929168.html",
+        "https://www.scmp.com/tech/big-tech/article/3374540/alibaba-says-new-flagship-ai-model-cuts-task-costs-60-while-tightening-cyber-guardrails",
+        "https://www.business-standard.com/world-news/alibaba-says-qwen4-max-cuts-task-costs-by-60-boosts-cyber-safeguards-126111600895_1.html",
+        "https://mlq.ai/news/alibaba-launches-qwen4-max-saying-it-cuts-task-costs-by-about-60-with-tighter-cyber-guardrails/"
+      ],
+      "video": "out/2026-11-16/2026-11-16-explainer-qwen-no-hacking.mp4"
     }
   ]
 }
