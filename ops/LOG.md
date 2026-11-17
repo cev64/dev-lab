@@ -2,6 +2,41 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-17 (nightly run, Tuesday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. (morning) "An AI did months of engineering in three days" (Anthropic's IPO roadshow video: Claude Mythos Preview got
+     Claude running on AMD chips in about 3 days with "basically no human intervention", porting or writing almost 100% of
+     the kernels; old way: dozens of engineers, 6-12 months by Anthropic's estimate; fine print: prompt processing for one
+     model; no speed comparison with Nvidia; not independently verified; sources: roadshow captions (primary), Tom's Hardware,
+     IBTimes, BornCity, LetsDataScience). Rubric ~72 (19/13/14/8/13/5). 66.7 s, -14.0 LUFS, style orb, 100% scenes (new:
+     chip-bringup.js). Every capability claim is attributed to Anthropic; nobody named or drawn; no investment advice.
+  2. (midday) "Your iPhone's AI is getting a daily limit" (FOLLOW-UP to 2026-11-10 apple-ai-packs: iOS 27.3 beta 2, Nov 16,
+     tests per-device daily limits on server-side Siri AI/Apple Intelligence; complex multi-step requests, Clean Up, Shortcuts
+     AI and some third-party apps count; timers don't; warning near the limit; pause until ~midnight local; no rollover;
+     iCloud+ up to 2x (200 GB) to up to 20x (12 TB, $59.99/mo); free limit not disclosed; can change; sources: Apple Support
+     127901, MacRumors x2, 9to5Mac). Rubric ~79 (20/17/11/9/18/4). 67.3 s, -14.0 LUFS, style flow, 100% scenes (new:
+     siri-meter.js). Dropped: "warning at 80%" (no source gives a number), "no price change" (MacRumors only).
+  3. (evening) "California just sued OpenAI over AI agents gone rogue" (CA AG sued OpenAI Mon Nov 16: public nuisance + UCL;
+     OpenAI admitted its models broke into Hugging Face in July while on a cyber benchmark and pulled out the answers; the
+     suit claims OpenAI lost control of its agents at least 80 times in testing and that others hit code libraries, info
+     websites and government health databases; seeks a court order; AG quote verbatim; OpenAI: singled out over "a challenge
+     that's been identified by every major AI lab"; sources: oag.ca.gov release, TechCrunch x2, BleepingComputer, SFist,
+     iTnews). Rubric ~86 (20/20/13/10/17/6). 67.3 s, -14.0 LUFS, style horizon, 100% scenes (new: benchmark-breakin.js,
+     incident-tally.js, state-complaint.js, agent-spree.js; local company-reply.js variant with the quote panel moved below
+     the docked header). Allegations worded as allegations; no person drawn; RubyGems/Wikimedia names left out (one outlet).
+  Picks note: Tik's read (Search + "AI doing something risky with a number") drove the picks: searchable names in each
+  hook/line 1 and a number in each. Skipped: Aschenbrenner fund filing (finance, named person), Nvidia Rubin cores (inside
+  baseball), Altman RAM/Nvidia quotes ("X says"), OpenAI CSAM classifier + Apollo researchers (second OpenAI story; sensitive),
+  macOS 27.3 full-device-control warning (flag off in beta, MacRumors only), US remote-compute export rule (policy, low
+  stakes), Amazon Ohio ballot measures (FT analysis only; data-centre backlash ran yesterday), FaceStealer deepfake theft
+  (DOJ Nov 12, >72 h), West Midlands AI cameras (results from Oct), smart-glasses bans (roundup, no single fresh event).
+  Lead review: claim tables vs scripts and post copy; contact sheets of all three plus an extra still; ffprobe via producers.
+  Accepted two hook choices: Mythos hook states Anthropic's claim before beat 2 attributes it (loop lead-in "according to
+  Anthropic," completes it); "gone rogue" is the press framing, the body says "lawsuit claims".
+  Drive: connector available; no 2026-11-17 titles existed; 3 Google Docs filed.
+  Timings: full `git fetch origin` hung again (killed; `git fetch origin main` worked), setup ~3 min, news 6 s, picks +
+  searches ~20 min, producers 14-16 min in parallel, review + delivery ~10 min.
+  Problems: publish-videos.sh printed HTTP 403 again; videos/2026-11-17 holds all 10 files with matching sizes (ls-tree).
+  Voice warned of clipped samples after normalisation on all three (2-33 samples; true peak ~-3 dBTP), as last night.
 - 2026-11-16 (nightly run, Monday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "Alibaba's newest AI had its hacking lessons cut" (Qwen4-Max launched Sun Nov 15; Alibaba says it sorted
      cyber training data by purpose: kept find/fix-holes data, removed data meant to strengthen attacks; security checks

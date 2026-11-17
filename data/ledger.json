@@ -1987,6 +1987,57 @@
         "https://mlq.ai/news/alibaba-launches-qwen4-max-saying-it-cuts-task-costs-by-about-60-with-tighter-cyber-guardrails/"
       ],
       "video": "out/2026-11-16/2026-11-16-explainer-qwen-no-hacking.mp4"
+    },
+    {
+      "id": "2026-11-17-explainer-siri-limits",
+      "date": "2026-11-17",
+      "hook": "Your iPhone's AI is getting a daily limit",
+      "topic": "APPLE AI",
+      "title": "Siri AI gets a daily limit in the iOS 27.3 beta",
+      "followUp": true,
+      "format": "v2",
+      "sources": [
+        "https://support.apple.com/en-us/127901",
+        "https://www.macrumors.com/2026/11/16/apple-icloud-paid-siri-ai-upgrade/",
+        "https://9to5mac.com/2026/11/16/apple-intelligence-siri-ai-usage-limits/",
+        "https://www.macrumors.com/2026/11/16/ios-27-3-beta-2-everything-new/",
+        "https://9to5mac.com/2026/11/09/apple-launches-50-intelligence-usage-packs-for-select-ai-features/"
+      ],
+      "video": "out/2026-11-17/2026-11-17-explainer-siri-limits.mp4"
+    },
+    {
+      "id": "2026-11-17-explainer-mythos-amd",
+      "date": "2026-11-17",
+      "hook": "An AI did months of engineering in three days",
+      "topic": "CHIPS",
+      "title": "Anthropic says its Claude Mythos AI got Claude running on AMD chips in about 3 days",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://ipo.anthropic.com/us",
+        "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropic-says-claude-mythos-slashed-software-work-to-onboard-amd-gpus-from-up-to-12-months-to-around-three-days-writing-almost-100-percent-of-kernels-autonomously-chips-away-at-nvidias-cuda-moat",
+        "https://www.ibtimes.com/anthropic-ai-ported-claude-amd-chips-3809680",
+        "https://borncity.com/news/anthropic-und-amd-ki-modell-mythos-laeuft-nach-drei-tagen-auf-mi355x/"
+      ],
+      "video": "out/2026-11-17/2026-11-17-explainer-mythos-amd.mp4"
+    },
+    {
+      "id": "2026-11-17-explainer-ca-sues-openai",
+      "date": "2026-11-17",
+      "hook": "California just sued OpenAI over AI agents gone rogue",
+      "topic": "AI SAFETY",
+      "title": "California sues OpenAI over AI agents gone rogue",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://oag.ca.gov/news/press-releases/it%E2%80%99s-golden-state-not-wild-west-attorney-general-bonta-sues-openai-over",
+        "https://techcrunch.com/2026/11/16/california-state-ag-sues-openai-over-rogue-agent-incidents/",
+        "https://www.bleepingcomputer.com/news/security/california-sues-openai-over-ai-agents-escaping-sandboxes-hacking-firms/",
+        "https://sfist.com/2026/11/16/california-ag-sues-openai-for-public-nuisance-lack-of-oversight-of-ai-models/",
+        "https://techcrunch.com/2026/07/21/openai-says-hugging-face-was-breached-by-its-own-pre-release-models/",
+        "https://www.itnews.com.au/news/openai-models-running-benchmark-breached-ai-platform-hugging-face-627560"
+      ],
+      "video": "out/2026-11-17/2026-11-17-explainer-ca-sues-openai.mp4"
     }
   ]
 }
