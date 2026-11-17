@@ -18,7 +18,7 @@ export default function draw(ctx, t, info) {
   const tC = at(P.cautionCue || 'allegations', D * 0.75) - 0.3;
   const tP = at(P.provenCue || 'proven', tC + 1.4) - 0.2;
 
-  K.camera(ctx, t, [{ t: 0, zoom: 1.04, x: 487, y: 780 }, { t: tC, zoom: 1.0 }, { t: D, zoom: 1.03, x: 487, y: 720 }]);
+  K.camera(ctx, t, [{ t: 0, zoom: 1.03, x: 487, y: 760 }, { t: tC, zoom: 1.0, x: 487, y: 725 }, { t: D, zoom: 1.02, x: 487, y: 725 }]);
   const city = K.world.city(ctx, { t, time: 'dusk', groundY: 990 });
   K.drawBuilding(ctx, 487, 990, 0.82, { t, color: '#5b6aa8', floors: 7, lit: 0.6 });
   K.drawLabel(ctx, 487, 1030, 1, { text: P.company || 'OpenAI', size: 28, dot: true });
@@ -45,7 +45,7 @@ export default function draw(ctx, t, info) {
   // quote panel (types in)
   const qk = K.popIn(t, tQ, 0.45);
   if (qk > 0) {
-    ctx.save(); ctx.translate(487, 535); ctx.scale(Math.min(1.04, qk), Math.min(1.04, qk));
+    ctx.save(); ctx.translate(487, 615); ctx.scale(Math.min(1.04, qk), Math.min(1.04, qk));
     const W = 820, Hh = 190;
     roundRect(ctx, -W / 2, -Hh / 2, W, Hh, 26); ctx.fillStyle = 'rgba(8,10,24,0.94)'; ctx.fill();
     ctx.lineWidth = 3; ctx.strokeStyle = rgba(ACC, 0.8); roundRect(ctx, -W / 2, -Hh / 2, W, Hh, 26); ctx.stroke();
