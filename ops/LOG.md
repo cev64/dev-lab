@@ -37,6 +37,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   searches ~20 min, producers 14-16 min in parallel, review + delivery ~10 min.
   Problems: publish-videos.sh printed HTTP 403 again; videos/2026-11-17 holds all 10 files with matching sizes (ls-tree).
   Voice warned of clipped samples after normalisation on all three (2-33 samples; true peak ~-3 dBTP), as last night.
+  Improve: PR #52 merged: chip-bringup.js, usage-meter.js (generic defaults), benchmark-breakin.js, incident-tally.js,
+  state-complaint.js, agent-spree.js promoted to the scene library; company-reply.js quote panel moved below the docked
+  header. Verified by rendering stills of all three explainers from the library paths.
 - 2026-11-16 (nightly run, Monday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "Alibaba's newest AI had its hacking lessons cut" (Qwen4-Max launched Sun Nov 15; Alibaba says it sorted
      cyber training data by purpose: kept find/fix-holes data, removed data meant to strengthen attacks; security checks
