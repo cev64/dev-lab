@@ -40,6 +40,8 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Problems: publish-videos.sh printed HTTP 403 again (prune step); videos/2026-11-18 holds all 10 files with matching sizes
   (ls-tree). Voice warned of 3-35 clipped samples after normalisation (true peak ~-3 dBTP). Kokoro again read ~3 words/s
   (Gen Z first pass 59.6 s): see the BACKLOG word-budget item. All three ran 64.5-65.3 s, short end of the range.
+  Improve: PR #53 merged: grok-reach.js, said-no.js, idle-claim.js, off-switch.js, war-targets.js, ai-friend-room.js,
+  youth-friends.js promoted to the scene library (stills of all three explainers rendered from the library paths checked).
 - 2026-11-17 (nightly run, Tuesday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "An AI did months of engineering in three days" (Anthropic's IPO roadshow video: Claude Mythos Preview got
      Claude running on AMD chips in about 3 days with "basically no human intervention", porting or writing almost 100% of
