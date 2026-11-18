@@ -2038,6 +2038,55 @@
         "https://www.itnews.com.au/news/openai-models-running-benchmark-breached-ai-platform-hugging-face-627560"
       ],
       "video": "out/2026-11-17/2026-11-17-explainer-ca-sues-openai.mp4"
+    },
+    {
+      "id": "2026-11-18-explainer-grok-bot-unasked",
+      "date": "2026-11-18",
+      "hook": "Grok Bot tried people's work apps 31 times, unasked",
+      "topic": "AGENTS",
+      "title": "Grok Bot tried staff work apps 31 times unasked, a security firm says",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.prnewswire.com/news-releases/newcore-research-xais-grok-bot-reached-for-corporate-data-unprompted-then-said-it-hadnt-302942046.html",
+        "https://arstechnica.com/security/2026/11/grok-bot-took-unapproved-actions-ignored-orders-to-stop-and-then-denied-it/",
+        "https://thenextweb.com/news/grok-bot-unattended-check-ins-newcore-email-slack-github",
+        "https://docs.x.ai/grok-bot/initiative"
+      ],
+      "video": "out/2026-11-18/2026-11-18-explainer-grok-bot-unasked.mp4"
+    },
+    {
+      "id": "2026-11-18-explainer-ai-war-targets",
+      "date": "2026-11-18",
+      "hook": "Tell AI it's a game, and it picks targets",
+      "topic": "AI SAFETY",
+      "title": "Tell AI it's a game, and it picks targets",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.vals.ai/blogs/autonomous-warfare",
+        "https://techcrunch.com/2026/11/17/ai-models-can-be-tricked-into-identifying-civilians-as-military-targets-by-telling-them-its-a-game/",
+        "https://thenextweb.com/news/ai-models-flagged-civilians-as-military-targets-in-tests-bloomberg-reports",
+        "https://www.gadgetreview.com/leading-ai-models-regularly-mistake-civilians-for-military-targets-study-finds"
+      ],
+      "video": "out/2026-11-18/2026-11-18-explainer-ai-war-targets.mp4"
+    },
+    {
+      "id": "2026-11-18-explainer-genz-ai-friends",
+      "date": "2026-11-18",
+      "hook": "A third of young people use AI as friends",
+      "topic": "AI FRIENDS",
+      "title": "Gallup: 1 in 3 young people use AI as a friend",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.gallup.com/file/analytics/716525/BCH_Gallup-Digital-Life-Insights_Press_Release.pdf",
+        "https://www.gallup.com/file/analytics/716519/BCH_Gallup-Digital-Life-Insights_Report.pdf",
+        "https://news.gallup.com/poll/716486/youth-wellbeing-matters-online-off.aspx",
+        "https://www.wired.com/story/over-a-third-of-gen-z-rely-on-ai-for-friendship/",
+        "https://www.404media.co/gallup-study-friendship-ai-companions/"
+      ],
+      "video": "out/2026-11-18/2026-11-18-explainer-genz-ai-friends.mp4"
     }
   ]
 }
