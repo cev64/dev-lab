@@ -2,6 +2,37 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-19 (nightly run, Thursday, fired ~07:55 UTC): delivered 2 explainers (order: morning/evening; no midday).
+  1. (morning) "Gemini history off, Google keeps chats around two months" (Google blog Nov 16 + Gemini Apps Privacy Hub:
+     Keep Activity splits into History and AI training toggles, rolling out globally over the coming weeks; with History off
+     chats are now kept "around two months", up from up to 72 hours, temporary chats too; Google: to detect and investigate
+     abuse, those chats don't train unless you send feedback; human reviewers, reviewed chats up to 3 years; history on
+     auto-deletes after 18 months by default; sources: Google x2, TechCrunch, Ars, Digital Trends, Android Central, Gizmodo).
+     Rubric ~75 (19/17/12/8/18/1). 64.0 s, -14.0 LUFS, style horizon, 100% scenes (new: gemini-switch.js, 6 modes).
+     Dropped "60 days" (Google says around two months) and "turning history off doesn't delete existing chats" (no clear source).
+  2. (evening) "AI found a hole in Java in one hour" (Calif's Java4Shell, CVE-2026-114938, disclosed Nov 17: OpenJDK Base64
+     decoder flaw, unauthenticated remote code execution; found with OpenAI's Codex in about an hour for under $200; Calif
+     broke into Keycloak in tests; Calif says Java runs at 90% of Fortune 500; Oracle + OpenJDK fixes same day, CISA urged
+     patching; Calif 9.2 vs Oracle 8.1 (high complexity); no confirmed attacks as of reports; sources: calif.io, CyberScoop,
+     Tenable, Unite.AI, Euronews, Inside AI News, Silicon UK). Rubric ~82 (20/17/14/9/18/4). 68.6 s, -14.0 LUFS, style neural,
+     100% scenes (new: java-hunt.js, decoder-jam.js, score-split.js; local tweaks of foundation-flaw/server-door). Dropped
+     "12-year-old bug" (one outlet; Calif says 17.0.6+, a 2023 release) and "GPT-6 Cyber" (Silicon UK only; others say Codex).
+  Why 2, not 3: pick #1 was Arizona AG's reported criminal probe of OpenAI and other AI firms over "apparent infiltration of
+  banks by rogue AI agents" (Reuters Nov 18). Only the Reuters wire carried it (syndications), azag.gov had no release, no
+  independent outlet: failed the 2-source rule, dropped (recheck tomorrow; would be a follow-up to 11-17 ca-sues-openai).
+  The banks-blame-customers angle (Citi/PNC/Citizens terms) was TechCrunch-only and too close to 10-28 BofA. Replacement:
+  A3 robot orders Q3 (+24.8%, 10,989 robots): rendered (72.8 s, orb, new robot-orders.js), but A3 released the data Oct 28,
+  so it failed the freshness gate (only the FT's Nov 19 framing was new). Held, not delivered, not on videos/ (rule 9).
+  Other skips: GAO chatbot terror-test (no source found), college students' AI opt-outs (NYT + scattered campus items, weak),
+  Will Wright AI memory game (feature), Nvidia China halt/Huang cluster (corporate), GPT-6.2 Astra/Sol (product launch),
+  Mullin "superintelligence outages" ("X says", no evidence).
+  Lead review: claim tables vs scripts and post copy; Java contact sheet (14 frames) and Gemini sheets + final frames.
+  Minor known blemishes: Java beat 5 a character partly covers the OFFICE sign; beat 4 memory cards overlap a pill.
+  Drive: connector available; no 2026-11-19 titles existed; 2 Google Docs filed.
+  Timings: git fetch ~4 min, setup ~3 min, news 10 s, picks ~12 min, producers ~15 min each (robot replacement +14 min).
+  Problems: publish-videos.sh 403 again at the prune step; videos/2026-11-19 has all 6 media files + README (ls-tree).
+  Producers shared scratchpad/qa/ and one helper script got overwritten (no harm found); next time give each its own folder.
+  Kokoro read 2.8-2.83 words/s; 182-197 words gave 64-73 s.
 - 2026-11-18 (nightly run, Wednesday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "A third of young people use AI as friends" (Gallup + Boston Children's Digital Wellness Lab report, Nov 17-18,
      Pinterest Impact Fund support: 15,925 people aged 15-22 in 16 countries; median 33% have used AI as a companion or friend;

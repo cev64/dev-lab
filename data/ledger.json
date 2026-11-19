@@ -2087,6 +2087,44 @@
         "https://www.404media.co/gallup-study-friendship-ai-companions/"
       ],
       "video": "out/2026-11-18/2026-11-18-explainer-genz-ai-friends.mp4"
+    },
+    {
+      "id": "2026-11-19-explainer-java4shell",
+      "date": "2026-11-19",
+      "hook": "AI found a hole in Java in one hour",
+      "topic": "SECURITY",
+      "title": "AI found a hole in Java in one hour",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://calif.io/java4shell/",
+        "https://cyberscoop.com/java4shell-critical-java-flaw-openjdk/",
+        "https://www.tenable.com/blog/java4shell-cve-2026-114938-frequently-asked-questions-about-openjdk-rce-vulnerability",
+        "https://www.unite.ai/calif-uses-ai-to-find-java4shell-as-openjdk-and-oracle-ship-fixes/",
+        "https://www.euronews.com/2026/11/18/ai-finds-security-flaw-in-java-worlds-third-largest-programming-language",
+        "https://insideai.news/news/cybersecurity-ai/java4shell-vulnerability/15545/",
+        "https://www.silicon.co.uk/cybersecurity/java4shell-bug-632420"
+      ],
+      "video": "out/2026-11-19/2026-11-19-explainer-java4shell.mp4"
+    },
+    {
+      "id": "2026-11-19-explainer-gemini-two-months",
+      "date": "2026-11-19",
+      "hook": "Gemini history off, Google keeps chats around two months",
+      "topic": "PRIVACY",
+      "title": "Gemini history off now means Google keeps chats around two months",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://blog.google/innovation-and-ai/products/gemini-app/updated-controls/",
+        "https://support.google.com/gemini/answer/13594961?hl=en",
+        "https://techcrunch.com/2026/11/17/google-to-keep-gemini-chats-for-two-months-up-from-72-hours-even-with-history-off/",
+        "https://arstechnica.com/ai/2026/11/google-will-let-you-opt-out-of-ai-training-in-gemini-without-losing-your-history/",
+        "https://digitaltrends.com/computing/gemini-users-can-finally-save-their-ai-chats-without-letting-google-use-them-for-training-but-theres-a-catch",
+        "https://androidcentral.com/apps-software/ai/you-can-now-keep-your-gemini-history-without-feeding-googles-training-pipeline",
+        "https://gizmodo.com/google-to-keep-ai-chat-logs-for-two-months-even-with-gemini-history-turned-off-2000841271"
+      ],
+      "video": "out/2026-11-19/2026-11-19-explainer-gemini-two-months.mp4"
     }
   ]
 }
