@@ -33,6 +33,8 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Problems: publish-videos.sh 403 again at the prune step; videos/2026-11-19 has all 6 media files + README (ls-tree).
   Producers shared scratchpad/qa/ and one helper script got overwritten (no harm found); next time give each its own folder.
   Kokoro read 2.8-2.83 words/s; 182-197 words gave 64-73 s.
+  Improve: PR #54 merged: java-hunt.js, decoder-jam.js, score-split.js, gemini-switch.js, robot-orders.js promoted to the
+  scene library (stills of all three explainers rendered from the library paths checked); 2 BACKLOG items added.
 - 2026-11-18 (nightly run, Wednesday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "A third of young people use AI as friends" (Gallup + Boston Children's Digital Wellness Lab report, Nov 17-18,
      Pinterest Impact Fund support: 15,925 people aged 15-22 in 16 countries; median 33% have used AI as a companion or friend;
