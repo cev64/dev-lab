@@ -37,6 +37,8 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Problems: publish-videos.sh 403 at the prune step again; videos/2026-11-20 remote sha matches local (10 files, ls-tree).
   Mid-count stills: IPO "$32.6B" at 20.5 s and SoftBank "> 13%" at ~42 s, Doritos "5 police cars" mid count-up; all settle
   on the right values.
+  Improve: PR #55 merged: debut-day.js, index-basket.js, muse-mixup.js, chip-alert.js promoted to the scene library with
+  generic placeholder defaults (library-path stills byte-identical to the originals with story params); README index updated.
 - 2026-11-19 (nightly run, Thursday, fired ~07:55 UTC): delivered 2 explainers (order: morning/evening; no midday).
   1. (morning) "Gemini history off, Google keeps chats around two months" (Google blog Nov 16 + Gemini Apps Privacy Hub:
      Keep Activity splits into History and AI training toggles, rolling out globally over the coming weeks; with History off

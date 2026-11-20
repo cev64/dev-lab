@@ -4,6 +4,9 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 (on a branch + PR), verified with a render. Re-rank on Sundays. (Podcast-clip items are parked with that track.)
 
 ## Next
+- [ ] (2026-11-20) Library scenes with story numbers baked into drawing code: debut-day.js ($83 line, price curve),
+      muse-mixup.js (two bank balances), chip-alert.js (99% count-up); make them params. Also list the 2026-11-19 PR #54
+      scenes in the engine/render/README.md index.
 - [ ] (2026-11-19) Fold the Java4Shell producer's tweaks into the library: foundation-flaw.js `sites` param, `fixed`/`fixedCue`
       patch trigger and flatter camera (copy: work/.../java4shell/scenes/java-slab.js); server-door.js flatter camera option
       (server-door-j.js). Those work files are not committed, so re-derive from the diff notes if the container is gone.
