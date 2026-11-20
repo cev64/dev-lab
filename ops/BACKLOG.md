@@ -7,7 +7,7 @@ The nightly run first delivers the 3 explainers. With leftover time it ships ONE
 - [ ] (2026-11-19) Fold the Java4Shell producer's tweaks into the library: foundation-flaw.js `sites` param, `fixed`/`fixedCue`
       patch trigger and flatter camera (copy: work/.../java4shell/scenes/java-slab.js); server-door.js flatter camera option
       (server-door-j.js). Those work files are not committed, so re-derive from the diff notes if the container is gone.
-- [ ] (2026-11-19) Producers share scratchpad/qa/: give each producer its own scratch subfolder in the brief (a helper
+- [x] (done 2026-11-20 via the brief) (2026-11-19) Producers share scratchpad/qa/: give each producer its own scratch subfolder in the brief (a helper
       script got overwritten tonight).
 - [x] (PR #49 merged 2026-11-15) (2026-11-15) Promote tonight's scenes: exam-hall.js (exam hall; hook/scores/method/proctor; remove no-op
       ctx.save/restore lines in officer()), confession-desk.js (police desk self-report, pass under review; confess/caveat),

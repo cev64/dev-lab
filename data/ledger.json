@@ -2125,6 +2125,60 @@
         "https://gizmodo.com/google-to-keep-ai-chat-logs-for-two-months-even-with-gemini-history-turned-off-2000841271"
       ],
       "video": "out/2026-11-19/2026-11-19-explainer-gemini-two-months.mp4"
+    },
+    {
+      "id": "2026-11-20-explainer-doritos-gun-alert",
+      "date": "2026-11-20",
+      "hook": "A school AI camera mistook Doritos for a gun",
+      "topic": "AI SAFETY",
+      "title": "Teens sue after an AI camera mistook Doritos for a gun",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://arstechnica.com/tech-policy/2026/11/traumatized-teens-sue-school-cops-after-doritos-bag-triggers-ai-gun-alert/",
+        "https://www.wbaltv.com/article/kenwood-high-students-lawsuit-ai-weapons-alert/74471096",
+        "https://cdn.arstechnica.net/wp-content/uploads/2026/11/Allen-v.-Omnilert-Complaint-11-17-26.pdf",
+        "https://techcrunch.com/2025/10/25/high-schools-ai-security-system-confuses-doritos-bag-for-a-possible-firearm",
+        "https://oige.maryland.gov/wp-content/uploads/sites/18/2025/11/OIGE-Case-25-0014-I-BCPS-Report-11252025-Amended.pdf"
+      ],
+      "video": "out/2026-11-20/2026-11-20-explainer-doritos-gun-alert.mp4"
+    },
+    {
+      "id": "2026-11-20-explainer-muse-mixups",
+      "date": "2026-11-20",
+      "hook": "Meta's AI sent staff bank balances that weren't theirs",
+      "topic": "PRIVACY",
+      "title": "Meta's Muse AI agent sent staff bank balances that weren't theirs",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.reuters.com/investigations/meta-bets-big-muse-ai-agent-early-safety-mishaps-surface-2026-11-18/",
+        "https://www.thestar.com.my/news/world/2026/11/18/as-meta-bets-big-on-muse-ai-agent-early-safety-mishaps-surface",
+        "https://techcrunch.com/2026/11/19/metas-ai-agent-muse-is-mixing-up-conversations-and-exposing-private-data-report-says/",
+        "https://www.ibtimes.co.uk/meta-muse-ai-signal-messages-bank-balances-1833200"
+      ],
+      "video": "out/2026-11-20/2026-11-20-explainer-muse-mixups.mp4"
+    },
+    {
+      "id": "2026-11-20-explainer-anthropic-debut",
+      "date": "2026-11-20",
+      "hook": "The biggest IPO ever popped, then AI stocks dropped",
+      "topic": "MARKETS",
+      "title": "Anthropic's record IPO pops 34%, then the AI market slides",
+      "followUp": true,
+      "format": "v2",
+      "sources": [
+        "https://www.cnbc.com/2026/11/19/anthropic-ipo-ant-live-updates.html",
+        "https://www.nbcnews.com/business/markets/live-blog/anthropic-ipo-live-updates-rcna610159",
+        "https://techcrunch.com/2026/11/19/anthropic-hits-nasdaq-exchanges-at-110-27-above-ipo-price/",
+        "https://www.abc.net.au/news/2026-11-20/anthropic-ipo-three-trillion/107407020",
+        "https://finance.yahoo.com/technology/live/anthropic-ipo-live-anthropic-stock-begins-trading-in-record-81b-raise-with-15t-valuation-192410598.html",
+        "https://www.cnbc.com/2026/11/19/anthropic-ipo-ai-stocks-selloff.html",
+        "https://www.cnbc.com/2026/11/20/softbank-ai-tech-stocks-slide-anthropic-debut.html",
+        "https://seekingalpha.com/news/4675025-asia-tech-stocks-reel-from-anthropic-ipo-as-softbank-samsung-and-tsmc-slide",
+        "https://stockanalysis.com/news/anthropic-nasdaq-100-funds-december-21/"
+      ],
+      "video": "out/2026-11-20/2026-11-20-explainer-anthropic-debut.mp4"
     }
   ]
 }

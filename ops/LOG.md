@@ -2,6 +2,41 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-20 (nightly run, Friday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. (morning, FOLLOW-UP to 11-15 IPO demand) "The biggest IPO ever popped, then AI stocks dropped" (Anthropic Nasdaq debut
+     Nov 19: priced $83, opened $111.50, ~$2T value at the open, raised $81.3B (record), closed $97.17 (+17%); S&P 500 and
+     Nasdaq ~-2%; Asian tech slid Friday, SoftBank -14%+; on track for Nasdaq-100 next month so tracking funds must buy;
+     sources: CNBC x3, NBC News, TechCrunch, ABC Australia, Yahoo Finance, Seeking Alpha, Stock Analysis citing Bloomberg).
+     Rubric ~78 (20/18/13/9/16/2). 70.3 s, -14.0 LUFS, style orb, 100% scenes (new: debut-day.js, index-basket.js; reused
+     market-board.js). Dropped Bloomberg's $107.3B / -5% after-hours (couldn't verify; three outlets say $81.3B), the
+     conflicting $1.5T-$3T valuations (only "about $2T at the open"), single-source Nikkei/TSMC/Samsung moves and causes.
+     Post copy says "News, not investment advice."
+  2. (midday) "Meta's AI sent staff bank balances that weren't theirs" (Reuters investigation Nov 18 via The Star wire copy +
+     TechCrunch Nov 19 with Meta's own statement: >2 dozen internal posts; employees worried Muse mixed up conversations
+     between accounts; tides chat surfaced two bank balances; childcare requests/career advice/orders never made; 10M+
+     downloads since September launch; Reuters couldn't establish if balances were real or invented; staff told it
+     "appeared to be hallucinating"; Meta: "isolated incidents"). Rubric ~76 (20/20/12/8/14/2). 68.2 s, -14.0 LUFS,
+     style neural, 100% scenes (new: muse-mixup.js, 6 modes). Two-source basis: Reuters primary + TechCrunch's own Meta
+     statement (CTV/IBTimes are rewrites); "exposing private data" kept hedged; bank names not shown.
+  3. (evening) "A school AI camera mistook Doritos for a gun" (lawsuit filed Nov 17 in Baltimore County Circuit Court by four
+     Kenwood High students vs Omnilert, county police and the school board over the Oct 20, 2025 alert: alert canceled within
+     two minutes, lawsuit says the principal missed it and sent a screenshot to the SRO, who forwarded it to police; 6+
+     cruisers, teens handcuffed, nothing found; damages + injunction; lawsuit cites the state OIGE: >99% of alerts false
+     positives needing no police; Omnilert "truly sorry"; sources: complaint PDF, Ars Technica, WBAL-TV, TechCrunch 2025,
+     OIGE report). Rubric ~84 (19/23/13/9/17/3). 70.7 s, -14.0 LUFS, style flow, 100% scenes (new: chip-alert.js, 7 modes).
+     Students not named (minors); no guns shown on screen; all wrongdoing worded as "the lawsuit says". Lead checked the
+     complaint for the SRO pronoun ("his personal phone").
+  Picks: news feed was dominated by the Anthropic IPO cluster (one taken as a follow-up). Skipped: DeepMind ASI essay
+  ("X says"), Nvidia-Inception talks and Nscale/ByteDance license ("Sources:"), Apple Mac agent / Gemini uses your Mac
+  (product launches), tech outages Y2K piece (experts speculate), Anthropic Australian data centre (Reuters only, one feed
+  item), Jensen Huang scandal timeline (personal), founders' $2B cash-out (off-angle).
+  Lead review: claim tables vs scripts and post copy; contact sheets of all three plus the Muse take frame.
+  Drive: connector available; no 2026-11-20 titles existed; 3 Google Docs filed.
+  Timings: full `git fetch origin` hung >2 min (video branches), killed; `git fetch origin main` 10 s; setup ~3 min, news 5 s,
+  picks ~6 min, producers 12-16 min in parallel (own scratch folders each, per BACKLOG), review + delivery ~10 min.
+  Problems: publish-videos.sh 403 at the prune step again; videos/2026-11-20 remote sha matches local (10 files, ls-tree).
+  Mid-count stills: IPO "$32.6B" at 20.5 s and SoftBank "> 13%" at ~42 s, Doritos "5 police cars" mid count-up; all settle
+  on the right values.
 - 2026-11-19 (nightly run, Thursday, fired ~07:55 UTC): delivered 2 explainers (order: morning/evening; no midday).
   1. (morning) "Gemini history off, Google keeps chats around two months" (Google blog Nov 16 + Gemini Apps Privacy Hub:
      Keep Activity splits into History and AI training toggles, rolling out globally over the coming weeks; with History off
