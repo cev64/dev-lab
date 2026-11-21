@@ -2,6 +2,39 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-21 (nightly run, Saturday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. (morning) "Signal locked Siri and Gemini out of your chats" (Signal blog Nov 20 by Meredith Whittaker + The Verge,
+     9to5Mac, Android Authority, Engadget: iPhone/iOS 27 "Block Siri AI" setting on by default, blocks in-app screenshots;
+     Android auto-enables Screen security when an AI assistant reads the screen; can be switched off but Signal warns it
+     could expose you and your contacts; 2025 Windows Recall block as precedent; quote "Signal is the canary in the coal
+     mine."; remedy incomplete (not all Android, no macOS, files on device); asks Apple/Google/Microsoft for an opt-out).
+     Rubric ~76 (19/18/10/8/17/4). 66.3 s, -14.0 LUFS, style horizon, 100% scenes (new: curtain.js, 6 modes). Reuters
+     exclusive unreachable from here; Signal primary + 4 outlets used. No Google/Apple response found, so none claimed.
+  2. (midday) "Claude may have just cracked math's most famous problem" (Levent Alpöge's remark.pdf + The Verge, BBC,
+     TechCrunch, Clay rules, Vakil and Tao blogs: claims RH proof working with an unreleased Claude, ~6 weeks, Lean-only,
+     early testers say it compiles, written-out version 250,000+ pages per him; Clay rules = publish, 2+ years, general
+     acceptance; rival all-human GRH proof posted by Stanford's Vakil for a postdoc, problems reported hours later with
+     AI's help; neither accepted). Rubric ~78 (20/15/15/8/14/6). 69.0 s, -14.0 LUFS, style orb, 100% scenes (new:
+     vault-board.js, prize-case.js, relay-board.js, lean-stack.js, rival-door.js). Worded throughout as a claim. Left out:
+     Navier-Stokes "loophole in OpenAI's solution" (unverified), IPO timing, TechCrunch's garbled Vakil title.
+  3. (evening) "He hid two million trackable secrets in AI prompts" (Dragos blog by HD Moore + Ars Technica Nov 20: ~2M
+     prompts with canary secrets Jul-Nov 2026; evidence at least three AI providers breached, bait keys used in tens of
+     thousands of AWS calls, none knew until notified; resellers logged prompts at low prices, a home connection opened
+     secret links ~1.5 days later; some providers appeared not to honor privacy settings, one crawled a link 2+ months
+     later; breached providers unnamed; several investigating). Rubric ~83 (19/20/14/9/16/5). 65.0 s, -14.0 LUFS, style
+     neural, 100% scenes (new: canary-line.js, canary-desk.js). No company named as breached; OpenRouter/Vercel and the
+     Chinese-lab finding left out. Researcher drawn as a generic cartoon (not a likeness).
+  Picks: Riemann/Navier-Stokes cluster (one taken), Signal, canaries. Skipped: Nasdaq worst week since 2020 (too close to
+  11-20 Anthropic debut/AI stocks), Meta reconsidering 2030 net-zero (Axios-led, corporate/climate; kept as a spare),
+  Ubisoft Motherbrain smart NPCs (announcement), Cursor/Chinese models and chip export rules (inside baseball), Google
+  search homepage and Gemini-uses-your-Mac (feature launches), Trump data-center tax ("X threatens").
+  Lead review: claim tables vs scripts and post copy; contact sheets for all three; ffprobe 1080x1920 30 fps.
+  Drive: connector available; no 2026-11-21 titles existed; 3 Google Docs filed.
+  Timings: full `git fetch origin` hung again (video branches), killed after ~4 min; `git fetch origin main` fine; setup
+  ~3 min, news 5 s, picks ~8 min, producers 13-19 min in parallel (own scratch folders), review + delivery ~10 min.
+  Problems: publish-videos.sh 403 at the prune step again; videos/2026-11-21 remote sha matches local (10 files, ls-tree).
+  Known blemishes: Riemann beat 6 magnifier handles cross folder tags; canaries beat 5 "LOW $" tag overlaps booth edge;
+  Signal thumbnail cover card hides the cartoon person's head. Kokoro read "H.D." as letters (fine).
 - 2026-11-20 (nightly run, Friday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning, FOLLOW-UP to 11-15 IPO demand) "The biggest IPO ever popped, then AI stocks dropped" (Anthropic Nasdaq debut
      Nov 19: priced $83, opened $111.50, ~$2T value at the open, raised $81.3B (record), closed $97.17 (+17%); S&P 500 and

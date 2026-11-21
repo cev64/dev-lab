@@ -2179,6 +2179,57 @@
         "https://stockanalysis.com/news/anthropic-nasdaq-100-funds-december-21/"
       ],
       "video": "out/2026-11-20/2026-11-20-explainer-anthropic-debut.mp4"
+    },
+    {
+      "id": "2026-11-21-explainer-signal-ai-block",
+      "date": "2026-11-21",
+      "hook": "Signal locked Siri and Gemini out of your chats",
+      "topic": "PRIVACY",
+      "title": "Signal blocks Siri and Gemini from reading your chats",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://signal.org/blog/protecting-your-privacy/",
+        "https://www.theverge.com/ai-artificial-intelligence/1038390/signal-blocking-ai-agent-screenshots-mobile-app",
+        "https://9to5mac.com/2026/11/20/signal-now-blocks-screenshots-on-iphone-to-stop-siri-ai-from-seeing-chats/",
+        "https://www.androidauthority.com/signal-blocks-gemini-siri-ai-private-messages-3737647/",
+        "https://www.engadget.com/2323574/signal-now-blocks-screenshots-by-default-to-stymie-ai-agents/",
+        "https://signal.org/blog/signal-doesnt-recall/"
+      ],
+      "video": "out/2026-11-21/2026-11-21-explainer-signal-ai-block.mp4"
+    },
+    {
+      "id": "2026-11-21-explainer-ai-canaries",
+      "date": "2026-11-21",
+      "hook": "He hid two million trackable secrets in AI prompts",
+      "topic": "AI PRIVACY",
+      "title": "He hid 2 million secrets in AI prompts. Some got stolen.",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens",
+        "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/"
+      ],
+      "video": "out/2026-11-21/2026-11-21-explainer-ai-canaries.mp4"
+    },
+    {
+      "id": "2026-11-21-explainer-riemann-claude",
+      "date": "2026-11-21",
+      "hook": "Claude may have just cracked math's most famous problem",
+      "topic": "AI MATH",
+      "title": "Claude and the Riemann hypothesis: a claim, not yet a proof",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://alpo.ge/remark.pdf",
+        "https://www.theverge.com/ai-artificial-intelligence/1010051/anthropic-riemann-hypothesis-millennium-prize-problem",
+        "https://www.bbc.co.uk/news/articles/c6pqr2g7w059o",
+        "https://techcrunch.com/2026/11/20/ai-claimed-a-solution-to-the-167-year-old-riemann-hypothesis-and-a-human-did-too/",
+        "https://www.claymath.org/millennium-problems/rules/",
+        "https://math216.wordpress.com/2026/11/20/hurried-announcement-alessandro-masullo-grh/",
+        "https://terrytao.wordpress.com/"
+      ],
+      "video": "out/2026-11-21/2026-11-21-explainer-riemann-claude.mp4"
     }
   ]
 }
