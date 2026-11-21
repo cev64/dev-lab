@@ -35,6 +35,9 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Problems: publish-videos.sh 403 at the prune step again; videos/2026-11-21 remote sha matches local (10 files, ls-tree).
   Known blemishes: Riemann beat 6 magnifier handles cross folder tags; canaries beat 5 "LOW $" tag overlaps booth edge;
   Signal thumbnail cover card hides the cartoon person's head. Kokoro read "H.D." as letters (fine).
+  Improve: PR #56 merged: curtain.js, canary-line.js, canary-desk.js, vault-board.js, prize-case.js, relay-board.js,
+  lean-stack.js, rival-door.js promoted to the scene library with generic defaults (60 library-vs-original still pairs
+  byte-identical; defaults-only stills checked). A container restart killed the first engine-engineer run; re-run finished.
 - 2026-11-20 (nightly run, Friday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning, FOLLOW-UP to 11-15 IPO demand) "The biggest IPO ever popped, then AI stocks dropped" (Anthropic Nasdaq debut
      Nov 19: priced $83, opened $111.50, ~$2T value at the open, raised $81.3B (record), closed $97.17 (+17%); S&P 500 and
