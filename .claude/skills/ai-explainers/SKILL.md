@@ -35,7 +35,7 @@ freshness 20 · mass-audience stakes 25 · surprise/number 15 · visual potentia
 controversy without defamation 10 (weights changed 2026-11-08, see playbook). Stakes 5 = a normal person would retell it
 tonight: their job, an AI doing something on its own nobody asked for, or a physical, dramatic event; a company, CEO or
 policy statement scores at most 3 unless the hook shows what changes for a person. Hooks open on an actor doing a
-concrete thing, not on someone saying something ("X says..." hooks hold viewers worst). Gates: < 2 independent sources; > 72 h old with nothing new; single-outlet rumour;
+concrete thing, not on someone saying something ("X says..." hooks hold viewers worst). Score stakes on what already happened to someone (caught, sued, grounded, backlash), not on a "your X could..." framing of a launch or vendor test: those hooks held worst after 2026-11-08 (2026-11-22 review, see playbook). Gates: < 2 independent sources; > 72 h old with nothing new; single-outlet rumour;
 accuses a named person/company of wrongdoing not established by a court, regulator or their own admission; only
 tellable as stock/medical/legal advice; already covered (`news` prints ALREADY COVERED from `data/ledger.json`; also
 compare with the doc titles in Charlie's Drive folder DailyToken, config/drive.json), unless there is a genuinely new
