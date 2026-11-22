@@ -2,6 +2,40 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-22 (nightly run, Sunday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. (morning) "AI data centers just pushed Meta's emissions up 45%" (Meta 2026 Sustainability Report + blog Nov 19,
+     Trellis, Let's Data Science: 2025 net emissions 11.8M t CO2e (+45%), electricity +35% as data centers came online,
+     driven mostly by Scope 3 purchased goods + capital goods e.g. servers; capital goods +58% per Trellis; re-evaluating
+     timelines incl. 2030 net zero, "long-term ambitions haven't changed", no new date yet; Microsoft +25%, Amazon +16%,
+     Google +18% per Trellis + LDS). Rubric ~73 (17/14/13/8/18/3). 68.6 s, -14.0 LUFS, style neural, 100% scenes (new:
+     netzero-road.js). Left out: spokesperson quote (Axios 403, Ars blocked: unverified), any tonnage comparison (none sourced).
+  2. (midday) "Rules for killer robots just got pushed to 2028" (CCW Review Conference, Geneva, ended Sat Nov 21 without a
+     mandate to negotiate a binding treaty; consensus forum of 128 states; activists blame Russia and the US; two-year expert
+     process, possible accord by 2028, legal nature undecided; UN chief wanted 2026; Nakamitsu "significant achievement", ICRC
+     "an opportunity has been missed"; sources AP, Anadolu, dpa/swissinfo (one wire), NPR, ICRC). Rubric ~80 (19/18/11/9/17/6).
+     63.9 s, -14.0 LUFS, style orb, 100% scenes (new: robot-treaty.js, 6 modes). Lead review cut "talks ran through the
+     night" (dpa/Keystone only) and re-rendered. Left out: 163-state UNGA vote, ~100 countries, Israel/Belarus/UK (single-source).
+  3. (evening) "An actor rented his face to an AI show" (TechCrunch Nov 21, TheWrap, Programming Insider Nov 16: Israeli actor
+     Aki Avni (Fox's 24) licensed his face to microdrama startup Shortical; AI-made series Inevitable premiered Nov 13; he
+     plays himself, his AI double is tied to an attempted murder he didn't commit; pay not disclosed; he helped make creative
+     calls; China face licensing $15-$700 per Rest of World + The Next Web). Rubric ~78 (18/19/12/9/15/5). 64.9 s, -14.0 LUFS,
+     style flow, 100% scenes (new: face-license.js with holo()/faceCard() helpers). Lead review: hook changed from "just
+     rented" (deal was public in May per TheWrap) to "rented ... AI show"; dropped a Programming-Insider-only quote card and
+     the TechCrunch-only "Shortical won't say"; re-rendered. Actor drawn as a generic cartoon (no likeness).
+  Picks: thin Sunday feed. Skipped: Navier-Stokes AI-aided proof by Buckmaster/Alpöge (same cluster as 11-21 Riemann),
+  Anthropic founders' $2B (third Anthropic IPO story in a week), Amazon/Decart $7.5B (FT sources only), AI server price hikes
+  (inside baseball), outages "Y2K AI agent style" (officials found no AI link), DeepMind philosopher interview, text-message
+  agents listicle. Hooks follow the 11-16 performance read (concrete action + number first).
+  Lead review: claim tables vs scripts and post copy (Trellis re-checked for peer percentages); contact sheets for all three;
+  ffprobe 1080x1920 30 fps.
+  Sunday Skeptic review (opus, n=19 post-11-08 rows): weights unchanged; added a stakes-scoring line ("your X could..."
+  hooks held worst, median 8.8 s vs 12.7 s) to the skill + dated evidence note in the playbook. PR #57, merged.
+  Drive: connector available; no 2026-11-22 titles existed; 3 Google Docs filed.
+  Timings: full `git fetch origin` hung again (video branches) and was killed; `git fetch origin main` fine; setup ~3 min,
+  news 3 s, picks ~10 min, producers 13-16 min in parallel (own scratch folders), 2 fix re-renders ~6 min each, delivery ~8 min.
+  Problems: publish-videos.sh 403 at the prune step again; videos/2026-11-22 remote sha matches local (10 files).
+  Known blemishes: robots hook spoken in ~3.4 s; Meta crane mast cropped by zoom, caption shows "DROPPED THE GOAL" under the
+  NOT DROPPED stamp; face beat-3 characters small, "Per Rest of World" pill small.
 - 2026-11-21 (nightly run, Saturday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "Signal locked Siri and Gemini out of your chats" (Signal blog Nov 20 by Meredith Whittaker + The Verge,
      9to5Mac, Android Authority, Engadget: iPhone/iOS 27 "Block Siri AI" setting on by default, blocks in-app screenshots;

@@ -2230,6 +2230,58 @@
         "https://terrytao.wordpress.com/"
       ],
       "video": "out/2026-11-21/2026-11-21-explainer-riemann-claude.mp4"
+    },
+    {
+      "id": "2026-11-22-explainer-ai-face-license",
+      "date": "2026-11-22",
+      "hook": "An actor just rented his face to an AI",
+      "topic": "AI ACTORS",
+      "title": "An actor licensed his face for an AI-made microdrama",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://techcrunch.com/2026/11/21/is-selling-an-ai-version-of-your-face-to-this-microdrama-startup-the-future-of-hollywood/",
+        "https://www.thewrap.com/media-platforms/tv/shortical-ai-generated-microdrama-aki-avni-inevitable-ofir-lobel/",
+        "https://programminginsider.com/shortical-is-betting-big-on-ai-its-new-series-inevitable-explores-the-future-of-entertainment/",
+        "https://restofworld.org/2026/china-ai-microdramas-face-licensing/",
+        "https://thenextweb.com/news/china-face-licensing-ai-microdramas-biometric-marketplace",
+        "https://encyclopedia.com/education/news-wires-white-papers-and-books/avni-aki-1967"
+      ],
+      "video": "out/2026-11-22/2026-11-22-explainer-ai-face-license.mp4"
+    },
+    {
+      "id": "2026-11-22-explainer-meta-net-zero",
+      "date": "2026-11-22",
+      "hook": "AI data centers just pushed Meta's emissions up 45%",
+      "topic": "CLIMATE",
+      "title": "Meta is re-evaluating its 2030 net-zero goal as AI emissions jump 45%",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://sustainability.atmeta.com/asset/2026-sustainability-report/",
+        "https://sustainability.atmeta.com/blog/2026/11/19/meta-launches-2026-sustainability-report/",
+        "https://trellis.net/article/meta-2026-sustainability-report/",
+        "https://letsdatascience.com/news/meta-reconsiders-2030-net-zero-goal-after-45-emissions-jump-0375f9bd"
+      ],
+      "video": "out/2026-11-22/2026-11-22-explainer-meta-net-zero.mp4"
+    },
+    {
+      "id": "2026-11-22-explainer-killer-robot-talks",
+      "date": "2026-11-22",
+      "hook": "Rules for killer robots just got pushed to 2028",
+      "topic": "AI WEAPONS",
+      "title": "UN killer robot talks end with no treaty mandate",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.whio.com/news/technology/nations-un-talks-ai/KPESIT54IE2Y7I6ZK5KTRTWRCI/",
+        "https://www.anews.com.tr/world/2026/11/21/un-sees-progress-on-autonomous-weapons-regulation-despite-lack-of-binding-treaty-mandate",
+        "https://www.yahoo.com/news/world/articles/un-talks-autonomous-killer-robots-073342859.html",
+        "https://www.opb.org/article/2026/11/16/u-n-talks-seek-to-rein-in-killer-robots-as-fears-grow-over-autonomous-weapons/",
+        "https://www.swissinfo.ch/eng/international-geneva/rules-for-killer-robots-talks-end-with-a-minimal-consensus/92416572",
+        "https://www.icrc.org/en/statement/autonomous-weapons-icrc-warns-states-must-act-now-preserve-meaningful-human-control-over-use-of-force"
+      ],
+      "video": "out/2026-11-22/2026-11-22-explainer-killer-robot-talks.mp4"
     }
   ]
 }
