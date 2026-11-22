@@ -36,6 +36,8 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   Problems: publish-videos.sh 403 at the prune step again; videos/2026-11-22 remote sha matches local (10 files).
   Known blemishes: robots hook spoken in ~3.4 s; Meta crane mast cropped by zoom, caption shows "DROPPED THE GOAL" under the
   NOT DROPPED stamp; face beat-3 characters small, "Per Rest of World" pill small.
+  Improve: PR #58 merged: robot-treaty.js, face-license.js, netzero-road.js promoted to the scene library with generic
+  defaults (96 library-vs-original still pairs byte-identical; defaults-only stills checked; grep clean of story names).
 - 2026-11-21 (nightly run, Saturday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "Signal locked Siri and Gemini out of your chats" (Signal blog Nov 20 by Meredith Whittaker + The Verge,
      9to5Mac, Android Authority, Engadget: iPhone/iOS 27 "Block Siri AI" setting on by default, blocks in-app screenshots;
