@@ -1,0 +1,222 @@
+# Deliveries 2026-11-23
+
+**Posting order:** morning (~8am ET) OpenAI speed limit ("OpenAI just proposed a speed limit for AI") ·
+midday (~12pm) Binding of Isaac AI music ("Fans caught a hit game using unlabeled AI music") ·
+evening (~6-9pm) AI zero-day ("Hackers' AI found a brand-new flaw in 11 minutes").
+Switch ON the platform's AI-generated content label on every post (synthetic narrator).
+Why this order: the zero-day hook opens on an actor doing something with a number (the pattern that held best in
+ops/PERFORMANCE.md), so it gets the evening slot; the game-music backlash is something that already happened to people
+(players, reviews) for midday; the speed limit is a proposal/policy story, which holds viewers less well, so it goes in the morning.
+
+## Explainer: Hackers' AI agents found a zero-day in medical-scan software
+
+**Hook:** Hackers' AI found a brand-new flaw in 11 minutes  
+**Video:** `out/2026-11-23/2026-11-23-explainer-ai-zero-day.mp4` (69.8 s)  
+**Cover text:** Hackers' AI found a flaw in 11 minutes  
+**Thumbnail:** `out/2026-11-23/2026-11-23-explainer-ai-zero-day.thumbnail.png` (upload it as the cover when posting)  
+**Format:** v2 (log it in ops/PERFORMANCE.md with the numbers)
+
+Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info; YouTube: Altered or synthetic content = Yes). After posting: post the pinned comment from the channel account and pin it; reply to comments in the first hour.
+
+TikTok description (paste as is):
+
+```
+Amazon says hackers' AI agents found a zero-day in MONAI Label, medical-scan software, in about 11 minutes 🤖
+The agents ran on Cairn, an open-source hacking-test tool, picked their own steps and later got root on a university server. Amazon links it to a China-linked actor with moderate confidence.
+Should AI guard the servers too? 👇
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Amazon Threat Intelligence, The Register, SecurityWeek, The Hacker News, MONAI Label advisory. AI narrator.
+
+#thedailytoken #ai #cybersecurity #aiagents #technews
+```
+
+Instagram Reels caption (paste as is):
+
+```
+Hackers' AI agents found a brand-new flaw in 11 minutes 🤖
+Amazon's threat team says an attacker gave AI agents built on Cairn, an open-source hacking-test tool, one goal: get shell access. They found an unknown path-traversal flaw in MONAI Label, open-source software for labelling medical scans, and later got root on a university server. A fix is merged, but per the project's advisory there's no patched version yet. Amazon says the actor is China-linked, with moderate confidence.
+💬 Should AI guard the servers too?
+📤 Send this to the friend who runs your IT.
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Amazon Threat Intelligence, The Register, SecurityWeek, The Hacker News, MONAI Label advisory. AI narrator.
+
+#thedailytoken #ai #cybersecurity #aiagents #technews
+```
+
+YouTube Shorts title:
+
+```
+Amazon: hackers' AI agents found a zero-day in 11 minutes
+```
+
+YouTube Shorts description:
+
+```
+Amazon says hackers' AI agents found a zero-day in MONAI Label, medical-scan software, in about 11 minutes 🤖
+The agents ran on Cairn, an open-source hacking-test tool, picked their own steps and later got root on a university server. Amazon links it to a China-linked actor with moderate confidence.
+Should AI guard the servers too? 👇
+
+Subscribe to @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Amazon Threat Intelligence, The Register, SecurityWeek, The Hacker News, MONAI Label advisory. AI narrator.
+
+#thedailytoken #ai #cybersecurity #aiagents #technews
+```
+
+Pinned comment (all three platforms):
+
+```
+Should AI guard the servers? 🤖 = yes, fight fire with fire, 👀 = no, keep humans on watch
+```
+
+Sources:
+- Amazon (AWS Security Blog): Chinese-nexus actor's Cairn AI agents found a zero-day on their own https://aws.amazon.com/blogs/security/chinese-nexus-actors-cairn-ai-agents-found-a-zero-day-on-their-own/
+- The Register: China attackers deployed AI agents that autonomously found and exploited a 0-day to take over a university server https://www.theregister.com/security/2026/11/20/china-attackers-deployed-ai-agents-that-autonomously-found-and-exploited-a-0-day-to-take-over-a-university-server/5311382
+- SecurityWeek: Amazon: China-linked hackers' AI agents exploited medical software zero-day https://www.securityweek.com/amazon-china-linked-hackers-ai-agents-exploited-medical-software-zero-day/
+- The Hacker News: Attackers' AI Agents Found a Zero-Day in Medical-Imaging Software and Gained Root Access https://thehackernews.com/2026/11/attackers-ai-agents-found-zero-day-in.html
+- MONAI Label (GitHub security advisory): Path traversal in datastore upload endpoints allows arbitrary file write https://github.com/Project-MONAI/MONAILabel/security/advisories/GHSA-qc22-rmgc-vg94
+
+- Explainer id: `2026-11-23-explainer-ai-zero-day`
+
+## Explainer: OpenAI's chief scientist proposes a speed limit for AI
+
+**Hook:** OpenAI just proposed a speed limit for AI  
+**Video:** `out/2026-11-23/2026-11-23-explainer-ai-speed-limit.mp4` (67.3 s)  
+**Cover text:** OpenAI just proposed a speed limit for AI  
+**Thumbnail:** `out/2026-11-23/2026-11-23-explainer-ai-speed-limit.thumbnail.png` (upload it as the cover when posting)  
+**Format:** v2 (log it in ops/PERFORMANCE.md with the numbers)
+
+Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info; YouTube: Altered or synthetic content = Yes). After posting: post the pinned comment from the channel account and pin it; reply to comments in the first hour.
+
+TikTok description (paste as is):
+
+```
+OpenAI's chief scientist Jakub Pachocki just proposed a speed limit for AI, measured in perplexity 🚦
+Perplexity measures how well a model predicts the next token; lower is better. His pitch: labs agree on a limit and don't cross it until they can understand and monitor AI behavior. No number is set and no rival has signed on yet.
+Who should set AI's speed limit? 👇
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: OpenAI, TechCrunch, OfficeChai. AI narrator.
+
+#thedailytoken #ai #openai #aisafety #technews
+```
+
+Instagram Reels caption (paste as is):
+
+```
+OpenAI just proposed a speed limit for AI 🚦
+In a blog post, chief scientist Jakub Pachocki suggests perplexity (how well a model predicts the next token; lower is better) as a shared yardstick for general intelligence. OpenAI's scores have fallen since GPT-3.5: GPT-4, at about 0.91, got good at chain-of-thought reasoning, and below 0.8 transformative capabilities emerged in cybersecurity and math. His proposal: labs commit not to cross a limit until their ability to understand and monitor AI hits a concrete milestone. It's only a proposal: no number, no named checker, no word yet from rival labs.
+💬 Who should set AI's speed limit: the labs or governments?
+📤 Send this to the friend who drives exactly at the limit.
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: OpenAI, TechCrunch, OfficeChai. AI narrator.
+
+#thedailytoken #ai #openai #aisafety #technews
+```
+
+YouTube Shorts title:
+
+```
+OpenAI's chief scientist proposes a speed limit for AI
+```
+
+YouTube Shorts description:
+
+```
+OpenAI's chief scientist Jakub Pachocki just proposed a speed limit for AI, measured in perplexity 🚦
+Perplexity measures how well a model predicts the next token; lower is better. His pitch: labs agree on a limit and don't cross it until they can understand and monitor AI behavior. No number is set and no rival has signed on yet.
+Who should set AI's speed limit? 👇
+
+Subscribe to @thedaily_token for AI news, animated. 3 stories a day.
+Sources: OpenAI, TechCrunch, OfficeChai. AI narrator.
+
+#thedailytoken #ai #openai #aisafety #technews
+```
+
+Pinned comment (all three platforms):
+
+```
+Who should set AI's speed limit? 🧪 = the labs, 🏛️ = governments
+```
+
+Sources:
+- OpenAI (Jakub Pachocki): Perplexity and Intelligence https://openai.com/index/perplexity-and-intelligence/
+- TechCrunch: OpenAI's chief scientist has thoughts on how to limit AI development https://techcrunch.com/2026/11/22/openais-chief-scientist-has-thoughts-on-how-to-limit-ai-development/
+- OfficeChai: OpenAI Wants 'Perplexity' To Become The Industry's Shared Yardstick For AI Progress And Safety Limits https://officechai.com/ai/openai-wants-perplexity-to-become-the-industrys-shared-yardstick-for-ai-progress-and-safety-limits/
+
+- Explainer id: `2026-11-23-explainer-ai-speed-limit`
+
+## Explainer: Binding of Isaac update pulls unlabeled AI music
+
+**Hook:** Fans caught a hit game using unlabeled AI music  
+**Video:** `out/2026-11-23/2026-11-23-explainer-ai-game-music.mp4` (64.9 s)  
+**Cover text:** Fans caught unlabeled AI music  
+**Thumbnail:** `out/2026-11-23/2026-11-23-explainer-ai-game-music.thumbnail.png` (upload it as the cover when posting)  
+**Format:** v2 (log it in ops/PERFORMANCE.md with the numbers)
+
+Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info; YouTube: Altered or synthetic content = Yes). After posting: post the pinned comment from the channel account and pin it; reply to comments in the first hour.
+
+TikTok description (paste as is):
+
+```
+Binding of Isaac Repentance+ shipped AI music with no Steam AI disclosure 🎵
+A Reddit user found "made with Suno" tags in the new crime mode's songs. Recent Steam reviews sank to 8% positive and Nicalis patched the music out.
+Should games have to label AI music? 👇
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Kotaku, Power Up Gaming, IGN, PC Gamer, Steam. AI narrator.
+
+#thedailytoken #ai #bindingofisaac #aimusic #technews
+```
+
+Instagram Reels caption (paste as is):
+
+```
+Fans caught a hit game using unlabeled AI music 🎵
+The Binding of Isaac: Repentance+ got a Grand Theft Auto-style crime mode on Nov 19. A day later a Reddit user found "made with Suno" (an AI song generator) in the music files' data, and the Steam page had no AI disclosure. Recent reviews sank to 8% positive; creator Edmund McMillen said he "had no idea," and publisher Nicalis patched out the generated music on Nov 21. How it got in hasn't been explained.
+💬 Would you still play a game with AI music?
+📤 Send this to the friend who reads every patch note.
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Kotaku, Power Up Gaming, IGN, PC Gamer, Steam. AI narrator.
+
+#thedailytoken #ai #bindingofisaac #aimusic #technews
+```
+
+YouTube Shorts title:
+
+```
+Binding of Isaac update caught with unlabeled AI music (Suno)
+```
+
+YouTube Shorts description:
+
+```
+Binding of Isaac Repentance+ shipped AI music with no Steam AI disclosure 🎵
+A Reddit user found "made with Suno" tags in the new crime mode's songs. Recent Steam reviews sank to 8% positive and Nicalis patched the music out.
+Should games have to label AI music? 👇
+
+Subscribe to @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Kotaku, Power Up Gaming, IGN, PC Gamer, Steam. AI narrator.
+
+#thedailytoken #ai #bindingofisaac #aimusic #technews
+```
+
+Pinned comment (all three platforms):
+
+```
+AI music in games: 🏷️ = fine if labeled, 🚫 = never
+```
+
+Sources:
+- Kotaku: Binding Of Isaac Update Review-Bombed Over AI-Generated Music In GTA 6 Mode https://kotaku.com/binding-of-isaac-update-review-bombed-over-ai-generated-music-in-gta-6-mode-woke-up-to-a-sht-show-obviously-i-had-no-idea-2000759213
+- Power Up Gaming: Binding of Isaac Repentance+ Faces Backlash Over GTA AI Music https://powerupgaming.co.uk/2026/11/21/binding-of-isaacs-gta-6-ai-music/
+- ShiftDelete.Net (citing IGN): Binding of Isaac Dev Pulls Undisclosed AI Music After Steam Backlash https://shiftdelete.net/en/binding-of-isaac-ai-music-removed
+- PC Gamer: Binding of Isaac DLC adds AI music in GTA 6-parodying update despite not having an AI disclosure, Steam reviews drop to Overwhelmingly Negative, music gets pulled https://www.pcgamer.com/games/roguelike/binding-of-isaac-dlc-adds-ai-music-in-gta-6-parodying-update-despite-not-having-an-ai-disclosure-steam-reviews-drop-to-overwhelmingly-negative-music-gets-pulled/
+- Steam store page (Repentance+), checked 2026-11-23: Recent reviews: Overwhelmingly Negative, 8% of 1,788 (last 30 days); no AI disclosure section https://store.steampowered.com/app/3353470/
+- Binding of Isaac Rebirth Wiki: V1.9.7.19 Hotfix (2026-11-21) https://bindingofisaacrebirth.wiki.gg/wiki/V1.9.7.19_Hotfix
+
+- Explainer id: `2026-11-23-explainer-ai-game-music`
+
