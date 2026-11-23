@@ -35,6 +35,10 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   asked for a commit mid-run, so the data was committed on claude/amazing-ride-bfizei first and fast-forwarded into main.
   Known blemishes: zero-day hook spoken in ~3.15-3.45 s; its thumbnail shows the beat-2 desk, not the house; game-music 8%
   figure is a moving 30-day number; voice reported 1-4 clipped samples after normalisation on all three (LUFS fine).
+  Improve: PR #59 merged: speed-limit.js, zero-day-lab.js, review-crash.js, file-dig.js promoted to the scene library with
+  generic defaults (76 library-vs-original still pairs byte-identical; defaults-only stills checked; grep clean of story
+  names). file-dig's `suno`/`sunoCue` params renamed `explain`/`explainCue`. Known quirks kept: zero-day-lab root mode
+  "Fix merged"/"Patched version" pills overlap; speed-limit limit mode walker overlaps a kart.
 - 2026-11-22 (nightly run, Sunday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "AI data centers just pushed Meta's emissions up 45%" (Meta 2026 Sustainability Report + blog Nov 19,
      Trellis, Let's Data Science: 2025 net emissions 11.8M t CO2e (+45%), electricity +35% as data centers came online,
