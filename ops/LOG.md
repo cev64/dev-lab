@@ -2,6 +2,39 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-23 (nightly run, Monday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. (morning) "OpenAI just proposed a speed limit for AI" (OpenAI blog "Perplexity and Intelligence" by chief scientist
+     Jakub Pachocki, Nov 22 + TechCrunch, OfficeChai: perplexity as a shared yardstick; labs commit not to cross a limit
+     "until our ability to understand and monitor AI behavior achieves a certain concrete milestone"; GPT-4 ~0.91 good at
+     chain-of-thought, below 0.8 transformative capabilities in cybersecurity and math; no number, no checker, no rival
+     sign-on). Rubric ~72 (18/12/11/9/17/5). 67.3 s, -14.0 LUFS, style flow, 100% scenes (new: speed-limit.js, 6 modes).
+     Left out: Altman's "most important thing" (TechCrunch only), Reuters (unreachable), Anthropic's pace-the-frontier plan.
+  2. (midday) "Fans caught a hit game using unlabeled AI music" (Binding of Isaac: Repentance+ crime mode, Nov 19 update;
+     Reddit user found "made with suno" metadata; no Steam AI disclosure; recent reviews 8% positive (Steam page, Power Up,
+     IGN via ShiftDelete; Kotaku had 9%); Edmund McMillen verbatim "Obviously I had no idea..."; Nicalis Nov 21 patch
+     "Removal of generated music files"; who put it in unknown; Kotaku, Power Up Gaming, ShiftDelete, PC Gamer headline,
+     Steam, wiki). Rubric ~79 (18/15/12/9/17/8). 64.9 s, -14.0 LUFS, style orb, 100% scenes (new: file-dig.js,
+     crime-mode.js, review-crash.js, creator-post.js). Hook changed by the producer from "secret" to "unlabeled" (intent
+     not established). No game art; McMillen not drawn (faceless post card). Left out: modder credit, "Nicalis's idea".
+  3. (evening) "Hackers' AI found a brand-new flaw in 11 minutes" (AWS Security Blog Nov 20 + The Register, SecurityWeek,
+     The Hacker News, MONAI Label advisory GHSA-qc22-rmgc-vg94: Cairn-based agents given "obtain shell access", path traversal
+     in MONAI Label, ~11 min from mapping the API to writing files, root later via sitecustomize.py, zero-day (high
+     confidence), fix merged / no patched release, 16 h nonstop on another server failed; China-linked per Amazon with
+     moderate confidence, no group named). Rubric ~81 (16/18/14/9/18/6). 69.8 s, -14.0 LUFS, style horizon, 100% scenes
+     (new: zero-day-lab.js; reused agent-swarm.js). Left out: Google GTIG agent-framework report (unverified), CVE/9.8 (THN
+     only), versions, Amazon's triage-speed line (single source).
+  Picks: thin Monday feed (Techmeme-heavy). Skipped: Nvidia/Huang/Bessent (named-person allegations, probes unresolved),
+  OpenRouter drops 3 providers (follow-up to 11-21 canaries; kept as a spare, two security stories in one night is too many),
+  GPT-6.2 vs Fable cost test (single hands-on), Asia AI stock rout (markets, no fresh dated report), DNI "bumps in the road"
+  (no AI link), Oregon v. OpenAI (Nov 17, too old), Simplexity/Arva/Alecto funding.
+  Lead review: claim tables vs scripts and post copy; contact sheets for all three; ffprobe 1080x1920 30 fps.
+  Drive: connector available; no 2026-11-23 titles existed; 3 Google Docs filed (create returned fileSize 1; not re-checked).
+  Timings: `git fetch origin` (all branches) took ~5 min; setup ~3 min, news 16 s, picks ~12 min, producers 14-15 min in
+  parallel, review + delivery ~10 min.
+  Problems: publish-videos.sh 403 at the prune step again; videos/2026-11-23 remote sha matches local (10 files). A stop hook
+  asked for a commit mid-run, so the data was committed on claude/amazing-ride-bfizei first and fast-forwarded into main.
+  Known blemishes: zero-day hook spoken in ~3.15-3.45 s; its thumbnail shows the beat-2 desk, not the house; game-music 8%
+  figure is a moving 30-day number; voice reported 1-4 clipped samples after normalisation on all three (LUFS fine).
 - 2026-11-22 (nightly run, Sunday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "AI data centers just pushed Meta's emissions up 45%" (Meta 2026 Sustainability Report + blog Nov 19,
      Trellis, Let's Data Science: 2025 net emissions 11.8M t CO2e (+45%), electricity +35% as data centers came online,
