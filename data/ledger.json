@@ -2332,6 +2332,38 @@
         "https://bindingofisaacrebirth.wiki.gg/wiki/V1.9.7.19_Hotfix"
       ],
       "video": "out/2026-11-23/2026-11-23-explainer-ai-game-music.mp4"
+    },
+    {
+      "id": "2026-11-24-explainer-claude-ship",
+      "date": "2026-11-24",
+      "hook": "Claude can now approve code changes on its own",
+      "topic": "AI AGENTS",
+      "title": "Anthropic's Claude Ship can approve routine code changes on its own",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://claude.com/resources/articles/introducing-claude-ship",
+        "https://claude.com/product/claude-ship",
+        "https://techcrunch.com/2026/11/23/anthropic-launches-claude-ship-letting-ai-agents-review-fix-and-approve-code-changes/",
+        "https://www.digitaltrends.com/computing/anthropic-claude-ship-code-review/",
+        "https://www.testingcatalog.com/anthropic-launches-claude-ship-to-review-and-approve-prs/"
+      ],
+      "video": "out/2026-11-24/2026-11-24-explainer-claude-ship.mp4"
+    },
+    {
+      "id": "2026-11-24-explainer-ai-mode-wallet",
+      "date": "2026-11-24",
+      "hook": "Google's search AI can now read your Wallet",
+      "topic": "PRIVACY",
+      "title": "Google's search AI can now read your Wallet",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://blog.google/products-and-platforms/products/search/google-search-personal-intelligence-apps/",
+        "https://techcrunch.com/2026/11/23/google-searchs-ai-mode-can-now-tap-into-drive-and-wallet-for-more-personalized-responses/",
+        "https://9to5google.com/2026/11/23/ai-mode-wallet-gemini/"
+      ],
+      "video": "out/2026-11-24/2026-11-24-explainer-ai-mode-wallet.mp4"
     }
   ]
 }
