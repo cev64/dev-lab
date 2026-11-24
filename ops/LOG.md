@@ -36,6 +36,10 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   asked for commits mid-run, so data went to claude/amazing-ride-1bazf6 first and then to main.
   Known blemishes: company-reply.js pills sit behind its quote panel (Grok passed feats: []); a few labels near the safe-area
   edge (Ship numbers board border ~x 53; Wallet tile in AI Mode beat 2); voice reported 1-48 clipped samples (LUFS fine).
+  Improve: PR #61 merged: ship-desk.js, search-wallet.js, blur-machine.js (was grok-suit.js), two-courts.js promoted to the
+  scene library with generic defaults (92 library-vs-original still pairs byte-identical; defaults-only stills checked; grep
+  clean of story names); company-reply.js feature pills moved above the quote panel (were hidden behind it). Quirk kept:
+  company-reply defaults still say "OpenAI spokesperson" (pre-existing).
 - 2026-11-23 (nightly run, Monday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "OpenAI just proposed a speed limit for AI" (OpenAI blog "Perplexity and Intelligence" by chief scientist
      Jakub Pachocki, Nov 22 + TechCrunch, OfficeChai: perplexity as a shared yardstick; labs commit not to cross a limit
