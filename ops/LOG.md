@@ -2,6 +2,40 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-24 (nightly run, Tuesday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. (morning) "Google's search AI can now read your Wallet" (Google Keyword blog Nov 23 + TechCrunch, 9to5Google: opt-in
+     Wallet connection to Personal Intelligence in AI Mode rolling out now; Drive (Docs, Sheets, PDFs) and Gemini app "in the
+     coming weeks"; read-only, "can't move, manage, or invest your money"; Gmail/Calendar/Photos already connectable;
+     Connected Apps toggles, off any time; Personalization icon "soon"). Rubric ~73 (18/16/9/8/17/5). 64.8 s, -14.0 LUFS,
+     style flow, 100% scenes (new: search-wallet.js). Producer corrected the brief: TechCrunch's headline says Drive "now",
+     Google says only Wallet is rolling out now.
+  2. (midday) "Claude can now approve code changes on its own" (Anthropic launch post + product page Nov 23, TechCrunch,
+     Digital Trends, TestingCatalog: beta; review/fix/approve agents; team policy file; docs fix approvable, sensitive code
+     waits for a person; PR Steward "designed not to approve or merge"; Anthropic's own numbers: merged PRs more than doubled
+     June-Sept, share reverted fell by more than 40%; "may miss bugs"; Team + Enterprise on GitHub; observe-only first).
+     Rubric ~77 (18/15/11/9/18/6). 66.8 s, -14.0 LUFS, style neural, 100% scenes (new: ship-desk.js, 7 modes). The Verge
+     and Reuters items in the feed could not be fetched, so not cited.
+  3. (evening) "Two states just sued over Grok's fake nude images" (Virginia AG + Oregon DOJ releases, CNBC, Al Jazeera,
+     CyberScoop, Oregon Capital Chronicle, Decrypt, WA AG: separate suits vs SpaceX (owner of X/xAI), Oregon Sun Nov 22,
+     Virginia Mon Nov 23; first states to sue over Grok; CCDH estimate ~3M sexualized images in 11 days, ~23,000 appeared to
+     depict children (as cited by the states); alleged "spicy mode" promotion and safety claims; Rayfield "a feature, not a
+     bug"; 35 AGs' Jan 23 letter; penalties + injunction (+ restitution VA); SpaceX statement). All accusations worded as
+     allegations; abstract blurred cards, no imagery, no real people. Rubric ~84 (19/20/11/8/18/8). 67.2 s, -14.0 LUFS,
+     style horizon, 100% scenes (new: grok-suit.js, two-courts.js; reused state-complaint, court-asks, company-reply).
+  Picks: thin Tuesday feed dominated by Jensen Huang's return to Nvidia (personal scandal, named-person allegations: skipped).
+  Also skipped: Novartis CEO on AI and cancer ("X says", medical), Muse UK (Muse covered 11-20), OpenRouter removes 3
+  providers (third-party accusation; kept as a spare), Amazon-Decart $7.5B (low stakes), US banks tighten AI-agent controls
+  (Reuters exclusive, single source), OpenAI/Cisco Shirudo (inside baseball), GPT-6.2 Sol chat tweak.
+  Lead review: claim tables vs scripts/post copy; spot-checked the Anthropic post, Google post and CNBC verbatim; contact
+  sheets for all three. Grok's Rayfield quote is only in the two AG releases (first-hand, attributed).
+  Drive: connector available; no 2026-11-24 titles existed; 3 Google Docs filed (create returned fileSize 1 as before).
+  Timings: full `git fetch origin` hung >2 min (killed; fetched main only), setup ~4 min, news 5 s, picks ~8 min, producers
+  11-14 min in parallel, review + delivery ~10 min.
+  Problems: publish-videos.sh 403 at the push/prune step again, but remote videos/2026-11-24 sha matches local (9 files).
+  My delivery-note reorder script dropped the first block; restored it from the WIP commit (checked: 3 blocks). A stop hook
+  asked for commits mid-run, so data went to claude/amazing-ride-1bazf6 first and then to main.
+  Known blemishes: company-reply.js pills sit behind its quote panel (Grok passed feats: []); a few labels near the safe-area
+  edge (Ship numbers board border ~x 53; Wallet tile in AI Mode beat 2); voice reported 1-48 clipped samples (LUFS fine).
 - 2026-11-23 (nightly run, Monday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "OpenAI just proposed a speed limit for AI" (OpenAI blog "Perplexity and Intelligence" by chief scientist
      Jakub Pachocki, Nov 22 + TechCrunch, OfficeChai: perplexity as a shared yardstick; labs commit not to cross a limit

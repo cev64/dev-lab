@@ -2364,6 +2364,26 @@
         "https://9to5google.com/2026/11/23/ai-mode-wallet-gemini/"
       ],
       "video": "out/2026-11-24/2026-11-24-explainer-ai-mode-wallet.mp4"
+    },
+    {
+      "id": "2026-11-24-explainer-grok-deepfake-suit",
+      "date": "2026-11-24",
+      "hook": "Two states just sued over Grok's fake nude images",
+      "topic": "AI LAWSUIT",
+      "title": "Oregon and Virginia sue SpaceX over Grok deepfake images",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.oag.state.va.us/media-center/news-releases/jay-jones/3162-attorneys-general-jones-and-rayfield-file-suit-against-spacex-parent-company-of-x-xai-and-grok-over-creation-and-promotion-of-child-exploitation-and-non-consensual-images-on-platform",
+        "https://www.doj.state.or.us/media-home/news-media-releases/ag-rayfield-takes-legal-action-against-grok-for-failing-to-block-child-exploitation/",
+        "https://www.cnbc.com/2026/11/23/oregon-virginia-spacex-grok-deepfake-lawsuits.html",
+        "https://www.aljazeera.com/economy/2026/11/23/us-states-sue-spacex-over-grok-ais-creation-of-child-sexual-abuse-material",
+        "https://cyberscoop.com/virginia-oregon-sue-spacex-grok-deepfakes/",
+        "https://www.yahoo.com/news/us/articles/oregon-ag-rayfield-sues-elon-205626551.html",
+        "https://decrypt.co/355543/grok-generated-23k-sexualized-images-children-watchdog-reports",
+        "https://www.atg.wa.gov/news/news-releases/ag-brown-joins-bipartisan-group-demanding-xai-halt-creation-nonconsensual-sexual"
+      ],
+      "video": "out/2026-11-24/2026-11-24-explainer-grok-deepfake-suit.mp4"
     }
   ]
 }
