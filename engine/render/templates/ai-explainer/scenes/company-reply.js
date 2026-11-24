@@ -1,6 +1,6 @@
 // Scene "company-reply" (full frame, 1 beat). Dusk city street: a generic company tower (name as a text pill at its
 // base, no logo). A verbatim quote panel types in ("<who>" + quote), a shield with a check rises in front of the tower,
-// feature pills pop on their cues. Then the caveat: everything dims and a card lands with a level balance scale,
+// feature pills pop on their cues (above the quote panel). Then the caveat: everything dims and a card lands with a level balance scale,
 // "These are allegations" / "Not proven in court".
 // Fits: a company's response to a lawsuit / regulator, followed by an "allegations, not findings" caveat.
 // params: company ("OpenAI"), by ("OpenAI spokesperson"), quote ("industry-leading age-specific protections"),
@@ -36,12 +36,6 @@ export default function draw(ctx, t, info) {
     K.glow(ctx, 487, 900, 170, ACC, 0.35 * sk);
     K.drawShield(ctx, 487, 990 + rise, 1.25 * Math.min(1.05, sk), { check: clamp((t - tSh - 0.35) / 0.4) });
   }
-  // feature pills
-  const fx = Array.isArray(P.featX) && P.featX.length >= 2 ? P.featX : [255, 720];
-  feats.forEach((f, i) => {
-    const k = K.popIn(t, tF[i], 0.4);
-    if (k > 0) K.drawLabel(ctx, fx[i], 705 + K.bob(t, 4, 1.5, i), Math.min(1.05, k), { text: f.text, size: 30, dot: true });
-  });
   // quote panel (types in)
   const qk = K.popIn(t, tQ, 0.45);
   if (qk > 0) {
@@ -60,6 +54,13 @@ export default function draw(ctx, t, info) {
     lines.forEach((ln, j) => { const part = ln.slice(0, Math.max(0, left)); left -= ln.length + 1; ctx.fillText(part, 0 - (ctx.measureText(ln).width - ctx.measureText(part).width) / 2, y0 + j * lh); });
     ctx.restore();
   }
+  // feature pills: just above the quote panel (its top edge is y ~516 at full pop), drawn after it so they never sit
+  // underneath (they used to be at y 705, inside the panel's 520-710 band)
+  const fx = Array.isArray(P.featX) && P.featX.length >= 2 ? P.featX : [255, 720];
+  feats.forEach((f, i) => {
+    const k = K.popIn(t, tF[i], 0.4);
+    if (k > 0) K.drawLabel(ctx, fx[i], 500 + K.bob(t, 4, 1.5, i), Math.min(1.05, k), { text: f.text, size: 30, dot: true });
+  });
   ctx.restore();
 
   // caveat card
