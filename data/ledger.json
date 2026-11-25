@@ -2384,6 +2384,56 @@
         "https://www.atg.wa.gov/news/news-releases/ag-brown-joins-bipartisan-group-demanding-xai-halt-creation-nonconsensual-sexual"
       ],
       "video": "out/2026-11-24/2026-11-24-explainer-grok-deepfake-suit.mp4"
+    },
+    {
+      "id": "2026-11-25-explainer-siren-honeypot",
+      "date": "2026-11-25",
+      "hook": "Anthropic left a password just outside its AI's sandbox",
+      "topic": "AI SAFETY",
+      "title": "Anthropic left a password just outside its AI's sandbox",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://safeguards.anthropic.com/2026/siren/",
+        "https://www.wired.com/story/ai-agents-can-get-honeypotted-too-aw/"
+      ],
+      "video": "out/2026-11-25/2026-11-25-explainer-siren-honeypot.mp4"
+    },
+    {
+      "id": "2026-11-25-explainer-tidal-ai-ban",
+      "date": "2026-11-25",
+      "hook": "Tidal will delete 29 million AI songs",
+      "topic": "AI MUSIC",
+      "title": "Tidal will delete 29 million AI songs",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.hollywoodreporter.com/music/music-industry-news/tidal-bans-wholly-ai-generated-music-1236762171/",
+        "https://www.theverge.com/entertainment/1041362/tidal-ai-music-ban",
+        "https://techcrunch.com/2026/11/24/tidal-to-ban-and-remove-millions-of-ai-generated-tracks-as-ai-slop-inundates-music-streaming/",
+        "https://arstechnica.com/ai/2026/11/tidal-will-ban-fully-ai-generated-music-on-december-9/",
+        "https://www.engadget.com/2326812/tidal-is-banning-ai-generated-music-entirely/",
+        "https://www.yahoo.com/entertainment/music/articles/tidal-draws-line-ai-generated-165335939.html",
+        "https://www.ibtimes.co.uk/tidal-ai-music-crackdown-false-positives-1834562",
+        "https://techcrunch.com/2026/06/29/tidal-cracks-down-on-ai-music-by-cutting-off-monetization/"
+      ],
+      "video": "out/2026-11-25/2026-11-25-explainer-tidal-ai-ban.mp4"
+    },
+    {
+      "id": "2026-11-25-explainer-muse-walmart",
+      "date": "2026-11-25",
+      "hook": "Meta's AI can now buy Walmart's Black Friday deals",
+      "topic": "AI SHOPPING",
+      "title": "Meta's AI agent Muse can now shop Walmart's Black Friday deals",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://corporate.walmart.com/news/2026/11/black-friday-deals-with-meta-muse",
+        "https://techcrunch.com/2026/11/24/walmart-teams-up-with-meta-to-bring-black-friday-deals-to-ai-agent-muse/",
+        "https://ppc.land/metas-muse-ai-can-now-shop-at-walmart-but-walmart-picks-the-products/",
+        "https://digitaltrends.com/computing/amazon-is-saying-bye-bye-to-muse-while-walmart-is-rolling-out-the-welcome-mat-for-metas-shopping-agent"
+      ],
+      "video": "out/2026-11-25/2026-11-25-explainer-muse-walmart.mp4"
     }
   ]
 }
