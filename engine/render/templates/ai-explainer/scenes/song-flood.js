@@ -3,7 +3,8 @@
 // big number counts up with a line under it; at the half cue a split bar fills past the middle with a share label.
 // Fits: "X AI-made songs/apps/posts a day", floods of AI content, upload volume stats.
 // params: source ("Deezer, Oct 13, 2026"), prefix ("Nearly"), value (90000), unit ("fully AI tracks a day"),
-//         share (">50%"), shareFill (0.55), shareLabel ("of new music on peak days"), aiShare (0.75 of cards)
+//         suffix ('' ; e.g. "%" to show "43%"; added 2026-11-25), step (count rounding; default 100, or 1 when
+//         value < 1000), share (">50%"), shareFill (0.55), shareLabel ("of new music on peak days"), aiShare (0.75 of cards)
 //         cues: srcCue (Deezer), countCue (ninety), halfCue (half)
 export default function draw(ctx, t, info) {
   const H = info.helpers, K = H.kit, P = info.params || {};
@@ -56,9 +57,10 @@ export default function draw(ctx, t, info) {
     H.roundRect(ctx, -330, -100, 660, 200, 30); ctx.fillStyle = 'rgba(10,12,22,0.86)'; ctx.fill();
     ctx.font = K.font.ui(28); ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = 'rgba(255,255,255,0.75)';
     ctx.fillText(P.prefix || 'Nearly', 0, -66);
-    const v = Math.round((P.value || 90000) * easeOutCubic(clamp((t - tCount) / 1.3)) / 100) * 100;
+    const V = P.value || 90000, step = P.step || (V < 1000 ? 1 : 100);
+    const v = Math.round(V * easeOutCubic(clamp((t - tCount) / 1.3)) / step) * step;
     ctx.font = K.font.display(104); ctx.fillStyle = ACC;
-    ctx.fillText(v.toLocaleString('en-US'), 0, 6);
+    ctx.fillText(v.toLocaleString('en-US') + (P.suffix || ''), 0, 6);
     ctx.font = K.font.ui(28); ctx.fillStyle = '#ffffff'; ctx.fillText(P.unit || 'fully AI tracks a day', 0, 74);
     ctx.restore();
   }
