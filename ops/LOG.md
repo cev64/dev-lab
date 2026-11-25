@@ -34,6 +34,11 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   for a commit mid-run, so data went to claude/amazing-ride-o9oabd first. Voice reported 1-10 clipped samples (LUFS fine).
   Known blemishes: Siren cold-open sandbox frame touches the left edge after the zoom; Tidal caveat "OUT" tag sits low (~y 1000,
   inside safe area).
+  Improve: PR #62 merged: honeypot-lab.js, bait-scoreboard.js, ai-purge.js, chat-checkout.js (was muse-shop.js) promoted to
+  the scene library with generic defaults (91 library-vs-original still pairs byte-identical; defaults-only stills checked;
+  grep clean of story names); song-flood.js gains suffix/step params; two-doors.js layout fix (vs chip below the header,
+  agent pill inside the left edge). There was no older script to compare two-doors against. Quirk kept: song-flood defaults
+  still say "Deezer".
 - 2026-11-24 (nightly run, Tuesday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "Google's search AI can now read your Wallet" (Google Keyword blog Nov 23 + TechCrunch, 9to5Google: opt-in
      Wallet connection to Personal Intelligence in AI Mode rolling out now; Drive (Docs, Sheets, PDFs) and Gemini app "in the
