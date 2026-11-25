@@ -2,6 +2,8 @@
 // logos). Right: doors open, a glowing mat, little agent robots stroll in one after another. Left: on shutCue its doors
 // slam shut, a doorman's hand goes up and a BLOCKED cross stamp lands; agent robots walking to it bounce off. On nameCue
 // the bounced robot's pill renames (e.g. a named agent). A "vs" chip sits between the stores; an optional caption pill.
+// 2026-11-25: vs chip and caption moved below the v2 header (y >= 500), agent pill kept inside x >= 210, camera
+// centred (the template already zooms); caption pill now has a dot + accent.
 // Fits: "store A blocks AI agents while store B lets them in", any open-vs-closed comparison of two companies.
 // params: left ("Store A"), right ("Store B"), leftSign ("SHOP"), rightSign ("SHOP"), stamp ("BLOCKED"),
 //         agent ("Outside agents"), named ("" keeps agent), vs ("vs"), caption ("" hides)
@@ -17,7 +19,7 @@ export default function draw(ctx, t, info) {
   const tCap = at(P.captionCue, D * 0.6) - 0.2;
   const danger = '#ff6b5e', feet = 1030;
 
-  K.camera(ctx, t, [{ t: 0, zoom: 1.0 }, { t: tShut, zoom: 1.04, x: 400, y: 770 }, { t: D, zoom: 1.03, x: 480, y: 770 }]);
+  K.camera(ctx, t, [{ t: 0, zoom: 1.0, x: 487, y: 725 }, { t: D, zoom: 1.03, x: 487, y: 725 }]); // v2 (2026-11-25): centred, the template already zooms
   K.world.city(ctx, { t, time: 'dusk', groundY: 1000 });
 
   function store(x0, x1, body, stripe, sign, doorX, openAmt) {
@@ -74,7 +76,7 @@ export default function draw(ctx, t, info) {
     if (i === 0) {
       const renamed = P.named && t > tName;
       const pk = K.popIn(t, 0.25, 0.4) * (renamed ? Math.min(1.08, 0.7 + 0.3 * K.popIn(t, tName, 0.4)) : 1);
-      K.drawLabel(ctx, Math.max(130, x), 800, Math.min(1.08, pk), { text: renamed ? P.named : (P.agent || 'Outside agents'), size: 26, dot: true, accent: !!renamed });
+      K.drawLabel(ctx, Math.max(300, x), 800, Math.min(1.08, pk), { text: renamed ? P.named : (P.agent || 'Outside agents'), size: 26, dot: true, accent: !!renamed });
     }
   }
   // stamp on the left doors
@@ -89,11 +91,11 @@ export default function draw(ctx, t, info) {
   // vs chip
   const vk = K.popIn(t, tVs, 0.4);
   if (vk > 0) {
-    ctx.save(); ctx.translate(495, 500); ctx.scale(vk * (1 + 0.04 * Math.sin(t * 4)), vk * (1 + 0.04 * Math.sin(t * 4)));
+    ctx.save(); ctx.translate(495, 585); ctx.scale(vk * (1 + 0.04 * Math.sin(t * 4)), vk * (1 + 0.04 * Math.sin(t * 4)));
     ctx.fillStyle = '#0e101c'; ctx.beginPath(); ctx.arc(0, 0, 46, 0, Math.PI * 2); ctx.fill();
     ctx.lineWidth = 4; ctx.strokeStyle = ACC; ctx.stroke();
     ctx.font = H.font('display', 36); ctx.fillStyle = ACC; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(P.vs || 'vs', 0, 2);
     ctx.restore();
   }
-  if (P.caption) { const ck = K.popIn(t, tCap, 0.4); if (ck > 0) K.drawLabel(ctx, 487, 460, Math.min(1.05, ck), { text: P.caption, size: 28 }); }
+  if (P.caption) { const ck = K.popIn(t, tCap, 0.4); if (ck > 0) K.drawLabel(ctx, 487, 500, Math.min(1.05, ck), { text: P.caption, size: 28, dot: true, accent: true }); }
 }
