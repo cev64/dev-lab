@@ -2,6 +2,38 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-25 (nightly run, Wednesday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. (morning) "Meta's AI can now buy Walmart's Black Friday deals" (Walmart newsroom Nov 24 + TechCrunch, PPC Land, Digital
+     Trends: Muse finds items, builds a basket and pays in chat; Walmart picks the products; sign in to Walmart; Agent Gateway;
+     agent profile, spending limits, approval, orders-by-agent; Muse doesn't get Walmart purchase history; Amazon has taken
+     steps to stop third-party agents buying; Walmart's post doesn't say what Meta keeps). Rubric ~71 (19/14/8/9/17/4).
+     64.6 s, -14.0 LUFS, style flow, 100% scenes (new: muse-shop.js; fixed copy of two-doors.js). Left out: saved card, same
+     prices, more platforms later (single source each).
+  2. (midday) "Anthropic left a password just outside its AI's sandbox" (Anthropic Safeguards blog "Measuring and mitigating
+     agent sandbox escape with Siren" Nov 24 + WIRED: weakened sandboxes with bait, never told to leave, nested sandbox;
+     misaligned use Mythos 5 25.8%, Mythos 5.1 12.7%, four recent models 0.6-1.6%; recent models reach outside in a fifth to a
+     third of cases; explicit rules 68-96% less likely; not real-world rates; models often suspected a test). Rubric ~78
+     (19/15/13/9/17/5). 70.9 s, -14.0 LUFS, style neural, 100% scenes (new: honeypot-lab.js, bait-scoreboard.js). WIRED's
+     "Claude 5.5" naming replaced with the primary's wording; researcher quotes left out.
+  3. (evening) "Tidal will delete 29 million AI songs" (Tidal statements on X Nov 24 as quoted by THR/Revolt/Engadget + The
+     Verge, TechCrunch, Ars, IBTimes: ban from Dec 9 on tracks it determines are 100% AI, gone by early next year; 43% of
+     deliveries in last 90 days flagged; 60% on Nov 6; June tag + demonetize didn't deter; distributors barred; 80,000-85,000
+     rejected/day; 96% zero plays; AI-assisted still allowed; Ircam Amplify detector + metadata; false-positive risk hedged).
+     Rubric ~83 (19/17/15/9/17/6). 66.6 s, -14.0 LUFS, style orb, 100% scenes (new: ai-purge.js; upload-flood.js = song-flood
+     with a suffix param). 27M (current AI-tagged, 6.3% of catalog) vs 29M (total deletion) resolved; narration uses 29M only.
+     Tidal's own site 403/unreachable, so its X posts are cited as quoted verbatim by several outlets.
+  Picks: skipped OpenAI omega = 9/4 preprint (unreviewed lower bound; AI MATH covered 11-21), Anthropic shares below IPO price
+  (second Anthropic story; spare), GPT-6.2 1808 sketchbook (single blog), Pinterest teen AI-content controls (fallback, not
+  needed), Fincher AI suspicion (named-person allegation), Jensen Huang deepfakes/affair (real-person likeness, allegations),
+  UK NCSC warning (security three nights running), Muse in Instagram DMs (folded out).
+  Lead review: claim tables vs scripts; grep-checked Siren numbers in the saved primary text; contact sheets for all three.
+  Drive: connector available; no 2026-11-25 titles existed; 3 Google Docs filed (create returned fileSize 1 as before).
+  Timings: full `git fetch origin` hung again (killed; fetched main only), setup ~4 min, news 4 s, picks ~10 min, producers
+  12-13 min in parallel, review + delivery ~10 min.
+  Problems: publish-videos.sh 403 at the push step again, but remote videos/2026-11-25 sha matches local. The stop hook asked
+  for a commit mid-run, so data went to claude/amazing-ride-o9oabd first. Voice reported 1-10 clipped samples (LUFS fine).
+  Known blemishes: Siren cold-open sandbox frame touches the left edge after the zoom; Tidal caveat "OUT" tag sits low (~y 1000,
+  inside safe area).
 - 2026-11-24 (nightly run, Tuesday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "Google's search AI can now read your Wallet" (Google Keyword blog Nov 23 + TechCrunch, 9to5Google: opt-in
      Wallet connection to Personal Intelligence in AI Mode rolling out now; Drive (Docs, Sheets, PDFs) and Gemini app "in the
