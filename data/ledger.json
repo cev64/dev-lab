@@ -2434,6 +2434,22 @@
         "https://digitaltrends.com/computing/amazon-is-saying-bye-bye-to-muse-while-walmart-is-rolling-out-the-welcome-mat-for-metas-shopping-agent"
       ],
       "video": "out/2026-11-25/2026-11-25-explainer-muse-walmart.mp4"
+    },
+    {
+      "id": "2026-11-26-explainer-talkie-pulled",
+      "date": "2026-11-26",
+      "hook": "Apple just pulled a hit AI companion app worldwide",
+      "topic": "AI APPS",
+      "title": "Apple pulls MiniMax's Talkie AI companion app worldwide",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://whbl.com/2026/11/25/apple-pulls-minimax-ai-chatbot-from-app-store-over-child-safety-concerns/",
+        "https://www.scmp.com/tech/tech-trends/article/3375791/minimax-chatbot-talkie-removed-apple-app-store-over-alleged-sexual-content",
+        "https://www.abc.net.au/news/2026-11-25/chinese-ai-companion-app-talkie-child-harm-allegations/107416128",
+        "https://9to5mac.com/2026/11/25/apple-pulls-popular-chinese-ai-chatbot-from-the-app-store-amid-child-safety-concerns/"
+      ],
+      "video": "out/2026-11-26/2026-11-26-explainer-talkie-pulled.mp4"
     }
   ]
 }
