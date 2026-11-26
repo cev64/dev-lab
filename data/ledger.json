@@ -2450,6 +2450,39 @@
         "https://9to5mac.com/2026/11/25/apple-pulls-popular-chinese-ai-chatbot-from-the-app-store-amid-child-safety-concerns/"
       ],
       "video": "out/2026-11-26/2026-11-26-explainer-talkie-pulled.mp4"
+    },
+    {
+      "id": "2026-11-26-explainer-orbit-datacenters",
+      "date": "2026-11-26",
+      "hook": "The FCC cleared a million AI data centers overhead",
+      "topic": "SPACE",
+      "title": "FCC clears SpaceX's Starmind: up to a million AI data-center satellites",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf",
+        "https://siliconangle.com/2026/11/25/fcc-clears-spacex-to-put-up-to-1-million-starmind-data-centers-in-space/",
+        "https://newatlas.com/space-systems/fcc-greenlight-spacex-million-orbital-data-center-constellation",
+        "https://www.foxbusiness.com/politics/data-centers-space-fcc-clears-spacex-1m-satellites-extend-americas-lead-superintelligence"
+      ],
+      "video": "out/2026-11-26/2026-11-26-explainer-orbit-datacenters.mp4"
+    },
+    {
+      "id": "2026-11-26-explainer-ny-ai-toys",
+      "date": "2026-11-26",
+      "hook": "New York just banned toys with AI chatbots inside",
+      "topic": "AI TOYS",
+      "title": "New York bans AI chatbot toys for five years",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.governor.ny.gov/news/consumers-begin-their-holiday-shopping-season-governor-hochul-signs-five-year-ban-ai-chatbot",
+        "https://techcrunch.com/2026/11/25/want-to-buy-your-kid-an-ai-toy-this-christmas-not-in-new-york/",
+        "https://www.nbcnews.com/tech/tech-news/new-york-governor-kathy-hochul-sign-ai-toy-ban-law-rcna610962",
+        "https://local12.com/news/nation-world/gov-hochul-signs-five-year-ban-on-ai-chatbot-toys-in-new-york-chatgpt-child-safety-law-attorney-general-letitia-james-minors-foster-emotional-dependency-s9408a/a11144b-legislation-animals-hold-conversations-dangerous-cbs6-wrgb",
+        "https://about.commonsensemedia.org/press-room/press-releases/common-sense-media-finds-popular-ai-toys-fail-safety-checks"
+      ],
+      "video": "out/2026-11-26/2026-11-26-explainer-ny-ai-toys.mp4"
     }
   ]
 }
