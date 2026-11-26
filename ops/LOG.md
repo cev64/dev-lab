@@ -35,6 +35,10 @@ Newest first. One entry per nightly run: date, stories, videos delivered (hooks 
   asked for commits mid-run, so data went to claude/amazing-ride-u3chdf first. Voice reported 1-8 clipped samples (LUFS fine).
   Known blemishes: Toys beat 3 opens on ~1.5 s of city + AG pill before the fine ticket pops; Talkie hook runs 3.4 s; Talkie
   shop sign says "App Store" as plain text (no logo).
+  Improve: PR #63 merged: app-pulled.js (was talkie-pull.js), orbit-datacenters.js (was starmind-sky.js), toy-shelf.js
+  promoted to the scene library with generic defaults (96 library-vs-original still pairs byte-identical; defaults-only
+  stills checked; grep clean of story names); app-pulled draws its pctSub pill only when passed. Quirk kept: toy-shelf chat
+  mode's top pill sits near the top crop late in the beat (same as the original).
 - 2026-11-25 (nightly run, Wednesday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "Meta's AI can now buy Walmart's Black Friday deals" (Walmart newsroom Nov 24 + TechCrunch, PPC Land, Digital
      Trends: Muse finds items, builds a basket and pays in chat; Walmart picks the products; sign in to Walmart; Agent Gateway;
