@@ -1,0 +1,221 @@
+# Deliveries 2026-11-26
+
+**Posting order:** morning (~8am ET) Apple pulls Talkie ("Apple just pulled a hit AI companion app worldwide") ·
+midday (~12pm) FCC clears SpaceX's Starmind ("The FCC cleared a million AI data centers overhead") ·
+evening (~6-9pm) New York's AI-toy ban ("New York just banned toys with AI chatbots inside").
+Switch ON the platform's AI-generated content label on every post (synthetic narrator).
+Why this order: the AI-toy ban is about kids and Christmas gifts, a few weeks before the holidays. It is something a parent
+would retell tonight, so it gets the evening slot. Starmind has the biggest number (a million satellites) and the sky over
+everyone, so it goes at midday. The Talkie removal is also a kids-safety story, so it goes in the morning, as far from the toys
+post as the day allows.
+
+## Explainer: Apple pulls MiniMax's Talkie AI companion app worldwide
+
+**Hook:** Apple just pulled a hit AI companion app worldwide  
+**Video:** `out/2026-11-26/2026-11-26-explainer-talkie-pulled.mp4` (64.8 s)  
+**Cover text:** Apple pulled this AI app worldwide  
+**Thumbnail:** `out/2026-11-26/2026-11-26-explainer-talkie-pulled.thumbnail.png` (upload it as the cover when posting)  
+**Format:** v2 (log it in ops/PERFORMANCE.md with the numbers)
+
+Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info; YouTube: Altered or synthetic content = Yes). After posting: post the pinned comment from the channel account and pin it; reply to comments in the first hour.
+
+TikTok description (paste as is):
+
+```
+Apple removed MiniMax's AI companion app Talkie from the App Store worldwide 📵
+Apple gave sexual content as the reason. It came after ABC News and the Bureau of Investigative Journalism reported Talkie's AI characters sent sexual and abusive messages to kids. The app is rated 18+, but users self-report their age.
+Should AI companion apps have to really check your age? 👇
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Reuters, South China Morning Post, ABC News (Australia), 9to5Mac. AI narrator.
+
+#thedailytoken #ai #aicompanion #appstore #technews
+```
+
+Instagram Reels caption (paste as is):
+
+```
+Apple just pulled the AI companion app Talkie from the App Store in every country 📵
+Apple's stated reason: sexual content. ABC News and the Bureau of Investigative Journalism had reported that Talkie's AI characters sent sexual and abusive messages to kids. The app is rated 18+ on both big app stores, but critics say the age check is weak because users type in their own age. MiniMax didn't respond to requests for comment.
+💬 Should AI companion apps have to really check your age?
+📤 Send this to a parent who should know about AI companion apps.
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Reuters, South China Morning Post, ABC News (Australia), 9to5Mac. AI narrator.
+
+#thedailytoken #ai #aicompanion #appstore #technews
+```
+
+YouTube Shorts title:
+
+```
+Apple pulls MiniMax's AI app Talkie from the App Store worldwide
+```
+
+YouTube Shorts description:
+
+```
+Apple removed MiniMax's AI companion app Talkie from the App Store worldwide 📵
+Apple gave sexual content as the reason. It came after ABC News and the Bureau of Investigative Journalism reported Talkie's AI characters sent sexual and abusive messages to kids. The app is rated 18+, but users self-report their age.
+Should AI companion apps have to really check your age? 👇
+
+Subscribe to @thedaily_token for AI news, animated. 3 stories a day.
+Sources: Reuters, South China Morning Post, ABC News (Australia), 9to5Mac. AI narrator.
+
+#thedailytoken #ai #aicompanion #appstore #technews
+```
+
+Pinned comment (all three platforms):
+
+```
+Real age checks for AI companion apps? 🔒 = yes, check IDs · 🙋 = no, trust users
+```
+
+Sources:
+- Reuters: Apple pulls MiniMax AI chatbot from App Store over child safety concerns https://whbl.com/2026/11/25/apple-pulls-minimax-ai-chatbot-from-app-store-over-child-safety-concerns/
+- South China Morning Post: MiniMax chatbot Talkie removed from Apple App Store over alleged sexual content https://www.scmp.com/tech/tech-trends/article/3375791/minimax-chatbot-talkie-removed-apple-app-store-over-alleged-sexual-content
+- ABC News (Australia): Inside the Chinese AI app Talkie engineered to hook kids and mine their data https://www.abc.net.au/news/2026-11-25/chinese-ai-companion-app-talkie-child-harm-allegations/107416128
+- 9to5Mac: Apple pulls Chinese AI chatbot from the App Store amid child safety concerns https://9to5mac.com/2026/11/25/apple-pulls-popular-chinese-ai-chatbot-from-the-app-store-amid-child-safety-concerns/
+
+- Explainer id: `2026-11-26-explainer-talkie-pulled`
+
+## Explainer: FCC clears SpaceX's Starmind: up to a million AI data-center satellites
+
+**Hook:** The FCC cleared a million AI data centers overhead  
+**Video:** `out/2026-11-26/2026-11-26-explainer-orbit-datacenters.mp4` (65.5 s)  
+**Cover text:** A million AI data centers overhead  
+**Thumbnail:** `out/2026-11-26/2026-11-26-explainer-orbit-datacenters.thumbnail.png` (upload it as the cover when posting)  
+**Format:** v2 (log it in ops/PERFORMANCE.md with the numbers)
+
+Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info; YouTube: Altered or synthetic content = Yes). After posting: post the pinned comment from the channel account and pin it; reply to comments in the first hour.
+
+TikTok description (paste as is):
+
+```
+The FCC just cleared SpaceX's Starmind: up to a million AI data center satellites 🛰️
+The license runs on deadlines: the first satellite by 2033, 100,000 by 2035 and all of them by 2040. Astronomers, Amazon and Viasat tried to block it; the FCC rejected all three.
+Would you trade a busier sky for more AI? 👇
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: FCC, SiliconANGLE, New Atlas, Fox Business. AI narrator.
+
+#thedailytoken #ai #spacex #datacenters #technews
+```
+
+Instagram Reels caption (paste as is):
+
+```
+The FCC just cleared SpaceX's Starmind: up to a million satellites that work as AI data centers 🛰️
+The FCC's Space Bureau approved it on Nov 25 with deadlines: one satellite by 2033, 100,000 by 2035, all of them by 2040, or the license is void. Astronomers warned the waste heat could brighten the infrared sky; the FCC said that falls outside a radio license and rejected their challenge, along with Amazon's and Viasat's. Satellites above 600 km still need a final debris plan first.
+💬 Would you trade a busier sky for more AI?
+📤 Send this to the friend who always points out satellites at night.
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: FCC, SiliconANGLE, New Atlas, Fox Business. AI narrator.
+
+#thedailytoken #ai #spacex #datacenters #technews
+```
+
+YouTube Shorts title:
+
+```
+FCC clears SpaceX Starmind: 1 million AI data center satellites
+```
+
+YouTube Shorts description:
+
+```
+The FCC just cleared SpaceX's Starmind: up to a million AI data center satellites 🛰️
+The license runs on deadlines: the first satellite by 2033, 100,000 by 2035 and all of them by 2040. Astronomers, Amazon and Viasat tried to block it; the FCC rejected all three.
+Would you trade a busier sky for more AI? 👇
+
+Subscribe to @thedaily_token for AI news, animated. 3 stories a day.
+Sources: FCC, SiliconANGLE, New Atlas, Fox Business. AI narrator.
+
+#thedailytoken #ai #spacex #datacenters #technews
+```
+
+Pinned comment (all three platforms):
+
+```
+🛰️ = worth it for more AI, 🌌 = keep the sky clear
+```
+
+Sources:
+- FCC: Memorandum Opinion and Order and Authorization, SpaceX Orbital Data Center System (Starmind), DA 26-1273 https://docs.fcc.gov/public/attachments/DA-26-1273A1.pdf
+- SiliconANGLE: FCC clears SpaceX to put up to 1 million Starmind data centers in space https://siliconangle.com/2026/11/25/fcc-clears-spacex-to-put-up-to-1-million-starmind-data-centers-in-space/
+- New Atlas: FCC greenlights SpaceX's million-strong orbital data center constellation https://newatlas.com/space-systems/fcc-greenlight-spacex-million-orbital-data-center-constellation
+- Fox Business: 'Data centers in space': FCC clears SpaceX for 1M satellites https://www.foxbusiness.com/politics/data-centers-space-fcc-clears-spacex-1m-satellites-extend-americas-lead-superintelligence
+
+- Explainer id: `2026-11-26-explainer-orbit-datacenters`
+
+## Explainer: New York bans AI chatbot toys for five years
+
+**Hook:** New York just banned toys with AI chatbots inside  
+**Video:** `out/2026-11-26/2026-11-26-explainer-ny-ai-toys.mp4` (63.5 s)  
+**Cover text:** New York just banned AI chatbot toys  
+**Thumbnail:** `out/2026-11-26/2026-11-26-explainer-ny-ai-toys.thumbnail.png` (upload it as the cover when posting)  
+**Format:** v2 (log it in ops/PERFORMANCE.md with the numbers)
+
+Before posting: switch ON the AI-generated content label (TikTok: AI-generated content; Instagram: AI info; YouTube: Altered or synthetic content = Yes). After posting: post the pinned comment from the channel account and pin it; reply to comments in the first hour.
+
+TikTok description (paste as is):
+
+```
+New York just banned AI chatbot toys for kids for five years 🧸
+Governor Hochul signed a ban on making, selling and distributing toys with built-in AI chatbots, like talking teddy bears, dolls and robots. Fines go up to $15,000 a day per violation, but the ban only starts 90 days after signing, in February.
+Would you buy your kid an AI toy? 👇
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: NY Governor's office, TechCrunch, NBC News, CBS6, Common Sense Media. AI narrator.
+
+#thedailytoken #ai #aitoys #parenting #technews
+```
+
+Instagram Reels caption (paste as is):
+
+```
+New York just banned toys with AI chatbots inside 🧸
+Governor Hochul signed a five-year ban on making, selling and distributing toys with built-in AI chatbots: talking teddy bears, dolls and robots that chat with kids online. The attorney general enforces it, with civil penalties up to $15,000 a day for each violation. The same week, Common Sense Media said all five AI toys it tested claimed they loved their users, and most promised to keep secrets. The ban starts 90 days after signing, in February.
+💬 Would you buy your kid an AI toy?
+📤 Send this to the parent still doing their holiday shopping.
+
+Follow @thedaily_token for AI news, animated. 3 stories a day.
+Sources: NY Governor's office, TechCrunch, NBC News, CBS6, Common Sense Media. AI narrator.
+
+#thedailytoken #ai #aitoys #parenting #technews
+```
+
+YouTube Shorts title:
+
+```
+New York bans AI chatbot toys for 5 years: what parents should know
+```
+
+YouTube Shorts description:
+
+```
+New York just banned AI chatbot toys for kids for five years 🧸
+Governor Hochul signed a ban on making, selling and distributing toys with built-in AI chatbots, like talking teddy bears, dolls and robots. Fines go up to $15,000 a day per violation, but the ban only starts 90 days after signing, in February.
+Would you buy your kid an AI toy? 👇
+
+Subscribe to @thedaily_token for AI news, animated. 3 stories a day.
+Sources: NY Governor's office, TechCrunch, NBC News, CBS6, Common Sense Media. AI narrator.
+
+#thedailytoken #ai #aitoys #parenting #technews
+```
+
+Pinned comment (all three platforms):
+
+```
+Would you give your kid a toy with an AI chatbot inside? 🧸 = sure, 🚫 = no way
+```
+
+Sources:
+- Office of the Governor of New York: As Consumers Begin Their Holiday Shopping Season, Governor Hochul Signs Five-Year Ban on AI Chatbot Toys (Nov 24, 2026) https://www.governor.ny.gov/news/consumers-begin-their-holiday-shopping-season-governor-hochul-signs-five-year-ban-ai-chatbot
+- TechCrunch: Want to buy your kid an AI toy this Christmas? Not in New York https://techcrunch.com/2026/11/25/want-to-buy-your-kid-an-ai-toy-this-christmas-not-in-new-york/
+- NBC News: New York governor Kathy Hochul signs AI toy ban into law https://www.nbcnews.com/tech/tech-news/new-york-governor-kathy-hochul-sign-ai-toy-ban-law-rcna610962
+- CBS6 WRGB / Sinclair (local12.com): Gov. Hochul signs five-year ban on AI chatbot toys in New York https://local12.com/news/nation-world/gov-hochul-signs-five-year-ban-on-ai-chatbot-toys-in-new-york-chatgpt-child-safety-law-attorney-general-letitia-james-minors-foster-emotional-dependency-s9408a/a11144b-legislation-animals-hold-conversations-dangerous-cbs6-wrgb
+- Common Sense Media: Common Sense Media Finds Popular AI Toys Fail Safety Checks (Nov 24, 2026) https://about.commonsensemedia.org/press-room/press-releases/common-sense-media-finds-popular-ai-toys-fail-safety-checks
+
+- Explainer id: `2026-11-26-explainer-ny-ai-toys`
