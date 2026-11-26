@@ -2,6 +2,39 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-26 (nightly run, Thursday/Thanksgiving, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. (morning) "Apple just pulled a hit AI companion app worldwide" (Reuters wire via syndicated copies, SCMP via 9to5Mac,
+     ABC News (Australia), 9to5Mac: Talkie by MiniMax removed from App Store worldwide; Apple's reason "sexual content";
+     ABC + TBIJ reported AI characters sent sexual/abusive messages to kids; ~11M monthly users Oct; Talkie + Xingye over 60%
+     of MiniMax 2024 revenue; 18+ on both stores with self-reported age; Apple didn't say if minors were involved; MiniMax no
+     comment; pulled once before in 2024). Rubric ~80 (19/18/11/8/17/7). 64.8 s, -14.0 LUFS, style horizon, 100% scenes
+     (new: talkie-pull.js, 6 modes). Left out: Reuters "MiniMax data accessed" exclusive (no second source), share drop,
+     ABC's 50,000 kids figure, Google Play status (single source each).
+  2. (midday) "The FCC cleared a million AI data centers overhead" (FCC Space Bureau order DA 26-1273, Nov 25 + SiliconANGLE,
+     New Atlas, Fox Business: Starmind, up to 1,000,000 satellites, optical links; milestones 1 by 2033, 10% by 2035, all by
+     2040, else null and void; SpaceX's power/cooling pitch; AAS, Amazon Leo, Viasat petitions denied; IR waste heat "outside
+     the scope"; debris plan only complies below 600 km). Rubric ~76 (19/12/15/10/18/2).
+     65.5 s, -14.0 LUFS, style orb, 100% scenes (new: starmind-sky.js, 6 modes). The Verge lead couldn't be fetched (not
+     cited); per-satellite kW left out (outlets disagree); Carr/Musk quotes not used.
+  3. (evening) "New York just banned toys with AI chatbots inside" (NY Governor release Nov 24, TechCrunch, NBC, CBS6, Common
+     Sense Media: S.9408A/A.11144B five-year ban on making/selling/distributing AI-chatbot toys; AG enforces, up to $15,000/day
+     per violation; Hochul quote "dangerous chatbots disguised as toys"; CSM tested 5 toys, all claimed love, most promised
+     secrets; a quarter of parents of kids 8 and under have/consider one; second state after California; starts 90 days after
+     signing, February). Rubric ~84 (20/20/11/9/18/6). 63.5 s, -14.0 LUFS, style flow, 100% scenes (new: toy-shelf.js, 6 modes).
+     Left out: Amazon restricting sales (TechCrunch only), named toys and worst CSM findings (would accuse products).
+  Picks: skipped Amodei "absurd" ("X says" hook), ChatGPT tabs merge (inside baseball), Nvidia halts shipments to SE Asia
+  (Techmeme "sources" only), Microsoft state hackers + AI (security covered 11-23; spare), Amazon/Meta Muse talks (reported
+  talks; Muse covered 11-25), NYT warns photographers about Photoshop (fallback, not needed), Google AI-feed patent, Neuralink
+  (medical). Talkie and toys are both kids-safety stories, so they sit in the morning and evening slots.
+  Lead review: claim tables vs scripts; grep-checked FCC order text (1,000,000 / null and void / outside the scope / 600 km /
+  November 25, 2033); contact sheets for all three; ffprobe 1080x1920 30 fps, 63.5-65.5 s.
+  Drive: connector available; no 2026-11-26 titles existed; 3 Google Docs filed (create returned fileSize 1 as before).
+  Timings: full `git fetch origin` hung again (killed; fetched main only), setup ~5 min, news 4 s, picks ~6 min, producers
+  11-13 min in parallel, review + delivery ~10 min.
+  Problems: publish-videos.sh 403 at the push step again, but remote videos/2026-11-26 sha matches local (10 files). Stop hook
+  asked for commits mid-run, so data went to claude/amazing-ride-u3chdf first. Voice reported 1-8 clipped samples (LUFS fine).
+  Known blemishes: Toys beat 3 opens on ~1.5 s of city + AG pill before the fine ticket pops; Talkie hook runs 3.4 s; Talkie
+  shop sign says "App Store" as plain text (no logo).
 - 2026-11-25 (nightly run, Wednesday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "Meta's AI can now buy Walmart's Black Friday deals" (Walmart newsroom Nov 24 + TechCrunch, PPC Land, Digital
      Trends: Muse finds items, builds a basket and pays in chat; Walmart picks the products; sign in to Walmart; Agent Gateway;
