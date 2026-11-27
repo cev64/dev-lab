@@ -2,6 +2,43 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-27 (nightly run, Friday after Thanksgiving, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. (morning) "ChatGPT is putting everything on one fuel gauge" (OpenAI Help Center "Understanding ChatGPT and Codex usage
+     limits" + TechCrunch Nov 25, Android Authority, BleepingComputer, TechRepublic, Notebookcheck: from December Plus/Pro/Business
+     share one allowance across ChatGPT and Codex as Work's agent features move in; measured in tokens; Instant chats don't count;
+     "most users" won't wait for resets more often; Settings -> Usage; allowance size not disclosed). Rubric ~71 (17/14/9/9/17/5).
+     65.7 s, -14.0 LUFS, style flow, 100% scenes (new: shared-tank.js, 6 modes). Lead review cut "heaviest users may hit the limit
+     sooner" (TechCrunch only) and replaced it with a gloss on OpenAI's own "most users" wording; Pro doubling, start date, Free/Go
+     plans dropped (conflicting or single-source).
+  2. (midday) "This Christmas market only looked magical in the ads" (BBC, LBC, NewsNation, People, The Mary Sue: Kernow Christmas
+     Market in Pool, Cornwall; AI-generated promo pictures vs visitors' photos of a mostly empty warehouse with buckets under a leak;
+     organisers "gutted", cancel and refund all current and future bookings, none for 2026; image maker told BBC "lesson learned",
+     "so easy to do"; organisers say signage/decorating was the venue's job; venue approached for comment per BBC). Rubric ~78
+     (19/15/14/10/15/5). 65.6 s, -14.0 LUFS, style horizon, 100% scenes (new: xmas-market.js, 6 modes). Left out: fee (GBP 30 vs
+     180), Redruth, whether the event shut, organiser company name (spellings differ). No fraud/scam framing.
+  3. (evening) "Chats from 21 million accounts go to auction Tuesday" (California AG release Nov 24 + TNW, Gizmodo, Engadget,
+     Notebookcheck: Character.AI (bankrupt since October) to auction its platform incl. chats Dec 1; >21M US accounts, >2.1M
+     registered to minors; 42 AGs (41 states + DC) objected in Delaware bankruptcy court; at minimum leave out kids' chats and
+     sensitive data; policy quote "We do not sell personal information for monetary consideration"; buyer wouldn't have to follow it
+     or honor deletion requests per the states; only disclosed bidder set up Nov 13, picked a day later; backer later named; judge
+     must approve). Rubric ~80 (16/21/13/9/17/4; objection Nov 20, AG release Nov 24, auction Dec 1). 65.4 s, -14.0 LUFS, style
+     neural, 100% scenes (new: chat-auction.js, 6 modes). Lead grep-checked the CA AG release. Left out: lead-bidder approval and
+     $350K fee (reports conflict), hearing date (Dec 3-4 vs 7-8), Bonta's "45" figure, bidder/backer names. Hook says "Tuesday":
+     post before Dec 1.
+  Picks: thin Thanksgiving feed. Skipped SAP 10,000 jobs (Bloomberg "sources" only; search finds the 2024 restructuring),
+  Florida man 47 months for AI impersonation of a streamer (Aftermath via Techmeme only; no second source found), Amodei
+  "absurd" ("X says"), Nvidia SE Asia pause (sources only), Taiwan stock outflows (finance), Anthropic Rust rewrite (single
+  digest), Amazon/Meta Muse talks (reported talks; Muse covered 11-25). Found Character.AI and the Cornwall market via web search
+  (not in `news`).
+  Lead review: claim tables vs scripts; contact sheets for all three; ffprobe 1080x1920 30 fps, 65.4-65.7 s.
+  Drive: connector available; no 2026-11-27 titles existed; 3 Google Docs filed (create returned fileSize 1 as before).
+  Timings: full `git fetch origin` hung again (killed; fetched main only), setup ~5 min, news 5 s, picks ~10 min, producers
+  13-18 min in parallel (+4 min ChatGPT fix), review + delivery ~10 min.
+  Problems: publish-videos.sh 403 at the push step again, but remote videos/2026-11-27 sha matches local. Stop hook asked for
+  commits mid-run, so WIP data commits went to main and claude/amazing-ride-keo9ge. Voice reported 1-5 clipped samples (LUFS fine).
+  Known blemishes: a refund coin crosses the CANCELLED sign (market beat 4); bubbles briefly cover the "Character.AI" pill (auction
+  beat 2); ChatGPT script ~192 words (over the guide, needed for >= 62 s). Producers shared the scratchpad (a mixed qa2 folder).
+  Improve: not done tonight (time); candidates for the library: shared-tank.js, chat-auction.js, xmas-market.js.
 - 2026-11-26 (nightly run, Thursday/Thanksgiving, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "Apple just pulled a hit AI companion app worldwide" (Reuters wire via syndicated copies, SCMP via 9to5Mac,
      ABC News (Australia), 9to5Mac: Talkie by MiniMax removed from App Store worldwide; Apple's reason "sexual content";
