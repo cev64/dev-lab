@@ -2501,6 +2501,40 @@
         "https://www.notebookcheck.net/ChatGPT-and-Codex-will-share-one-usage-limit-starting-in-December.1440897.0.html"
       ],
       "video": "out/2026-11-27/2026-11-27-explainer-chatgpt-meter.mp4"
+    },
+    {
+      "id": "2026-11-27-explainer-ai-xmas-market",
+      "date": "2026-11-27",
+      "hook": "This Christmas market only looked magical in the ads",
+      "topic": "AI ADS",
+      "title": "Cornwall Christmas market cancels bookings after AI-generated ads backfire",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.bbc.com/news/articles/cm0qjglj3ejlo",
+        "https://www.lbc.co.uk/article/christmas-market-cancel-ai-generated-ad-5HjdnYb_2/",
+        "https://www.newsnationnow.com/business/tech/ai/christmas-market-viral-ai-generated-advertisements/",
+        "https://uk.style.yahoo.com/christmas-market-canceled-ai-generated-001500308.html",
+        "https://www.yahoo.com/news/world/articles/customers-purchase-tickets-christmas-market-150000212.html"
+      ],
+      "video": "out/2026-11-27/2026-11-27-explainer-ai-xmas-market.mp4"
+    },
+    {
+      "id": "2026-11-27-explainer-chat-auction",
+      "date": "2026-11-27",
+      "hook": "Chats from 21 million accounts go to auction Tuesday",
+      "topic": "AI PRIVACY",
+      "title": "42 attorneys general object to Character.AI auctioning users' chats",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://oag.ca.gov/news/press-releases/attorney-general-bonta-opposes-asset-sale-characterai-amid-child-safety-concerns",
+        "https://thenextweb.com/news/character-ai-chats-auction-attorneys-general-bankruptcy",
+        "https://gizmodo.com/character-ai-wants-to-sell-millions-of-user-chats-to-the-highest-bidder-2000845664",
+        "https://www.engadget.com/2328630/state-ags-are-trying-to-stop-characterai-from-auctioning-off-users-chat-histories/",
+        "https://www.notebookcheck.net/Character-ai-plans-to-auction-chats-from-21-million-US-accounts.1460646.0.html"
+      ],
+      "video": "out/2026-11-27/2026-11-27-explainer-chat-auction.mp4"
     }
   ]
 }
