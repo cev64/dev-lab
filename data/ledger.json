@@ -2483,6 +2483,24 @@
         "https://about.commonsensemedia.org/press-room/press-releases/common-sense-media-finds-popular-ai-toys-fail-safety-checks"
       ],
       "video": "out/2026-11-26/2026-11-26-explainer-ny-ai-toys.mp4"
+    },
+    {
+      "id": "2026-11-27-explainer-chatgpt-meter",
+      "date": "2026-11-27",
+      "hook": "ChatGPT is putting everything on one fuel gauge",
+      "topic": "CHATGPT",
+      "title": "ChatGPT's chats and coding agent will share one usage meter",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://help.openai.com/en/articles/20001625",
+        "https://techcrunch.com/2026/11/25/openai-says-heavy-chatgpt-users-may-hit-limits-sooner-as-it-merges-chat-and-work/",
+        "https://www.androidauthority.com/chatgpt-codex-shared-usage-limits-3739254/",
+        "https://www.bleepingcomputer.com/news/artificial-intelligence/openai-says-its-doubling-pro-usage-limits-and-bringing-work-features-to-chat/",
+        "https://www.techrepublic.com/article/news-chatgpt-codex-shared-usage-limits/",
+        "https://www.notebookcheck.net/ChatGPT-and-Codex-will-share-one-usage-limit-starting-in-December.1440897.0.html"
+      ],
+      "video": "out/2026-11-27/2026-11-27-explainer-chatgpt-meter.mp4"
     }
   ]
 }
