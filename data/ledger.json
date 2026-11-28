@@ -2567,6 +2567,25 @@
         "https://todaytimeslive.com/nearly-half-of-eurozone-workers-now-use-ai-weekly-ecb-finds/"
       ],
       "video": "out/2026-11-28/2026-11-28-explainer-ai-at-work.mp4"
+    },
+    {
+      "id": "2026-11-28-explainer-ai-shoppers",
+      "date": "2026-11-28",
+      "hook": "Shoppers sent by AI bought 74% more often",
+      "topic": "AI SHOPPING",
+      "title": "Adobe: AI-referred shoppers converted 74% better on Thanksgiving",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://news.adobe.com/news/2026/09/adobe-us-holiday-shopping-season-to-hit-record",
+        "https://www.tipranks.com/news/the-fly/adobe-data-shows-ai-traffic-soaring-as-thanksgiving-online-sales-reach-7-1b-thefly-news",
+        "https://finance.yahoo.com/video/how-ai-is-driving-record-holiday-spending-154808415.html",
+        "https://www.ntd.com/thanksgiving-online-spending-hits-record-7-1-billion-as-shoppers-hunt-for-deals-adobe_1187827.html",
+        "https://www.thestar.com.my/tech/tech-news/2026/11/28/us-black-friday-online-sales-to-cross-13-billion-adobe-says",
+        "https://www.digitalcommerce360.com/2026/11/25/adobe-online-holiday-spending-data/",
+        "https://www.retailtouchpoints.com/?p=621887"
+      ],
+      "video": "out/2026-11-28/2026-11-28-explainer-ai-shoppers.mp4"
     }
   ]
 }
