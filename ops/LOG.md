@@ -2,6 +2,42 @@
 
 Newest first. One entry per nightly run: date, stories, videos delivered (hooks + scores), problems, next.
 
+- 2026-11-28 (nightly run, Saturday, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
+  1. (morning) "44% of euro area workers now use AI weekly" (ECB Blog Nov 27 "AI, jobs and prices: what euro area consumers
+     expect" + Mobile World Live, Bloomberg headline: Consumer Expectations Survey, August 2026; 44% of employed euro-area
+     consumers use AI at work at least weekly, ~18% daily; similar to the US by the ECB's rough comparison (hedged); 56% more
+     work, 47% higher quality; top reason for no gain = time checking/correcting AI output; expect 46% of their sector using AI
+     within 5 years, up from 34%; next year more expect higher job-loss risk than higher income or job prospects). Rubric ~72
+     (19/15/10/8/17/3). 63.8 s, -14.0 LUFS, style horizon, 100% scenes (new: atwork-floor, coffee-poll, check-fix,
+     crystal-ball, expect-scale). Lead review cut "a sizeable share expect higher prices" (2nd source not independent).
+  2. (midday) "AI-sent shoppers were 74% more likely to buy" (Adobe Analytics via TheFly/TipRanks, Yahoo Finance, NTD, Reuters,
+     Digital Commerce 360, Retail TouchPoints, Adobe Sept release: record $7.1B US online Thanksgiving, +10.4%; AI-referred
+     visitors converted 74% better; Adobe's pre-day forecast +159% AI traffic; forecasts $12.9B Black Friday, record $15.1B
+     Cyber Monday, $47.5B Cyber 5). Rubric ~74 (20/16/12/8/14/4). 69.3 s, -14.0 LUFS, style flow, ~78% scenes (new:
+     ai-shoppers.js) + 1 compare card. Lead review cut 162% actual AI-traffic growth and 63.2% mobile share (Adobe's own
+     Thanksgiving release unreachable; only TheFly + aggregators) and made the hook faithful to "converted 74% better".
+  3. (evening) "AI agents just broke into four Swiss targets" (BACS/NCSC advisory Nov 24 + Reuters, The Hacker News, Tech
+     Times: first confirmed AI-agent cyberattacks in Switzerland; 5 cases, 4 got in; 3 critical-infrastructure operators in at
+     least 2 sectors; SMEs self-reported; no major outage; agents hunt gaps, pick tools, plan next steps, mostly weak passwords
+     and known flaws, switch methods; AI attack agents online nearly doubled since October; attacker/victims not named; ARTEX
+     and CyberStrikeAI only examples). Rubric ~82 (20/18/14/9/18/3). 63.3 s, -14.0 LUFS, style orb, 100% scenes (new:
+     alpine-agents.js, 6 modes). Lead grep-checked the BACS advisory. Left out: named sectors (power/water/telecom), SRF/
+     director quotes, "two infrastructure attacks succeeded" (single source).
+  Picks: very thin feed (Saturday after Thanksgiving). Skipped Claude "silent sabotage" claims (an employee's X post +
+  AI-written aggregators; dispute framing), OpenAI countersues Apple (unproven allegations), Gogol AI novel (released Oct 5),
+  Japan data-centre revolt (July coverage, nothing new), Utah AI-voice-of-victim plan dropped (Nov 22-23, > 72 h),
+  DOJ FaceStealer (Nov 12), Musk SpaceX shares (real-person pledge), GPT-6.2 limits bug (ChatGPT covered 11-27), Neuralink
+  (medical, unverified). Swiss, Adobe and ECB found via web search (only ECB was in `news`, via Techmeme).
+  Lead review: claim tables vs scripts; contact sheets for all three; ffprobe 1080x1920 30 fps, 63.3-69.3 s.
+  Drive: connector available; no 2026-11-28 titles existed; 3 Google Docs filed (create returned fileSize 1 as before).
+  Timings: `git fetch origin` slow (~4 min, completed), setup ~2 min, news 10 s, picks ~35 min (thin feed), producers 13-17 min
+  in parallel + 2 revision passes (~5 min each), review + delivery ~10 min.
+  Problems: publish-videos.sh 403 at the push step again, but remote videos/2026-11-28 sha matches local. Stop hook asked for
+  commits mid-run, so WIP data commits went to main. Voice reported 18-245 clipped samples (LUFS fine). ECB and Swiss run
+  near the 62 s floor (63.3-63.8 s).
+  Known blemishes: ECB beat 3 caveat chip sits just above the coffee crew's heads; ECB beat 5 page overlaps the robot's arm;
+  Adobe "+159%" arrow tight against "+"; Swiss stamp lettering small.
+  Improve: not done tonight (time); library candidates: alpine-agents.js, ai-shoppers.js, check-fix.js, expect-scale.js.
 - 2026-11-27 (nightly run, Friday after Thanksgiving, fired ~07:55 UTC): delivered 3 explainers (order: morning/midday/evening).
   1. (morning) "ChatGPT is putting everything on one fuel gauge" (OpenAI Help Center "Understanding ChatGPT and Codex usage
      limits" + TechCrunch Nov 25, Android Authority, BleepingComputer, TechRepublic, Notebookcheck: from December Plus/Pro/Business
