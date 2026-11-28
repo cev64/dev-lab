@@ -2535,6 +2535,38 @@
         "https://www.notebookcheck.net/Character-ai-plans-to-auction-chats-from-21-million-US-accounts.1460646.0.html"
       ],
       "video": "out/2026-11-27/2026-11-27-explainer-chat-auction.mp4"
+    },
+    {
+      "id": "2026-11-28-explainer-swiss-ai-attacks",
+      "date": "2026-11-28",
+      "hook": "AI agents just broke into four Swiss targets",
+      "topic": "AI SECURITY",
+      "title": "Switzerland confirms its first cyberattacks carried out with AI agents",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.bacs.admin.ch/en/26-ki-agenten-1-en",
+        "https://www.reuters.com/legal/litigation/ai-agents-used-five-cyber-attacks-switzerland-government-says-2026-11-26/",
+        "https://thehackernews.com/2026/11/switzerland-confirms-ai-assisted.html",
+        "https://www.techtimes.com/articles/331659/20261127/swiss-ai-agent-cyberattacks-confirmed-five-cases-three-targeted-critical-infrastructure.htm"
+      ],
+      "video": "out/2026-11-28/2026-11-28-explainer-swiss-ai-attacks.mp4"
+    },
+    {
+      "id": "2026-11-28-explainer-ai-at-work",
+      "date": "2026-11-28",
+      "hook": "44% of euro area workers now use AI weekly",
+      "topic": "AI AT WORK",
+      "title": "44% of euro area workers use AI weekly (ECB survey)",
+      "followUp": false,
+      "format": "v2",
+      "sources": [
+        "https://www.ecb.europa.eu/press/blog/date/2026/html/ecb.blog20261127~81118f8ec0.en.html",
+        "https://www.mobileworldlive.com/europe/skills-gap-threatens-europes-ai-productivity-gains-report-finds/",
+        "https://www.bloomberg.com/news/articles/2026-11-27/european-workers-ai-use-on-par-with-that-of-us-peers-ecb-says",
+        "https://todaytimeslive.com/nearly-half-of-eurozone-workers-now-use-ai-weekly-ecb-finds/"
+      ],
+      "video": "out/2026-11-28/2026-11-28-explainer-ai-at-work.mp4"
     }
   ]
 }
